@@ -1,22 +1,22 @@
 # RFC analysis: contradictions, ambiguities and possible errata {#rfc_analysis}
 
-A review of 407 RFCs covering BGP, IS-IS, MPLS, LDP, RSVP-TE, PCEP, PIM, BFD, pseudowires, measurement protocols and supporting IP and security specifications. Each finding names the RFC and section, quotes the text briefly, explains the contradiction, ambiguity or error, and gives the status of any existing erratum. Findings that look like errata not yet reported carry a proposed report in the RFC Editor's format (Original Text, Corrected Text, Notes). The review was done in two passes on 2026-11-09: a first pass over the most-used protocol specifications and an automated check of all texts, and a second pass that read the remaining texts.
+A review of 411 RFCs covering BGP, IS-IS, MPLS, LDP, RSVP-TE, PCEP, PIM, BFD, pseudowires, measurement protocols and supporting IP and security specifications. Each finding names the RFC and section, quotes the text briefly, explains the contradiction, ambiguity or error, and gives the status of any existing erratum. Findings that look like errata not yet reported carry a proposed report in the RFC Editor's format (Original Text, Corrected Text, Notes). The review was done in two passes on 2026-11-09: a first pass over the most-used protocol specifications and an automated check of all texts, and a second pass that read the remaining texts.
 
 ## Summary {#ra_summary}
 
-1193 findings in 368 RFCs; 177 match an existing erratum report; **487 are proposed new errata**.
+1216 findings in 372 RFCs; 177 match an existing erratum report; **500 are proposed new errata**.
 
 ### Counts by severity {#ra_counts_sev}
 
 | Severity | Findings | Existing erratum | Proposed erratum |
 |---|---|---|---|
-| error | 207 | 67 | 103 |
-| contradiction | 256 | 21 | 168 |
-| ambiguity | 455 | 32 | 105 |
-| editorial | 270 | 56 | 109 |
-| **total** | **1193** | **177** | **487** |
+| error | 212 | 67 | 107 |
+| contradiction | 258 | 21 | 170 |
+| ambiguity | 464 | 32 | 106 |
+| editorial | 277 | 56 | 115 |
+| **total** | **1216** | **177** | **500** |
 
-"error" includes 40 security gaps (marked "Security gap"). "Existing erratum" counts findings that match an erratum report of any status, including rejected reports that leave a question open.
+"error" includes 41 security gaps (marked "Security gap"). "Existing erratum" counts findings that match an erratum report of any status, including rejected reports that leave a question open.
 
 ### Counts by area {#ra_counts_area}
 
@@ -24,14 +24,14 @@ A review of 407 RFCs covering BGP, IS-IS, MPLS, LDP, RSVP-TE, PCEP, PIM, BFD, ps
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | [BGP, L3VPN, MVPN and BGP-LS](#ra_bgp) | 72 | 72 | 0 | 0 | 0 | 0 | 0 | 177 | 59 | 25 | 32 | 91 | 27 |
 | [IS-IS, IGP TE, Segment Routing and IP FRR](#ra_isis) | 62 | 62 | 0 | 0 | 0 | 0 | 0 | 176 | 94 | 24 | 41 | 62 | 46 |
-| [MPLS, LDP and mLDP](#ra_ldp) | 44 | 44 | 0 | 0 | 0 | 0 | 0 | 103 | 40 | 14 | 18 | 49 | 22 |
-| [Pseudowires, VPLS and ICCP](#ra_pw) | 20 | 20 | 0 | 0 | 0 | 0 | 0 | 71 | 27 | 10 | 17 | 30 | 14 |
+| [MPLS, LDP and mLDP](#ra_ldp) | 45 | 45 | 0 | 0 | 0 | 0 | 0 | 109 | 43 | 16 | 18 | 51 | 24 |
+| [Pseudowires, VPLS and ICCP](#ra_pw) | 23 | 23 | 0 | 0 | 0 | 0 | 0 | 88 | 37 | 13 | 19 | 37 | 19 |
 | [RSVP, RSVP-TE and GMPLS](#ra_rsvp) | 44 | 44 | 0 | 0 | 0 | 0 | 0 | 151 | 56 | 30 | 39 | 44 | 38 |
 | [PCEP and PCE](#ra_pcep) | 36 | 36 | 0 | 0 | 0 | 0 | 0 | 149 | 75 | 21 | 39 | 62 | 27 |
 | [Multicast: PIM, IGMP, MLD and MVPN](#ra_mcast) | 22 | 22 | 0 | 0 | 0 | 0 | 0 | 63 | 26 | 8 | 13 | 27 | 15 |
 | [BFD, LSP ping, measurement and time](#ra_oam) | 30 | 30 | 0 | 0 | 0 | 0 | 0 | 86 | 36 | 22 | 14 | 33 | 17 |
 | [IP, ICMP, neighbour discovery, transport and security](#ra_ip) | 77 | 77 | 0 | 0 | 0 | 0 | 0 | 217 | 74 | 53 | 43 | 57 | 64 |
-| **all** | **407** | **407** | **0** | **0** | **0** | **0** | **0** | **1193** | **487** | **207** | **256** | **455** | **270** |
+| **all** | **411** | **411** | **0** | **0** | **0** | **0** | **0** | **1216** | **500** | **212** | **258** | **464** | **277** |
 
 ### Coverage {#ra_coverage}
 
@@ -39,23 +39,23 @@ How deeply each RFC was read (the per-RFC table is the [Coverage by RFC](#ra_ind
 
 | Depth | Meaning | RFCs |
 |---|---|---|
-| deep | every normative section read (state machines, encodings, timers, error handling, IANA, security) | 407 |
+| deep | every normative section read (state machines, encodings, timers, error handling, IANA, security) | 411 |
 | deep (targeted) | core specifications read in all sections where implementers make choices (state machines, error handling, timers, encodings and figures, IANA tables, interaction with updating RFCs), but not every section line by line | 0 |
 | part | the sections named in the RFC entry read in full; the rest not read | 0 |
 | read | normative statements and formats read through once | 0 |
 | light | figures, IANA sections and the automated hits checked, or normative statements extracted | 0 |
 | scan | automated checks only | 0 |
 
-Errata: every finding was matched against the RFC Editor errata database (all errata of all 407 RFCs, fetched 2026-11-09), by section and by comparing the quoted text and the issue with each report.
+Errata: every finding was matched against the RFC Editor errata database (all errata of all 411 RFCs, fetched 2026-11-09), by section and by comparing the quoted text and the issue with each report.
 
 | Errata in the database for these RFCs | Count |
 |---|---|
-| RFCs with at least one erratum | 191 of 407 |
+| RFCs with at least one erratum | 192 of 411 |
 | Verified | 344 |
 | Reported | 49 |
-| Held for Document Update | 295 |
+| Held for Document Update | 296 |
 | Rejected | 166 |
-| **total** | **854** |
+| **total** | **855** |
 
 | Findings against the errata | Count |
 |---|---|
@@ -64,8 +64,8 @@ Errata: every finding was matched against the RFC Editor errata database (all er
 | match an existing erratum: held for document update | 54 |
 | match only a rejected erratum | 8 |
 | related to an erratum that does not cover the point | 21 |
-| no erratum on the point (RFC has errata) | 523 |
-| no erratum on the point (RFC has none) | 472 |
+| no erratum on the point (RFC has errata) | 531 |
+| no erratum on the point (RFC has none) | 487 |
 
 Where a finding matches several errata the best status is counted. Drafted errata that turned out to duplicate an existing report are no longer proposed (87); drafted errata that duplicate only a rejected report are kept with the reason they are raised again (0); drafts whose only match is a rejected report whose reason also applies to them are withdrawn (1).
 
@@ -237,6 +237,9 @@ Where a finding matches several errata the best status is counted. Drafted errat
 | [RA-0202](#ra_rfc3478) | RFC 3478 3.1.2 | Technical | Egress per-FEC-label case omits the FEC match that the 3.1.1 equivalent has. |
 | [RA-0588](#ra_rfc3479) | RFC 3479 7.1 | Technical | Section 8.2 defines a 12-octet value. |
 | [RA-0589](#ra_rfc3479) | RFC 3479 9.4 | Technical | Sequence number 97 was already used and acknowledged before the shutdown. |
+| [RA-1195](#ra_rfc4023) | RFC 4023 8.1 | Technical | Tunnel tail recovers the packet by IPsec "outbound" processing; should be inbound. |
+| [RA-1196](#ra_rfc4023) | RFC 4023 8.1 | Editorial | Typo "will" for "with" in the ESP requirement. |
+| [RA-1197](#ra_rfc4023) | RFC 4023 1, 8 | Editorial | Two typos (Sections 1 and 8). |
 | [RA-0052](#ra_rfc5036) | RFC 5036 3.5.11 (and the other message figures) | Editorial | Message Type / Message Length boundary drawn one bit early in the message figures. |
 | [RA-1053](#ra_rfc5036) | RFC 5036 2.8, 2.8.1, 2.8.2, 3.4.4.1, 3.5.3, A.2.6 | Technical | "Reached" (2.8) versus "exceeds" (2.8.1, 2.8.2, 3.4.4.1, A.2.6) for the Hop Count and Path Vector limits. |
 | [RA-1054](#ra_rfc5036) | RFC 5036 A.2.6 | Technical | Check_Received_Attributes skips the Path Vector check when no Hop Count is present. |
@@ -278,7 +281,15 @@ Where a finding matches several errata the best status is counted. Drafted errat
 | [RA-0244](#ra_rfc6073) | RFC 6073 14.5, 7.4.1 | Technical | Length of sub-TLV 0x06 is 14 octets per Section 7.4.1, not 12. |
 | [RA-0245](#ra_rfc6073) | RFC 6073 7.4.1, 7.6 | Technical | "Mandatory" SP-PE sub-TLVs are never identified; loop detection depends on an optional one. |
 | [RA-0248](#ra_rfc6074) | RFC 6074 3.2.3, 3.2.2.1 | Technical | Mapping of the VPLS-id Extended Community to the 8-octet AGI is unspecified. |
+| [RA-1201](#ra_rfc6310) | RFC 6310 6.1.2 | Technical | CV type 0x10 is described with the 0x20 meaning (fault detection and status signalling). |
+| [RA-1202](#ra_rfc6310) | RFC 6310 6.1, 6.1.2 | Editorial | CV types are said to be defined in 6.1.3; they are defined in RFC 5885. |
+| [RA-1203](#ra_rfc6310) | RFC 6310 6.1.3, 6.1 | Technical | 6.1.3 says Section 6.1 restricts 0x08 / 0x20 for LDP and L2TP; 6.1 states it for L2TP only. |
+| [RA-1206](#ra_rfc6310) | RFC 6310 10.2.3, 10.1.3 | Editorial | "these packets" has no antecedent in the CEP AC receive defect actions. |
+| [RA-1207](#ra_rfc6310) | RFC 6310 B.3, B.4 | Technical | Appendix B cites RFC 5885 for LSP BFD (should be RFC 5884) and RFC 4377 for the PW procedures. |
+| [RA-1208](#ra_rfc6310) | RFC 6310 13.1, A.2 | Editorial | Reference [Q.933] says "Q.993"; Appendix A.2 uses "FT" and "AC" inconsistently. |
 | [RA-0250](#ra_rfc6391) | RFC 6391 1.3, 3 | Technical | Section 1.3 discards the flow LSE unprocessed; Section 3 requires a reserved-label check. |
+| [RA-1209](#ra_rfc6478) | RFC 6478 6.1 | Technical | SP-PE sub-TLV 0x07 Length 24 does not fit the 32-octet RFC 6426 Static PW Sub-TLV it reuses. |
+| [RA-1210](#ra_rfc6478) | RFC 6478 5.5.1, 8 | Technical | Bypass flag mismatch disables the PW in one sentence and only disables bypass in another; bit 31 vs bit 0. |
 | [RA-1067](#ra_rfc6870) | RFC 6870 5.1, 6.3.1 d, A.5 | Technical | "system IP address" undefined; 6.3.1 d i says "its address". |
 | [RA-1068](#ra_rfc6870) | RFC 6870 6.3.2 | Technical | Down-PW case misnumbered as a step of the up-PW case. |
 | [RA-1070](#ra_rfc6870) | RFC 6870 A.6 | Technical | Default MAC Withdraw behaviour of PE-rs implied but not stated; sentence as written does not prevent duplicates. |
@@ -286,6 +297,8 @@ Where a finding matches several errata the best status is counted. Drafted errat
 | [RA-0635](#ra_rfc7267) | RFC 7267 4.1.3 | Technical | The valid full-Prefix length 128 is declared invalid. |
 | [RA-0252](#ra_rfc7275) | RFC 7275 4.2.1, 4.4.2, 4.2 | Technical | ICCP and Application Connection state machines answer a NAK with a NAK. |
 | [RA-0255](#ra_rfc7275) | RFC 7275 6.4.1 | Editorial | Code iii described with the condition of code ii. |
+| [RA-1215](#ra_rfc7771) | RFC 7771 A.2 | Technical | PSC encapsulation for PWs: the G-ACh is placed "in the label stack"; TTL and S-PE handling are not given. |
+| [RA-1217](#ra_rfc7771) | RFC 7771 1, A.2 | Editorial | Typos in Section 1 and Appendix A.2. |
 | [RA-1073](#ra_rfc8077) | RFC 8077 6.2.3, 1 | Technical | PE1/PE2 ingress/egress roles swapped relative to Section 1. |
 | [RA-1074](#ra_rfc8077) | RFC 8077 7.1 | Technical | Section 7.1 does not say which PW types require the control word. |
 | [RA-1075](#ra_rfc8077) | RFC 8077 6.2.2 | Technical | PW info length: inclusion of sub-element headers not stated. |
@@ -593,11 +606,11 @@ Contradictions and errors with interoperability impact, whether or not an erratu
 
 ## Method and limits {#ra_method}
 
-**Scope.** 407 RFC texts, grouped into nine areas. The texts were taken as published (plain-text RFCs);
+**Scope.** 411 RFC texts, grouped into nine areas. The texts were taken as published (plain-text RFCs);
 errata were not applied to them. A few related texts (IANA registries for PCEP, RSVP and RSVP-TE, one
 Internet-Draft and NIST SP 800-38D) were used as references only and are not analysed.
 
-**Automated checks, all 407 RFCs.** Every text was scanned by script for: references to sections that
+**Automated checks, all 411 RFCs.** Every text was scanned by script for: references to sections that
 do not exist in the same document; mixed-case or non-RFC 2119 keyword forms ("MAY NOT", "MUST not",
 "SHOULD not"); leftover placeholders ("TBD", "TBA", "XXX"); and packet diagrams whose field boundaries
 do not fall on bit boundaries. Every hit was read in context; most were false positives (references to
@@ -624,8 +637,10 @@ RFC 8032 and RFC 8439 were recomputed with independent code, and the example cod
 Section 6 was run to confirm the defects reported against it.
 
 **Fourth pass.** Those 40 core specifications were then read in full, every section, by four reviewers
-on separate lists, so that all 407 RFCs have been read at the "deep" level (see [Coverage](#ra_coverage)).
+on separate lists, so that all 411 RFCs have been read at the "deep" level (see [Coverage](#ra_coverage)).
 Findings RA-0980 to RA-1194 come from this pass.
+
+**Added texts.** Four RFCs added to the set later (RFC 4023, RFC 6310, RFC 6478 and RFC 7771) were read in full, every section, with the same method and checked against the same errata database; findings RA-1195 to RA-1217 come from this reading.
 
 **Duplicates.** Where more than one pass produced findings for the same RFC, records with the same
 section were compared by quote and issue. Nine RFCs had findings from the first two passes, 28 had
@@ -634,7 +649,7 @@ findings; no record duplicated another, so all were kept.
 The ids are stable across passes.
 
 **Errata.** Every finding was matched against the RFC Editor's complete errata database (8163 reports,
-retrieved 2026-11-09; 191 of the 407 RFCs have at least one report). For each finding, the reports on the
+retrieved 2026-11-09; 191 of the 411 RFCs have at least one report). For each finding, the reports on the
 same RFC were compared by section and by the quoted text, the corrected text and the notes; candidate
 pairs were then judged by hand. A finding either matches one or more reports (cited by id, status and
 type), is related to a report that does not cover its point (cited as related), or has no report on the
@@ -5041,7 +5056,7 @@ Nothing notable found at this depth.
 
 ## MPLS, LDP and mLDP {#ra_ldp}
 
-44 RFCs in this area (44 deep); 103 findings, 40 of them proposed errata.
+45 RFCs in this area (45 deep); 109 findings, 43 of them proposed errata.
 
 ### RFC 3032: MPLS Label Stack Encoding {#ra_rfc3032}
 
@@ -5350,6 +5365,71 @@ Corrected Text
 Notes
 -----
    none
+```
+
+### RFC 4023: Encapsulating MPLS in IP or Generic Routing Encapsulation (GRE) {#ra_rfc4023}
+
+Depth: deep. Errata: none (the RFC has no errata). 
+
+| ID | Section | Quote | Issue | Severity | Erratum |
+|---|---|---|---|---|---|
+| RA-1195 | 8.1 | "At the tunnel tail, IPsec outbound processing recovers the contained MPLS-in-IP/GRE packet." | The tunnel tail receives the IPsec-protected packet; removing the IPsec protection is inbound processing (RFC 4301 Section 5.2). "Outbound" is the processing the tunnel head applies earlier in the same section. | error | none: RFC has no errata; **proposed erratum below** |
+| RA-1196 | 8.1 | "Thus, the implementation MUST support ESP will null encryption." | "will" is a typo for "with". The requirement itself (ESP with NULL encryption, RFC 2410) is clear from context. | editorial | none: RFC has no errata; **proposed erratum below** |
+| RA-1197 | 1, 8 | "(... outside the scope of the this document) / The specification encapsulations do not ensure privacy." | Section 1 has "the this document"; Section 8 has "The specification encapsulations", which reads as "The specified encapsulations". Neither changes the meaning. | editorial | none: RFC has no errata; **proposed erratum below** |
+| RA-1198 | 3, 4 | "(The use of the MPLS-in-IP encapsulation for MPLS multicast packets is not supported by this specification.) / MUST be set to the Ethertype value for MPLS Unicast (0x8847) or Multicast (0x8848)." | Both rules were replaced by RFC 5332 Sections 6 and 7: protocol 137 is used "whether or not the encapsulated MPLS packet is an MPLS multicast packet", and 0x8847 is required for every unicast GRE destination, with 0x8848 only for an upstream-assigned top label under a multicast destination. Read alone, Section 4 lets a sender pick 0x8848 for MPLS multicast to a unicast destination, which an RFC 5332 receiver treats as wrong. The two sections are not consistent with each other either: Section 3 excludes multicast, while Section 4 provides a multicast codepoint. No erratum is needed, because RFC 5332 updates this RFC. This is a reader's note. | ambiguity | none: RFC has no errata |
+| RA-1199 | 5.1 | "If IPv4 is used, then the tunnel MUST set the DF bit. / the minimum of (a) an administratively configured value, and, if known, (b) the discovered Path MTU value minus the encapsulation overhead." | The requirement is put on "the tunnel" rather than the tunnel head that builds the IPv4 header. The Tunnel MTU is defined as a minimum that includes an administratively configured value, but the text does not say what applies when no value is configured, or when no Path MTU is known either (for example, the outgoing link MTU minus the overhead). Implementations can therefore start with different Tunnel MTUs and fragment or drop differently. | ambiguity | none: RFC has no errata |
+| RA-1200 | 8.1 | "If automatic keying is implemented, IKE in main mode with preshared keys MUST be supported. / then the use of BGP's MD5-based authentication mechanism is satisfactory" | Security gap: The mandatory key management is IKEv1 (RFC 2409, obsoleted by RFC 4306 and now RFC 7296), and TCP MD5 (RFC 2385) is called satisfactory although RFC 5925 (TCP-AO) obsoletes it. The IPsec architecture and ESP documents (RFC 2401, 2402, 2406) are only informative references, yet ESP support is a MUST whenever IPsec is used. The security guidance reflects 2005 practice and has not been updated. No erratum applies: this is outdated text, not a mistake at publication. | error | none: RFC has no errata |
+
+Proposed erratum RA-1195 (RFC 4023, Section 8.1; type: Technical):
+
+```
+Original Text
+-------------
+   At the tunnel tail, IPsec outbound processing recovers the
+   contained MPLS-in-IP/GRE packet.
+
+Corrected Text
+--------------
+   At the tunnel tail, IPsec inbound processing recovers the
+   contained MPLS-in-IP/GRE packet.
+
+Notes
+-----
+   The tunnel tail is the receiver of the protected packet, so it
+   applies IPsec inbound processing.
+```
+
+Proposed erratum RA-1196 (RFC 4023, Section 8.1; type: Editorial):
+
+```
+Original Text
+-------------
+   Thus, the implementation MUST support ESP will null encryption.
+
+Corrected Text
+--------------
+   Thus, the implementation MUST support ESP with null encryption.
+
+Notes
+-----
+   Typographical error.
+```
+
+Proposed erratum RA-1197 (RFC 4023, Section 1, 8; type: Editorial):
+
+```
+Original Text
+-------------
+   The specification encapsulations do not ensure privacy.
+
+Corrected Text
+--------------
+   The specified encapsulations do not ensure privacy.
+
+Notes
+-----
+   Typographical errors; in Section 1, "the this document" should
+   read "this document".
 ```
 
 ### RFC 4950: ICMP Extensions for Multiprotocol Label Switching {#ra_rfc4950}
@@ -6242,7 +6322,7 @@ Notes
 
 ## Pseudowires, VPLS and ICCP {#ra_pw}
 
-20 RFCs in this area (20 deep); 71 findings, 27 of them proposed errata.
+23 RFCs in this area (23 deep); 88 findings, 37 of them proposed errata.
 
 ### RFC 4385: Pseudowire Emulation Edge-to-Edge (PWE3) Control Word for Use over an MPLS PSN {#ra_rfc4385}
 
@@ -6617,6 +6697,131 @@ Notes
    stated.
 ```
 
+### RFC 6310: Pseudowire (PW) Operations, Administration, and Maintenance (OAM) Message Mapping {#ra_rfc6310}
+
+Depth: deep. Errata: 1 errata: 1 held. 
+
+| ID | Section | Quote | Issue | Severity | Erratum |
+|---|---|---|---|---|---|
+| RA-1201 | 6.1.2 | "and 0x10 (BFD PW-ACH-encapsulated (without IP/UDP headers), for PW.  Fault Detection and AC/PW Fault Status Signaling) for fault detection only" | RFC 5885 defines 0x10 as BFD PW-ACH-encapsulated "for PW Fault Detection only". "Fault Detection and AC/PW Fault Status Signaling" is the description of 0x20 (and 0x08). The text therefore gives 0x10 both meanings in one parenthesis and contradicts Sections 6.1 and 6.1.3, which put 0x10 with 0x04 as fault detection only. | error | none: RFC has 1 errata, none on this point; **proposed erratum below** |
+| RA-1202 | 6.1, 6.1.2 | "The CV types are defined in Section 6.1.3 of this document." | Section 6.1.3 describes how the BFD diagnostic codes are used with the CV types. The CV types themselves are defined in RFC 5885 Section 3.3, which Section 6.1 cites in the same paragraphs. Section 6.1.2 repeats the same reference ("described in Section 6.1.3"). | editorial | none: RFC has 1 errata, none on this point; **proposed erratum below** |
+| RA-1203 | 6.1.3, 6.1 | "As stated in Section 6.1, these CV types SHOULD NOT be used when the PW is established with the LDP or L2TP control plane." | Section 6.1 states the SHOULD NOT only for L2TP ("These CV types SHOULD NOT be used when the PW is established via the L2TP control plane"). For MPLS it only says that a PE signalling by means other than LDP MAY use 0x08 / 0x20; it gives no restriction for LDP. The LDP restriction comes from RFC 5885 Section 3.3. The same subsection also maps the forward defect indication to "the logical OR of" BFD diagnostic 6 and PW status code 0x00000001, a status word that is not a BFD code, under a heading that lists "BFD codes". | contradiction | none: RFC has 1 errata, none on this point; **proposed erratum below** |
+| RA-1204 | 6.1 | "A PE that establishes an MPLS PW using means other than LDP, e.g., by static configuration or by use of BGP, MUST support some alternative method of status reporting." | The MUST names no mechanism. The text calls the design "work in progress" ([Static-PW-Status], later RFC 6478), and the only alternative it offers, VCCV-BFD CV 0x08 / 0x20, is a MAY. At publication, an implementation could not know which method satisfies the MUST, and a statically configured PE that runs only fault-detection BFD (0x04 / 0x10) cannot convey AC defects to its peer as Sections 7 to 10 require. | ambiguity | none: RFC has 1 errata, none on this point |
+| RA-1205 | 10.2.2, 10.1.4 | "a. A structure-aware PE1 MUST commence RDI insertion into the corresponding AC. / The AC transmit defect state is not valid for CEP PWs.  RDI signals are forwarded transparently." | "Structure-aware" and "structure-agnostic" are TDM PW terms (Section 9: SAToP versus CESoPSN/TDMoIP). The CEP text (Section 10, RFC 4842) does not define which CEP PE is structure-aware, so the MUST has no clear subject. Section 10.1.4 also says RDI is forwarded transparently on CEP, without saying how inserted RDI (RDI-P or RDI-V) relates to RDI received from the remote CE. | ambiguity | none: RFC has 1 errata, none on this point |
+| RA-1206 | 10.2.3, 10.1.3 | "a. PE1 MUST set the L bit in these packets." | In Section 10.2.3, "these packets" has no antecedent. The sentence was carried over from Section 9.3.3, where the previous item names "the PW packets sent towards PE2". The same section writes both "AIS-V/P" and "AIS-P/V", and its exit item (a) undoes an AIS overwrite that entry item (c) makes only when DBA is not enabled. Section 10.1.3 has "by detecting of AIS". | editorial | none: RFC has 1 errata, none on this point; **proposed erratum below** |
+| RA-1207 | B.3, B.4 | "b. LSP-Ping with Bi-directional Forwarding Detection [RFC5885] for LSP tunnel continuity checking. / [RFC4377] describes how LSP-Ping and BFD can be used over individual" | BFD for MPLS LSPs (bootstrapped by LSP Ping) is RFC 5884. RFC 5885 is BFD for PW VCCV, which Appendix B.4 is about. RFC 4377 states OAM requirements and does not describe how to use LSP Ping and BFD over individual PWs; that is RFC 5085 and RFC 5885. | error | none: RFC has 1 errata, none on this point; **proposed erratum below** |
+| RA-1208 | 13.1, A.2 | "(DSS1)  Signalling specifications for frame mode ... Recommendation Q.993, February 2003. / including fault management (FT), Performance management (PM)," | The [Q.933] reference entry names the Recommendation "Q.993". Appendix A.2 abbreviates fault management as "FT" (FM is meant), and uses "AC" for accounting management, although AC means attachment circuit throughout the document. | editorial | none: RFC has 1 errata, none on this point; **proposed erratum below** |
+
+Proposed erratum RA-1201 (RFC 6310, Section 6.1.2; type: Technical):
+
+```
+Original Text
+-------------
+   0x10 (BFD PW-ACH-encapsulated (without IP/UDP headers), for PW.
+   Fault Detection and AC/PW Fault Status Signaling) for fault
+   detection only
+
+Corrected Text
+--------------
+   0x10 (BFD PW-ACH-encapsulated (without IP/UDP headers), for PW
+   Fault Detection only) for fault detection only
+
+Notes
+-----
+   Per RFC 5885 Section 3.3
+   IANA, 0x10 is PW-ACH-encapsulated BFD for fault detection only;
+   the status-signalling variant is 0x20.
+```
+
+Proposed erratum RA-1202 (RFC 6310, Section 6.1, 6.1.2; type: Editorial):
+
+```
+Original Text
+-------------
+   The CV types are defined in Section 6.1.3 of this document.
+
+Corrected Text
+--------------
+   The CV types are defined in [RFC5885]; their use with BFD
+   diagnostic codes is described in Section 6.1.3 of this document.
+
+Notes
+-----
+   Wrong cross-reference.
+```
+
+Proposed erratum RA-1203 (RFC 6310, Section 6.1.3, 6.1; type: Technical):
+
+```
+Original Text
+-------------
+   As stated in Section 6.1, these CV types SHOULD NOT be used when
+   the PW is established with the LDP or L2TP control plane.
+
+Corrected Text
+--------------
+   As stated in Section 6.1 and in [RFC5885], these CV types SHOULD
+   NOT be used when the PW is established with the LDP or L2TP
+   control plane.
+
+Notes
+-----
+   Section 6.1 does not contain the LDP restriction; the source is
+   RFC 5885 Section 3.3.
+```
+
+Proposed erratum RA-1206 (RFC 6310, Section 10.2.3, 10.1.3; type: Editorial):
+
+```
+Original Text
+-------------
+   a. PE1 MUST set the L bit in these packets.
+
+Corrected Text
+--------------
+   a. PE1 MUST set the L bit in the PW packets sent towards PE2.
+
+Notes
+-----
+   Editorial; the wording was copied from Section 9.3.3.
+```
+
+Proposed erratum RA-1207 (RFC 6310, Section B.3, B.4; type: Technical):
+
+```
+Original Text
+-------------
+   b. LSP-Ping with Bi-directional Forwarding Detection [RFC5885]
+   for LSP tunnel continuity checking.
+
+Corrected Text
+--------------
+   b. LSP-Ping with Bi-directional Forwarding Detection [RFC5884]
+   for LSP tunnel continuity checking.
+
+Notes
+-----
+   Wrong reference. In B.4, "[RFC4377] describes" should read
+   "[RFC5085] and [RFC5885] describe" (RFC 5884 must be added to the
+   references).
+```
+
+Proposed erratum RA-1208 (RFC 6310, Section 13.1, A.2; type: Editorial):
+
+```
+Original Text
+-------------
+   ITU- T Recommendation Q.993, February 2003.
+
+Corrected Text
+--------------
+   ITU-T Recommendation Q.933, February 2003.
+
+Notes
+-----
+   Typographical errors.
+```
+
 ### RFC 6391: Flow-Aware Transport of Pseudowires over an MPLS Packet Switched Network {#ra_rfc6391}
 
 Depth: deep (1.3 to 5). Errata: none (the RFC has no errata). 
@@ -6643,6 +6848,58 @@ Notes
 -----
    Section 3: "If a flow LSE is present, it MUST be checked to
    determine whether it carries a reserved label."
+```
+
+### RFC 6478: Pseudowire Status for Static Pseudowires {#ra_rfc6478}
+
+Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 5885.
+
+| ID | Section | Quote | Issue | Severity | Erratum |
+|---|---|---|---|---|---|
+| RA-1209 | 6.1 | "0x07      24   Static PW/MPLS-TP PW segment ID of last PW segment traversed / The format of this TLV is that of the "Static Pseudowire Sub-TLV" defined in [RFC6426]." | The Static Pseudowire Sub-TLV of RFC 6426 Section 2.3.2 is 32 octets: a 64-bit Service Identifier and six 32-bit fields (source and destination Global ID, Node ID and AC-ID). A Length of 24 cannot hold it. A sender that follows the table truncates the value, and a receiver that checks the length rejects a correctly formatted sub-TLV. | error | none: RFC has no errata; **proposed erratum below** |
+| RA-1210 | 5.5.1, 8 | "If the S-PE bypass mode LDP flag bit in the generic protocol flags interface parameter does not match in the FEC advertisement for directions of a specific PW, that PW MUST NOT be enabled. / If bit B of said TLV is not set, or the TLV is not present, then the T-PE receiving the label mapping message MUST NOT send S-PE bypass status messages" | The first sentence makes any mismatch fatal, including a peer that does not implement this RFC and so never sends the sub-TLV. The paragraph at the end of the section instead describes a T-PE that keeps the PW and only refrains from bypass messages when B is absent, which is the backward-compatible reading. The bit position is also stated two ways: "position 31" in Figure 3, while Section 8 says "Bit 0 is defined" with mask 0x0001 in a 16-bit string. | contradiction | none: RFC has no errata; **proposed erratum below** |
+| RA-1211 | 5.3, 5.3.1 | "transmission will cease after 3 PW status messages have been sent at one second intervals and before the refresh timer expires. / If it is acknowledged, then a timer value of zero MUST be used." | The text does not say which side uses the timer value of zero (the acknowledger in its reply, or the originator in later messages), nor what the receiver of a zero status does with its 3.5 x refresh timeout once transmission stops (the timeout only runs after "another non-zero PW status message"). A refresh timer of 0 ("never timeout") also disables the only recovery from lost messages after the three initial sends, without a rule on when 0 may be used. The retransmission rule says the message is "repeated twice more at an initial interval of one second" but does not say whether an acknowledgement stops those repeats. | ambiguity | none: RFC has no errata |
+| RA-1212 | 6.2 | "The S-PE will only withdraw its label for the dynamic, LDP-controlled PW segment if the S-PE is not provisioned." | "If the S-PE is not provisioned" has no clear object (the static segment, the switching entry, or the S-PE as a whole), and the section covers only the LDP-to-static direction. It does not say what the S-PE signals on the LDP segment when the static segment's status times out (3.5 x refresh) or reports a fault: an LDP status Notification under RFC 6073 Section 10 would follow, but the text does not say so. | ambiguity | none: RFC has no errata |
+| RA-1213 | 4, 5.4.1, 9 | "the PE MUST place the GAL reserved label [RFC5586] below the PW label with the TTL field set to 1." | RFC 5586 (GAL and ACH, both required by Sections 5.1 and 5.4) and RFC 5885 (whose CV types 0x08 / 0x20 Section 4 forbids) are listed only as informative references. Section 4 also says that RFC 4447 requires static PEs to support an alternative status method; that requirement is in RFC 6310 Section 6.1. Section 5.3.1 has "when the the current timer". | editorial | none: RFC has no errata |
+
+Proposed erratum RA-1209 (RFC 6478, Section 6.1; type: Technical):
+
+```
+Original Text
+-------------
+   0x07      24   Static PW/MPLS-TP PW segment ID of last PW segment
+   traversed
+
+Corrected Text
+--------------
+   0x07      32   Static PW/MPLS-TP PW segment ID of last PW segment
+   traversed
+
+Notes
+-----
+   RFC 6426 Section 2.3.2 Figure 6: 8 + 6 x 4 = 32 octets.
+```
+
+Proposed erratum RA-1210 (RFC 6478, Section 5.5.1, 8; type: Technical):
+
+```
+Original Text
+-------------
+   If the S-PE bypass mode LDP flag bit in the generic protocol
+   flags interface parameter does not match in the FEC advertisement
+   for directions of a specific PW, that PW MUST NOT be enabled.
+
+Corrected Text
+--------------
+   If both T-PEs advertise the generic protocol flags interface
+   parameter and the S-PE bypass mode flag bit does not match in the
+   FEC advertisements for the two directions of a specific PW, S-PE
+   bypass mode MUST NOT be used on that PW.
+
+Notes
+-----
+   The proposed text keeps interworking with T-PEs that do not
+   support this document; the authors should confirm the intent.
 ```
 
 ### RFC 6718: Pseudowire Redundancy {#ra_rfc6718}
@@ -6860,6 +7117,56 @@ Depth: deep (5 in full; 3, 6, 7 by MUST/SHOULD). Errata: 1 errata: 1 verified.
 |---|---|---|---|---|---|
 | RA-0257 | 5.1.1, 5.1.2 | "The U-bit and F-bit [RFC5036] are set to forward if unknown so that potential intermediate VPLS PE-rs devices unaware of the new TLV can just propagate it transparently." | With U = 1 a PE-rs that does not know the TLV ignores it and processes the Address Withdraw with an empty MAC list per RFC 4762, i.e. flushes all MACs except those learned from the sender ("flush-all-but-mine"). For the optimized procedure (N = 1, "flush-all-from-me") that is the complement of the requested action, not a harmless fallback; the document relies on "the assumption ... that the MAC Flush TLV is understood by all devices before it is turned on", but the U-bit choice makes a partial deployment silently do the opposite rather than fail. The rationale given (transparent propagation) does not fit LDP, whose Address Withdraw messages are regenerated per session rather than forwarded. | ambiguity | none: RFC has 1 errata, none on this point |
 | RA-0258 | 5.1.3 | "When optimized MAC flushing is not supported, a MAC Flush TLV is received with N = 0 in the MAC flush message" | A receiver that does not support optimized flushing cannot interpret the TLV at all; the sentence means a TLV received with N = 0 (flush-all-but-mine, the RFC 4762 semantics), whatever the receiver supports. As written it ties the value of N to the receiver's capability. | editorial | none: RFC has 1 errata, none on this point |
+
+### RFC 7771: Switching Provider Edge (S-PE) Protection for MPLS and MPLS Transport Profile (MPLS-TP) Static Multi-Segment Pseudowires {#ra_rfc7771}
+
+Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 6870.
+
+| ID | Section | Quote | Issue | Severity | Erratum |
+|---|---|---|---|---|---|
+| RA-1214 | 2, 3 | "so that the status-signaling-based procedures in RFC 6870 operate identically to when used with LDP-based status signaling." | RFC 6870 Section 8 requires all PWs of a redundant set to use the same FEC type, identifies each PW by its PW ID or AGI::SAII::TAII (which also drive the default tie-break of Sections 5 and 6), and requires PW Status TLV negotiation. Static PWs have no FEC, no PW ID and no negotiation. This document does not say what identifies a static PW for these rules. Section 3 lists what must be provisioned identically (whether redundancy is used, the primary, the precedence of the secondaries) but omits the mode of operation (independent or master/slave, RFC 6870 Section 5), which the two T-PEs must also agree on. | ambiguity | none: RFC has no errata |
+| RA-1215 | A.2 | "The Generic Associated Channel (G-Ach) carrying the PSC protocol information is placed in the label stack directly beneath the PW identifier." | The G-ACh is not a label stack entry. The Associated Channel Header follows the bottom of the stack (the PW label), with the GAL below the PW label only when the control word is not used (RFC 5586, RFC 6478 Section 5.4). The text also gives neither the PW label TTL needed for PSC messages to pass the S-PEs and reach the far T-PE (as in RFC 6478 Section 5.4.2) nor how S-PEs treat these messages. Implementations can place the header, or set the TTL, differently. | ambiguity | none: RFC has no errata; **proposed erratum below** |
+| RA-1216 | 2, Title, Abstract | "2.  Extension to RFC 6870 to Protect Statically Provisioned SS-PWs and MS-PWs" | The title, the abstract and Section 1 limit the document to static MS-PWs and S-PE failure. The heading of Section 2 and its last paragraph ("statically provisioned PWs (SS-PWs or MS-PWs)") extend it to static SS-PWs, which have no S-PE. The reader cannot tell whether RFC 6870 redundancy over RFC 6478 status is also specified for static SS-PWs (for example, a multi-homed CE). | ambiguity | none: RFC has no errata |
+| RA-1217 | 1, A.2 | "consist of Terminating Provider Edge Routers PEs (T-PEs) / statically provisioned MS-PWs pseudowires (PWs) as well" | Section 1 has a stray "PEs" in "Provider Edge Routers PEs (T-PEs)" and a redundant "MS-PWs pseudowires (PWs)". Appendix A.2 writes "G-Ach" where RFC 5586 writes G-ACh. | editorial | none: RFC has no errata; **proposed erratum below** |
+
+Proposed erratum RA-1215 (RFC 7771, Section A.2; type: Technical):
+
+```
+Original Text
+-------------
+   The Generic Associated Channel (G-Ach) carrying the PSC protocol
+   information is placed in the label stack directly beneath the PW
+   identifier.
+
+Corrected Text
+--------------
+   The PSC protocol messages are carried in the PW Associated
+   Channel, i.e., the Associated Channel Header follows the PW label
+   (preceded by the GAL when the control word is not used, as in RFC
+   6478), and the PW label TTL is set so that the messages reach the
+   far T-PE.
+
+Notes
+-----
+   The G-ACh is not a label stack entry. Without a TTL rule, an S-PE
+   takes the message as addressed to itself.
+```
+
+Proposed erratum RA-1217 (RFC 7771, Section 1, A.2; type: Editorial):
+
+```
+Original Text
+-------------
+   statically provisioned MS-PWs pseudowires (PWs) as well.
+
+Corrected Text
+--------------
+   statically provisioned MS-PWs as well.
+
+Notes
+-----
+   Editorial.
+```
 
 ### RFC 8077: Pseudowire Setup and Maintenance Using the Label Distribution Protocol (LDP) {#ra_rfc8077}
 
@@ -14679,6 +14986,7 @@ Every RFC reviewed, with the depth of reading (best of the two passes) and the e
 | [RFC 3906](#ra_rfc3906) | Calculating Interior Gateway Protocol (IGP) Routes Over Traffic Engineering Tunnels | [IS-IS](#ra_isis) | deep | none | 2 | 1 |
 | [RFC 3971](#ra_rfc3971) | SEcure Neighbor Discovery (SEND) | [IP](#ra_ip) | deep | 13 (4 verified, 8 held, 1 rejected) | 5 | 1 |
 | [RFC 3988](#ra_rfc3988) | Maximum Transmission Unit Signalling Extensions for the Label Distribution Protocol | [RSVP](#ra_rsvp) | deep | none | 1 | 0 |
+| [RFC 4023](#ra_rfc4023) | Encapsulating MPLS in IP or Generic Routing Encapsulation (GRE) | [MPLS/LDP](#ra_ldp) | deep | none | 6 | 3 |
 | [RFC 4090](#ra_rfc4090) | Fast Reroute Extensions to RSVP-TE for LSP Tunnels | [RSVP](#ra_rsvp) | deep | 3 (3 verified) | 8 | 5 |
 | [RFC 4105](#ra_rfc4105) | Requirements for Inter-Area MPLS Traffic Engineering | [RSVP](#ra_rsvp) | deep | none | 1 | 1 |
 | [RFC 4124](#ra_rfc4124) | Protocol Extensions for Support of Diffserv-aware MPLS Traffic Engineering | [RSVP](#ra_rsvp) | deep | none | 4 | 1 |
@@ -14812,6 +15120,7 @@ Every RFC reviewed, with the depth of reading (best of the two passes) and the e
 | [RFC 6233](#ra_rfc6233) | IS-IS Registry Extension for Purges | [IS-IS](#ra_isis) | deep | none | 1 | 0 |
 | [RFC 6234](#ra_rfc6234) | US Secure Hash Algorithms (SHA and SHA-based HMAC and HKDF) | [IP](#ra_ip) | deep | 4 (1 verified, 2 reported, 1 held) | 2 | 2 |
 | [RFC 6286](#ra_rfc6286) | Autonomous-System-Wide Unique BGP Identifier for BGP-4 | [BGP](#ra_bgp) | deep | 1 (1 held) | 1 | 1 |
+| [RFC 6310](#ra_rfc6310) | Pseudowire (PW) Operations, Administration, and Maintenance (OAM) Message Mapping | [PW](#ra_pw) | deep | 1 (1 held) | 8 | 6 |
 | [RFC 6368](#ra_rfc6368) | Internal BGP as the Provider/Customer Edge Protocol for BGP/MPLS IP Virtual Private Networ | [BGP](#ra_bgp) | deep | 2 (2 verified) | 1 | 0 |
 | [RFC 6370](#ra_rfc6370) | MPLS Transport Profile (MPLS-TP) Identifiers | [MPLS/LDP](#ra_ldp) | deep | none | 2 | 1 |
 | [RFC 6378](#ra_rfc6378) | MPLS Transport Profile (MPLS-TP) Linear Protection | [MPLS/LDP](#ra_ldp) | deep | none | 6 | 3 |
@@ -14823,6 +15132,7 @@ Every RFC reviewed, with the depth of reading (best of the two passes) and the e
 | [RFC 6426](#ra_rfc6426) | MPLS On-Demand Connectivity Verification and Route Tracing | [OAM](#ra_oam) | deep | 2 (2 verified) | 4 | 1 |
 | [RFC 6454](#ra_rfc6454) | The Web Origin Concept | [IP](#ra_ip) | deep | 1 (1 rejected) | 1 | 0 |
 | [RFC 6455](#ra_rfc6455) | The WebSocket Protocol | [IP](#ra_ip) | deep | 18 (3 verified, 6 reported, 4 held, 5 rejected) | 4 | 1 |
+| [RFC 6478](#ra_rfc6478) | Pseudowire Status for Static Pseudowires | [PW](#ra_pw) | deep | none | 5 | 2 |
 | [RFC 6512](#ra_rfc6512) | Using Multipoint LDP When the Backbone Has No Route to the Root | [MPLS/LDP](#ra_ldp) | deep | 2 (2 verified) | 0 | 0 |
 | [RFC 6513](#ra_rfc6513) | Multicast in MPLS/BGP IP VPNs | [Multicast](#ra_mcast) | deep | 2 (1 verified, 1 held) | 2 | 0 |
 | [RFC 6514](#ra_rfc6514) | BGP Encodings and Procedures for Multicast in MPLS/BGP IP VPNs | [Multicast](#ra_mcast) | deep | 3 (3 held) | 8 | 6 |
@@ -14885,6 +15195,7 @@ Every RFC reviewed, with the depth of reading (best of the two passes) and the e
 | [RFC 7748](#ra_rfc7748) | Elliptic Curves for Security | [IP](#ra_ip) | deep | 9 (4 verified, 1 held, 4 rejected) | 3 | 0 |
 | [RFC 7750](#ra_rfc7750) | Differentiated Service Code Point and Explicit Congestion Notification Monitoring in the T | [OAM](#ra_oam) | deep | none | 1 | 1 |
 | [RFC 7761](#ra_rfc7761) | Protocol Independent Multicast - Sparse Mode (PIM-SM): Protocol Specification (Revised) | [Multicast](#ra_mcast) | deep | 4 (2 verified, 1 held, 1 rejected) | 9 | 4 |
+| [RFC 7771](#ra_rfc7771) | Switching Provider Edge (S-PE) Protection for MPLS and MPLS Transport Profile (MPLS-TP) St | [PW](#ra_pw) | deep | none | 4 | 2 |
 | [RFC 7775](#ra_rfc7775) | IS-IS Route Preference for Extended IP and IPv6 Reachability | [IS-IS](#ra_isis) | deep | none | 2 | 1 |
 | [RFC 7794](#ra_rfc7794) | IS-IS Prefix Attributes for Extended IPv4 and IPv6 Reachability | [IS-IS](#ra_isis) | deep | none | 1 | 1 |
 | [RFC 7811](#ra_rfc7811) | An Algorithm for Computing IP/LDP Fast Reroute Using Maximally Redundant Trees (MRT-FRR) | [IS-IS](#ra_isis) | deep | none | 11 | 7 |
