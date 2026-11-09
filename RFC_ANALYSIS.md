@@ -1,20 +1,20 @@
 # RFC analysis: contradictions, ambiguities and possible errata {#rfc_analysis}
 
-A review of 439 RFCs covering BGP, IS-IS, MPLS, LDP, RSVP-TE, PCEP, PIM, BFD, pseudowires, measurement protocols and supporting IP and security specifications. Each finding names the RFC and section, quotes the text briefly, explains the contradiction, ambiguity or error, and gives the status of any existing erratum. Findings that look like errata not yet reported carry a proposed report in the RFC Editor's format (Original Text, Corrected Text, Notes). The review was done in two passes on 2026-11-09: a first pass over the most-used protocol specifications and an automated check of all texts, and a second pass that read the remaining texts.
+A review of 449 RFCs covering BGP, IS-IS, MPLS, LDP, RSVP-TE, PCEP, PIM, BFD, pseudowires, measurement protocols and supporting IP and security specifications. Each finding names the RFC and section, quotes the text briefly, explains the contradiction, ambiguity or error, and gives the status of any existing erratum. Findings that look like errata not yet reported carry a proposed report in the RFC Editor's format (Original Text, Corrected Text, Notes). The review was done in two passes on 2026-11-09: a first pass over the most-used protocol specifications and an automated check of all texts, and a second pass that read the remaining texts.
 
 ## Summary {#ra_summary}
 
-1291 open findings in 395 RFCs; 173 match an existing erratum report; **545 are proposed new errata**. 25 further findings are resolved by a later RFC in the set and are listed separately ([Resolved by later RFCs](#ra_resolved)); they are not counted below.
+1456 open findings in 410 RFCs; 171 match an existing erratum report; **648 are proposed new errata**. 30 further findings are resolved by a later RFC in the set, or re-targeted to the RFC that replaces theirs, and are listed separately ([Resolved by later RFCs](#ra_resolved)); they are not counted below.
 
 ### Counts by severity {#ra_counts_sev}
 
 | Severity | Findings | Existing erratum | Proposed erratum |
 |---|---|---|---|
-| error | 223 | 66 | 115 |
-| contradiction | 273 | 21 | 185 |
-| ambiguity | 496 | 30 | 120 |
-| editorial | 295 | 56 | 123 |
-| **total** | **1291** | **173** | **545** |
+| error | 246 | 65 | 139 |
+| contradiction | 305 | 21 | 207 |
+| ambiguity | 566 | 29 | 146 |
+| editorial | 335 | 56 | 154 |
+| **total** | **1456** | **171** | **648** |
 
 "error" includes 44 security gaps (marked "Security gap"). "Existing erratum" counts findings that match an erratum report of any status, including rejected reports that leave a question open.
 
@@ -22,16 +22,16 @@ A review of 439 RFCs covering BGP, IS-IS, MPLS, LDP, RSVP-TE, PCEP, PIM, BFD, ps
 
 | Area | RFCs | deep | deep (targeted) | part | read | light | scan | Findings | Proposed errata | error | contradiction | ambiguity | editorial |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| [BGP, L3VPN, MVPN and BGP-LS](#ra_bgp) | 72 | 72 | 0 | 0 | 0 | 0 | 0 | 173 | 57 | 24 | 31 | 91 | 26 |
-| [IS-IS, IGP TE, Segment Routing and IP FRR](#ra_isis) | 63 | 63 | 0 | 0 | 0 | 0 | 0 | 177 | 94 | 24 | 42 | 62 | 46 |
-| [MPLS, LDP and mLDP](#ra_ldp) | 46 | 46 | 0 | 0 | 0 | 0 | 0 | 115 | 46 | 19 | 19 | 52 | 25 |
-| [Pseudowires, VPLS and ICCP](#ra_pw) | 23 | 23 | 0 | 0 | 0 | 0 | 0 | 87 | 36 | 13 | 18 | 37 | 19 |
-| [RSVP, RSVP-TE and GMPLS](#ra_rsvp) | 48 | 48 | 0 | 0 | 0 | 0 | 0 | 167 | 59 | 32 | 41 | 52 | 42 |
-| [PCEP and PCE](#ra_pcep) | 37 | 37 | 0 | 0 | 0 | 0 | 0 | 151 | 77 | 22 | 39 | 63 | 27 |
-| [Multicast: PIM, IGMP, MLD and MVPN](#ra_mcast) | 23 | 23 | 0 | 0 | 0 | 0 | 0 | 69 | 29 | 9 | 14 | 30 | 16 |
-| [BFD, LSP ping, measurement and time](#ra_oam) | 34 | 34 | 0 | 0 | 0 | 0 | 0 | 99 | 45 | 23 | 17 | 38 | 21 |
-| [IP, ICMP, neighbour discovery, transport and security](#ra_ip) | 93 | 93 | 0 | 0 | 0 | 0 | 0 | 253 | 102 | 57 | 52 | 71 | 73 |
-| **all** | **439** | **439** | **0** | **0** | **0** | **0** | **0** | **1291** | **545** | **223** | **273** | **496** | **295** |
+| [BGP, L3VPN, MVPN and BGP-LS](#ra_bgp) | 73 | 73 | 0 | 0 | 0 | 0 | 0 | 183 | 62 | 26 | 34 | 95 | 27 |
+| [IS-IS, IGP TE, Segment Routing and IP FRR](#ra_isis) | 64 | 64 | 0 | 0 | 0 | 0 | 0 | 215 | 118 | 29 | 46 | 83 | 54 |
+| [MPLS, LDP and mLDP](#ra_ldp) | 51 | 51 | 0 | 0 | 0 | 0 | 0 | 160 | 75 | 24 | 25 | 73 | 38 |
+| [Pseudowires, VPLS and ICCP](#ra_pw) | 23 | 23 | 0 | 0 | 0 | 0 | 0 | 103 | 47 | 20 | 21 | 40 | 22 |
+| [RSVP, RSVP-TE and GMPLS](#ra_rsvp) | 48 | 48 | 0 | 0 | 0 | 0 | 0 | 171 | 62 | 33 | 43 | 52 | 43 |
+| [PCEP and PCE](#ra_pcep) | 37 | 37 | 0 | 0 | 0 | 0 | 0 | 156 | 79 | 22 | 39 | 66 | 29 |
+| [Multicast: PIM, IGMP, MLD and MVPN](#ra_mcast) | 24 | 24 | 0 | 0 | 0 | 0 | 0 | 92 | 42 | 10 | 22 | 37 | 23 |
+| [BFD, LSP ping, measurement and time](#ra_oam) | 34 | 34 | 0 | 0 | 0 | 0 | 0 | 112 | 53 | 25 | 19 | 44 | 24 |
+| [IP, ICMP, neighbour discovery, transport and security](#ra_ip) | 95 | 95 | 0 | 0 | 0 | 0 | 0 | 264 | 110 | 57 | 56 | 76 | 75 |
+| **all** | **449** | **449** | **0** | **0** | **0** | **0** | **0** | **1456** | **648** | **246** | **305** | **566** | **335** |
 
 ### Coverage {#ra_coverage}
 
@@ -39,35 +39,35 @@ How deeply each RFC was read (the per-RFC table is the [Coverage by RFC](#ra_ind
 
 | Depth | Meaning | RFCs |
 |---|---|---|
-| deep | every normative section read (state machines, encodings, timers, error handling, IANA, security) | 439 |
+| deep | every normative section read (state machines, encodings, timers, error handling, IANA, security) | 449 |
 | deep (targeted) | core specifications read in all sections where implementers make choices (state machines, error handling, timers, encodings and figures, IANA tables, interaction with updating RFCs), but not every section line by line | 0 |
 | part | the sections named in the RFC entry read in full; the rest not read | 0 |
 | read | normative statements and formats read through once | 0 |
 | light | figures, IANA sections and the automated hits checked, or normative statements extracted | 0 |
 | scan | automated checks only | 0 |
 
-Errata: every finding was matched against the RFC Editor errata database (all errata of all 439 RFCs, fetched 2026-11-09), by section and by comparing the quoted text and the issue with each report.
+Errata: every finding was matched against the RFC Editor errata database (all errata of all 449 RFCs, fetched 2026-11-09), by section and by comparing the quoted text and the issue with each report.
 
 | Errata in the database for these RFCs | Count |
 |---|---|
-| RFCs with at least one erratum | 199 of 439 |
-| Verified | 352 |
+| RFCs with at least one erratum | 200 of 449 |
+| Verified | 353 |
 | Reported | 54 |
-| Held for Document Update | 301 |
+| Held for Document Update | 302 |
 | Rejected | 169 |
-| **total** | **876** |
+| **total** | **878** |
 
 | Findings against the errata | Count |
 |---|---|
-| match an existing erratum: verified | 113 |
+| match an existing erratum: verified | 112 |
 | match an existing erratum: reported (open) | 1 |
-| match an existing erratum: held for document update | 51 |
+| match an existing erratum: held for document update | 50 |
 | match only a rejected erratum | 8 |
-| related to an erratum that does not cover the point | 23 |
-| no erratum on the point (RFC has errata) | 548 |
-| no erratum on the point (RFC has none) | 547 |
+| related to an erratum that does not cover the point | 24 |
+| no erratum on the point (RFC has errata) | 593 |
+| no erratum on the point (RFC has none) | 668 |
 
-Where a finding matches several errata the best status is counted. Drafted errata that turned out to duplicate an existing report are no longer proposed (84); drafted errata that duplicate only a rejected report are kept with the reason they are raised again (0); drafts whose only match is a rejected report whose reason also applies to them are withdrawn (1).
+Where a finding matches several errata the best status is counted. Drafted errata that turned out to duplicate an existing report are no longer proposed (82); drafted errata that duplicate only a rejected report are kept with the reason they are raised again (0); drafts whose only match is a rejected report whose reason also applies to them are withdrawn (1).
 
 ### Proposed errata {#ra_proposed}
 
@@ -95,10 +95,13 @@ Where a finding matches several errata the best status is counted. Drafted errat
 | [RA-0448](#ra_rfc5543) | RFC 5543 6 | Editorial | 6 |
 | [RA-0449](#ra_rfc5701) | RFC 5701 2 | Technical | 2 |
 | [RA-0117](#ra_rfc6286) | RFC 6286 2.2, 3 | Technical | Same-identifier check omits confederation peers although Section 3 treats the confederation as one AS. |
+| [RA-1318](#ra_rfc6368) | RFC 6368 6, 4 | Technical | PE-PE IGP distance attributed to the customer network IGP instead of the provider network IGP. |
 | [RA-0997](#ra_rfc6793) | RFC 6793 3, 4.1 | Technical | Behaviour on disagreement between My Autonomous System and the capability AS is unspecified. |
 | [RA-0998](#ra_rfc6793) | RFC 6793 4.2.3 | Technical | Handling of an AS_SET at the merge boundary is not specified. |
 | [RA-0999](#ra_rfc6793) | RFC 6793 4.2.2, 6 | Technical | The AS4_PATH exception ignores the removal of confederation segments and can require an empty AS4_PATH. |
 | [RA-0120](#ra_rfc7311) | RFC 7311 3.4.3, 3.2 | Technical | Capping at 0xffffffffffffffff creates a value that Section 3.2 tells receivers to discard. |
+| [RA-1320](#ra_rfc7311) | RFC 7311 3.4.3 | Technical | Step 6 of the recursive AIGP procedure loops forever when the next-hop route has an AIGP attribute without an AIGP TLV. |
+| [RA-1321](#ra_rfc7311) | RFC 7311 4.1, 4.2 | Technical | Section 4.2 applies to routes with equal AIGP TLV values, but Section 4.1 leaves routes tied on TLV value plus distance. |
 | [RA-0026](#ra_rfc7606) | RFC 7606 4 | Technical | The zero-length rule cannot be applied to unrecognized attributes. |
 | [RA-1000](#ra_rfc7606) | RFC 7606 2 | Technical | Definition of "AFI/SAFI disable" omits the mandatory route deletion of RFC 4760 Section 7. |
 | [RA-1002](#ra_rfc7606) | RFC 7606 7.11 | Technical | Example omits the 32-octet (global + link-local) IPv6 next hop allowed by RFC 5549. |
@@ -127,21 +130,23 @@ Where a finding matches several errata the best status is counted. Drafted errat
 | [RA-0149](#ra_rfc9774) | RFC 9774 3 | Technical | Treat-as-withdraw for AS_CONFED_SET in AS4_PATH conflicts with RFC 6793 handling of confederation segments in AS4_PATH. |
 | [RA-0480](#ra_rfc9793) | RFC 9793 4 | Technical | Section 4 |
 | [RA-0150](#ra_rfc9830) | RFC 9830 5 vs RFC 9012 13 | Technical | Error handling for malformed Tunnel Encapsulation sub-TLVs in SAFI 73 conflicts with RFC 9012 Section 13 without saying it overrides it. |
+| [RA-1324](#ra_rfc9830) | RFC 9830 2.1 | Technical | Requires mandatory attributes on withdraw-only (MP_UNREACH_NLRI) updates, contrary to RFC 4760. |
+| [RA-1325](#ra_rfc9830) | RFC 9830 2.4.3 | Technical | SRv6 Binding SID value 0 with Endpoint Behavior allowed by one sentence, forbidden by the next. |
 | [RA-0486](#ra_rfc9831) | RFC 9831 2 | Editorial | Section 2 |
 | [RA-0487](#ra_rfc10039) | RFC 10039 4 (item 7) | Technical | Section 4, item 7 |
 | [RA-0488](#ra_rfc10039) | RFC 10039 4 (items 1, 2) vs Figure 7 | Technical | Section 4, item 2, third bullet |
-| [RA-1015](#ra_rfc1142) | RFC 1142 Status of this Memo, 6.1, 7.2.5, 7.2.9, 10.2, 11.2.17, D.1.1 | Editorial | The ASCII republication drops normative text, figures and formulas. |
-| [RA-1016](#ra_rfc1142) | RFC 1142 7.3.15.1 a), 7.3.15.2 a), 8.2.4.1 c), 8.4.1.1 c), Security Considerations | Technical | An unknown Authentication Type bypasses configured password checks. |
-| [RA-1017](#ra_rfc1142) | RFC 1142 7.3.14 e), 7.3.14 i) | Technical | Purging on checksum error (superseded by ISO 10589:2002 and RFC 3719 Section 7). |
-| [RA-1018](#ra_rfc1142) | RFC 1142 7.3.16.3 | Technical | Remaining Lifetime above MaxAge treated as corruption (RFC 3719 2.1 requires ignoring this rule). |
-| [RA-1019](#ra_rfc1142) | RFC 1142 9.7, 8.2.4.2 c) | Technical | Clause 9.7 contradicts 8.2.4.2 c) on which system determines the point-to-point CircuitID. |
-| [RA-1020](#ra_rfc1142) | RFC 1142 9.6, 9.9 | Technical | Level 2 IIH and Level 2 LSP text refer to the Level 1 Designated IS. |
-| [RA-1021](#ra_rfc1142) | RFC 1142 C.2.4 | Technical | SPF Step 1 e) records P instead of P's adjacencies as the first hops. |
-| [RA-1022](#ra_rfc1142) | RFC 1142 C.3.1 | Technical | Example forwarding pseudo-code can index past the valid next hops. |
-| [RA-1023](#ra_rfc1142) | RFC 1142 7.3.15.3, 7.3.15.6, 11.2.17 | Technical | Unit of minimumBroadcastLSPTransmissionInterval: seconds in the text, milliseconds in the formulas and default. |
-| [RA-1024](#ra_rfc1142) | RFC 1142 7.5.1, 8.4.3, 11.2.17 | Technical | Permitted iSISHelloTimer values overflow the Holding Time field with ISISHoldingMultiplier 10. |
-| [RA-1025](#ra_rfc1142) | RFC 1142 7.3.11, 9.8, 9.9, C.1 | Technical | Option lengths and the checksum rule assume a 6-octet ID although ID Length is variable. |
-| [RA-1026](#ra_rfc1142) | RFC 1142 8.4.1.5 | Technical | The new-adjacency conditions are ill-formed; a changed Source ID from a known MAC is not covered. |
+| [RA-1015](#ra_rfc1142) | RFC 1142 Status of this Memo, 6.1, 7.2.5, 7.2.9, 10.2, 11.2.17, D.1.1 | Editorial | The ASCII republication drops normative text, figures and formulas. (RFC 1142 is obsoleted by RFC 7142.) |
+| [RA-1016](#ra_rfc1142) | RFC 1142 7.3.15.1 a), 7.3.15.2 a), 8.2.4.1 c), 8.4.1.1 c), Security Considerations | Technical | An unknown Authentication Type bypasses configured password checks. (RFC 1142 is obsoleted by RFC 7142.) |
+| [RA-1017](#ra_rfc1142) | RFC 1142 7.3.14 e), 7.3.14 i) | Technical | Purging on checksum error (superseded by ISO 10589:2002 and RFC 3719 Section 7). (RFC 1142 is obsoleted by RFC 7142.) |
+| [RA-1018](#ra_rfc1142) | RFC 1142 7.3.16.3 | Technical | Remaining Lifetime above MaxAge treated as corruption (RFC 3719 2.1 requires ignoring this rule). (RFC 1142 is obsoleted by RFC 7142.) |
+| [RA-1019](#ra_rfc1142) | RFC 1142 9.7, 8.2.4.2 c) | Technical | Clause 9.7 contradicts 8.2.4.2 c) on which system determines the point-to-point CircuitID. (RFC 1142 is obsoleted by RFC 7142.) |
+| [RA-1020](#ra_rfc1142) | RFC 1142 9.6, 9.9 | Technical | Level 2 IIH and Level 2 LSP text refer to the Level 1 Designated IS. (RFC 1142 is obsoleted by RFC 7142.) |
+| [RA-1021](#ra_rfc1142) | RFC 1142 C.2.4 | Technical | SPF Step 1 e) records P instead of P's adjacencies as the first hops. (RFC 1142 is obsoleted by RFC 7142.) |
+| [RA-1022](#ra_rfc1142) | RFC 1142 C.3.1 | Technical | Example forwarding pseudo-code can index past the valid next hops. (RFC 1142 is obsoleted by RFC 7142.) |
+| [RA-1023](#ra_rfc1142) | RFC 1142 7.3.15.3, 7.3.15.6, 11.2.17 | Technical | Unit of minimumBroadcastLSPTransmissionInterval: seconds in the text, milliseconds in the formulas and default. (RFC 1142 is obsoleted by RFC 7142.) |
+| [RA-1024](#ra_rfc1142) | RFC 1142 7.5.1, 8.4.3, 11.2.17 | Technical | Permitted iSISHelloTimer values overflow the Holding Time field with ISISHoldingMultiplier 10. (RFC 1142 is obsoleted by RFC 7142.) |
+| [RA-1025](#ra_rfc1142) | RFC 1142 7.3.11, 9.8, 9.9, C.1 | Technical | Option lengths and the checksum rule assume a 6-octet ID although ID Length is variable. (RFC 1142 is obsoleted by RFC 7142.) |
+| [RA-1026](#ra_rfc1142) | RFC 1142 8.4.1.5 | Technical | The new-adjacency conditions are ill-formed; a changed Source ID from a known MAC is not covered. (RFC 1142 is obsoleted by RFC 7142.) |
 | [RA-1028](#ra_rfc1195) | RFC 1195 5.3.4, 5.3.5 | Editorial | Metric descriptions of the IP reachability fields refer to "the link to the listed neighbor". |
 | [RA-0494](#ra_rfc3630) | RFC 3630 2.4.2 | Technical | Sections 2.5.3 and 2.5.4 allow multiple addresses (4N octets). |
 | [RA-0495](#ra_rfc3719) | RFC 3719 14.1 | Editorial | Wrong author attribution for RFC 3358. |
@@ -163,9 +168,9 @@ Where a finding matches several errata the best status is counted. Drafted errat
 | [RA-0037](#ra_rfc5305) | RFC 5305 3, 4 | Technical | Path metric clamp at MAX_PATH_METRIC conflicts with ISO 10589 "unreachable" semantics. |
 | [RA-0038](#ra_rfc5305) | RFC 5305 4 | Editorial | Typo "then"; nonexistent "paragraph 3.0". |
 | [RA-1033](#ra_rfc5305) | RFC 5305 4.3 | Editorial | Mixed-case "SHOULD not"; receiver action for repeated TLV 134 unstated. |
-| [RA-0523](#ra_rfc5306) | RFC 5306 3.4.1.1 | Technical | 3.4.1.1 |
-| [RA-0524](#ra_rfc5306) | RFC 5306 4.3 | Technical | 4.3 (row "Router starts") |
-| [RA-0525](#ra_rfc5306) | RFC 5306 3.1 | Editorial | 3.1 |
+| [RA-0523](#ra_rfc5306) | RFC 5306 3.4.1.1 | Technical | 3.4.1.1 (RFC 5306 is obsoleted by RFC 8706.) |
+| [RA-0524](#ra_rfc5306) | RFC 5306 4.3 | Technical | 4.3 (row "Router starts") (RFC 5306 is obsoleted by RFC 8706.) |
+| [RA-0525](#ra_rfc5306) | RFC 5306 3.1 | Editorial | 3.1 (RFC 5306 is obsoleted by RFC 8706.) |
 | [RA-0527](#ra_rfc5307) | RFC 5307 1.4 | Technical | 1.4 |
 | [RA-0528](#ra_rfc5308) | RFC 5308 2 | Technical | 2 |
 | [RA-0530](#ra_rfc5308) | RFC 5308 2 | Editorial | 2 |
@@ -175,12 +180,15 @@ Where a finding matches several errata the best status is counted. Drafted errat
 | [RA-1039](#ra_rfc5310) | RFC 5310 7.1 | Editorial | Wrong date for RFC 2119; misspelt author name for RFC 2104. |
 | [RA-0531](#ra_rfc5311) | RFC 5311 6.4 | Technical | 6.4 |
 | [RA-0532](#ra_rfc5311) | RFC 5311 4.2.2 | Editorial | 4.2.2 |
-| [RA-0534](#ra_rfc5316) | RFC 5316 3.3 | Technical | 3.3.1, 3.3.2, 3.3.3, 3.3.4, 3.3.5 (figures) |
-| [RA-0536](#ra_rfc5316) | RFC 5316 4 | Technical | 4 |
+| [RA-0534](#ra_rfc5316) | RFC 5316 3.3 | Technical | 3.3.1, 3.3.2, 3.3.3, 3.3.4, 3.3.5 (figures) (RFC 5316 is obsoleted by RFC 9346.) |
+| [RA-0536](#ra_rfc5316) | RFC 5316 4 | Technical | 4 (RFC 5316 is obsoleted by RFC 9346.) |
 | [RA-0157](#ra_rfc6119) | RFC 6119 4.3 | Editorial | "interface address" in the Neighbor Address sub-TLV section. |
+| [RA-1328](#ra_rfc6119) | RFC 6119 3.2.3, 4.3, 4.5 | Technical | Inclusion of TLV 233 in IIHs is not required, although the mandatory Neighbor Address sub-TLV depends on it. |
 | [RA-0158](#ra_rfc6213) | RFC 6213 3.1, 3.2, 3.3 | Technical | Multi-topology effect of a single-topology BFD failure is implied by AND / OR rules but not stated. |
 | [RA-0161](#ra_rfc7308) | RFC 7308 2.2 | Technical | EAG bit numbering example contradicts the AG-compatible word-wise numbering. |
 | [RA-0162](#ra_rfc7490) | RFC 7490 5.2.1.2, 5.3 | Technical | Extended P-space: text uses N->S->E->P, pseudocode uses RFC 5286 Inequality 1 (N->S->P). |
+| [RA-1332](#ra_rfc7490) | RFC 7490 8 | Technical | "push its own label" contradicts Figure 4 and Section 4.2 (first hop's label for the PQ node). |
+| [RA-1336](#ra_rfc7490) | RFC 7490 9.3, 5.2 | Editorial | Example says D's session is to node D; it is to node C. |
 | [RA-0164](#ra_rfc7775) | RFC 7775 3.3, 3.4 | Technical | Within-class selection and ties between internal and external routes not stated. |
 | [RA-0166](#ra_rfc7794) | RFC 7794 2.2 | Technical | Source Router ID consistency rule ambiguous for leaked prefixes (originator's or carrier's TLV 134). |
 | [RA-0537](#ra_rfc7811) | RFC 7811 5.7.3 | Technical | Example states the wrong order relation between E and B, A. |
@@ -191,14 +199,20 @@ Where a finding matches several errata the best status is counted. Drafted errat
 | [RA-0542](#ra_rfc7811) | RFC 7811 App. A | Technical | Appendix A code fails with AttributeError in MRT_Island_Identification. |
 | [RA-0543](#ra_rfc7811) | RFC 7811 App. A | Editorial | Equal-metric interfaces to an LFIN are never collected. |
 | [RA-0548](#ra_rfc7812) | RFC 7812 3 | Technical | Definition of block conflicts with RFC 7811. |
+| [RA-1337](#ra_rfc8102) | RFC 8102 2.3.2, 2.3.1 | Editorial | Table 5 gives D_opt(E,D2) = 1; it is 2. Table 6 header names the wrong path segment. |
 | [RA-0169](#ra_rfc8202) | RFC 8202 3.6.1, 3.6.1.1, 3.6.2 | Technical | Discard rule of 3.6.1 conflicts with mandatory IID-TLV (IID 0) in point-to-point IIHs of 3.6.2 on point-to-point-over-LAN circuits; unclear "either address". |
 | [RA-0170](#ra_rfc8333) | RFC 8333 5.4 | Technical | Mandatory delay in step 5 conflicts with the "SHOULD only ... when protected" restriction. |
+| [RA-1338](#ra_rfc8333) | RFC 8333 9.3 | Editorial | Two router E events printed in the router C column of Table 6. |
 | [RA-0551](#ra_rfc8402) | RFC 8402 2 | Technical | SRv6 "top of segment list" identified ambiguously against the SRH encoding. |
 | [RA-0172](#ra_rfc8405) | RFC 8405 5.2, 5.3, 5.4 | Technical | QUIET defined relative to last computation, FSM relative to last IGP event. |
 | [RA-1223](#ra_rfc8518) | RFC 8518 3, 2 | Technical | An originating neighbour is selected as LFA regardless of its advertised cost, which can loop. |
 | [RA-1224](#ra_rfc8518) | RFC 8518 5.1 | Technical | Section 5.1 relaxes the RFC 5286 3.5 MUST NOT on maximum-cost links without a way to tell TE use from a cost-out. |
 | [RA-1225](#ra_rfc8518) | RFC 8518 4.2.1, 4.2.1.2, 4.2.1.4 | Technical | Type 1 ECMP is decided on advertised cost alone, and ECMP is programmed before the route-type and P-bit checks. |
 | [RA-0174](#ra_rfc8570) | RFC 8570 4.6, Appendix A | Technical | Appendix A claims the 4.6 bundle definition was corrected per erratum 5486, but 4.6 is unchanged. |
+| [RA-1339](#ra_rfc8570) | RFC 8570 2, 5 | Technical | Section 2 makes min/max delay rolling averages; Section 5 makes them interval minimum and maximum. |
+| [RA-1342](#ra_rfc8570) | RFC 8570 4.5, 4.6, 4.7 | Editorial | OSPF term "LSA" in an IS-IS document; missing direction in 4.6 and 4.7. |
+| [RA-1345](#ra_rfc8660) | RFC 8660 A.2.13 | Technical | Wrong FEC type codepoint for SR Policy in Example 13. |
+| [RA-1346](#ra_rfc8660) | RFC 8660 A.3.2 | Technical | Wrong VPN label in Example A.3.2. |
 | [RA-0178](#ra_rfc8661) | RFC 8661 2.1 | Technical | Coexistence example programs an SR entry for a prefix of a non-SR node. |
 | [RA-0555](#ra_rfc8661) | RFC 8661 4.3 vs 4.1 | Editorial | Flow name YZ should be XZ. |
 | [RA-1040](#ra_rfc8667) | RFC 8667 2.1, 2.1.1.3 | Technical | E-Flag definition is unconditional; Section 2.1.1.3 ignores E when P is clear. |
@@ -210,24 +224,39 @@ Where a finding matches several errata the best status is counted. Drafted errat
 | [RA-1048](#ra_rfc8706) | RFC 8706 3.4.1.1, 3.4.1.2, 3.2.3, Tables 1 to 3 | Technical | State tables 2 and 3 cancel T3 / clear overload per LSPDB; the text does so only when all T2 timers have ended. |
 | [RA-0557](#ra_rfc8754) | RFC 8754 2.1.2.1 | Technical | HMAC does not cover Segments Left, so earlier segments can be skipped undetected; stray "HMAC" in the DA check. |
 | [RA-0558](#ra_rfc8754) | RFC 8754 2.1.2.1 | Technical | "Lowest-order octets" conflicts with "subsequent octets set to zero". |
+| [RA-1348](#ra_rfc8918) | RFC 8918 3.1, 3.4, 4 | Technical | POI TLV in a live LSP: Section 3.1 says ignore the TLV and accept the LSP; RFC 6233 Section 3 (not updated) says do not accept the LSP. |
+| [RA-1349](#ra_rfc8918) | RFC 8918 1, 3.1, 4 | Technical | Scope of the "invalid TLV does not invalidate the PDU" rule: all PDUs (Section 1) or LSPs only (Section 4). |
 | [RA-0562](#ra_rfc8986) | RFC 8986 4.16.3 | Technical | End.T (an IPv6 table) with USD performs an IPv4 lookup in table T; missing braces in the USD pseudocode. |
+| [RA-1353](#ra_rfc9294) | RFC 9294 4.1 | Editorial | Rule labels in Section 4.1 use lower case (2)(c)/(d)/(e) while Section 4 defines (2)(C)/(D)/(E). |
 | [RA-0182](#ra_rfc9346) | RFC 9346 3.2 vs 3.4.4 | Editorial | Section 3.2 names a nonexistent "IPv6 Router ID sub-TLV". |
 | [RA-0183](#ra_rfc9346) | RFC 9346 3.4.2, 3.4.3 | Editorial | Wrong parent TLV named for the Remote ASBR Identifier sub-TLVs. |
 | [RA-0184](#ra_rfc9350) | RFC 9350 13.1 vs 8 | Technical | Saturation of overflowing flex-algorithm metrics at 0xFFFFFFFF makes the prefix unreachable downstream (Section 8), unlike the MAX_PATH_METRIC clamp of RFC 5305. |
+| [RA-1354](#ra_rfc9350) | RFC 9350 13.1, 8 | Technical | No rule for classifying IS-IS prefix advertisements as inter-area or intra-area for FAPM use. |
+| [RA-1355](#ra_rfc9350) | RFC 9350 5.1, 5.3, 15.1 | Technical | Non-participating routers must ignore FADs, but an L1/L2 router must select the level 2 winning FAD to regenerate it. |
+| [RA-1356](#ra_rfc9350) | RFC 9350 13 | Technical | Include-all prune condition "all such colors are not set" reads as "none set". |
+| [RA-1357](#ra_rfc9350) | RFC 9350 15.3, 18.4.8 | Editorial | TE metric set in the "ASLA delay advertisement"; Table 14 column "Bit Number" for type values. |
 | [RA-0186](#ra_rfc9352) | RFC 9352 11.3 | Editorial | Wrong RFC number in the IANA table of Section 11.3. |
 | [RA-0190](#ra_rfc9377) | RFC 9377 4.5 vs 4.6 | Technical | Sections 4.5 and 4.6 disagree on standard L2 adjacencies between a flood reflector and its clients. |
 | [RA-0194](#ra_rfc9502) | RFC 9502 6.1, 6.2 | Technical | Unclear whether an out-of-range algorithm invalidates the entry or the whole TLV. |
+| [RA-1358](#ra_rfc9502) | RFC 9502 6.1, 6.2 | Technical | Sub-TLV length octet of TLV 126/127 prefix entries labelled optional without a presence flag. |
+| [RA-1359](#ra_rfc9502) | RFC 9502 8, 6.4 | Technical | Wrong section reference (5 for 6) for the IP Algorithm Prefix Reachability advertisement. |
+| [RA-1360](#ra_rfc9502) | RFC 9502 6.3, 6.4 | Editorial | Flags figure of the OSPFv2 IP Algorithm Prefix Reachability sub-TLV shows 9 bits for a 1-octet field. |
+| [RA-1361](#ra_rfc9502) | RFC 9502 6.1, 6.2, 12 | Technical | "all of them do not advertise the same algorithm" ambiguous; scope (MTID, level) of "same prefix" not stated. |
 | [RA-0567](#ra_rfc9800) | RFC 9800 4.2 | Technical | Section 4.2 |
 | [RA-0571](#ra_rfc9800) | RFC 9800 4.2, A.6-A.10 | Editorial | Appendix A.6 (also A.7, A.8, A.9, A.10) |
 | [RA-0195](#ra_rfc9843) | RFC 9843 4.1.3.2 | Technical | IS-IS threshold rule sets a metric that does not fit the 24-bit Generic Metric. |
 | [RA-0196](#ra_rfc9843) | RFC 9843 4.1.4.2 | Technical | Off-by-one: maximum 32-bit metric is 4,294,967,295. |
 | [RA-0197](#ra_rfc9843) | RFC 9843 4.1.3.1, 4.1.3.2 | Editorial | Flags field drawn narrower than its 1-octet definition in two IS-IS figures. |
+| [RA-1362](#ra_rfc9843) | RFC 9843 4.1.3.1, 4.1.4.1 | Technical | Reference Bandwidth metric formula undefined for granularity 0 and link bandwidth 0; integer arithmetic on IEEE floats unspecified. |
+| [RA-1363](#ra_rfc9843) | RFC 9843 4.1.3.1, 4.1.3.2, 4.1.4.1, 4.1.4.2, 4, 5 | Technical | Advertised Bandwidth Metric is both mandatory and ignored for partially advertised parallel links in Interface Group Mode. |
+| [RA-1364](#ra_rfc9843) | RFC 9843 4.1.4.1, 4.1.4.2 | Technical | OSPF FADRB / FADBT Length values (14, 2 + 8N) do not match the figures (12, 4 + 8N); Reserved size missing. |
+| [RA-1365](#ra_rfc9843) | RFC 9843 4.1.3.2, 4.1.4.2 | Technical | Threshold ordering not required; receiver action for unordered thresholds undefined. |
 | [RA-0198](#ra_rfc9855) | RFC 9855 6.1 vs 7.1 | Technical | "Kept unchanged" conflicts with the MPLS pop / re-push rules of Section 7.1. |
 | [RA-0199](#ra_rfc9885) | RFC 9885 3.2.1, 5 | Technical | MP-TLV key for TLV 22 does not say whether each part must repeat the link identifiers. |
 | [RA-1051](#ra_rfc3032) | RFC 3032 3.5 | Technical | In-transit IPv6 fragmentation and sub-1280 Packet Too Big conflict with RFC 8200 / RFC 8201. |
 | [RA-1052](#ra_rfc3032) | RFC 3032 3.4, 3.5 | Technical | N is not said to be the size of the outgoing label stack. |
-| [RA-0572](#ra_rfc3036) | RFC 3036 3.5.1.2.1 | Technical | The Message Type field is 15 bits; the high-order bit of the 16-bit word is the U bit (Section 3.5). Same correction applies to the TLV case in 3.5.1.2.2. |
-| [RA-0576](#ra_rfc3036) | RFC 3036 A.1.2 | Technical | At LMp.21 no label has been advertised to Peer for FEC, so PrevAdvLabel has no value; a label must be allocated and advertised. |
+| [RA-0572](#ra_rfc3036) | RFC 3036 3.5.1.2.1 | Technical | The Message Type field is 15 bits; the high-order bit of the 16-bit word is the U bit (Section 3.5). Same correction applies to the TLV case in 3.5.1.2.2. (RFC 3036 is obsoleted by RFC 5036.) |
+| [RA-0576](#ra_rfc3036) | RFC 3036 A.1.2 | Technical | At LMp.21 no label has been advertised to Peer for FEC, so PrevAdvLabel has no value; a label must be allocated and advertised. (RFC 3036 is obsoleted by RFC 5036.) |
 | [RA-0048](#ra_rfc3212) | RFC 3212 3.4 | Technical | Reference to nonexistent Section 4.11 (status codes are in 5.3). |
 | [RA-0581](#ra_rfc3212) | RFC 3212 4.5 | Technical | The value field shown in the figure is two 32-bit words. |
 | [RA-0583](#ra_rfc3212) | RFC 3212 4.2 | Technical | Copy of the strict-node sentence; the subject is the loose node. |
@@ -248,39 +277,70 @@ Where a finding matches several errata the best status is counted. Drafted errat
 | [RA-0594](#ra_rfc5332) | RFC 5332 4 | Technical | 4 |
 | [RA-0595](#ra_rfc5332) | RFC 5332 3 | Editorial | 3 |
 | [RA-0208](#ra_rfc5443) | RFC 5443 2 | Technical | Misstates the effect of the RFC 5305 maximum link metric. |
+| [RA-1367](#ra_rfc5561) | RFC 5561 3.1 | Editorial | Undefined term "Backward Capability TLV". |
+| [RA-1368](#ra_rfc5586) | RFC 5586 4.2.1.1, 4.2 | Technical | G-ACh on an LSP with PHP: the egress cannot check the LSP label or tell which LSP the message belongs to. |
+| [RA-1369](#ra_rfc5586) | RFC 5586 4.2.1.2 | Editorial | Requirement on "intermediate nodes" of a Section, which by definition has none at the MPLS layer. |
 | [RA-0599](#ra_rfc6370) | RFC 6370 6 | Technical | SAII/TAII example contradicts the stated SAII rule and RFC 4447 label direction. |
 | [RA-0601](#ra_rfc6378) | RFC 6378 4.3.3.2, Appendix A | Technical | Local SF on protection in remote Unavailable state: text says ignore, Appendix A table says report SF(0,0). |
 | [RA-0602](#ra_rfc6378) | RFC 6378 4.3.3.4, Appendix A | Technical | Appendix A omits the SF(1,1) message for PF:W:L on a remote FS; footnote [12] names no extended state. |
 | [RA-0606](#ra_rfc6378) | RFC 6378 2.1, 4.2.6 | Editorial | Wrong expansion of MEG; 1:n named where 1:1 is meant. |
+| [RA-1370](#ra_rfc6388) | RFC 6388 8.3 | Technical | Immediate MBB notification is addressed to the non-MBB upstream LSR-U instead of the downstream LSR-D. |
+| [RA-1371](#ra_rfc6388) | RFC 6388 9, 3.2, 11 | Technical | Typed wildcard names "the MP2MP FEC Element" although MP2MP has two element types (0x07, 0x08). |
+| [RA-1373](#ra_rfc6388) | RFC 6388 5.2.1, 11 | Technical | "Message ID and Message Type fields are set to 0" does not say these are the Status TLV fields; the status code is not named in Section 5.2.1. |
+| [RA-1374](#ra_rfc6388) | RFC 6388 8.1, 3.3.2.2, 3 | Editorial | 8.1 has LSR-U receiving the MBB notification from itself. |
 | [RA-0216](#ra_rfc6389) | RFC 6389 6, 9 | Technical | LAN upstream hash differs from RFC 6388 (sum vs CRC32) although Section 9 says it is taken from RFC 6388. |
+| [RA-1375](#ra_rfc6512) | RFC 6512 3.2.1, 3.1 | Editorial | Wrong figure reference in 3.2.1 and a typo in 3.1. |
+| [RA-1376](#ra_rfc6790) | RFC 6790 4.2, 4.3, 4.4 | Technical | The example of an LSP on which the ELI is never the top label describes the case in which it is. |
+| [RA-1377](#ra_rfc6790) | RFC 6790 5.1.1 | Technical | ELC propagation rule counts mappings from all neighbours instead of the next hops in use. |
+| [RA-1378](#ra_rfc6790) | RFC 6790 6, header, 5.1, 8 | Editorial | Section 6 updates RFC 4379 without an Updates header entry; minor wording slips in 5.1 and 8. |
 | [RA-0607](#ra_rfc7032) | RFC 7032 4.1 | Technical | Ordered label distribution control defined incorrectly. |
+| [RA-1379](#ra_rfc7140) | RFC 7140 3.5.2 | Technical | Transit node propagates the withdraw with the downstream node's label L instead of its own label L'. |
+| [RA-1380](#ra_rfc7140) | RFC 7140 3.4.1, 3.4.2, 3.4.3 | Editorial | Three references to Section 3.3 for rules defined in Section 3.4. |
+| [RA-1381](#ra_rfc7271) | RFC 7271 11, 11.2 (notes 9, 11, 13), Appendix D | Technical | Note (11) enters WTR on a remote NR without saying whether the WTR timer starts; strict reading of Section 11 can leave both nodes in WTR. |
+| [RA-1385](#ra_rfc7271) | RFC 7271 4.4, 10.2, Appendix D | Editorial | Partial priority list in 4.4 stated as complete; "SF(l,l)" typo; undefined "APS message". |
 | [RA-0219](#ra_rfc7307) | RFC 7307 3.3 | Technical | Figure 4 Len = 6 does not match the 4 octets drawn. |
 | [RA-0221](#ra_rfc7307) | RFC 7307 3.5.2 | Editorial | "label release" where "label withdraw" is meant. |
+| [RA-1388](#ra_rfc7307) | RFC 7307 5 | Editorial | "error notification" should be qualified as fatal, as in RFC 5036. |
+| [RA-1389](#ra_rfc7307) | RFC 7307 3.5.1, 4.1, 13.2 | Editorial | Wrong internal references to the MT Typed Wildcard encoding; garbled reference entry. |
+| [RA-1390](#ra_rfc7324) | RFC 7324 3, 5 | Technical | New remote-FS-with-local-SF-P state has no defined exit on remote NR, and remote LO / SF-P still yield NR(0,0). |
+| [RA-1391](#ra_rfc7324) | RFC 7324 5 | Technical | Replacement text changes the local-state sentence while the stated purpose concerns remote state; deadlock description names WTR instead of Protecting failure. |
+| [RA-1392](#ra_rfc7324) | RFC 7324 2.1, 2.2.1, 2.2.2 | Technical | Exact-length check drops padded PSC messages; malformed TLV action unspecified. |
+| [RA-1394](#ra_rfc7324) | RFC 7324 6 | Technical | Section 6: "local SF" should be "local FS"; "remove FS" should be "remote FS"; reevaluation start state not stated. |
 | [RA-0222](#ra_rfc7349) | RFC 7349 6.1, 2.3 | Technical | TLV Length values in 6.1 omit the 8-octet Cryptographic Sequence Number counted by 2.3. |
 | [RA-0223](#ra_rfc7349) | RFC 7349 5.2 | Technical | Unclear whether the HMAC covers the LDP PDU header (LDP Identifier). |
 | [RA-0225](#ra_rfc7349) | RFC 7349 4, 6.2 | Editorial | Two wrong section references. |
+| [RA-1395](#ra_rfc7438) | RFC 7438 3.2, 6 | Technical | Wildcard-group semantics are SSM-only in 3.2 but include ASM groups in 6. |
+| [RA-1396](#ra_rfc7438) | RFC 7438 2 | Editorial | "LSPs" for "LSRs" in the Egress LSR definition. |
 | [RA-0226](#ra_rfc7473) | RFC 7473 4.1, 4.2 | Technical | Unknown App value: "error" (4.1) versus "ignore" (4.1, 4.2) with different keywords. |
 | [RA-0227](#ra_rfc7473) | RFC 7473 4.1, 4.2 | Technical | U=1 silent-ignore rule contradicts the "Unsupported TLV" notification requirement. |
 | [RA-0054](#ra_rfc7552) | RFC 7552 6.1.1 | Editorial | TLV code point printed with a letter O ("Ox0701") instead of 0x0701. |
 | [RA-0228](#ra_rfc7552) | RFC 7552 6.1.1 | Technical | Dual-Stack capability TLV figure has an undescribed MBZ field and no Length value. |
 | [RA-0232](#ra_rfc8320) | RFC 8320 4.1 | Technical | S-bit values for advertise and withdraw are swapped. |
 | [RA-0234](#ra_rfc8356) | RFC 8356 4 | Editorial | Wrong noun and wrong section reference for the experimental TLV range. |
+| [RA-1400](#ra_rfc9017) | RFC 9017 5, 4 | Technical | Security Considerations say forwarding is unaffected, but Section 4 adds a drop rule for ELI after XL. |
+| [RA-1401](#ra_rfc9017) | RFC 9017 2, 3 | Editorial | "eSPLs" used for 0-1048575 in Section 2 but defined as 16-1048575 in Section 3. |
 | [RA-0616](#ra_rfc9789) | RFC 9789 3.6.1 | Technical | Section 3.6.1 |
 | [RA-0617](#ra_rfc9789) | RFC 9789 1.3 | Editorial | Section 1.3, Table 1 |
+| [RA-1402](#ra_rfc9994) | RFC 9994 13.2.1, 4.2, 4.3, 6.2 | Technical | Maximum Format D LSEs per opcode is 7 (3-bit NAL), not 14; flag bit numbering after a Format B LSE undefined. |
+| [RA-1403](#ra_rfc9994) | RFC 9994 5.2, 4.3 | Technical | Wrong bit range for mutable data in Format C LSE (25-28 includes the U bit). |
+| [RA-1405](#ra_rfc9994) | RFC 9994 7, 5.3, 9.3 | Technical | PHP removal of HbH / I2E NAS: "outside the scope" (Section 7) vs MUST NOT (Sections 5.3, 9.3); HbH "all nodes MUST process" includes MNA-incapable nodes. |
+| [RA-1407](#ra_rfc9994) | RFC 9994 13.2.2, 11 | Editorial | Opcode range 1-126 contradicts Tables 5 and 6; RLD requirement for filtering nodes unsatisfiable with several filters. |
 | [RA-1227](#ra_rfc10041) | RFC 10041 3.1, 3.2 | Technical | Unconditional MUST NOT in 3.1 contradicts the all-routers condition of 3.2. |
 | [RA-1228](#ra_rfc10041) | RFC 10041 4.2.5 | Technical | Interface augment uses derived-from() (excludes ospfv2/ospfv3 themselves) and an absolute path. |
 | [RA-1229](#ra_rfc10041) | RFC 10041 4.2.3, 6.3 | Technical | Initial IANA-maintained YANG module is announced but not included. |
 | [RA-0237](#ra_rfc4385) | RFC 4385 4.2, Appendix | Technical | Normative text updates the expected sequence number on out-of-window packets; the Appendix does not. |
 | [RA-0618](#ra_rfc4446) | RFC 4446 3, 3.5 | Technical | Value 0 reserved in all registries, yet allocated in the Pseudowire Status registry. |
 | [RA-0619](#ra_rfc4446) | RFC 4446 3.2 | Editorial | Text says types 1-30 are specified, table lists 1-25 only. |
-| [RA-0621](#ra_rfc4447) | RFC 4447 5.3.3, 1 | Technical | Ingress/egress roles of PE1 and PE2 in 5.3.3 contradict Section 1. |
 | [RA-0238](#ra_rfc4448) | RFC 4448 4.6 | Technical | "source MAC address" should be "destination MAC address". |
 | [RA-0631](#ra_rfc4761) | RFC 4761 3.2.1, 3.2.2, 3.2.3 | Technical | Label block definition in 3.2.1 contradicts 3.2.2 and 3.2.3. |
 | [RA-1063](#ra_rfc4762) | RFC 4762 6.2.1 | Technical | Address List TLV (mandatory in RFC 5036 Address Withdraw) not mentioned; "ignore the message" cannot apply; TLV name inconsistent. |
 | [RA-1064](#ra_rfc4762) | RFC 4762 6.2.2 | Technical | The per-MAC rule names "the AC or PW over which this message is received", which does not exist for an LDP message and contradicts the empty-list rule. |
 | [RA-0242](#ra_rfc5085) | RFC 5085 8.1.2, 4 | Editorial | Registry name says "Control Verification" for Connectivity Verification. |
 | [RA-0245](#ra_rfc6073) | RFC 6073 7.4.1, 7.6 | Technical | "Mandatory" SP-PE sub-TLVs are never identified; loop detection depends on an optional one. |
+| [RA-1408](#ra_rfc6073) | RFC 6073 9.6.1.3 | Technical | Wrong cross-reference: echo reply procedures are in 9.6.2, not 9.5.2. |
 | [RA-0248](#ra_rfc6074) | RFC 6074 3.2.3, 3.2.2.1 | Technical | Mapping of the VPLS-id Extended Community to the 8-octet AGI is unspecified. |
+| [RA-1413](#ra_rfc6074) | RFC 6074 3.3.3, 6 | Technical | Status code named in 3.3.3 is not registered in Section 6. |
+| [RA-1414](#ra_rfc6074) | RFC 6074 4.1 | Technical | VPWS inter-AS paragraph refers to the VPLS signaling section (3.2.3) instead of 3.3.3. |
 | [RA-1201](#ra_rfc6310) | RFC 6310 6.1.2 | Technical | CV type 0x10 is described with the 0x20 meaning (fault detection and status signalling). |
 | [RA-1202](#ra_rfc6310) | RFC 6310 6.1, 6.1.2 | Editorial | CV types are said to be defined in 6.1.3; they are defined in RFC 5885. |
 | [RA-1203](#ra_rfc6310) | RFC 6310 6.1.3, 6.1 | Technical | 6.1.3 says Section 6.1 restricts 0x08 / 0x20 for LDP and L2TP; 6.1 states it for L2TP only. |
@@ -297,6 +357,15 @@ Where a finding matches several errata the best status is counted. Drafted errat
 | [RA-0635](#ra_rfc7267) | RFC 7267 4.1.3 | Technical | The valid full-Prefix length 128 is declared invalid. |
 | [RA-0252](#ra_rfc7275) | RFC 7275 4.2.1, 4.4.2, 4.2 | Technical | ICCP and Application Connection state machines answer a NAK with a NAK. |
 | [RA-0255](#ra_rfc7275) | RFC 7275 6.4.1 | Editorial | Code iii described with the condition of code ii. |
+| [RA-1418](#ra_rfc7275) | RFC 7275 7.2.7 | Technical | The Node ID encoding is required for the Partner Port Number, which is assigned by the partner (CE). |
+| [RA-1419](#ra_rfc7275) | RFC 7275 9.2.2.1, 9.2.2.2, 7.2.3 | Technical | Undefined term "System Aggregation Priority"; no tie-break for equal priorities (9.2.2.1, 9.2.2.2). |
+| [RA-1420](#ra_rfc7275) | RFC 7275 9.1.3.1, 9.1.3.2, 7.1.3, 7.1.4 | Technical | PW Priority is evaluated after exchanging State TLVs, but it is carried in the Config TLV. |
+| [RA-1421](#ra_rfc7275) | RFC 7275 6.4, 6.4.1, 4.2 | Technical | Notification restricted to RG members, yet required to reject a Connect for an RG the PE is not a member of. |
+| [RA-1422](#ra_rfc7275) | RFC 7275 4.4.2, 6.3, 6.4.1, 9.1.3, 9.2.2.3, 7.2.2.1 | Editorial | Typo "resent"; undefined "Synchronization Response TLV"; status code names differ from Section 12.4; mLACP cause string encoding missing. |
+| [RA-1423](#ra_rfc7361) | RFC 7361 3.2, 2, 3, 5.1.2, 5.1.3 | Technical | Section 3.2 puts MAC addresses in the negative flush message; Sections 3, 5.1.2 and 5.1.3 require an empty list and ignore N otherwise. |
+| [RA-1424](#ra_rfc7361) | RFC 7361 3 | Technical | Section 3 claims the address withdraw message with a MAC list is defined in this document; it is defined in RFC 4762. |
+| [RA-1425](#ra_rfc7361) | RFC 7361 5.2, 7.1 | Technical | After erratum 4380 the PBB sub-TLV types have no IANA registry; 0x0407 / 0x0408 remain registered as LDP TLVs. |
+| [RA-1427](#ra_rfc7361) | RFC 7361 5.1.1 | Editorial | Flags figure says "MUST Be Zero"; text says SHOULD. |
 | [RA-1215](#ra_rfc7771) | RFC 7771 A.2 | Technical | PSC encapsulation for PWs: the G-ACh is placed "in the label stack"; TTL and S-PE handling are not given. |
 | [RA-1217](#ra_rfc7771) | RFC 7771 1, A.2 | Editorial | Typos in Section 1 and Appendix A.2. |
 | [RA-1073](#ra_rfc8077) | RFC 8077 6.2.3, 1 | Technical | PE1/PE2 ingress/egress roles swapped relative to Section 1. |
@@ -309,6 +378,8 @@ Where a finding matches several errata the best status is counted. Drafted errat
 | [RA-1085](#ra_rfc2205) | RFC 2205 3.1.2, 3.1.3, 3.1.5 | Technical | Path BNF makes the sender descriptor optional although SENDER_TEMPLATE and SENDER_TSPEC are required; PathTear matching needs SENDER_TEMPLATE but the BNF makes it optional. |
 | [RA-0639](#ra_rfc2209) | RFC 2209 2 (PATH MESSAGE ARRIVES) | Technical | Algorithm never makes a network-received unicast PSB a forwarding PSB. |
 | [RA-0259](#ra_rfc2210) | RFC 2210 3.3.6, 3.3.2 | Technical | ADSPEC example mislabels the extent of the general parameters fragment and shows 16-bit fields where 3.3.2 defines 32-bit ones. |
+| [RA-1428](#ra_rfc2210) | RFC 2210 2.3.2 | Technical | Wrong parameter number for the composed PATH_MTU parameter. |
+| [RA-1429](#ra_rfc2210) | RFC 2210 3.2.2 | Technical | Guaranteed FLOWSPEC legend gives overall length 9; figure and word count give 10. |
 | [RA-0643](#ra_rfc2211) | RFC 2211 5 | Technical | r and b required "positive" and, in the same section, allowed as any "non-negative" bit pattern. |
 | [RA-0646](#ra_rfc2212) | RFC 2212 Invocation Information | Technical | Discouraged exponent limit (2^36) is below the defined maximum rate (40 TB/s) and bucket size (250 GB). |
 | [RA-0649](#ra_rfc2212) | RFC 2212 Examples of Implementation, Policing | Editorial | References [3] and [4] swapped; RED cited as [2]. |
@@ -357,6 +428,7 @@ Where a finding matches several errata the best status is counted. Drafted errat
 | [RA-0701](#ra_rfc5712) | RFC 5712 6.1 | Technical | 6.1 |
 | [RA-1234](#ra_rfc6510) | RFC 6510 3, 3.1, 3.2 | Technical | "All S2L sub-LSPs identified in the message" spans flow descriptors of different LSPs, contrary to the per-FILTER_SPEC association of RFC 5420 9. |
 | [RA-0286](#ra_rfc7570) | RFC 7570 2.1 | Technical | Stated maximum Hop Attributes size (250) does not fit the 8-bit, 4-octet-aligned subobject length. |
+| [RA-1431](#ra_rfc7570) | RFC 7570 2.2, 2.3 | Technical | Unknown flag handling in 2.2 (PathErr) contradicts the R-bit-clear rule of 2.3 (RFC 5420 4.2: forward unchanged). |
 | [RA-0287](#ra_rfc8169) | RFC 8169 3.1 | Technical | PTP sub-TLV Length (20), field sizes (4 + 10 + 2) and Figure 2 (Port ID of 6 octets) disagree. |
 | [RA-0288](#ra_rfc8169) | RFC 8169 4.4.1 | Technical | RTM_SET TLV header does not follow the RFC 5420 TLV format; I-bit accumulation unspecified. |
 | [RA-0707](#ra_rfc8169) | RFC 8169 3.2, 7.2, 7.3 | Technical | PTP RTM message type given as 1 (No payload) with the wrong registry. |
@@ -415,6 +487,8 @@ Where a finding matches several errata the best status is counted. Drafted errat
 | [RA-0322](#ra_rfc8685) | RFC 8685 4.2 | Technical | "PCReq" for "PCRep" in the negative reply; inconsistent name of the S bit. |
 | [RA-0323](#ra_rfc8685) | RFC 8685 3.2.1, 4.1 | Technical | MUST in 3.2.1 versus SHOULD in 4.1 for the 28/1 PCErr. |
 | [RA-0324](#ra_rfc8685) | RFC 8685 3.2.1.1 | Technical | Backward-compatibility claim ignores non-TLV extensions (OF codes, METRIC types, flags). |
+| [RA-1433](#ra_rfc8685) | RFC 8685 2.1.3 | Editorial | Wrong cross-reference: metrics are in Section 3.5, not 3.4. |
+| [RA-1434](#ra_rfc8685) | RFC 8685 3.2.1 | Technical | Error-value for conflicting P-flags not specified. |
 | [RA-0327](#ra_rfc8697) | RFC 8697 5 | Technical | Boundary of the Operator-configured Association Range check is unclear. |
 | [RA-0331](#ra_rfc8745) | RFC 8745 3.1 vs 4.5 | Technical | Number of working LSPs in a PPAG differs between Sections 3.1 and 4.5; N for 1:N is not signalled. |
 | [RA-0726](#ra_rfc8751) | RFC 8751 3 vs RFC 8231 7.3, RFC 8232 3.3.2 | Technical | Wrong TLV name, undefined LSP-object usage, and PLSP-ID collisions when a C-PCE relays several PCCs with their original PLSP-IDs. |
@@ -443,7 +517,9 @@ Where a finding matches several errata the best status is counted. Drafted errat
 | [RA-0745](#ra_rfc9933) | RFC 9933 5.1.1 | Editorial | Section 5.1.1 |
 | [RA-0746](#ra_rfc9933) | RFC 9933 4.5.2, 4.5.3 | Editorial | Section 4.5.2 (and "User-defined metric value" in Section 4.5.3) |
 | [RA-0749](#ra_rfc2236) | RFC 2236 7 | Editorial | Router action count says six; seven are listed. |
-| [RA-0752](#ra_rfc3376) | RFC 3376 6.6.2 | Technical | 6.6.2 conflicts with 7.3.1, which requires configuration rather than automatic fallback. |
+| [RA-0752](#ra_rfc3376) | RFC 3376 6.6.2 | Technical | 6.6.2 conflicts with 7.3.1, which requires configuration rather than automatic fallback. (RFC 3376 is obsoleted by RFC 9776.) |
+| [RA-1437](#ra_rfc3590) | RFC 3590 4, 5, 6 | Technical | Security Considerations claim RFC 2710 requires discarding MLD from "::", Section 5 says behaviour varies; host report suppression on "::" Reports not addressed. |
+| [RA-1438](#ra_rfc3590) | RFC 3590 3, 5 | Editorial | Timing of "::" Reports stated inconsistently; typos "affect", "has led". |
 | [RA-0758](#ra_rfc4604) | RFC 4604 2.2.3, 3.6 | Technical | Older-version General Queries carry no group address; a compliant router on a mixed-version link causes hosts to revert. |
 | [RA-0363](#ra_rfc4607) | RFC 4607 9 | Editorial | Missing "::" in the IPv6 range of the IANA section. |
 | [RA-0762](#ra_rfc4610) | RFC 4610 3, 4, 5.1 | Technical | Sources directly connected to an Anycast-RP member that is also DR are not propagated to the other members. |
@@ -451,15 +527,20 @@ Where a finding matches several errata the best status is counted. Drafted errat
 | [RA-0366](#ra_rfc5059) | RFC 5059 3.1.2 | Technical | Prose says NoInfo moves to AA; the state table moves to AP. |
 | [RA-0765](#ra_rfc5771) | RFC 5771 6.1 | Technical | 6.1 |
 | [RA-0766](#ra_rfc5771) | RFC 5771 4 | Technical | 4 |
-| [RA-0767](#ra_rfc6037) | RFC 6037 4.4.1 | Technical | 4.4.1 |
-| [RA-0768](#ra_rfc6037) | RFC 6037 4.6.1.1 | Technical | 4.6.1.1, 4.6.1.2 |
-| [RA-0769](#ra_rfc6037) | RFC 6037 5.2.1 | Technical | 5.2.1 |
+| [RA-0767](#ra_rfc6037) | RFC 6037 4.4.1 | Technical | 4.4.1 (RFC 6037 has the status Historic.) |
+| [RA-0768](#ra_rfc6037) | RFC 6037 4.6.1.1 | Technical | 4.6.1.1, 4.6.1.2 (RFC 6037 has the status Historic.) |
+| [RA-0769](#ra_rfc6037) | RFC 6037 5.2.1 | Technical | 5.2.1 (RFC 6037 has the status Historic.) |
+| [RA-1441](#ra_rfc6513) | RFC 6513 5.3.3, 5.3.1, 9.3.2 | Technical | Section 5.3.3 un-prunes a source by withdrawing a prune route that Sections 5.3.1 and 9.3.2 say does not exist. |
+| [RA-1442](#ra_rfc6513) | RFC 6513 5.1.3 | Technical | Default UMH selection has no tie-breaker among routes from the same Upstream PE with different RDs. |
+| [RA-1443](#ra_rfc6513) | RFC 6513 7.4.2.2 | Technical | S-PMSI Join figures draw Length as 15 bits and Reserved / Value as 9 bits; the text says 16 and 8. |
 | [RA-1148](#ra_rfc6514) | RFC 6514 11.1.1.2 | Technical | Shared Tree Join withdrawal described with (C-S,C-G) Prune semantics. |
 | [RA-1149](#ra_rfc6514) | RFC 6514 8 | Technical | "Route Type field" length cannot indicate the address family of the PE Address. |
 | [RA-1150](#ra_rfc6514) | RFC 6514 5, 8 | Technical | Handling of a malformed attribute is unspecified when the Partial bit is clear; unknown tunnel types are declared malformed. |
 | [RA-1151](#ra_rfc6514) | RFC 6514 4.3, 4.6, 11.3.2 | Technical | Length encoding for an mLDP Opaque Value Element in the Multicast Group field is undefined. |
 | [RA-1152](#ra_rfc6514) | RFC 6514 10 | Technical | Whether the SAFI 129 Length counts the Route Distinguisher is not stated. |
 | [RA-1153](#ra_rfc6514) | RFC 6514 9.2.3.2, 9.2.3.4, 16, 17 | Editorial | Wrong section reference and several wording slips. |
+| [RA-1447](#ra_rfc6625) | RFC 6625 4.3 | Technical | The ignore rule for (C-S,C-*) routes tests a C-G that the route does not contain. |
+| [RA-1448](#ra_rfc6625) | RFC 6625 1.3 | Editorial | Wrong expansion of SSM. |
 | [RA-0770](#ra_rfc7524) | RFC 7524 14.5, 16, 5.1.2, 5.2.2 | Technical | Reference to a nonexistent Section 7.1.2.1; RFC 3209 cited for P2MP RSVP-TE; misleading headings. |
 | [RA-1154](#ra_rfc7761) | RFC 7761 4.7.1 | Technical | Direction of RP mapping priority not stated; BSR priority is inverted. |
 | [RA-1155](#ra_rfc7761) | RFC 7761 4.9 | Technical | Destination check forbids the unicast Bootstrap messages of RFC 5059. |
@@ -470,7 +551,13 @@ Where a finding matches several errata the best status is counted. Drafted errat
 | [RA-1257](#ra_rfc8534) | RFC 8534 1 | Technical | Typo "(C-*,C-S)" for "(C-*,C-G)". |
 | [RA-0772](#ra_rfc9026) | RFC 9026 4.4.2 | Technical | The maximum MED value is given as 0xffff; MED is a 4-octet field. |
 | [RA-0376](#ra_rfc9776) | RFC 9776 8.12 vs 9777 9.12 | Technical | Unit error in the Older Version Querier Present Interval; differs from RFC 9777 9.12. |
+| [RA-1450](#ra_rfc9776) | RFC 9776 9 | Editorial | Missing "does not" reverses the meaning of the first Security Considerations sentence. |
+| [RA-1451](#ra_rfc9776) | RFC 9776 6.6.2, 7.3.1 | Technical | Automatic downgrade (6.6.2) vs administrative configuration (7.3.1) on receipt of an older-version General Query. |
+| [RA-1452](#ra_rfc9776) | RFC 9776 7.2.1 | Technical | Host-side v2 timer expiry ignores a running v1 timer, contrary to Table 11 and to the router-side text of 7.3.2. |
 | [RA-0378](#ra_rfc9777) | RFC 9777 9.5 | Editorial | Unbalanced parentheses in the Other Querier Present Interval formula. |
+| [RA-1456](#ra_rfc9777) | RFC 9777 9.12 | Technical | Older Version Querier Present Interval refers to a Query Interval that an MLDv1 Query does not carry. |
+| [RA-1457](#ra_rfc9777) | RFC 9777 7.6.1, 11 | Editorial | Wrong section references in 7.6.1 (S flag) and 11 (Report format). |
+| [RA-1458](#ra_rfc9777) | RFC 9777 7.2.3, 6.1, 8.2.1, 10.1, 10.2, 10, B.2 | Editorial | IGMPv3 terminology and undefined names in an MLDv2 specification. |
 | [RA-0776](#ra_rfc2330) | RFC 2330 11.3 | Technical | 15th percentile of the example data given as -infinity; it is -5. |
 | [RA-0777](#ra_rfc2330) | RFC 2330 18 (Appendix) | Technical | Transform to Unif(0,1) written with the inverse distribution function. |
 | [RA-0779](#ra_rfc4656) | RFC 4656 3.3 | Technical | Accept handling rule inverted: listed values would be mapped to 1. |
@@ -479,6 +566,8 @@ Where a finding matches several errata the best status is counted. Drafted errat
 | [RA-0782](#ra_rfc4656) | RFC 4656 3.8 | Technical | Stop-Sessions accounting rule for the client includes sessions where the server is the sender. |
 | [RA-0379](#ra_rfc5357) | RFC 5357 4.2 | Technical | Reflector decryption length for received Session-Sender packets in encrypted mode is wrong (96 instead of 32 octets). |
 | [RA-0381](#ra_rfc5357) | RFC 5357 3.8 | Editorial | Wrong message named in the Stop-Sessions paragraph. |
+| [RA-1460](#ra_rfc5357) | RFC 5357 3.8 | Technical | Stop-Sessions discard rule names an instant instead of the interval after the Timeout. |
+| [RA-1461](#ra_rfc5618) | RFC 5618 2, 4.1.2, 4.2 | Technical | Unconditional "MUST support" of mixed mode in 4.1.2 / 4.2 versus OPTIONAL in Section 2. |
 | [RA-1161](#ra_rfc5880) | RFC 5880 6.7.3, 6.7.4 | Technical | The Detect Mult used for the authentication sequence window is not identified. |
 | [RA-1162](#ra_rfc5880) | RFC 5880 6.8.6 | Technical | Minimum length with authentication is given as 26 (the smallest valid is 28); no consistency rule between Length and Auth Len. |
 | [RA-1163](#ra_rfc5880) | RFC 5880 6.2 | Technical | The state machine overview text disagrees with Section 6.8.6 for a received AdminDown. |
@@ -487,10 +576,14 @@ Where a finding matches several errata the best status is counted. Drafted errat
 | [RA-0786](#ra_rfc5905) | RFC 5905 6 | Technical | 6, Figure 4 |
 | [RA-0788](#ra_rfc5905) | RFC 5905 A.1.1 | Technical | A.1.1, A.5.5.6, A.5.7 |
 | [RA-0789](#ra_rfc5905) | RFC 5905 14 | Editorial | 14 |
+| [RA-1463](#ra_rfc5938) | RFC 5938 3.6 | Technical | SERVWAIT suspend and resume conditions are merged into one garbled sentence. |
 | [RA-0098](#ra_rfc6038) | RFC 6038 4.3 | Editorial | Reference to nonexistent Section 4.1.2. |
 | [RA-0790](#ra_rfc6038) | RFC 6038 4.2 | Technical | 4.2 |
 | [RA-0792](#ra_rfc6038) | RFC 6038 7.2 | Editorial | 7.2 |
+| [RA-1466](#ra_rfc6425) | RFC 6425 4.2.1.3 | Technical | Bud-node rules: Node Address match gives egress+branch, but the stated intent maps a request for "just this node" to pure egress. |
+| [RA-1467](#ra_rfc6425) | RFC 6425 3.1.2.1, 10.2 | Editorial | Reference [IANA-AF] has the wrong title (port numbers instead of address family numbers). |
 | [RA-0394](#ra_rfc6426) | RFC 6426 2.1, 2.1.1 | Technical | Non IP address type K value is correct for the DSMAP but not for the DDMAP. |
+| [RA-1470](#ra_rfc6426) | RFC 6426 2.3.2 | Editorial | AGI type 1 is defined in RFC 6074, not RFC 4446. |
 | [RA-0397](#ra_rfc7110) | RFC 7110 4, 5.1 | Technical | Section 5.1 still requires at least one sub-TLV; companion to erratum 4197. |
 | [RA-0796](#ra_rfc7680) | RFC 7680 2.7 | Editorial | Wrong citation for the one-way delay metric. |
 | [RA-0797](#ra_rfc7717) | RFC 7717 5.3 | Technical | Set-Up-Response figure gives wrong Token and Client-IV sizes. |
@@ -500,6 +593,8 @@ Where a finding matches several errata the best status is counted. Drafted errat
 | [RA-1259](#ra_rfc7737) | RFC 7737 3.1, 4.1 | Technical | RFC 7110 Section 4 "absence is treated as a malformed echo request" left in force. |
 | [RA-1260](#ra_rfc7737) | RFC 7737 3.2, 4.2 | Technical | Rule 8 (Reply Path TLV for every repeated value 5) contradicts the Section 4.2 example {5, 5, 5} with two Reply Path TLVs. |
 | [RA-0404](#ra_rfc7750) | RFC 7750 2.2.1 | Technical | "Least-significant" bits of the Differentiated Services field is ambiguous against the 8-bit TOS / Traffic Class octet. |
+| [RA-1471](#ra_rfc7750) | RFC 7750 2.2.2, 2.2.1 | Technical | Reflector size increase (4 vs 3 octets), minimum padding (28 vs 30) and Figure 4 MBZ (28) are mutually inconsistent. |
+| [RA-1472](#ra_rfc7750) | RFC 7750 2.1, 2.2 | Technical | Monitoring can be selected for "some" sessions, but there is no per-session signal and the reflector packet format changes. |
 | [RA-1168](#ra_rfc8029) | RFC 8029 4.4 (steps 4, 5), 3.4 | Technical | Echo request pseudocode (steps 4 and 5) does not implement the ALLROUTERS bypass required by Section 3.4. |
 | [RA-1169](#ra_rfc8029) | RFC 8029 3.4.1.1.1 | Technical | Bit-masked IP address set: maximum prefix length 27 is IPv4-only; IPv6 example uses 123; prefix length encoding unstated. |
 | [RA-1170](#ra_rfc8029) | RFC 8029 3.4.1.1.1 | Technical | Example range for V starts at .127 instead of .128 and overlaps U's range. |
@@ -559,6 +654,8 @@ Where a finding matches several errata the best status is counted. Drafted errat
 | [RA-0894](#ra_rfc5869) | RFC 5869 2.3 | Technical | 2.3 |
 | [RA-1190](#ra_rfc5925) | RFC 5925 7.5 | Technical | Receive procedure lacks the non-SYN case (MKT selection by KeyID, missing or unknown KeyID). |
 | [RA-0420](#ra_rfc5926) | RFC 5926 3.1.1 | Technical | Byte order of Output_Length in the KDF input is unspecified. |
+| [RA-1473](#ra_rfc5926) | RFC 5926 3.2, 3.2.1, 3.2.2 | Technical | Which 96 bits of the MAC output are kept is not stated. |
+| [RA-1474](#ra_rfc5926) | RFC 5926 3.1.1, 3.1.1.2, 7 | Editorial | AES-CMAC-PRF-128 attributed to SP 800-38B; RFC 4615, which defines it, is informative. |
 | [RA-0895](#ra_rfc5952) | RFC 5952 4 | Technical | 4 |
 | [RA-0896](#ra_rfc5952) | RFC 5952 5 | Technical | 5 |
 | [RA-0897](#ra_rfc6040) | RFC 6040 5.1 | Technical | 5.1 |
@@ -571,7 +668,7 @@ Where a finding matches several errata the best status is counted. Drafted errat
 | [RA-1280](#ra_rfc6633) | RFC 6633 1, 3, 4 | Technical | Scope of the replacement text and the status of router origination of Source Quench are unclear. |
 | [RA-1281](#ra_rfc6633) | RFC 6633 3, 8 | Technical | Host discard of Source Quench is MAY in Section 3 and MUST (with logging) in Section 8; transit scope unclear. |
 | [RA-1282](#ra_rfc6633) | RFC 6633 3 | Editorial | "necessarily" for "unnecessarily". |
-| [RA-1283](#ra_rfc6691) | RFC 6691 Appendix A, 2, 4 | Technical | The concluding bound uses EMTU_R after arguing that the connected network's MTU is what implementations use. |
+| [RA-1283](#ra_rfc6691) | RFC 6691 Appendix A, 2, 4 | Technical | The concluding bound uses EMTU_R after arguing that the connected network's MTU is what implementations use. (RFC 6691 is obsoleted by RFC 9293.) |
 | [RA-1284](#ra_rfc6818) | RFC 6818 1, 2, 4 | Technical | Introduction announces a recommendation on self-signed trust anchor certificates that the body does not contain. |
 | [RA-1288](#ra_rfc7048) | RFC 7048 4, 3 | Technical | The example algorithm disagrees with Section 3 on when UNREACHABLE is entered, on discarding the entry, and on the 60-second multicast rule (MUST vs "SHOULD"). |
 | [RA-1290](#ra_rfc7527) | RFC 7527 4, 4.1, 4.2 | Technical | One nonce per address or per probe, and how long nonces are kept, is not specified. |
@@ -592,7 +689,7 @@ Where a finding matches several errata the best status is counted. Drafted errat
 | [RA-1299](#ra_rfc8319) | RFC 8319 4 | Technical | AdvDefaultLifetime default (3 x MaxRtrAdvInterval) can exceed the new 65535 maximum. |
 | [RA-0943](#ra_rfc8439) | RFC 8439 4 | Technical | In Poly1305 the accumulator is reduced below P = 2^130-5 after each block, and the block value with its added 0x01 octet is below 2^129, so (Acc+Block) is below 2^131. The clamped r is below 2^124. |
 | [RA-0944](#ra_rfc8439) | RFC 8439 2.6.2, A.5 | Technical | Test-vector labels in 2.6.2 and A.5 name the wrong intermediate state. |
-| [RA-0946](#ra_rfc8446) | RFC 8446 5.4, 6.2 | Technical | No receiver behaviour for a padded TLSInnerPlaintext that exceeds 2^14 + 1 octets. |
+| [RA-0946](#ra_rfc8446) | RFC 8446 5.4, 6.2 | Technical | No receiver behaviour for a padded TLSInnerPlaintext that exceeds 2^14 + 1 octets. (RFC 8446 is obsoleted by RFC 9846.) |
 | [RA-0953](#ra_rfc9001) | RFC 9001 6.6 | Technical | Two different mandatory reactions to reaching the integrity limit; the stateless-reset one conflicts with RFC 9000 Section 11. |
 | [RA-0954](#ra_rfc9001) | RFC 9001 6.6, Appendix B | Technical | Integrity limit counted per connection (6.6) or per key (Appendix B); "accept" vs "reject" in the definition of v. |
 | [RA-0956](#ra_rfc9002) | RFC 9002 B.7, A.7 | Technical | ProcessECN looks up a packet that OnAckReceived has already removed, without the packet number space index. |
@@ -612,44 +709,55 @@ Where a finding matches several errata the best status is counted. Drafted errat
 | [RA-0979](#ra_rfc9525) | RFC 9525 7.6 | Editorial | Section 7.6 |
 | [RA-1219](#ra_rfc9673) | RFC 9673 5.2 | Technical | Skipping "the remaining options" by Hdr Ext Len contradicts continuing with the remaining options; Hdr Ext Len definition omits "not including the first 8 octets". |
 | [RA-1221](#ra_rfc9673) | RFC 9673 5.2.2 | Editorial | Wrong cross-reference for the handling of an unsupported option. |
+| [RA-1476](#ra_rfc9805) | RFC 9805 4, Appendix A | Technical | "Exhaustive" list of protocols that may continue to use the IPv6 Router Alert omits MLDv1, Active Networks and base RSVP. |
+| [RA-1477](#ra_rfc9805) | RFC 9805 6, 4, 5 | Technical | Security Considerations claim all Router Alert risks are mitigated although existing uses continue. |
+| [RA-1478](#ra_rfc9805) | RFC 9805 7, 4, Appendix A | Technical | Registry closure versus "future versions" of existing users; RFC 5350 not cited; PGM expansion inconsistent. |
 | [RA-1312](#ra_rfc9846) | RFC 9846 4.2.2, 4.3.1, E.2, E.5 | Technical | legacy_version other than 0x0303: Section 4.3.1 requires negotiation, Sections 4.2.2, E.5 and E.2 (erratum 9040) require abort. |
 | [RA-1313](#ra_rfc9846) | RFC 9846 4.2.3, 4.3.1, Appendix E, E.1 | Technical | Residual text describes TLS 1.0 / 1.1 negotiation that Sections 1.2 and E.5 forbid. |
 | [RA-1314](#ra_rfc9846) | RFC 9846 4.7.3 | Technical | The KeyUpdate limit is expressed with the undefined term "epoch". |
 | [RA-1315](#ra_rfc9846) | RFC 9846 5.5, B.4, 12.2 | Technical | Mandatory key-usage limits are not given for the CCM cipher suites and depend on an informative reference. |
 | [RA-1316](#ra_rfc9846) | RFC 9846 1, 1.4, 4.3.1, 4.3.3, 11, 12, Appendix D | Technical | TLS 1.2 requirements reference RFC 5246 / 7627 / 8422, which this document obsoletes, with RFC 5246 only informative. |
 | [RA-1317](#ra_rfc9846) | RFC 9846 4.2.1, 4.3.8, 4.3.9, 6, 6.2, 9.2, Appendix D | Editorial | Typos, a stale alert count and DHE-only wording in Section 9.2. |
+| [RA-1479](#ra_rfc9868) | RFC 9868 8, 9 | Technical | OCS coverage described differently in Sections 8 and 9; byte alignment of the sum and the computed-zero case unspecified. |
+| [RA-1481](#ra_rfc9868) | RFC 9868 10, 21, 18 | Technical | Scope of the UDP Length validity rule (all UDP receivers or only option-aware ones) not stated; Section 21 omits it. |
+| [RA-1483](#ra_rfc9868) | RFC 9868 Appendix A | Editorial | Appendix A: undefined JUNK Option; inconsistent API names. |
 
 ### Resolved by later RFCs {#ra_resolved}
 
-Findings on a text that a later RFC in this set updates or obsoletes, where the later RFC settles the point. Each was checked against the updating RFC; findings that a later RFC only changes, or whose text the later RFC repeats, stay open and carry a "Later RFCs" note.
+Findings on a text that a later RFC in this set updates or obsoletes, where the later RFC settles the point. Each was checked against the updating RFC; findings that a later RFC only changes, or whose text the later RFC repeats, stay open and carry a "Later RFCs" note. "Re-targeted" marks a finding on an obsoleted RFC whose text the successor repeats and where the same point is recorded against the successor under its own id.
 
-| ID | RFC, section | Issue as found | Resolution |
-|---|---|---|---|
-| [RA-0111](#ra_rfc2385) | RFC 2385 4.3 | "32-byte words" should be "32-bit words". | RFC 5925 (obsoletes RFC 2385) gives the Data Offset correctly in 32-bit words. |
-| [RA-0430](#ra_rfc4360) | RFC 4360 7 | Section 7, IPv4 address specific registry paragraph. | RFC 7153 (updates RFC 4360) reorganises the Extended Community registries (Sections 2 and 5); this paragraph no longer governs allocations. |
-| [RA-0431](#ra_rfc4360) | RFC 4360 7 | Section 7, Type range table. | RFC 7153 (updates RFC 4360) replaces the range table with its own registries (Sections 2 and 5). |
-| [RA-0450](#ra_rfc5701) | RFC 5701 3 | Section 2 ties the sub-types to the IPv4 Address Specific Extended Community registry, while Section 3 creates a separate "IPv6 Address Specific Extended Community" registry with First Come First Served allocation, so a sub-type could be allocated in one registry and not, or differently, in the other. | RFC 7153 Section 3 (updates RFC 5701) removes the requirement that IPv6 Address Specific sub-types match the IPv4 ones and creates separate IPv6 registries. |
-| [RA-0529](#ra_rfc5308) | RFC 5308 5 | In a two-level domain the up/down bit is never set in Level 2 LSPs (RFC 5302 3.1, RFC 5305 4.1), so "Level 2 down prefix" can only arise from a future multi-level extension or a misbehaving router; | RFC 7775 (updates RFC 5308), Sections 2 and 3.4: 'Level 2 down prefix' is withdrawn as an error and the preference order for TLVs 236 and 237 is restated, with internal and external routes of a level treated equally. |
-| [RA-0533](#ra_rfc5316) | RFC 5316 3.3.5 | An IPv6 TE Router ID is 16 octets; | RFC 9346 (obsoletes RFC 5316), Section 3.5.2: the IPv6 TE Router ID sub-TLV is 16 octets. |
-| [RA-0535](#ra_rfc5316) | RFC 5316 3.3.2 | The remote ASBR ID sub-TLVs are defined for the inter-AS reachability TLV (141); | RFC 9346 (obsoletes RFC 5316), Sections 3.5.1 and 3.5.2: the TE Router ID sub-TLVs 'MAY both be present in an IS-IS Router CAPABILITY TLV'; the sentence is corrected. |
-| [RA-0053](#ra_rfc6790) | RFC 6790 5.2 | The Entropy Label Capability attribute is described only as "of value 28"; | RFC 7447 (updates RFC 6790) deprecates the BGP Entropy Label Capability attribute. |
-| [RA-0244](#ra_rfc6073) | RFC 6073 14.5, 7.4.1 | Length of sub-TLV 0x06 is 14 octets per Section 7.4.1, not 12. | RFC 7267 Section 6 (updates RFC 6073) sets the length of sub-TLV 0x06 to 14. |
-| [RA-0661](#ra_rfc3471) | RFC 3471 12 | Value 51 (L2SC) is defined in Section 3.1.1 but missing from the IANA list. | RFC 7074 Section 5 (updates RFC 3471) revises the Switching Types registry, which lists 51 Layer-2 Switch Capable (L2SC); the omission remains only in the text of RFC 3471 Section 12. |
-| [RA-0828](#ra_rfc1122) | RFC 1122 4.2.5, 4.2.3.2 | TCP summary: delayed-ACK rule marked MUST (text SHOULD); two rows cite nonexistent 4.2.3.14. | RFC 9293 (which obsoletes the TCP material of RFC 1122): the delayed-ACK rule is a SHOULD in both Section 3.8.6.3 and the Appendix B summary, and the summary cites existing sections. |
-| [RA-0831](#ra_rfc1122) | RFC 1122 4.2.2.6 | TCPhdrsize includes TCP options, so whether the MSS a peer advertises already allows for options (and whether the advertised value should be reduced for options) is read both ways; | RFC 9293 Section 3.7.1 (which obsoletes the TCP material of RFC 1122) and RFC 6691 Section 2: the MSS option value ignores IP and TCP options, and the sender reduces the data length for the options it sends. |
-| [RA-1272](#ra_rfc1141) | RFC 1141 Description | The incremental update equation gives -0 (0xFFFF) instead of +0; corrected by RFC 1624 Eqn. 3. | RFC 1624 Section 3 (updates RFC 1141) gives the corrected incremental update (Eqn. 3), which avoids the 0x0000 / 0xFFFF error. |
-| [RA-0837](#ra_rfc1858) | RFC 1858 3.2.1, 4.2 | Security gap: The document presents "IF FO=1 and PROTOCOL=TCP then DROP PACKET" as the general algorithm and calls the direct TMIN test on zero-offset fragments unnecessary. | RFC 3128 Section 3 (updates RFC 1858) requires the test on zero-offset fragments (transport length below the minimum) in addition to dropping fragments with offset 1. |
-| [RA-0843](#ra_rfc2253) | RFC 2253 3 | Grammar rejects one-letter attribute type names used in the document's own examples. | RFC 4514 (obsoletes RFC 2253), Section 3 and Appendix B: the attribute type uses <descr> from RFC 4512, which allows short names of length 1. |
-| [RA-0844](#ra_rfc2253) | RFC 2253 2.4, 3 | Section 2.4 lets a generator emit "=" anywhere and "#" anywhere except at the start of a value without escaping, but the grammar's stringchar excludes every "special", including "=" and "#", so such output is not parseable by a strict parser built from Section 3. | RFC 4514 (obsoletes RFC 2253): the string grammar admits '=' and '#' inside a value, only a leading '#' is escaped (Section 2.4), and the LDAPv2-only forms are removed. |
-| [RA-0854](#ra_rfc3174) | RFC 3174 7.2 | The value 1 equals shaNull in the enumeration of sha1.h, so the reported error is wrong. The shift needs a (uint32_t) cast on each byte. | RFC 6234 (updates RFC 3174) replaces the sample code (Section 8). |
-| [RA-0904](#ra_rfc6125) | RFC 6125 6.2.1, 1.8 | DNS-ID rule calls a configured name a "derived domain"; Section 1.8 calls it a "delegated domain". | RFC 9525 (obsoletes RFC 6125) no longer uses 'derived domain' or 'delegated domain'; its Section 6 rules replace this text. |
-| [RA-0905](#ra_rfc6125) | RFC 6125 6.4.3, 7.2 | Partial-label wildcards may be matched, but the rules do not say whether '*' may match the empty string (does "baz*" match "baz"?), whether more than one '*' in a label is allowed, or whether a wildcard immediately above a public suffix ("*.com", "*.co.uk") may be matched. | RFC 9525 (obsoletes RFC 6125) allows the wildcard only as the complete left-most label (Section 6.3), so partial-label matching no longer arises. |
-| [RA-0906](#ra_rfc6125) | RFC 6125 10.2 | Wrong recommendation number in the X.520 reference. | RFC 9525 (obsoletes RFC 6125) does not carry this reference. |
-| [RA-0921](#ra_rfc7525) | RFC 7525 6.5 | Revocation list item 3 duplicates item 2. | RFC 9325 (obsoletes RFC 7525) replaces the revocation guidance (Section 7.5); the list is not carried over. |
-| [RA-0922](#ra_rfc7525) | RFC 7525 4.4, 4.3, 3.4 | Count of issues and "as required by Section 4.2" wrong; 1024-bit DHE option conflicts with 4.3. | RFC 9325 (obsoletes RFC 7525) rewrites the Diffie-Hellman and cipher-suite guidance; the miscounted list and the 1024-bit option are not carried over. |
-| [RA-0421](#ra_rfc8200) | RFC 8200 4, 4.3, 4.2 | Section 4 (with its NOTE) makes Hop-by-Hop processing at transit nodes optional and configuration-driven, while Section 4.3 still describes the header as information for "every node". | RFC 9673 (updates RFC 8200), Sections 5.1 and 5.2: a router that does not process the Hop-by-Hop Options header MUST forward the packet normally and MUST NOT drop it solely because it carries the header; options it does not process are skipped as for action bits 00, and the 01, 10 and 11 actions become 'MAY discard, if so configured'. Not covered by RFC 9673: the 'every node' wording of RFC 8200 Section 4.3, and the same question for the other extension headers (erratum 5933). RFC 9673 itself raises new points (RA-1218 to RA-1221). |
-| [RA-0947](#ra_rfc8446) | RFC 8446 4.2.10 | "PSK cipher suite" is a TLS 1.2 concept that does not exist in TLS 1.3. | RFC 9846 (obsoletes RFC 8446), Section 4.3.10: 'In order to accept early data, the server MUST have selected the first key offered'; the PSK cipher-suite wording is gone. |
-| [RA-0948](#ra_rfc8446) | RFC 8446 4.4.2.3 | Wrong cross-reference for acceptable certificate signature algorithms. | RFC 9846 (obsoletes RFC 8446) removes the sentence; Section 4.5.1.2 refers to Section 4.3.3 (Signature Algorithms) for acceptable certificate signature algorithms. |
+| ID | RFC, section | Issue as found | Outcome | Resolution |
+|---|---|---|---|---|
+| [RA-0111](#ra_rfc2385) | RFC 2385 4.3 | "32-byte words" should be "32-bit words". | Resolved | RFC 5925 (obsoletes RFC 2385) gives the Data Offset correctly in 32-bit words. |
+| [RA-0430](#ra_rfc4360) | RFC 4360 7 | Section 7, IPv4 address specific registry paragraph. | Resolved | RFC 7153 (updates RFC 4360) reorganises the Extended Community registries (Sections 2 and 5); this paragraph no longer governs allocations. |
+| [RA-0431](#ra_rfc4360) | RFC 4360 7 | Section 7, Type range table. | Resolved | RFC 7153 (updates RFC 4360) replaces the range table with its own registries (Sections 2 and 5). |
+| [RA-0450](#ra_rfc5701) | RFC 5701 3 | Section 2 ties the sub-types to the IPv4 Address Specific Extended Community registry, while Section 3 creates a separate "IPv6 Address Specific Extended Community" registry with First Come First Served allocation, so a sub-type could be allocated in one registry and not, or differently, in the other. | Resolved | RFC 7153 Section 3 (updates RFC 5701) removes the requirement that IPv6 Address Specific sub-types match the IPv4 ones and creates separate IPv6 registries. |
+| [RA-0529](#ra_rfc5308) | RFC 5308 5 | In a two-level domain the up/down bit is never set in Level 2 LSPs (RFC 5302 3.1, RFC 5305 4.1), so "Level 2 down prefix" can only arise from a future multi-level extension or a misbehaving router; | Resolved | RFC 7775 (updates RFC 5308), Sections 2 and 3.4: 'Level 2 down prefix' is withdrawn as an error and the preference order for TLVs 236 and 237 is restated, with internal and external routes of a level treated equally. |
+| [RA-0533](#ra_rfc5316) | RFC 5316 3.3.5 | An IPv6 TE Router ID is 16 octets; | Resolved | RFC 9346 (obsoletes RFC 5316), Section 3.5.2: the IPv6 TE Router ID sub-TLV is 16 octets. |
+| [RA-0535](#ra_rfc5316) | RFC 5316 3.3.2 | The remote ASBR ID sub-TLVs are defined for the inter-AS reachability TLV (141); | Resolved | RFC 9346 (obsoletes RFC 5316), Sections 3.5.1 and 3.5.2: the TE Router ID sub-TLVs 'MAY both be present in an IS-IS Router CAPABILITY TLV'; the sentence is corrected. |
+| [RA-0573](#ra_rfc3036) | RFC 3036 3.5.1.2.2 | Cross-reference names a section that does not exist. | Resolved | RFC 5036 (obsoletes RFC 3036) removes the sentence. |
+| [RA-0053](#ra_rfc6790) | RFC 6790 5.2 | The Entropy Label Capability attribute is described only as "of value 28"; | Resolved | RFC 7447 (updates RFC 6790) deprecates the BGP Entropy Label Capability attribute. |
+| [RA-0621](#ra_rfc4447) | RFC 4447 5.3.3, 1 | Ingress/egress roles of PE1 and PE2 in 5.3.3 contradict Section 1. | Re-targeted | RFC 8077 (obsoletes RFC 4447) repeats the text in Section 6.2.3; recorded as RA-1073. |
+| [RA-0623](#ra_rfc4447) | RFC 4447 6.1 | Section 6.1 never says which PW types "these PWs" are; | Re-targeted | RFC 8077 (obsoletes RFC 4447) repeats the text in Section 7.1; recorded as RA-1074. |
+| [RA-0625](#ra_rfc4447) | RFC 4447 5.3.2 | PW info length: unclear whether sub-element Type and Length octets are counted. | Re-targeted | RFC 8077 (obsoletes RFC 4447) repeats the text in Section 6.2.2; recorded as RA-1075. |
+| [RA-0626](#ra_rfc4447) | RFC 4447 6.3 | A Generalized PWid FEC (0x81) has no PW ID field; | Re-targeted | RFC 8077 (obsoletes RFC 4447) repeats the text in Section 6.5; recorded as RA-1076. |
+| [RA-0244](#ra_rfc6073) | RFC 6073 14.5, 7.4.1 | Length of sub-TLV 0x06 is 14 octets per Section 7.4.1, not 12. | Resolved | RFC 7267 Section 6 (updates RFC 6073) sets the length of sub-TLV 0x06 to 14. |
+| [RA-0661](#ra_rfc3471) | RFC 3471 12 | Value 51 (L2SC) is defined in Section 3.1.1 but missing from the IANA list. | Resolved | RFC 7074 Section 5 (updates RFC 3471) revises the Switching Types registry, which lists 51 Layer-2 Switch Capable (L2SC); the omission remains only in the text of RFC 3471 Section 12. |
+| [RA-0828](#ra_rfc1122) | RFC 1122 4.2.5, 4.2.3.2 | TCP summary: delayed-ACK rule marked MUST (text SHOULD); two rows cite nonexistent 4.2.3.14. | Resolved | RFC 9293 (which obsoletes the TCP material of RFC 1122): the delayed-ACK rule is a SHOULD in both Section 3.8.6.3 and the Appendix B summary, and the summary cites existing sections. |
+| [RA-0831](#ra_rfc1122) | RFC 1122 4.2.2.6 | TCPhdrsize includes TCP options, so whether the MSS a peer advertises already allows for options (and whether the advertised value should be reduced for options) is read both ways; | Resolved | RFC 9293 Section 3.7.1 (which obsoletes the TCP material of RFC 1122) and RFC 6691 Section 2: the MSS option value ignores IP and TCP options, and the sender reduces the data length for the options it sends. |
+| [RA-1272](#ra_rfc1141) | RFC 1141 Description | The incremental update equation gives -0 (0xFFFF) instead of +0; corrected by RFC 1624 Eqn. 3. | Resolved | RFC 1624 Section 3 (updates RFC 1141) gives the corrected incremental update (Eqn. 3), which avoids the 0x0000 / 0xFFFF error. |
+| [RA-0837](#ra_rfc1858) | RFC 1858 3.2.1, 4.2 | Security gap: The document presents "IF FO=1 and PROTOCOL=TCP then DROP PACKET" as the general algorithm and calls the direct TMIN test on zero-offset fragments unnecessary. | Resolved | RFC 3128 Section 3 (updates RFC 1858) requires the test on zero-offset fragments (transport length below the minimum) in addition to dropping fragments with offset 1. |
+| [RA-0843](#ra_rfc2253) | RFC 2253 3 | Grammar rejects one-letter attribute type names used in the document's own examples. | Resolved | RFC 4514 (obsoletes RFC 2253), Section 3 and Appendix B: the attribute type uses <descr> from RFC 4512, which allows short names of length 1. |
+| [RA-0844](#ra_rfc2253) | RFC 2253 2.4, 3 | Section 2.4 lets a generator emit "=" anywhere and "#" anywhere except at the start of a value without escaping, but the grammar's stringchar excludes every "special", including "=" and "#", so such output is not parseable by a strict parser built from Section 3. | Resolved | RFC 4514 (obsoletes RFC 2253): the string grammar admits '=' and '#' inside a value, only a leading '#' is escaped (Section 2.4), and the LDAPv2-only forms are removed. |
+| [RA-0854](#ra_rfc3174) | RFC 3174 7.2 | The value 1 equals shaNull in the enumeration of sha1.h, so the reported error is wrong. The shift needs a (uint32_t) cast on each byte. | Resolved | RFC 6234 (updates RFC 3174) replaces the sample code (Section 8). |
+| [RA-0904](#ra_rfc6125) | RFC 6125 6.2.1, 1.8 | DNS-ID rule calls a configured name a "derived domain"; Section 1.8 calls it a "delegated domain". | Resolved | RFC 9525 (obsoletes RFC 6125) no longer uses 'derived domain' or 'delegated domain'; its Section 6 rules replace this text. |
+| [RA-0905](#ra_rfc6125) | RFC 6125 6.4.3, 7.2 | Partial-label wildcards may be matched, but the rules do not say whether '*' may match the empty string (does "baz*" match "baz"?), whether more than one '*' in a label is allowed, or whether a wildcard immediately above a public suffix ("*.com", "*.co.uk") may be matched. | Resolved | RFC 9525 (obsoletes RFC 6125) allows the wildcard only as the complete left-most label (Section 6.3), so partial-label matching no longer arises. |
+| [RA-0906](#ra_rfc6125) | RFC 6125 10.2 | Wrong recommendation number in the X.520 reference. | Resolved | RFC 9525 (obsoletes RFC 6125) does not carry this reference. |
+| [RA-0921](#ra_rfc7525) | RFC 7525 6.5 | Revocation list item 3 duplicates item 2. | Resolved | RFC 9325 (obsoletes RFC 7525) replaces the revocation guidance (Section 7.5); the list is not carried over. |
+| [RA-0922](#ra_rfc7525) | RFC 7525 4.4, 4.3, 3.4 | Count of issues and "as required by Section 4.2" wrong; 1024-bit DHE option conflicts with 4.3. | Resolved | RFC 9325 (obsoletes RFC 7525) rewrites the Diffie-Hellman and cipher-suite guidance; the miscounted list and the 1024-bit option are not carried over. |
+| [RA-0421](#ra_rfc8200) | RFC 8200 4, 4.3, 4.2 | Section 4 (with its NOTE) makes Hop-by-Hop processing at transit nodes optional and configuration-driven, while Section 4.3 still describes the header as information for "every node". | Resolved | RFC 9673 (updates RFC 8200), Sections 5.1 and 5.2: a router that does not process the Hop-by-Hop Options header MUST forward the packet normally and MUST NOT drop it solely because it carries the header; options it does not process are skipped as for action bits 00, and the 01, 10 and 11 actions become 'MAY discard, if so configured'. Not covered by RFC 9673: the 'every node' wording of RFC 8200 Section 4.3, and the same question for the other extension headers (erratum 5933). RFC 9673 itself raises new points (RA-1218 to RA-1221). |
+| [RA-0947](#ra_rfc8446) | RFC 8446 4.2.10 | "PSK cipher suite" is a TLS 1.2 concept that does not exist in TLS 1.3. | Resolved | RFC 9846 (obsoletes RFC 8446), Section 4.3.10: 'In order to accept early data, the server MUST have selected the first key offered'; the PSK cipher-suite wording is gone. |
+| [RA-0948](#ra_rfc8446) | RFC 8446 4.4.2.3 | Wrong cross-reference for acceptable certificate signature algorithms. | Resolved | RFC 9846 (obsoletes RFC 8446) removes the sentence; Section 4.5.1.2 refers to Section 4.3.3 (Signature Algorithms) for acceptable certificate signature algorithms. |
 
 ### Most significant findings {#ra_significant}
 
@@ -683,11 +791,11 @@ Contradictions and errors with interoperability impact, whether or not an erratu
 
 ## Method and limits {#ra_method}
 
-**Scope.** 439 RFC texts, grouped into nine areas. The texts were taken as published (plain-text RFCs);
+**Scope.** 449 RFC texts, grouped into nine areas. The texts were taken as published (plain-text RFCs);
 errata were not applied to them. A few related texts (IANA registries for PCEP, RSVP and RSVP-TE, one
 Internet-Draft and NIST SP 800-38D) were used as references only and are not analysed.
 
-**Automated checks, all 439 RFCs.** Every text was scanned by script for: references to sections that
+**Automated checks, all 449 RFCs.** Every text was scanned by script for: references to sections that
 do not exist in the same document; mixed-case or non-RFC 2119 keyword forms ("MAY NOT", "MUST not",
 "SHOULD not"); leftover placeholders ("TBD", "TBA", "XXX"); and packet diagrams whose field boundaries
 do not fall on bit boundaries. Every hit was read in context; most were false positives (references to
@@ -714,12 +822,12 @@ RFC 8032 and RFC 8439 were recomputed with independent code, and the example cod
 Section 6 was run to confirm the defects reported against it.
 
 **Fourth pass.** Those 40 core specifications were then read in full, every section, by four reviewers
-on separate lists, so that all 439 RFCs have been read at the "deep" level (see [Coverage](#ra_coverage)).
+on separate lists. A later check of the reading records showed that 39 RFCs marked "deep" in the second pass had been read only in part; they, and five RFCs whose record named no sections, were then read again in full by four reviewers (findings RA-1318 onwards), so that all 449 RFCs have been read at the "deep" level (see [Coverage](#ra_coverage)).
 Findings RA-0980 to RA-1194 come from this pass.
 
 **Added texts.** Five RFCs added to the set later (RFC 4023, RFC 6310, RFC 6478, RFC 7771 and RFC 9673) were read in full, every section, with the same method and checked against the same errata database; findings RA-1195 to RA-1222 come from this reading.
 
-**Updating RFCs.** Every finding was then checked against the RFCs in the set that update or obsolete the RFC it is about (from the "Updates:" and "Obsoletes:" headers of all texts in the set, and the "Updated by" / "Obsoleted by" data on the RFC Editor errata pages). Findings that an updating RFC settles are listed under [Resolved by later RFCs](#ra_resolved) and are not counted as open; findings whose text a successor repeats, or that an updating RFC changes without settling, stay open with a "Later RFCs" note. Twenty-seven updating or obsoleting RFCs that this check found missing were then added to the set and read in full by three reviewers with the same method (findings RA-1223 to RA-1317); the check was repeated over all 439 texts. Updating RFCs that are still not in the set were not checked.
+**Updating RFCs.** Every finding was then checked against the RFCs in the set that update or obsolete the RFC it is about (from the "Updates:" and "Obsoletes:" headers of all texts in the set, and the "Updated by" / "Obsoleted by" data on the RFC Editor errata pages). Findings that an updating RFC settles are listed under [Resolved by later RFCs](#ra_resolved) and are not counted as open; findings whose text a successor repeats, or that an updating RFC changes without settling, stay open with a "Later RFCs" note. Twenty-seven updating or obsoleting RFCs that this check found missing were then added to the set and read in full by three reviewers with the same method (findings RA-1223 to RA-1317); the check was repeated over all 449 texts. Ten further updating RFCs identified from the RFC index were then added and read in full. Updating RFCs that are still not in the set were not checked. Finally, the status, obsoletes / obsoleted-by and updates / updated-by data of every RFC were taken from the RFC Editor's RFC index and shown in each RFC's header line below; the check against later RFCs was repeated with that data. Proposed errata against an RFC that is obsoleted or Historic carry a status note, since such reports may be held or rejected for that reason.
 
 **Duplicates.** Where more than one pass produced findings for the same RFC, records with the same
 section were compared by quote and issue. Nine RFCs had findings from the first two passes, 28 had
@@ -728,7 +836,7 @@ findings; no record duplicated another, so all were kept.
 The ids are stable across passes.
 
 **Errata.** Every finding was matched against the RFC Editor's complete errata database (8163 reports,
-retrieved 2026-11-09; 191 of the 439 RFCs have at least one report). For each finding, the reports on the
+retrieved 2026-11-09; 191 of the 449 RFCs have at least one report). For each finding, the reports on the
 same RFC were compared by section and by the quoted text, the corrected text and the notes; candidate
 pairs were then judged by hand. A finding either matches one or more reports (cited by id, status and
 type), is related to a report that does not cover its point (cited as related), or has no report on the
@@ -745,11 +853,11 @@ RFC is free of problems.
 
 ## BGP, L3VPN, MVPN and BGP-LS {#ra_bgp}
 
-72 RFCs in this area (72 deep); 173 findings, 57 of them proposed errata.
+73 RFCs in this area (73 deep); 183 findings, 62 of them proposed errata.
 
 ### RFC 1997: BGP Communities Attribute {#ra_rfc1997}
 
-Depth: deep (normative statements). Errata: 3 errata: 2 held, 1 rejected. 
+Depth: deep. Errata: 3 errata: 2 held, 1 rejected. Status: Proposed Standard. Updated by: RFC 7606, RFC 8642.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -758,7 +866,7 @@ Depth: deep (normative statements). Errata: 3 errata: 2 held, 1 rejected.
 
 ### RFC 2042: Registering New BGP Attribute Types {#ra_rfc2042}
 
-Depth: deep. Errata: 1 errata: 1 held. 
+Depth: deep. Errata: 1 errata: 1 held. Status: Informational.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -766,17 +874,17 @@ Depth: deep. Errata: 1 errata: 1 held.
 
 ### RFC 2385: Protection of BGP Sessions via the TCP MD5 Signature Option {#ra_rfc2385}
 
-Depth: deep. Errata: 1 errata: 1 held. 
+Depth: deep. Errata: 1 errata: 1 held. Status: Proposed Standard. Obsoleted by: RFC 5925. Updated by: RFC 6691.
 
-Resolved by a later RFC (kept for reference; not counted as open findings):
+Resolved by a later RFC or re-targeted to its successor (kept for reference; not counted as open findings):
 
-| ID | Section | Issue as found | Resolution |
-|---|---|---|---|
-| RA-0111 | 4.3 | "32-byte words" should be "32-bit words". | RFC 5925 (obsoletes RFC 2385) gives the Data Offset correctly in 32-bit words. |
+| ID | Section | Issue as found | Outcome | Resolution |
+|---|---|---|---|---|
+| RA-0111 | 4.3 | "32-byte words" should be "32-bit words". | Resolved | RFC 5925 (obsoletes RFC 2385) gives the Data Offset correctly in 32-bit words. |
 
 ### RFC 2545: Use of BGP-4 Multiprotocol Extensions for IPv6 Inter-Domain Routing {#ra_rfc2545}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -784,7 +892,7 @@ Depth: deep. Errata: none (the RFC has no errata).
 
 ### RFC 2918: Route Refresh Capability for BGP-4 {#ra_rfc2918}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 7313.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -792,7 +900,7 @@ Depth: deep. Errata: none (the RFC has no errata).
 
 ### RFC 3765: NOPEER Community for Border Gateway Protocol (BGP) Route Scope Control {#ra_rfc3765}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Informational.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -800,7 +908,7 @@ Depth: deep. Errata: none (the RFC has no errata).
 
 ### RFC 4271: A Border Gateway Protocol 4 (BGP-4) {#ra_rfc4271}
 
-Depth: deep. Errata: 21 errata: 9 verified, 7 held, 5 rejected. Obsoletes: RFC 1771.
+Depth: deep. Errata: 21 errata: 9 verified, 7 held, 5 rejected. Status: Draft Standard. Obsoletes: RFC 1771. Updated by: RFC 4724, RFC 6286, RFC 6608, RFC 6793, RFC 7606, RFC 7607, RFC 7705, RFC 8212, RFC 8654, RFC 9072, RFC 9687, RFC 9774.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -961,14 +1069,14 @@ Notes
 
 ### RFC 4360: BGP Extended Communities Attribute {#ra_rfc4360}
 
-Depth: deep (normative statements and formats). Errata: 4 errata: 2 verified, 1 held, 1 rejected. 
+Depth: deep. Errata: 4 errata: 2 verified, 1 held, 1 rejected. Status: Proposed Standard. Updated by: RFC 7153, RFC 7606.
 
-Resolved by a later RFC (kept for reference; not counted as open findings):
+Resolved by a later RFC or re-targeted to its successor (kept for reference; not counted as open findings):
 
-| ID | Section | Issue as found | Resolution |
-|---|---|---|---|
-| RA-0430 | 7 | Section 7, IPv4 address specific registry paragraph. | RFC 7153 (updates RFC 4360) reorganises the Extended Community registries (Sections 2 and 5); this paragraph no longer governs allocations. |
-| RA-0431 | 7 | Section 7, Type range table. | RFC 7153 (updates RFC 4360) replaces the range table with its own registries (Sections 2 and 5). |
+| ID | Section | Issue as found | Outcome | Resolution |
+|---|---|---|---|---|
+| RA-0430 | 7 | Section 7, IPv4 address specific registry paragraph. | Resolved | RFC 7153 (updates RFC 4360) reorganises the Extended Community registries (Sections 2 and 5); this paragraph no longer governs allocations. |
+| RA-0431 | 7 | Section 7, Type range table. | Resolved | RFC 7153 (updates RFC 4360) replaces the range table with its own registries (Sections 2 and 5). |
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -979,7 +1087,7 @@ Resolved by a later RFC (kept for reference; not counted as open findings):
 
 ### RFC 4364: BGP/MPLS IP Virtual Private Networks (VPNs) {#ra_rfc4364}
 
-Depth: deep. Errata: 5 errata: 1 verified, 2 held, 2 rejected. Obsoletes: RFC 2547.
+Depth: deep. Errata: 5 errata: 1 verified, 2 held, 2 rejected. Status: Proposed Standard. Obsoletes: RFC 2547. Updated by: RFC 4577, RFC 4684, RFC 5462.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1011,7 +1119,7 @@ Notes
 
 ### RFC 4456: BGP Route Reflection: An Alternative to Full Mesh Internal BGP (IBGP) {#ra_rfc4456}
 
-Depth: deep. Errata: 2 errata: 1 held, 1 rejected. Obsoletes: RFC 2796, RFC 1966.
+Depth: deep. Errata: 2 errata: 1 held, 1 rejected. Status: Draft Standard. Obsoletes: RFC 1966, RFC 2796. Updated by: RFC 7606.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1044,7 +1152,7 @@ Notes
 
 ### RFC 4486: Subcodes for BGP Cease Notification Message {#ra_rfc4486}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 8203, RFC 9003.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1052,7 +1160,7 @@ Depth: deep. Errata: none (the RFC has no errata).
 
 ### RFC 4659: BGP-MPLS IP Virtual Private Network (VPN) Extension for IPv6 VPN {#ra_rfc4659}
 
-Depth: deep (normative statements). Errata: 1 errata: 1 rejected. 
+Depth: deep. Errata: 1 errata: 1 rejected. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1081,7 +1189,7 @@ Notes
 
 ### RFC 4724: Graceful Restart Mechanism for BGP {#ra_rfc4724}
 
-Depth: deep. Errata: 3 errata: 1 verified, 2 held. 
+Depth: deep. Errata: 3 errata: 1 verified, 2 held. Status: Proposed Standard. Updates: RFC 4271. Updated by: RFC 8538.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1143,7 +1251,7 @@ Notes
 
 ### RFC 4760: Multiprotocol Extensions for BGP-4 {#ra_rfc4760}
 
-Depth: deep. Errata: 5 errata: 1 verified, 4 held. Obsoletes: RFC 2858.
+Depth: deep. Errata: 5 errata: 1 verified, 4 held. Status: Draft Standard. Obsoletes: RFC 2858. Updated by: RFC 7606.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1177,7 +1285,7 @@ Notes
 
 ### RFC 4798: Connecting IPv6 Islands over IPv4 MPLS Using IPv6 Provider Edge Routers (6PE) {#ra_rfc4798}
 
-Depth: deep (normative statements). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1185,7 +1293,7 @@ Depth: deep (normative statements). Errata: none (the RFC has no errata).
 
 ### RFC 5004: Avoid BGP Best Path Transitions from One External to Another {#ra_rfc5004}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1193,7 +1301,7 @@ Depth: deep. Errata: none (the RFC has no errata).
 
 ### RFC 5065: Autonomous System Confederations for BGP {#ra_rfc5065}
 
-Depth: deep. Errata: 2 errata: 1 verified, 1 held. Obsoletes: RFC 3065.
+Depth: deep. Errata: 2 errata: 1 verified, 1 held. Status: Draft Standard. Obsoletes: RFC 3065. Updated by: RFC 9774.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1203,7 +1311,7 @@ Depth: deep. Errata: 2 errata: 1 verified, 1 held. Obsoletes: RFC 3065.
 
 ### RFC 5291: Outbound Route Filtering Capability for BGP-4 {#ra_rfc5291}
 
-Depth: deep (normative statements, formats). Errata: 1 errata: 1 rejected. 
+Depth: deep. Errata: 1 errata: 1 rejected. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1269,7 +1377,7 @@ Notes
 
 ### RFC 5398: Autonomous System (AS) Number Reservation for Documentation Use {#ra_rfc5398}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Informational.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1298,7 +1406,7 @@ Notes
 
 ### RFC 5492: Capabilities Advertisement with BGP-4 {#ra_rfc5492}
 
-Depth: deep. Errata: 1 errata: 1 rejected. Obsoletes: RFC 3392.
+Depth: deep. Errata: 1 errata: 1 rejected. Status: Draft Standard. Obsoletes: RFC 3392. Updated by: RFC 8810.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1348,7 +1456,7 @@ Notes
 
 ### RFC 5543: BGP Traffic Engineering Attribute {#ra_rfc5543}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 7606.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1396,19 +1504,19 @@ Notes
 
 ### RFC 5668: 4-Octet AS Specific BGP Extended Community {#ra_rfc5668}
 
-Depth: deep (read in full). Errata: none (the RFC has no errata). 
+Depth: deep (read in full). Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 Nothing notable found at this depth.
 
 ### RFC 5701: IPv6 Address Specific BGP Extended Community Attribute {#ra_rfc5701}
 
-Depth: deep (encoding sections). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 7153, RFC 7606.
 
-Resolved by a later RFC (kept for reference; not counted as open findings):
+Resolved by a later RFC or re-targeted to its successor (kept for reference; not counted as open findings):
 
-| ID | Section | Issue as found | Resolution |
-|---|---|---|---|
-| RA-0450 | 3 | Section 2 ties the sub-types to the IPv4 Address Specific Extended Community registry, while Section 3 creates a separate "IPv6 Address Specific Extended Community" registry with First Come First Served allocation, so a sub-type could be allocated in one registry and not, or differently, in the other. | RFC 7153 Section 3 (updates RFC 5701) removes the requirement that IPv6 Address Specific sub-types match the IPv4 ones and creates separate IPv6 registries. |
+| ID | Section | Issue as found | Outcome | Resolution |
+|---|---|---|---|---|
+| RA-0450 | 3 | Section 2 ties the sub-types to the IPv4 Address Specific Extended Community registry, while Section 3 creates a separate "IPv6 Address Specific Extended Community" registry with First Come First Served allocation, so a sub-type could be allocated in one registry and not, or differently, in the other. | Resolved | RFC 7153 Section 3 (updates RFC 5701) removes the requirement that IPv6 Address Specific sub-types match the IPv4 ones and creates separate IPv6 registries. |
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1437,7 +1545,7 @@ Notes
 
 ### RFC 6286: Autonomous-System-Wide Unique BGP Identifier for BGP-4 {#ra_rfc6286}
 
-Depth: deep (read in full). Errata: 1 errata: 1 held. Updates: RFC 4271.
+Depth: deep (read in full). Errata: 1 errata: 1 held. Status: Proposed Standard. Updates: RFC 4271.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1464,15 +1572,41 @@ Notes
 
 ### RFC 6368: Internal BGP as the Provider/Customer Edge Protocol for BGP/MPLS IP Virtual Private Networks (VPNs) {#ra_rfc6368}
 
-Depth: deep (5, 6). Errata: 2 errata: 2 verified. 
+Depth: deep. Errata: 2 errata: 2 verified. Status: Proposed Standard. Updated by: RFC 7606, RFC 9494.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0118 | 5 | "If its Partial flag is set and its Neighbor-Complete flag is clear, the UPDATE is treated as a route withdraw as discussed in [OPT-TRANS-BGP]." | The "Neighbor-Complete flag" is defined only in an expired Internet-Draft cited informatively ([OPT-TRANS-BGP]), so the rule cannot be applied from the published RFCs. RFC 7606 Section 7.16 replaces the paragraph with plain treat-as-withdraw and removes the reference; RFC 6368 readers need that update to implement the section. The malformation list (length below 4, MP_REACH / MP_UNREACH inside, malformed inner attributes) is unchanged. | error | none: RFC has 2 errata, none on this point |
+| RA-1318 | 6, 4 | "The approach taken by this document is to rewrite the NEXT_HOP attribute at the VRF import/export boundary.  PE routers take into account the PE-PE IGP distance calculated by the customer network IGP, when selecting between routes advertised from different PEs." | The PE-PE distance is computed by the service provider's IGP; the customer network IGP does not run between PEs and does not know PE addresses. Section 4 says so: the IGP metric of a PE-received route "SHOULD be the metric to the remote PE address, expressed in terms of the service provider metric domain". This is the same customer/provider slip that verified errata 4309 (Section 7) and 7834 (Section 5) correct elsewhere in the document. Section 4 also states that "customer network IGP metrics SHOULD always be considered higher ... than local site metrics", where the comparison intended is between PE-received routes (provider metrics) and routes from local CEs (local site metrics). | error | none: RFC has 2 errata, none on this point; **proposed erratum below** |
+| RA-1319 | 5, 3, 9 | "In other words, the BGP path attributes are "pushed" into this attribute, which operates as a stack, when the route is received by the VPN and "popped" when the route is advertised in the PE-to-CE direction." | The attribute is described as a stack, but the document never says what happens when a route received from a CE already carries an ATTR_SET (for example a CE that is itself a PE of a carrier's-carrier or nested VPN): whether the received ATTR_SET is pushed inside the new one (nesting, with a pop restoring it), replaced, or treated as malformed. ATTR_SET may contain "any BGP attribute that can occur in a BGP UPDATE message" except MP_REACH / MP_UNREACH, so nesting is allowed by the encoding, and no depth or size limit is given (Section 9 only says implementations "must consider the issues of input validation and resource management"). The malformed test "the included attributes are malformed themselves" then applies recursively without bound. | ambiguity | none: RFC has 2 errata, none on this point |
+
+Proposed erratum RA-1318 (RFC 6368, Section 6, 4; type: Technical):
+
+```
+Original Text
+-------------
+   PE routers take into account the PE-PE IGP distance calculated by
+   the customer network IGP, when selecting between routes
+   advertised from different PEs.
+
+Corrected Text
+--------------
+   PE routers take into account the PE-PE IGP distance calculated by
+   the provider network IGP, when selecting between routes
+   advertised from different PEs.
+
+Notes
+-----
+   Section 4 states that the metric of a PE-received route is the
+   metric to the remote PE "expressed in terms of the service
+   provider metric domain". The customer IGP has no knowledge of
+   PE-PE distances. Errata 4309 and 7834 correct the same
+   customer/provider confusion in Sections 7 and 5.
+```
 
 ### RFC 6608: Subcodes for BGP Finite State Machine Error {#ra_rfc6608}
 
-Depth: deep (read in full). Errata: none (the RFC has no errata). Updates: RFC 4271.
+Depth: deep (read in full). Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 4271.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1480,7 +1614,7 @@ Depth: deep (read in full). Errata: none (the RFC has no errata). Updates: RFC 4
 
 ### RFC 6793: BGP Support for Four-Octet Autonomous System (AS) Number Space {#ra_rfc6793}
 
-Depth: deep. Errata: 1 errata: 1 held. Obsoletes: RFC 4893. Updates: RFC 4271.
+Depth: deep. Errata: 1 errata: 1 held. Status: Proposed Standard. Obsoletes: RFC 4893. Updates: RFC 4271.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1567,38 +1701,42 @@ Notes
 
 ### RFC 6938: Deprecation of BGP Path Attributes: DPA, ADVERTISER, and RCID_PATH / CLUSTER_ID {#ra_rfc6938}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 Nothing notable found at this depth.
 
 ### RFC 6996: Autonomous System (AS) Reservation for Private Use {#ra_rfc6996}
 
-Depth: deep (AS ranges). Errata: none (the RFC has no errata). Updates: RFC 1930.
+Depth: deep. Errata: none (the RFC has no errata). Status: Best Current Practice (BCP 6). Updates: RFC 1930.
 
 Nothing notable found at this depth.
 
 ### RFC 7153: IANA Registries for BGP Extended Communities {#ra_rfc7153}
 
-Depth: deep (registry document). Errata: none (the RFC has no errata). Updates: RFC 4360, RFC 5701.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 4360, RFC 5701. Updated by: RFC 9184.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
-| RA-0451 | 5.1.1, 5.2.10 | "0x80-0x8F        Experimental Use (see RFC 3692) / 0x0A               Layer2 Info Extended Community" | Type 0x80 lies in the range reserved for "Experimental Use (see RFC 3692)", and RFC 3692 says such values are not to be shipped in products or relied on for interoperability; yet 5.2.10 creates a permanent First Come First Served sub-type registry under that Type and records Flow Specification actions and the Layer2 Info community, which are deployed. A reader cannot tell whether 0x80 values are experimental (may collide, not to be relied on) or ordinary assignments. The note about RFC 5575 addresses only the transitive / non-transitive mismatch of traffic-rate, not this one. In addition, the IPv6-Address-Specific registries (5.3) use a single FCFS range 0x00-0xFF for the second octet, unlike the 0x00-0xBF / 0xC0-0xFF split that Section 2 gives "each" Sub-Type registry, and the Four-Octet registry names sub-type 0x10 "Cisco VPN Identifier" where the other registries say "Cisco VPN-Distinguisher". | contradiction | none: RFC has no errata |
+| RA-0451 | 5.1.1, 5.2.10 | "0x80-0x8F        Experimental Use (see RFC 3692) / 0x0A               Layer2 Info Extended Community" | Type 0x80 lies in the range reserved for "Experimental Use (see RFC 3692)", and RFC 3692 says such values are not to be shipped in products or relied on for interoperability; yet 5.2.10 creates a permanent First Come First Served sub-type registry under that Type and records Flow Specification actions and the Layer2 Info community, which are deployed. A reader cannot tell whether 0x80 values are experimental (may collide, not to be relied on) or ordinary assignments. The note about RFC 5575 addresses only the transitive / non-transitive mismatch of traffic-rate, not this one. In addition, the IPv6-Address-Specific registries (5.3) use a single FCFS range 0x00-0xFF for the second octet, unlike the 0x00-0xBF / 0xC0-0xFF split that Section 2 gives "each" Sub-Type registry, and the Four-Octet registry names sub-type 0x10 "Cisco VPN Identifier" where the other registries say "Cisco VPN-Distinguisher". Later RFCs: RFC 9184 Section 2 (updates RFC 7153) moves types 0x80 to 0x82 to First Come First Served and drops 'Experimental Use' from the sub-type registry names, which settles the main point; the IPv6-Address-Specific registry ranges and the naming points are not addressed. | contradiction | none: RFC has no errata |
 
 ### RFC 7300: Reservation of Last Autonomous System (AS) Numbers {#ra_rfc7300}
 
-Depth: deep (AS ranges). Errata: none (the RFC has no errata). Updates: RFC 1930.
+Depth: deep. Errata: none (the RFC has no errata). Status: Best Current Practice (BCP 6). Updates: RFC 1930.
 
 Nothing notable found at this depth.
 
 ### RFC 7311: The Accumulated IGP Metric Attribute for BGP {#ra_rfc7311}
 
-Depth: deep (3, 4 in full). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0120 | 3.4.3, 3.2 | "In all the computations discussed in this section, the AIGP value MUST be capped at its maximum unsigned value 0xffffffffffffffff." | Section 3.2 says that an AIGP attribute whose first AIGP TLV "contains the maximum value 0xffffffffffffffff ... SHOULD be considered to be malformed and SHOULD be discarded". A speaker that caps an overflowing sum as 3.4.3 requires therefore sends a value that every compliant receiver discards, so the route silently loses its AIGP attribute one hop later and, under Section 4.1, is then removed from consideration whenever another route still carries one. Capping at 0xfffffffffffffffe, or withdrawing the attribute, would avoid this; the text does not say which. | contradiction | none: RFC has no errata; **proposed erratum below** |
 | RA-0121 | 3.4.3 | "If D is above a configurable threshold, set the AIGP TLV value to Xattr+D.  If D is below a configurable threshold, set the AIGP TLV value to Xattr." | D equal to the threshold is not covered. In the non-recursive case the same section requires that "A MUST be increased by a non-zero amount", while here a D below the threshold leaves the value unchanged after a next-hop change; the two rules disagree on whether a next-hop change may leave the AIGP value as received. | ambiguity | none: RFC has no errata |
+| RA-1320 | 3.4.3 | "If the route has an AIGP attribute without an AIGP TLV, then the AIGP attribute MAY be passed along unchanged. / 8.  Go to step 4." | Step 6 has two cases. Its first case ("does NOT have an AIGP attribute") exits; its second case (the route to XNH has an AIGP attribute that holds no AIGP TLV) neither exits nor changes XNH or Xattr. Step 7 does not apply (there is no AIGP TLV value Y), so step 8 returns to step 4 with the same XNH and the procedure never terminates. The second case also does not say which AIGP attribute is "passed along unchanged": that of the route being redistributed (value A, which would then not be increased although the next hop changed, against the non-zero increase required earlier in the section) or that of the route to XNH. | error | none: RFC has no errata; **proposed erratum below** |
+| RA-1321 | 4.1, 4.2 | "remove from consideration all routes that are not tied for the lowest value of A. / such that either: -  the two routes have equal AIGP TLV values, or else -  neither of the two routes has an AIGP attribute containing an AIGP TLV." | After Section 4.1 the remaining routes are tied on A = AIGP TLV value + IGP distance to the next hop, not on the AIGP TLV value. Two routes with TLV values 10 and 20 and next-hop distances 20 and 10 survive 4.1 but meet neither condition of Section 4.2, so it is not defined whether the later "interior cost" tie breaker uses the AIGP-enhanced interior cost or the plain one for them. Section 4.1 also adds "the IGP distance from R to T's next hop" without saying what is used when that next hop is itself resolved through BGP (Section 4.2 defines a recursive cost for exactly that case), and the 64-bit cap of Section 3.4.3 ("In all the computations discussed in this section") does not cover the sum in 4.1, which can overflow. | contradiction | none: RFC has no errata; **proposed erratum below** |
+| RA-1322 | 3, 3.2 | "When receiving a BGP Update message containing a malformed AIGP attribute, the attribute MUST be treated exactly as if it were an unrecognized non-transitive attribute." | The document says what must not make an AIGP attribute malformed (several TLVs of one type, unknown types) and adds two cases that do (transitive bit set, maximum value), but never defines the structural errors: a TLV Length below 3, a TLV that runs past the end of the attribute, or an AIGP TLV (type 1) whose Length is not 11. Whether such an attribute is discarded, or the valid first AIGP TLV is still used, is left to the implementer. | ambiguity | none: RFC has no errata |
+| RA-1323 | 3.4.3 | "If R1 does not change the next hop of the route, then R1 MUST NOT change the AIGP attribute value of the route. / Suppose R1 changes the next hop of the route from R2 to R1." | Only two cases are covered: next hop unchanged, and next hop set to R1 itself. A next hop rewritten by policy to a third address (neither R2 nor R1, for example a route server or a policy "set next-hop") has no rule, although Section 3.4.1 forbids adding AIGP to a route "for which R does not set itself as the next hop". Whether the attribute must then be removed, kept unchanged or increased is not stated. | ambiguity | none: RFC has no errata |
 
 Proposed erratum RA-0120 (RFC 7311, Section 3.4.3, 3.2; type: Technical):
 
@@ -1621,9 +1759,58 @@ Notes
    SHOULD be considered to be malformed and SHOULD be discarded".
 ```
 
+Proposed erratum RA-1320 (RFC 7311, Section 3.4.3; type: Technical):
+
+```
+Original Text
+-------------
+   6.  If the route to XNH is a BGP-learned route that does NOT have
+   an AIGP attribute, then exit this procedure and do not pass on
+   any AIGP attribute.  If the route has an AIGP attribute without
+   an AIGP TLV, then the AIGP attribute MAY be passed along
+   unchanged.
+
+Corrected Text
+--------------
+   6.  If the route to XNH is a BGP-learned route that does NOT have
+   an AIGP attribute containing an AIGP TLV, then exit this
+   procedure and do not pass on any AIGP TLV.  (If the route being
+   redistributed has an AIGP attribute without an AIGP TLV, that
+   attribute MAY be passed along unchanged.)
+
+Notes
+-----
+   In the second case of step 6 the procedure has no exit: step 7
+   needs a value Y, and step 8 returns to step 4 with XNH unchanged.
+   The intended behaviour is presumably to stop accumulating, since
+   a path with a gap must not carry an AIGP value (Section 1: "the
+   AIGP attribute does not appear when there are 'gaps' along the
+   path").
+```
+
+Proposed erratum RA-1321 (RFC 7311, Section 4.1, 4.2; type: Technical):
+
+```
+Original Text
+-------------
+   -  the two routes have equal AIGP TLV values, or else
+
+Corrected Text
+--------------
+   -  the two routes were tied for the lowest value of A in Section
+   4.1, or else
+
+Notes
+-----
+   Section 4.1 should also say that A is capped at
+   0xffffffffffffffff, and whether the "IGP distance" to a
+   recursively resolved next hop is the AIGP-enhanced interior cost
+   of Section 4.2.
+```
+
 ### RFC 7313: Enhanced Route Refresh Capability for BGP-4 {#ra_rfc7313}
 
-Depth: deep (read in full). Errata: none (the RFC has no errata). Updates: RFC 2918.
+Depth: deep (read in full). Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 2918.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1632,13 +1819,13 @@ Depth: deep (read in full). Errata: none (the RFC has no errata). Updates: RFC 2
 
 ### RFC 7447: Deprecation of BGP Entropy Label Capability Attribute {#ra_rfc7447}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 6790.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 6790.
 
 Nothing notable found at this depth.
 
 ### RFC 7606: Revised Error Handling for BGP UPDATE Messages {#ra_rfc7606}
 
-Depth: deep. Errata: 1 errata: 1 held. Updates: RFC 1997, RFC 4271, RFC 4360, RFC 4456, RFC 4760, RFC 5543, RFC 5701, RFC 6368.
+Depth: deep. Errata: 1 errata: 1 held. Status: Proposed Standard. Updates: RFC 1997, RFC 4271, RFC 4360, RFC 4456, RFC 4760, RFC 5543, RFC 5701, RFC 6368.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1726,7 +1913,7 @@ Notes
 
 ### RFC 7607: Codification of AS 0 Processing {#ra_rfc7607}
 
-Depth: deep. Errata: 1 errata: 1 rejected. Updates: RFC 4271.
+Depth: deep. Errata: 1 errata: 1 rejected. Status: Proposed Standard. Updates: RFC 4271.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1759,7 +1946,7 @@ Notes
 
 ### RFC 7611: BGP ACCEPT_OWN Community Attribute {#ra_rfc7611}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1768,7 +1955,7 @@ Depth: deep. Errata: none (the RFC has no errata).
 
 ### RFC 7911: Advertisement of Multiple Paths in BGP {#ra_rfc7911}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1801,7 +1988,7 @@ Notes
 
 ### RFC 7947: Internet Exchange BGP Route Server {#ra_rfc7947}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1830,7 +2017,7 @@ Notes
 
 ### RFC 7948: Internet Exchange BGP Route Server Operations {#ra_rfc7948}
 
-Depth: deep (lines with requirement words and section references scanned). Errata: 1 errata: 1 held. 
+Depth: deep. Errata: 1 errata: 1 held. Status: Informational.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1838,7 +2025,7 @@ Depth: deep (lines with requirement words and section references scanned). Errat
 
 ### RFC 7999: BLACKHOLE Community {#ra_rfc7999}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Informational.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1846,7 +2033,7 @@ Depth: deep. Errata: none (the RFC has no errata).
 
 ### RFC 8092: BGP Large Communities Attribute {#ra_rfc8092}
 
-Depth: deep. Errata: 1 errata: 1 held. 
+Depth: deep. Errata: 1 errata: 1 held. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1854,13 +2041,13 @@ Depth: deep. Errata: 1 errata: 1 held.
 
 ### RFC 8093: Deprecation of BGP Path Attribute Values 30, 31, 129, 241, 242, and 243 {#ra_rfc8093}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 Nothing notable found at this depth.
 
 ### RFC 8205: BGPsec Protocol Specification {#ra_rfc8205}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 8206.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1886,7 +2073,7 @@ Notes
 
 ### RFC 8212: Default External BGP (EBGP) Route Propagation Behavior without Policies {#ra_rfc8212}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 4271.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 4271.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1894,7 +2081,7 @@ Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 4271.
 
 ### RFC 8277: Using BGP to Bind MPLS Labels to Address Prefixes {#ra_rfc8277}
 
-Depth: deep. Errata: none (the RFC has no errata). Obsoletes: RFC 3107.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Obsoletes: RFC 3107.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1926,13 +2113,13 @@ Notes
 
 ### RFC 8326: Graceful BGP Session Shutdown {#ra_rfc8326}
 
-Depth: deep. Errata: 1 errata: 1 verified. 
+Depth: deep. Errata: 1 errata: 1 verified. Status: Proposed Standard.
 
 Nothing notable found at this depth.
 
 ### RFC 8538: Notification Message Support for BGP Graceful Restart {#ra_rfc8538}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 4724.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 4724.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -1967,13 +2154,13 @@ Notes
 
 ### RFC 8571: BGP - Link State (BGP-LS) Advertisement of IGP Traffic Engineering Performance Metric Extensions {#ra_rfc8571}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 Nothing notable found at this depth.
 
 ### RFC 8654: Extended Message Support for BGP {#ra_rfc8654}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 4271.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 4271.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -2005,7 +2192,7 @@ Notes
 
 ### RFC 8669: Segment Routing Prefix Segment Identifier Extensions for BGP {#ra_rfc8669}
 
-Depth: deep. Errata: 1 errata: 1 verified. 
+Depth: deep. Errata: 1 errata: 1 verified. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -2014,19 +2201,19 @@ Depth: deep. Errata: 1 errata: 1 verified.
 
 ### RFC 8814: Signaling Maximum SID Depth (MSD) Using the Border Gateway Protocol - Link State {#ra_rfc8814}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 Nothing notable found at this depth.
 
 ### RFC 8950: Advertising IPv4 Network Layer Reachability Information (NLRI) with an IPv6 Next Hop {#ra_rfc8950}
 
-Depth: deep. Errata: none (the RFC has no errata). Obsoletes: RFC 5549.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Obsoletes: RFC 5549.
 
 Nothing notable found at this depth.
 
 ### RFC 9003: Extended BGP Administrative Shutdown Communication {#ra_rfc9003}
 
-Depth: deep. Errata: none (the RFC has no errata). Obsoletes: RFC 8203. Updates: RFC 4486.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Obsoletes: RFC 8203. Updates: RFC 4486.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -2034,7 +2221,7 @@ Depth: deep. Errata: none (the RFC has no errata). Obsoletes: RFC 8203. Updates:
 
 ### RFC 9012: The BGP Tunnel Encapsulation Attribute {#ra_rfc9012}
 
-Depth: deep (2, 3.1, 4.3, 6, 13 read; tunnel-type specific sub-TLVs 3.2-3.7 and sections 8-11 scanned). Errata: none (the RFC has no errata). Obsoletes: RFC 5512, RFC 5566. Updates: RFC 5640.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Obsoletes: RFC 5512, RFC 5566. Updates: RFC 5640. Updated by: RFC 9830.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -2075,7 +2262,7 @@ Notes
 
 ### RFC 9015: BGP Control Plane for the Network Service Header in Service Function Chaining {#ra_rfc9015}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -2210,13 +2397,13 @@ Notes
 
 ### RFC 9072: Extended Optional Parameters Length for BGP OPEN Message {#ra_rfc9072}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 4271.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 4271.
 
 Nothing notable found at this depth.
 
 ### RFC 9085: Border Gateway Protocol - Link State (BGP-LS) Extensions for Segment Routing {#ra_rfc9085}
 
-Depth: deep. Errata: 3 errata: 3 verified. 
+Depth: deep. Errata: 3 errata: 3 verified. Status: Proposed Standard. Updated by: RFC 9356.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -2246,7 +2433,7 @@ Notes
 
 ### RFC 9086: Border Gateway Protocol - Link State (BGP-LS) Extensions for Segment Routing BGP Egress Peer Engineering {#ra_rfc9086}
 
-Depth: deep (sections 3-5 and the SID sub-TLV encodings read; manageability scanned). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -2275,21 +2462,27 @@ Notes
 
 ### RFC 9088: Signaling Entropy Label Capability and Entropy Readable Label Depth Using IS-IS {#ra_rfc9088}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 Nothing notable found at this depth.
 
 ### RFC 9104: Distribution of Traffic Engineering Extended Administrative Groups Using the Border Gateway Protocol - Link State (BGP-LS) {#ra_rfc9104}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0140 | 2 vs RFC 9552 8.2.2 | "The length value MUST be a multiple of 4. If the length is not a multiple of 4, the TLV MUST be considered malformed." | "Malformed" is not tied to an action. Under RFC 9552 8.2.2 a propagating BGP-LS speaker checks only TLV framing and does not check "the length of a fixed-length TLV", while a consumer discards a malformed TLV; whether a length not a multiple of 4 is a framing error (affecting the whole BGP-LS Attribute and hence the UPDATE) or a TLV-level semantic error (TLV ignored) is left open. | ambiguity | none: RFC has no errata |
 
+### RFC 9184: BGP Extended Community Registries Update {#ra_rfc9184}
+
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 7153, RFC 8955.
+
+Nothing notable found at this depth.
+
 ### RFC 9234: Route Leak Prevention and Detection Using Roles in UPDATE and OPEN Messages {#ra_rfc9234}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -2322,7 +2515,7 @@ Notes
 
 ### RFC 9384: A BGP Cease NOTIFICATION Subcode for Bidirectional Forwarding Detection (BFD) {#ra_rfc9384}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -2330,7 +2523,7 @@ Depth: deep. Errata: none (the RFC has no errata).
 
 ### RFC 9494: Long-Lived Graceful Restart for BGP {#ra_rfc9494}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 6368.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 6368.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -2363,7 +2556,7 @@ Notes
 
 ### RFC 9514: Border Gateway Protocol - Link State (BGP-LS) Extensions for Segment Routing over IPv6 (SRv6) {#ra_rfc9514}
 
-Depth: deep. Errata: 2 errata: 2 verified. 
+Depth: deep. Errata: 2 errata: 2 verified. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -2372,7 +2565,7 @@ Depth: deep. Errata: 2 errata: 2 verified.
 
 ### RFC 9552: Distribution of Link-State and Traffic Engineering Information Using BGP {#ra_rfc9552}
 
-Depth: deep. Errata: 2 errata: 2 verified. Obsoletes: RFC 7752, RFC 9029.
+Depth: deep. Errata: 2 errata: 2 verified. Status: Proposed Standard. Obsoletes: RFC 7752, RFC 9029.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -2479,7 +2672,7 @@ Notes
 
 ### RFC 9687: Border Gateway Protocol 4 (BGP-4) Send Hold Timer {#ra_rfc9687}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 4271.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 4271.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -2487,7 +2680,7 @@ Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 4271.
 
 ### RFC 9774: Deprecation of AS_SET and AS_CONFED_SET in BGP {#ra_rfc9774}
 
-Depth: deep. Errata: none (the RFC has no errata). Obsoletes: RFC 6472. Updates: RFC 4271, RFC 5065.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Obsoletes: RFC 6472. Updates: RFC 4271, RFC 5065.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -2515,7 +2708,7 @@ Notes
 
 ### RFC 9793: BGP Extensions for Bit Index Explicit Replication (BIER) {#ra_rfc9793}
 
-Depth: deep. Errata: 1 errata: 1 verified. 
+Depth: deep. Errata: 1 errata: 1 verified. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -2548,12 +2741,16 @@ Notes
 
 ### RFC 9830: Advertising Segment Routing Policies in BGP {#ra_rfc9830}
 
-Depth: deep (2.1, 2.4, 2.4.4, 3, 4, 5 in full; sub-TLV encodings 2.4.1-2.4.8 scanned). Errata: none (the RFC has no errata). Updates: RFC 9012.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 9012.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0150 | 5 vs RFC 9012 13 | "In case of any error detected, either at the attribute or its TLV/sub-TLV level, the "treat-as-withdraw" strategy MUST be applied." | RFC 9012 Section 13, which the same paragraph says MUST be applied, treats a malformed sub-TLV "as if it were an unrecognized sub-TLV" (ignored and propagated) and an unrecognized sub-TLV as absent. For SAFI 73 this document instead withdraws the route on any sub-TLV error, and 4.2.2 makes an unrecognized sub-TLV a reason for "not usable" (SHOULD NOT) rather than ignoring it. A speaker cannot follow both texts for a malformed RFC 9012 sub-TLV (for example a Color sub-TLV) inside an SR Policy tunnel TLV; the scope of the override (all sub-TLVs, or only those of Section 2.4) is not stated. | contradiction | none: RFC has no errata; **proposed erratum below** |
 | RA-0151 | 4.2.1 | "The SR Policy update MUST have either the NO_ADVERTISE community, at least one Route Target extended community in IPv4-address format, or both. If a router supporting this specification receives an SR Policy update with no Route Target extended communities and no NO_ADVERTISE community, the update MUST be considered to be malformed." | An update carrying Route Targets only in other formats (2-octet or 4-octet AS) and no NO_ADVERTISE fails the first sentence but not the second; whether it is malformed (treat-as-withdraw) or valid but unusable (4.2.2) is not settled. 4.2.2 also does not say whether the Local Administrator field of an IPv4-address RT must be zero for it to "match the BGP Identifier". | ambiguity | none: RFC has no errata |
+| RA-1324 | 2.1 | "A BGP UPDATE message that carries the MP_REACH_NLRI or MP_UNREACH_NLRI attribute with the SR Policy SAFI MUST also carry the BGP mandatory attributes." | RFC 4760 (Section 4) says an UPDATE that contains MP_UNREACH_NLRI is not required to carry any other path attributes, and RFC 7606 (Section 3 (d)) treats the absence of well-known mandatory attributes as an error only when the UPDATE carries reachable NLRI. Applied literally, an UPDATE that only withdraws SR Policy NLRIs (MP_UNREACH_NLRI alone, the usual encoding) violates this MUST, and a receiver could treat such a withdrawal as malformed; the text gives no error action either. | contradiction | none: RFC has no errata; **proposed erratum below** |
+| RA-1325 | 2.4.3 | "The value 0 MAY be used when the controller wants to indicate the desired SRv6 Endpoint Behavior, SID Structure, or flags without specifying the BSID. / The SRv6 Endpoint Behavior and SID Structure MUST NOT be included when the SRv6 SID has not been included." | The SRv6 Binding SID field is always present (16 octets, Length 18 or 26), so "has not been included" can only mean the value 0 that indicates no BSID; read that way the second sentence forbids exactly what the first allows (signalling the Endpoint Behavior and SID Structure without a BSID). The same "MUST NOT be included when the SRv6 SID has not been included" sentence is repeated for the Type B Segment sub-TLV (2.4.4.2.2), where the SID is mandatory and the sentence has no meaning. | contradiction | none: RFC has no errata; **proposed erratum below** |
+| RA-1326 | 2.4.3, 2.4.4.2.2, 2.4.4.2.3 | "The B-Flag, when set, indicates the presence of the "SRv6 Endpoint Behavior & SID Structure" encoding / The value MUST be 26 when the SRv6 Endpoint Behavior and SID Structure is present; else, it MUST be 18." | The presence of the 8-octet structure is signalled twice, by the B-Flag and by the Length. The document does not say what a receiver does when they disagree (B set with Length 18, or B clear with Length 26): malformed (treat-as-withdraw under Section 5), structure ignored, or structure used. Section 5 also forbids BGP from "semantic verification of such fields", which leaves open whether a flag/length mismatch is a syntactic error BGP must act on. | ambiguity | none: RFC has no errata |
+| RA-1327 | 2.4, 3, 6.9, 2.1 | "only the first instance of that TLV/sub-TLV is used: the other instances MUST be ignored and MUST NOT considered to be malformed. (2.4)" | "MUST NOT considered" lacks "be". Section 3 calls Color-Only Type 3 "Reserved for future use and SHOULD NOT be used" and requires receivers to treat it as Type 0, while the registry in 6.9 lists value 3 as "Unassigned" (assignable by Standards Action), which does not convey the receive rule. Section 2.1 requires the Color to be "non-zero", but neither 4.2.1 nor Section 5 says how a Color of 0 is handled (malformed, or passed to the SRPM). | editorial | none: RFC has no errata |
 
 Proposed erratum RA-0150 (RFC 9830, Section 5 vs RFC 9012 13; type: Technical):
 
@@ -2577,9 +2774,58 @@ Notes
    Endpoint); this document withdraws the update.
 ```
 
+Proposed erratum RA-1324 (RFC 9830, Section 2.1; type: Technical):
+
+```
+Original Text
+-------------
+   A BGP UPDATE message that carries the MP_REACH_NLRI or
+   MP_UNREACH_NLRI attribute with the SR Policy SAFI MUST also carry
+   the BGP mandatory attributes.
+
+Corrected Text
+--------------
+   A BGP UPDATE message that carries the MP_REACH_NLRI attribute
+   with the SR Policy SAFI MUST also carry the BGP well-known
+   mandatory attributes. As specified in [RFC4760], an UPDATE
+   message that carries only the MP_UNREACH_NLRI attribute is not
+   required to carry any other path attributes.
+
+Notes
+-----
+   RFC 4760 Section 4 and RFC 7606 Section 3 (d) do not require
+   well-known mandatory attributes in an UPDATE message that
+   contains only MP_UNREACH_NLRI; a receiver following this sentence
+   literally could reject SR Policy withdrawals.
+```
+
+Proposed erratum RA-1325 (RFC 9830, Section 2.4.3; type: Technical):
+
+```
+Original Text
+-------------
+   The SRv6 Endpoint Behavior and SID Structure MUST NOT be included
+   when the SRv6 SID has not been included.
+
+Corrected Text
+--------------
+   (Delete the sentence in Sections 2.4.3 and 2.4.4.2.2, or state
+   which value of the SRv6 SID field means "not included" and
+   whether the Endpoint Behavior and SID Structure may then be
+   present.)
+
+Notes
+-----
+   The SRv6 Binding SID field is fixed-size and always present; the
+   value 0 is explicitly allowed together with the Endpoint Behavior
+   and SID Structure, so the MUST NOT can only conflict with that
+   permission. In the Type B Segment sub-TLV the SID is mandatory
+   and the sentence is vacuous.
+```
+
 ### RFC 9831: Segment Type Extensions for BGP Segment Routing (SR) Policy {#ra_rfc9831}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Experimental.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -2606,7 +2852,7 @@ Notes
 
 ### RFC 10039: Interconnecting EVPN and IPVPN Domains {#ra_rfc10039}
 
-Depth: deep. Errata: 1 errata: 1 reported. 
+Depth: deep. Errata: 1 errata: 1 reported. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -2656,11 +2902,11 @@ Notes
 
 ## IS-IS, IGP TE, Segment Routing and IP FRR {#ra_isis}
 
-63 RFCs in this area (63 deep); 177 findings, 94 of them proposed errata.
+64 RFCs in this area (64 deep); 215 findings, 118 of them proposed errata.
 
 ### RFC 1142: OSI IS-IS Intra-domain Routing Protocol {#ra_rfc1142}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Historic. Obsoleted by: RFC 7142.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -2698,6 +2944,8 @@ Notes
    7.2.9, the discard threshold formula of D.1.1, and exponents
    (10.2, Table 2). The ASN.1 module contains unassigned object
    identifiers.
+   Status note: RFC 1142 is obsoleted by RFC 7142; an erratum report
+   against it may be held or rejected for that reason.
 ```
 
 Proposed erratum RA-1016 (RFC 1142, Section 7.3.15.1 a), 7.3.15.2 a), 8.2.4.1 c), 8.4.1.1 c), Security Considerations; type: Technical):
@@ -2724,6 +2972,8 @@ Notes
    at both levels (7.3.15.1, 7.3.15.2) and to point-to-point and LAN
    IIHs (8.2.4.1, 8.4.1.1). "authenticatiion" is also misspelt in
    all occurrences.
+   Status note: RFC 1142 is obsoleted by RFC 7142; an erratum report
+   against it may be held or rejected for that reason.
 ```
 
 Proposed erratum RA-1017 (RFC 1142, Section 7.3.14 e), 7.3.14 i); type: Technical):
@@ -2744,6 +2994,8 @@ Notes
    Same for item i) ("A Link State PDU received with a zero checksum
    shall be treated as if the Remaining Lifetime were 0"). Later
    texts discard such PDUs instead of purging them.
+   Status note: RFC 1142 is obsoleted by RFC 7142; an erratum report
+   against it may be held or rejected for that reason.
 ```
 
 Proposed erratum RA-1018 (RFC 1142, Section 7.3.16.3; type: Technical):
@@ -2762,6 +3014,8 @@ Notes
 -----
    RFC 3719 Section 2.1: an implementation "MUST ignore the
    following sentence from section 7.3.16.3. of ISO 10589".
+   Status note: RFC 1142 is obsoleted by RFC 7142; an erratum report
+   against it may be held or rejected for that reason.
 ```
 
 Proposed erratum RA-1019 (RFC 1142, Section 9.7, 8.2.4.2 c); type: Technical):
@@ -2783,6 +3037,8 @@ Notes
 -----
    8.2.4.2 c) 1) and 2) give the higher Source ID's system ID and
    Local Circuit ID.
+   Status note: RFC 1142 is obsoleted by RFC 7142; an erratum report
+   against it may be held or rejected for that reason.
 ```
 
 Proposed erratum RA-1020 (RFC 1142, Section 9.6, 9.9; type: Technical):
@@ -2808,6 +3064,8 @@ Notes
    Clause 9.6 (Level 2 LAN IIH, LAN ID) and clause 9.9 (Level 2 LSP,
    pseudonode Neighbour ID) both say "Level 1"; the Level 2 DIS is
    meant.
+   Status note: RFC 1142 is obsoleted by RFC 7142; an erratum report
+   against it may be held or rejected for that reason.
 ```
 
 Proposed erratum RA-1021 (RFC 1142, Section C.2.4; type: Technical):
@@ -2827,6 +3085,8 @@ Notes
 -----
    Step 1 d) 4) and Step 0 use adjacency sets; e) is inconsistent
    with them.
+   Status note: RFC 1142 is obsoleted by RFC 7142; an erratum report
+   against it may be held or rejected for that reason.
 ```
 
 Proposed erratum RA-1022 (RFC 1142, Section C.3.1; type: Technical):
@@ -2846,6 +3106,8 @@ Notes
 -----
    With splits = 2 and lastChosen = 1, the first iteration sets temp
    to 3 and reads nextHop[3]. Annex C is informative.
+   Status note: RFC 1142 is obsoleted by RFC 7142; an erratum report
+   against it may be held or rejected for that reason.
 ```
 
 Proposed erratum RA-1023 (RFC 1142, Section 7.3.15.3, 7.3.15.6, 11.2.17; type: Technical):
@@ -2865,6 +3127,8 @@ Notes
 -----
    The 1000/x per-second limits and the default of 33 imply
    milliseconds; 7.3.15.3 and 7.3.15.6 say seconds.
+   Status note: RFC 1142 is obsoleted by RFC 7142; an erratum report
+   against it may be held or rejected for that reason.
 ```
 
 Proposed erratum RA-1024 (RFC 1142, Section 7.5.1, 8.4.3, 11.2.17; type: Technical):
@@ -2883,6 +3147,8 @@ Notes
    21845 = 65535
    3 (HoldingMultiplier for ISH PDUs); LAN IIHs multiply by
    ISISHoldingMultiplier = 10.
+   Status note: RFC 1142 is obsoleted by RFC 7142; an erratum report
+   against it may be held or rejected for that reason.
 ```
 
 Proposed erratum RA-1025 (RFC 1142, Section 7.3.11, 9.8, 9.9, C.1; type: Technical):
@@ -2902,6 +3168,8 @@ Notes
    Partition Designated Level 2 IS "LENGTH ID Length"; 7.3.11 "the
    first ID Length octets". RFC 3719 4.2 later recommends 6 as the
    only interoperable value.
+   Status note: RFC 1142 is obsoleted by RFC 7142; an erratum report
+   against it may be held or rejected for that reason.
 ```
 
 Proposed erratum RA-1026 (RFC 1142, Section 8.4.1.5; type: Technical):
@@ -2929,11 +3197,13 @@ Notes
 -----
    Items c) and d) of 8.4.1.5 refer to the adjacency whose absence
    item b) requires.
+   Status note: RFC 1142 is obsoleted by RFC 7142; an erratum report
+   against it may be held or rejected for that reason.
 ```
 
 ### RFC 1195: Use of OSI IS-IS for Routing in TCP/IP and Dual Environments {#ra_rfc1195}
 
-Depth: deep. Errata: 2 errata: 2 held. 
+Depth: deep. Errata: 2 errata: 2 held. Status: Proposed Standard. Updated by: RFC 1349, RFC 5302, RFC 5304.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -2967,7 +3237,7 @@ Notes
 
 ### RFC 3358: Optional Checksums in Intermediate System to Intermediate System (ISIS) {#ra_rfc3358}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Informational.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -2975,7 +3245,7 @@ Depth: deep. Errata: none (the RFC has no errata).
 
 ### RFC 3630: Traffic Engineering (TE) Extensions to OSPF Version 2 {#ra_rfc3630}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 2370.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 2370. Updated by: RFC 4203, RFC 5786.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -3001,7 +3271,7 @@ Notes
 
 ### RFC 3719: Recommendations for Interoperable Networks using Intermediate System to Intermediate System (IS-IS) {#ra_rfc3719}
 
-Depth: deep (normative statements of 2 to 12). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Informational.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -3028,7 +3298,7 @@ Notes
 
 ### RFC 3787: Recommendations for Interoperable IP Networks using Intermediate System to Intermediate System (IS-IS) {#ra_rfc3787}
 
-Depth: deep (normative statements). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Informational.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -3037,7 +3307,7 @@ Depth: deep (normative statements). Errata: none (the RFC has no errata).
 
 ### RFC 3906: Calculating Interior Gateway Protocol (IGP) Routes Over Traffic Engineering Tunnels {#ra_rfc3906}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Informational.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -3071,7 +3341,7 @@ Notes
 
 ### RFC 4444: Management Information Base for Intermediate System to Intermediate System (IS-IS) {#ra_rfc4444}
 
-Depth: deep (only (IS-IS MIB, background). Errata: 2 errata: 1 held, 1 rejected. 
+Depth: deep. Errata: 2 errata: 1 held, 1 rejected. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -3184,7 +3454,7 @@ Notes
 
 ### RFC 5089: IS-IS Protocol Extensions for Path Computation Element (PCE) Discovery {#ra_rfc5089}
 
-Depth: deep. Errata: 2 errata: 2 held. 
+Depth: deep. Errata: 2 errata: 2 held. Status: Proposed Standard. Updated by: RFC 9353.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -3211,7 +3481,7 @@ Notes
 
 ### RFC 5120: M-ISIS: Multi Topology (MT) Routing in Intermediate System to Intermediate Systems (IS-ISs) {#ra_rfc5120}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -3242,7 +3512,7 @@ Notes
 
 ### RFC 5130: A Policy Control Mechanism in IS-IS Using Administrative Tags {#ra_rfc5130}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -3269,7 +3539,7 @@ Notes
 
 ### RFC 5286: Basic Specification for IP Fast Reroute: Loop-Free Alternates {#ra_rfc5286}
 
-Depth: deep (normative statements of 1 to 6). Errata: 1 errata: 1 verified. 
+Depth: deep. Errata: 1 errata: 1 verified. Status: Proposed Standard. Updated by: RFC 8518.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -3312,7 +3582,7 @@ Notes
 
 ### RFC 5301: Dynamic Hostname Exchange Mechanism for IS-IS {#ra_rfc5301}
 
-Depth: deep. Errata: 2 errata: 1 held, 1 rejected. Obsoletes: RFC 2763.
+Depth: deep. Errata: 2 errata: 1 held, 1 rejected. Status: Proposed Standard. Obsoletes: RFC 2763. Updated by: RFC 6232.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -3380,7 +3650,7 @@ Notes
 
 ### RFC 5302: Domain-Wide Prefix Distribution with Two-Level IS-IS {#ra_rfc5302}
 
-Depth: deep (normative statements). Errata: 3 errata: 1 verified, 2 held. Obsoletes: RFC 2966. Updates: RFC 1195.
+Depth: deep. Errata: 3 errata: 1 verified, 2 held. Status: Proposed Standard. Obsoletes: RFC 2966. Updates: RFC 1195.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -3407,7 +3677,7 @@ Notes
 
 ### RFC 5303: Three-Way Handshake for IS-IS Point-to-Point Adjacencies {#ra_rfc5303}
 
-Depth: deep. Errata: 7 errata: 2 verified, 5 held. Obsoletes: RFC 3373.
+Depth: deep. Errata: 7 errata: 2 verified, 5 held. Status: Proposed Standard. Obsoletes: RFC 3373.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -3416,20 +3686,20 @@ Depth: deep. Errata: 7 errata: 2 verified, 5 held. Obsoletes: RFC 3373.
 
 ### RFC 5304: IS-IS Cryptographic Authentication {#ra_rfc5304}
 
-Depth: deep. Errata: none (the RFC has no errata). Obsoletes: RFC 3567. Updates: RFC 1195.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Obsoletes: RFC 3567. Updates: RFC 1195. Updated by: RFC 6232, RFC 6233.
 
 Nothing notable found at this depth.
 
 ### RFC 5305: IS-IS Extensions for Traffic Engineering {#ra_rfc5305}
 
-Depth: deep. Errata: none (the RFC has no errata). Obsoletes: RFC 3784.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Obsoletes: RFC 3784. Updated by: RFC 5307, RFC 8918.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0037 | 3, 4 | "all metrics greater than or equal to MAX_PATH_METRIC SHALL be considered to have a metric of MAX_PATH_METRIC." | Section 3 (and 4) clamp a path metric at MAX_PATH_METRIC (0xFE000000), which leaves the destination reachable at that cost. ISO 10589 (C.2) drops a path whose cost exceeds MaxPathMetric, and section 4 itself says a prefix advertised with a metric above MAX_PATH_METRIC "MUST NOT be considered during the normal SPF computation". Whether a path whose sum overflows is usable (clamped) or unreachable (ISO behaviour) is therefore read both ways; RFC 5308 3 repeats the clamp for IPv6. | contradiction | none: RFC has no errata; **proposed erratum below** |
 | RA-0038 | 4 | "If a prefix is advertised with a metric larger then MAX_PATH_METRIC (0xFE000000, see paragraph 3.0), this prefix MUST NOT be considered" | "larger then" for "larger than"; "paragraph 3.0" is not a section (section 3 defines MAX_PATH_METRIC). The rule also leaves a prefix metric exactly equal to 0xFE000000 usable, unlike the 2^24 - 1 link rule, which excludes the maximum value itself. | editorial | none: RFC has no errata; **proposed erratum below** |
 | RA-0039 | 3 | "If a link is advertised with the maximum link metric (2^24 - 1), this link MUST NOT be considered during the normal SPF computation." | The exclusion applies to "the normal SPF"; whether the link is still used for TE (CSPF) and for flex-algorithm computations with a TE or delay metric is left open (RFC 9350 later answers it for flex-algo only). | ambiguity | none: RFC has no errata |
-| RA-1031 | 2, 3, 4 | "Unknown sub-TLVs are to be ignored and skipped upon receipt.  /  The 6 bits of prefix length can have the values 0-32" | Only unknown sub-TLVs are covered. The document does not say what a receiver does with a known sub-TLV whose Length differs from the fixed length in the Section 3 table (for example an Administrative Group of length 3), with a sub-TLV that overruns the sub-TLV area or the enclosing entry, or with a TLV 135 entry whose 6-bit prefix length is 33 to 63 (after which the rest of the TLV cannot be parsed). Choices range from skipping the sub-TLV to discarding the entry, the TLV or the LSP, and implementations differ in what they keep. | ambiguity | none: RFC has no errata |
+| RA-1031 | 2, 3, 4 | "Unknown sub-TLVs are to be ignored and skipped upon receipt.  /  The 6 bits of prefix length can have the values 0-32" | Only unknown sub-TLVs are covered. The document does not say what a receiver does with a known sub-TLV whose Length differs from the fixed length in the Section 3 table (for example an Administrative Group of length 3), with a sub-TLV that overruns the sub-TLV area or the enclosing entry, or with a TLV 135 entry whose 6-bit prefix length is 33 to 63 (after which the rest of the TLV cannot be parsed). Choices range from skipping the sub-TLV to discarding the entry, the TLV or the LSP, and implementations differ in what they keep. Later RFCs: RFC 8918 Sections 3.3 and 4 (updates RFC 5305) make 'Unknown sub-TLVs MUST be ignored' normative and forbid rejecting the LSP for a non-conforming TLV or sub-TLV, but give no action for a known sub-TLV of the wrong length, an overrun, or a prefix length above 32; the choice remains open. | ambiguity | none: RFC has no errata |
 | RA-1032 | 3.4, 3.5, 3.6 | "The maximum link bandwidth is encoded in 32 bits in IEEE floating point format.  The units are bytes (not bits!) per second." | "IEEE floating point format" does not name IEEE 754 single precision explicitly (it follows only from "32 bits"), and nothing says how to treat negative values, infinities or NaN, or an Unreserved Bandwidth value larger than Maximum Reservable Bandwidth. A CSPF computation that compares a NaN bandwidth gives implementation-dependent results. | ambiguity | none: RFC has no errata |
 | RA-1033 | 4.3 | "If a router implements traffic engineering, it MUST include this TLV in its LSP.  This TLV SHOULD not be included more than once in an LSP." | "SHOULD not" is in mixed case (SHOULD NOT intended). The receiver action for more than one TLV 134 (in one LSP or across the fragments of one LSP set), possibly with different addresses, is not given; "in its LSP" also leaves open in which fragment it is carried. | editorial | none: RFC has no errata; **proposed erratum below** |
 | RA-1034 | 5.2.1 | "Taking into consideration allocations specified in this document, the registry has been initialized as follows:" | The initial registry contents include code points that this document does not specify (4 Link Local/Remote Identifiers, 19 Link-attributes, 20 Link Protection Type, 21 Interface Switching Capability Descriptor, 22 Bandwidth Constraints), with no reference to the documents that define them (RFC 5307, RFC 4124 and others). A reader cannot find the definitions from this document, and the introductory sentence says the table reflects "allocations specified in this document". | editorial | none: RFC has no errata |
@@ -3501,7 +3771,7 @@ Notes
 
 ### RFC 5306: Restart Signaling for IS-IS {#ra_rfc5306}
 
-Depth: deep. Errata: none (the RFC has no errata). Obsoletes: RFC 3847.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Obsoletes: RFC 3847. Obsoleted by: RFC 8706.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -3526,6 +3796,8 @@ Notes
 -----
    Same wording as the rest of 3.4.1.1 and Table 4.2 ("LSP DB Sync:
    Cancel T2 ... Trigger SPF").
+   Status note: RFC 5306 is obsoleted by RFC 8706; an erratum report
+   against it may be held or rejected for that reason.
 ```
 
 Proposed erratum RA-0524 (RFC 5306, Section 4.3; type: Technical):
@@ -3542,6 +3814,8 @@ Corrected Text
 Notes
 -----
    Also add "Goto Running" to the "LSP DB Sync" row of Table 4.3.
+   Status note: RFC 5306 is obsoleted by RFC 8706; an erratum report
+   against it may be held or rejected for that reason.
 ```
 
 Proposed erratum RA-0525 (RFC 5306, Section 3.1; type: Editorial):
@@ -3560,11 +3834,13 @@ Notes
 -----
    Also 3.4.1.1 O: a Designated Router change C: a Designated
    Intermediate System (DIS) change.
+   Status note: RFC 5306 is obsoleted by RFC 8706; an erratum report
+   against it may be held or rejected for that reason.
 ```
 
 ### RFC 5307: IS-IS Extensions in Support of Generalized Multi-Protocol Label Switching (GMPLS) {#ra_rfc5307}
 
-Depth: deep (normative statements). Errata: 4 errata: 2 verified, 2 held. Obsoletes: RFC 4205. Updates: RFC 5305.
+Depth: deep. Errata: 4 errata: 2 verified, 2 held. Status: Proposed Standard. Obsoletes: RFC 4205. Updates: RFC 5305. Updated by: RFC 6001, RFC 6002, RFC 7074.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -3590,13 +3866,13 @@ Notes
 
 ### RFC 5308: Routing IPv6 with IS-IS {#ra_rfc5308}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 7775.
 
-Resolved by a later RFC (kept for reference; not counted as open findings):
+Resolved by a later RFC or re-targeted to its successor (kept for reference; not counted as open findings):
 
-| ID | Section | Issue as found | Resolution |
-|---|---|---|---|
-| RA-0529 | 5 | In a two-level domain the up/down bit is never set in Level 2 LSPs (RFC 5302 3.1, RFC 5305 4.1), so "Level 2 down prefix" can only arise from a future multi-level extension or a misbehaving router; | RFC 7775 (updates RFC 5308), Sections 2 and 3.4: 'Level 2 down prefix' is withdrawn as an error and the preference order for TLVs 236 and 237 is restated, with internal and external routes of a level treated equally. |
+| ID | Section | Issue as found | Outcome | Resolution |
+|---|---|---|---|---|
+| RA-0529 | 5 | In a two-level domain the up/down bit is never set in Level 2 LSPs (RFC 5302 3.1, RFC 5305 4.1), so "Level 2 down prefix" can only arise from a future multi-level extension or a misbehaving router; | Resolved | RFC 7775 (updates RFC 5308), Sections 2 and 3.4: 'Level 2 down prefix' is withdrawn as an error and the preference order for TLVs 236 and 237 is restated, with internal and external routes of a level treated equally. |
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -3640,7 +3916,7 @@ Notes
 
 ### RFC 5310: IS-IS Generic Cryptographic Authentication {#ra_rfc5310}
 
-Depth: deep. Errata: 2 errata: 2 rejected. 
+Depth: deep. Errata: 2 errata: 2 rejected. Status: Proposed Standard. Updated by: RFC 6232, RFC 6233.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -3744,7 +4020,7 @@ Notes
 
 ### RFC 5311: Simplified Extension of Link State PDU (LSP) Space for IS-IS {#ra_rfc5311}
 
-Depth: deep (normative statements). Errata: none (the RFC has no errata). Obsoletes: RFC 3786.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Obsoletes: RFC 3786.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -3789,14 +4065,14 @@ Notes
 
 ### RFC 5316: ISIS Extensions in Support of Inter-Autonomous System (AS) MPLS and GMPLS Traffic Engineering {#ra_rfc5316}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Obsoleted by: RFC 9346.
 
-Resolved by a later RFC (kept for reference; not counted as open findings):
+Resolved by a later RFC or re-targeted to its successor (kept for reference; not counted as open findings):
 
-| ID | Section | Issue as found | Resolution |
-|---|---|---|---|
-| RA-0533 | 3.3.5 | An IPv6 TE Router ID is 16 octets; | RFC 9346 (obsoletes RFC 5316), Section 3.5.2: the IPv6 TE Router ID sub-TLV is 16 octets. |
-| RA-0535 | 3.3.2 | The remote ASBR ID sub-TLVs are defined for the inter-AS reachability TLV (141); | RFC 9346 (obsoletes RFC 5316), Sections 3.5.1 and 3.5.2: the TE Router ID sub-TLVs 'MAY both be present in an IS-IS Router CAPABILITY TLV'; the sentence is corrected. |
+| ID | Section | Issue as found | Outcome | Resolution |
+|---|---|---|---|---|
+| RA-0533 | 3.3.5 | An IPv6 TE Router ID is 16 octets; | Resolved | RFC 9346 (obsoletes RFC 5316), Section 3.5.2: the IPv6 TE Router ID sub-TLV is 16 octets. |
+| RA-0535 | 3.3.2 | The remote ASBR ID sub-TLVs are defined for the inter-AS reachability TLV (141); | Resolved | RFC 9346 (obsoletes RFC 5316), Sections 3.5.1 and 3.5.2: the TE Router ID sub-TLVs 'MAY both be present in an IS-IS Router CAPABILITY TLV'; the sentence is corrected. |
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -3818,6 +4094,8 @@ Corrected Text
 Notes
 -----
    Figures only; the text in 3.1 is correct.
+   Status note: RFC 5316 is obsoleted by RFC 9346; an erratum report
+   against it may be held or rejected for that reason.
 ```
 
 Proposed erratum RA-0536 (RFC 5316, Section 4; type: Technical):
@@ -3839,15 +4117,21 @@ Notes
    Also "emit LSAs" earlier in Section 4 should read "advertise TE
    link information in their LSPs"; 6.2 "adverting" should be
    "advertising".
+   Status note: RFC 5316 is obsoleted by RFC 9346; an erratum report
+   against it may be held or rejected for that reason.
 ```
 
 ### RFC 6119: IPv6 Traffic Engineering in IS-IS {#ra_rfc6119}
 
-Depth: deep (4 in full). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0157 | 4.3 | "Implementations MUST NOT inject a /128 prefix for the interface address into their routing or forwarding table" | Section 4.3 defines the IPv6 Neighbor Address sub-TLV, but the sentence (copied from 4.2) speaks of "the interface address"; the neighbour address is meant. | editorial | none: RFC has no errata; **proposed erratum below** |
+| RA-1328 | 3.2.3, 4.3, 4.5 | "The IPv6 Global Interface Address TLV is included in IIH PDUs for those interfaces using IPv6 TE extensions. / it MUST include this sub-TLV for point-to-point links" | Section 4.3 makes the IPv6 Neighbor Address sub-TLV mandatory on numbered point-to-point links, and Section 3.2.3 says the only source for its value is the neighbour's IPv6 Global Interface Address TLV (233) in IIHs, because TLV 232 in IIHs holds link-local addresses. Section 4.5 states the inclusion of TLV 233 descriptively, with no requirement keyword, so a neighbour that implements IPv6 TE may omit it and leave the MUST of 4.3 impossible to meet. When TLV 233 lists several addresses, the text does not say which one (or whether all, since the sub-TLV "can occur multiple times") goes into the Neighbor Address sub-TLV, nor what a router does when the neighbour's TLV 233 is absent (omit the sub-TLV, or take an address from the neighbour's TLV 232 in its LSP, which is not tied to the link). | ambiguity | none: RFC has no errata; **proposed erratum below** |
+| RA-1329 | 4.4 | "There MUST NOT be more than one IPv6 SRLG TLV for a given link." | An IS-IS TLV value holds at most 255 octets. With the fixed part of 24 octets (40 with the neighbour address), one IPv6 SRLG TLV can carry at most 57 SRLG values (53 with NA set). Because a link may have only one TLV 139, a link with more SRLGs than that cannot be described at all, while the IPv4 SRLG TLV 138 "MAY occur more than once" (RFC 5307 1.4) with no per-link limit. The text does not say whether the sender truncates, omits the TLV, or may in that case use several TLVs, nor how a receiver treats a second TLV for the same link. | ambiguity | none: RFC has no errata |
+| RA-1330 | 4.4, 7 | "If both an SRLG TLV and an IPv6 SRLG are received describing the SRLGs for the same link, the receiver MUST apply the SRLG TLV and ignore the IPv6 SRLG TLV." | TLV 138 names a link by IPv4 addresses or link identifiers and TLV 139 by IPv6 addresses; neither carries anything the other does, so a receiver can only tell that both describe "the same link" by finding one Extended IS Reachability entry that has both the IPv4 and the IPv6 interface address sub-TLVs, which the text does not state. Neither SRLG TLV carries a topology identifier, although Section 7 registers sub-TLVs 12 and 13 for TLV 222 (multi-topology), so SRLGs of a link that appears only in a non-zero topology cannot be associated unambiguously. | ambiguity | none: RFC has no errata |
+| RA-1331 | 4.1 | "This TLV MUST NOT be included more than once in an LSP." | The restriction applies to "an LSP", so a router could place TLV 140 in two fragments of its LSP set with different addresses; the receive behaviour for more than one IPv6 TE Router ID (from one LSP or across fragments) is not given. RFC 5305 4.3 states the same restriction for the IPv4 TE Router ID with SHOULD. | ambiguity | none: RFC has no errata |
 
 Proposed erratum RA-0157 (RFC 6119, Section 4.3; type: Editorial):
 
@@ -3868,9 +4152,39 @@ Notes
    Neighbor Address sub-TLV (type 13).
 ```
 
+Proposed erratum RA-1328 (RFC 6119, Section 3.2.3, 4.3, 4.5; type: Technical):
+
+```
+Original Text
+-------------
+   The IPv6 Global Interface Address TLV is TLV type 233.  The TLV
+   structure is identical to that of the IPv6 Interface Address TLV
+   defined in [IPv6], but the semantics are different.  In
+   particular, the TLV is included in IIH PDUs for those interfaces
+   using IPv6 TE extensions.
+
+Corrected Text
+--------------
+   The IPv6 Global Interface Address TLV is TLV type 233.  The TLV
+   structure is identical to that of the IPv6 Interface Address TLV
+   defined in [IPv6], but the semantics are different.  A router
+   that implements IPv6 traffic engineering MUST include this TLV in
+   the IIH PDUs it sends on numbered point-to-point interfaces using
+   IPv6 TE extensions.  A router constructing the IPv6 Neighbor
+   Address sub-TLV includes one sub-TLV for each address in the
+   neighbor's TLV.
+
+Notes
+-----
+   Without the neighbour's global address the MUST of Section 4.3
+   cannot be met; Section 3.2.3 excludes TLV 232 from IIHs as a
+   source. The choice among several addresses (one sub-TLV per
+   address, or one chosen address) also needs to be stated.
+```
+
 ### RFC 6213: IS-IS BFD-Enabled TLV {#ra_rfc6213}
 
-Depth: deep (read in full). Errata: none (the RFC has no errata). 
+Depth: deep (read in full). Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -3905,15 +4219,15 @@ Notes
 
 ### RFC 6232: Purge Originator Identification TLV for IS-IS {#ra_rfc6232}
 
-Depth: deep (read in full). Errata: none (the RFC has no errata). Updates: RFC 5301, RFC 5304, RFC 5310.
+Depth: deep (read in full). Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 5301, RFC 5304, RFC 5310. Updated by: RFC 8918.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
-| RA-0159 | 5, 3 | "all implementations in a domain implementing authentication MUST be upgraded to receive the POI TLV before any IS is allowed to generate a purge with the POI TLV." | RFC 6233 Section 3 (published together, not marked as updating this document) says that an implementation that implements authentication generates a purge by removing non-purge TLVs and "The POI TLV MUST be added", while Section 3 here makes it a SHOULD. An upgraded authenticating IS is thus required to add the POI TLV (RFC 6233) and forbidden to send it until every IS in the domain is upgraded (this section); neither document says which rule wins during migration, and there is no configuration knob in either. | contradiction | none: RFC has no errata |
+| RA-0159 | 5, 3 | "all implementations in a domain implementing authentication MUST be upgraded to receive the POI TLV before any IS is allowed to generate a purge with the POI TLV." | RFC 6233 Section 3 (published together, not marked as updating this document) says that an implementation that implements authentication generates a purge by removing non-purge TLVs and "The POI TLV MUST be added", while Section 3 here makes it a SHOULD. An upgraded authenticating IS is thus required to add the POI TLV (RFC 6233) and forbidden to send it until every IS in the domain is upgraded (this section); neither document says which rule wins during migration, and there is no configuration knob in either. Later RFCs: RFC 8918 Section 3.2 (updates RFC 6232) says the extensions can only be enabled safely when all nodes support them and recommends an enablement control, which sides with RFC 6232; RFC 6233 is not updated, so the conflict remains in the text. | contradiction | none: RFC has no errata |
 
 ### RFC 6233: IS-IS Registry Extension for Purges {#ra_rfc6233}
 
-Depth: deep (read in full). Errata: none (the RFC has no errata). Updates: RFC 3563, RFC 5304, RFC 5310.
+Depth: deep (read in full). Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 3563, RFC 5304, RFC 5310.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -3921,7 +4235,7 @@ Depth: deep (read in full). Errata: none (the RFC has no errata). Updates: RFC 3
 
 ### RFC 7308: Extended Administrative Groups in MPLS Traffic Engineering (MPLS-TE) {#ra_rfc7308}
 
-Depth: deep (read in full). Errata: none (the RFC has no errata). 
+Depth: deep (read in full). Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -3953,12 +4267,17 @@ Notes
 
 ### RFC 7490: Remote Loop-Free Alternate (LFA) Fast Reroute (FRR) {#ra_rfc7490}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0162 | 5.2.1.2, 5.3 | "In cost terms, a router (P) is in extended P-space if the shortest path cost N->P is strictly less than the shortest path cost N->S->E->P. / if ( D_opt(n, y) < D_opt(n,self) + D_opt(self, y))" | The prose condition is link-specific (N's path to P must avoid S->E), while the pseudocode applies RFC 5286 Inequality 1 (N's path to P must avoid S altogether), which never refers to the failed link. The pseudocode result is a strict subset of the prose set: a node P reached from N through S but not over S-E is in extended P-space by the text and excluded by the code. Implementations following one or the other compute different PQ sets. | contradiction | none: RFC has no errata; **proposed erratum below** |
 | RA-0163 | 5.2.2, 5.3 | "it is RECOMMENDED that the member of the set of routers {PQ} with the lowest cost S->P be the default choice for P." | For a PQ node found only through extended P-space, S's shortest path to P crosses S-E by definition, so "cost S->P" is either that pre-failure cost (which the repair does not follow) or the cost of the repair path S->N->P; the text does not say which, and the tie-breaker "lowest node identifier" does not say which identifier (system ID, router ID, TE router ID). Apply_Downstream_Constraint() uses "dest", which is not defined in the per-link main function. | ambiguity | none: RFC has no errata |
+| RA-1332 | 8 | "S will need to swap the top label in the stack for the remote LFA repair target's (PQ's) label to the destination and to then push its own label for the remote LFA repair target." | Figure 4 (stack Z) and the next paragraph show the pushed outer label as "A's label for C", i.e. the label that S's first-hop neighbour on the path to the PQ node advertised for the PQ node, as Section 4.2 also says ("the outer label is S's neighbor's label for the repair tunnel endpoint"). A label "of its own" (S's) for the PQ node would be the label S advertises upstream and would not be understood by the first hop. Read literally, the sentence describes an unusable label stack. | error | none: RFC has no errata; **proposed erratum below** |
+| RA-1333 | 5.4 | "the PLR MUST NOT use a repair tunnel path whose first hop is along a link that has a cost or reverse cost equal to MaxLinkMetric (for OSPF) or the maximum cost (for IS-IS)" | "The maximum cost (for IS-IS)" is not defined. With wide metrics, a link advertised at 2^24 - 1 is already excluded from the SPF (RFC 5305 3), so the rule can only be meant for 2^24 - 2 (the highest usable value, the conventional "costed out" value), or for 63 with narrow metrics; the text (copied from RFC 5286 3.5) names none. Item 2 gives an OSPF test for a costed-out repair tunnel endpoint ("all outgoing interfaces have the cost set to MaxLinkMetric") but no IS-IS equivalent besides the overload bit, so an IS-IS PQ node whose links are all costed out is not excluded. | ambiguity | none: RFC has no errata |
+| RA-1334 | 8 | "In the absence of a protocol to learn the preferred IP address for targeted LDP, an LSR should attempt a targeted LDP session with the Router ID [RFC2328] [RFC5305] [RFC5340] [RFC6119] [OSPF-RI] unless it is configured otherwise." | IS-IS has no "Router ID" other than the TE Router ID of RFC 5305 / RFC 6119 (and the IPv4 / IPv6 router IDs of the Router Capability TLV, RFC 7981), and the OSPF Router ID of RFC 2328 / RFC 5340 is a 32-bit identifier that need not be a reachable address (and is not an IPv6 address at all for OSPFv3). Which identifier is meant, and what to do when the PQ node advertises none or both families, is left open. | ambiguity | none: RFC has no errata |
+| RA-1335 | 5.2.1.3, 5.3 | "the set of routers {Q} are those for which the shortest path cost Q<-E is strictly less than the shortest path cost Q<-S<-E. / if ( D_opt(y,fail_intf.remote_node) < D_opt(y,self) + D_opt(self,fail_intf.remote_node) )" | The Q-space counterpart of the P-space point already recorded for 5.2.1.2: the prose and the definition in Section 2 exclude nodes whose path to E would use the link S-E, while Compute_Q_Space() excludes every node whose shortest path to E passes through S at all, and uses D_opt(self, E), which equals the cost of the link S-E only when that link is on S's shortest path to E. With parallel links between S and E, or when S's shortest path to E does not use S-E, the two give different Q-spaces. | contradiction | none: RFC has no errata |
+| RA-1336 | 9.3, 5.2 | "D has one session (to node D). / The repair tunneled point MUST be reachable from the tunnel source without traversing the failed link" | In the session-counting example of 9.3 (sessions A->B, A->C, C->A, C->D) node D's one session is to node C, not to itself. In 5.2 "repair tunneled point" stands for "repair tunnel endpoint", the term used everywhere else. | editorial | none: RFC has no errata; **proposed erratum below** |
 
 Proposed erratum RA-0162 (RFC 7490, Section 5.2.1.2, 5.3; type: Technical):
 
@@ -3980,9 +4299,49 @@ Notes
    to P crosses S-E.
 ```
 
+Proposed erratum RA-1332 (RFC 7490, Section 8; type: Technical):
+
+```
+Original Text
+-------------
+   S will need to swap the top label in the stack for the remote LFA
+   repair target's (PQ's) label to the destination and to then push
+   its own label for the remote LFA repair target.
+
+Corrected Text
+--------------
+   S will need to swap the top label in the stack for the remote LFA
+   repair target's (PQ's) label to the destination and to then push
+   the label that its next hop towards the remote LFA repair target
+   has advertised for the remote LFA repair target.
+
+Notes
+-----
+   Section 4.2: "the outer label is S's neighbor's label for the
+   repair tunnel endpoint, and the inner label is the repair tunnel
+   endpoint's label for the packet destination".
+```
+
+Proposed erratum RA-1336 (RFC 7490, Section 9.3, 5.2; type: Editorial):
+
+```
+Original Text
+-------------
+   D has one session (to node D).
+
+Corrected Text
+--------------
+   D has one session (to node C).
+
+Notes
+-----
+   The 5.2 wording "repair tunneled point" should read "repair
+   tunnel endpoint".
+```
+
 ### RFC 7775: IS-IS Route Preference for Extended IP and IPv6 Reachability {#ra_rfc7775}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 5308.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 5308.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -4013,7 +4372,7 @@ Notes
 
 ### RFC 7794: IS-IS Prefix Attributes for Extended IPv4 and IPv6 Reachability {#ra_rfc7794}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -4042,7 +4401,7 @@ Notes
 
 ### RFC 7811: An Algorithm for Computing IP/LDP Fast Reroute Using Maximally Redundant Trees (MRT-FRR) {#ra_rfc7811}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -4177,7 +4536,7 @@ Notes
 
 ### RFC 7812: An Architecture for IP/LDP Fast Reroute Using Maximally Redundant Trees (MRT-FRR) {#ra_rfc7812}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -4206,21 +4565,42 @@ Notes
 
 ### RFC 7981: IS-IS Extensions for Advertising Router Information {#ra_rfc7981}
 
-Depth: deep. Errata: none (the RFC has no errata). Obsoletes: RFC 4971.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Obsoletes: RFC 4971.
 
 Nothing notable found at this depth.
 
 ### RFC 8102: Remote-LFA Node Protection and Manageability {#ra_rfc8102}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0168 | 2.2.1, 2.2.6.1 | "the set of routers that are reachable from one or more direct neighbors of S, except primary node E, without traversing the S-E link on any of the shortest paths / D_opt(Ni,Y) < D_opt(Ni,S) + D_opt(S,Y)" | As in RFC 7490 (5.2.1.2 versus 5.3), the formal definition excludes only paths over the link S-E, while the "cost-based definition" excludes every path through S, a strictly smaller set; the section says the cost form defines the same set ("refer to Section 2.2.6.1"). Section 2.3.1 also says the needed metrics come from "the forward SPFs rooted at each of direct neighbor S", and Figure 6 mixes "D_opt" and "Distance_opt". | contradiction | none: RFC has no errata |
+| RA-1337 | 2.3.2, 2.3.1 | "\|      D2     \|     E      \|    2    \|   2    \|    1    \|    Yes    \| / \|             \|            \| (R2,D2) \| (R2,E) \|  (E,D2) \|           \|" | In Topology 2 (Figure 2, all links cost 1) the only paths from E to D2 go through R3 (E->R3->D2), so D_opt(E,D2) is 2, not 1 as printed in Table 5; the "Condition Met" result (2 < 2 + 2) is unchanged. Two related slips in the same sections: the header of Table 6 says "Shortest Path (Repairing router to PQ-node)" while its rows are paths from the PQ-node R2 to each destination; and the sentence after Table 4 concludes that R2 is not node-protecting "for E and D1, since the primary next hop E is on the shortest path from R2 to E and D1", which Table 4 (paths from S to the PQ-node) cannot show (it is the conclusion of Tables 5 and 6). | editorial | none: RFC has no errata; **proposed erratum below** |
+
+Proposed erratum RA-1337 (RFC 8102, Section 2.3.2, 2.3.1; type: Editorial):
+
+```
+Original Text
+-------------
+   |      D2     |     E      |    2    |   2    |    1    |    Yes
+     |
+
+Corrected Text
+--------------
+   |      D2     |     E      |    2    |   2    |    2    |    Yes
+     |
+
+Notes
+-----
+   Table 6 header should read "Shortest Path (PQ-node to
+   Destination)". The paragraph after Table 4 repeats the conclusion
+   of Section 2.3.2.
+```
 
 ### RFC 8202: IS-IS Multi-Instance {#ra_rfc8202}
 
-Depth: deep. Errata: none (the RFC has no errata). Obsoletes: RFC 6822.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Obsoletes: RFC 6822.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -4250,11 +4630,12 @@ Notes
 
 ### RFC 8333: Micro-loop Prevention by Introducing a Local Convergence Delay {#ra_rfc8333}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0170 | 5.4 | "If the condition of a single local link-down event has been met, then an update of the RIB and the FIB MUST be delayed for ULOOP_DELAY_DOWN_TIMER ms. / Hence, it SHOULD only be done for a non-urgent convergence, such as administrative deactivation (maintenance) or when the traffic is protected by FRR." | Step 5 makes the delay mandatory for every single local link-down, while the next paragraph says it should only be applied when the failure is non-urgent or FRR-protected. For an unprotected destination behind the failed link, the MUST keeps the old (failed) forwarding entry for ULOOP_DELAY_DOWN_TIMER (typically seconds), which black-holes traffic. The condition (protection available per destination) belongs in the MUST. In Section 6.2 "its forwarding entry to F is updated" should read "to K" (the example's destination). | contradiction | none: RFC has no errata; **proposed erratum below** |
+| RA-1338 | 9.3 | "\|            \| t0+312 \|  E receives LSP/LSA  \|                      \| / \|            \| t0+313 \| E schedules SPF (200 \|                      \|" | In Table 6 the rows "E receives LSP/LSA from F and floods it" (t0+312 ms) and "E schedules SPF (200 ms)" (t0+313 ms) are placed in the "Router C Events" column; they are router E's events (E then "computes SPF" at t0+514 ms in its own column). As printed, the table shows C receiving F's LSP twice and scheduling two SPFs, which obscures the abort sequence the section illustrates (the new convergence that stops ULOOP_DELAY_DOWN_TIMER). | editorial | none: RFC has no errata; **proposed erratum below** |
 
 Proposed erratum RA-0170 (RFC 8333, Section 5.4; type: Technical):
 
@@ -4278,9 +4659,27 @@ Notes
    whole delay.
 ```
 
+Proposed erratum RA-1338 (RFC 8333, Section 9.3; type: Editorial):
+
+```
+Original Text
+-------------
+   | t0+312 |  E receives LSP/LSA  |                      | (Router
+   C Events column)
+
+Corrected Text
+--------------
+   | t0+312 |                      |  E receives LSP/LSA  | (Router
+   E Events column; likewise t0+313 "E schedules SPF (200 ms)")
+
+Notes
+-----
+   Rows t0+312 ms and t0+313 ms of Table 6 (Section 9.3).
+```
+
 ### RFC 8402: Segment Routing Architecture {#ra_rfc8402}
 
-Depth: deep. Errata: 2 errata: 1 verified, 1 rejected. 
+Depth: deep. Errata: 2 errata: 1 verified, 1 rejected. Status: Proposed Standard. Updated by: RFC 9256.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -4310,7 +4709,7 @@ Notes
 
 ### RFC 8405: Shortest Path First (SPF) Back-Off Delay Algorithm for Link-State IGPs {#ra_rfc8405}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -4340,7 +4739,7 @@ Notes
 
 ### RFC 8491: Signaling Maximum SID Depth (MSD) Using IS-IS {#ra_rfc8491}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -4348,7 +4747,7 @@ Depth: deep. Errata: none (the RFC has no errata).
 
 ### RFC 8518: Selection of Loop-Free Alternates for Multi-Homed Prefixes {#ra_rfc8518}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 5286.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 5286.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -4436,7 +4835,7 @@ Notes
 
 ### RFC 8570: IS-IS Traffic Engineering (TE) Metric Extensions {#ra_rfc8570}
 
-Depth: deep. Errata: none (the RFC has no errata). Obsoletes: RFC 7810.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Obsoletes: RFC 7810.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -4444,6 +4843,10 @@ Depth: deep. Errata: none (the RFC has no errata). Obsoletes: RFC 7810.
 | RA-0174 | 4.6, Appendix A | "For a bundled link, available bandwidth is defined to be the sum of the component link available bandwidths. / it used "sum of the component link available bandwidths" when it should have used "sum of the component link residual bandwidths".  This has been corrected and clarified." | Appendix A states that the definition criticised in erratum 5486 against RFC 7810 has been corrected, but Section 4.6 still carries the RFC 7810 wording verbatim. Either the correction was lost during editing or the appendix is wrong; an implementer cannot tell which definition is intended for bundles (and "sum of the component link residual bandwidths" would equal the residual bandwidth of Section 4.5, which suggests the appendix wording is not right either). | contradiction | none: RFC has no errata; **proposed erratum below** |
 | RA-0175 | 4.4 | "The basic unit is 0.000003%, where (2^24 - 2) is 50.331642%.  This value is the highest packet-loss percentage that can be expressed" | The 24-bit field can hold 2^24 - 1, but the text names 2^24 - 2 as the highest expressible value without saying whether 2^24 - 1 is reserved, invalid or simply also "at least" 50.331642%. Implementations clamping to 2^24 - 1 and to 2^24 - 2 coexist; a receiver does not know how to treat 2^24 - 1. | ambiguity | none: RFC has no errata |
 | RA-0176 | 3 | "However, as for the TE case, Interface Address and Neighbor Address sub-TLVs (IPv4 or IPv6) MUST be present." | Unnumbered links have no interface or neighbor address and are identified by Link Local/Remote Identifiers (RFC 5307 sub-TLV 4), and links to a pseudonode have no single neighbor address. Read literally, the MUST forbids TE Metric Extensions on such links. Section 4.3 also defines delay variation as "the delay from the local neighbor to the remote neighbor (i.e., the forward-path latency)", a copy of the delay sentence. | ambiguity | none: RFC has no errata |
+| RA-1339 | 2, 5 | "All values (except residual bandwidth) MUST be calculated as rolling averages, where the averaging period MUST be a configurable period of time. / The values advertised in all sub-TLVs (except minimum/maximum delay and residual bandwidth) MUST represent an average" | Section 2 requires every value except residual bandwidth, including the minimum and maximum delay of sub-TLV 34, to be a rolling average. Section 5 exempts minimum / maximum delay from averaging and requires them to be the lowest / highest value of the interval (or a filtered representation of them), and it allows any filter "reasonably representative of an average" rather than a rolling average only. A minimum that is a rolling average is not a minimum, so the two MUSTs cannot both be met for sub-TLV 34. | contradiction | none: RFC has no errata; **proposed erratum below** |
+| RA-1340 | 4.3, 4.1, 4.2 | "Delay Variation:  This 24-bit field carries the average link delay variation over a configurable interval in microseconds, encoded as an integer value.  When set to 0, it has not been measured." | Zero is given the meaning "not measured", but zero (below one microsecond after rounding) is also a legitimate measured delay variation on a short, lightly loaded link, so a measured value of 0 cannot be expressed, and the text does not say what a sender with a measured 0 sends (1, or omit the sub-TLV) nor how a receiver treats 0 in path computation (unknown, or no variation). The delay sub-TLVs (4.1, 4.2) give no such meaning to 0, so a measured 0 delay is a value there; the reason for the asymmetry is not stated, and an implementation sending "not measured" would rather omit the sub-TLV (Section 8 lets each sub-TLV be disabled). | ambiguity | none: RFC has no errata |
+| RA-1341 | 2, 12 | "This document registers new IS-IS TE sub-TLVs in the "Sub-TLVs for TLVs 22, 23, 141, 222, and 223" registry. / have nested sub-TLVs that permit the TLVs to be readily extended." | The registry covers TLVs 22, 23, 141, 222 and 223, but Section 2 names only TLVs 22, 141 and 222 as carriers, and Section 12 registers sub-TLVs 33 to 39 without the per-TLV applicability columns that registry has. Whether the sub-TLVs may appear in TLVs 23 and 223 (IS Neighbor Attribute, RFC 5311) is not stated. | ambiguity | none: RFC has no errata |
+| RA-1342 | 4.5, 4.6, 4.7 | "MUST be the residual bandwidth from the system originating the Link State Advertisement (LSA) to its neighbor. / MUST be the available bandwidth from the system originating this sub-TLV." | Section 4.5 uses the OSPF term "Link State Advertisement (LSA)" where IS-IS has Link State PDUs (copied from RFC 7471). Sections 4.6 and 4.7 state the direction only as "from the system originating this sub-TLV", without the "to its neighbor" that 4.5 has, so the direction of the advertised bandwidth is only implied. | editorial | none: RFC has no errata; **proposed erratum below** |
 
 Proposed erratum RA-0174 (RFC 8570, Section 4.6, Appendix A; type: Technical):
 
@@ -4469,17 +4872,101 @@ Notes
    bandwidth for bundles.
 ```
 
+Proposed erratum RA-1339 (RFC 8570, Section 2, 5; type: Technical):
+
+```
+Original Text
+-------------
+   All values (except residual bandwidth) MUST be calculated as
+   rolling averages, where the averaging period MUST be a
+   configurable period of time.  See Section 5 for more information.
+
+Corrected Text
+--------------
+   All values (except minimum/maximum delay and residual bandwidth)
+   MUST be calculated as averages over a configurable period of time
+   (for example, rolling averages); minimum and maximum delay are
+   derived as described in Section 5.  See Section 5 for more
+   information.
+
+Notes
+-----
+   Text carried over from RFC 7810 Section 2; Section 5 is the more
+   specific rule.
+```
+
+Proposed erratum RA-1342 (RFC 8570, Section 4.5, 4.6, 4.7; type: Editorial):
+
+```
+Original Text
+-------------
+   MUST be the residual bandwidth from the system originating the
+   Link State Advertisement (LSA) to its neighbor.
+
+Corrected Text
+--------------
+   MUST be the residual bandwidth from the system originating the
+   Link State PDU (LSP) to its neighbor.
+
+Notes
+-----
+   In 4.6 and 4.7 "from the system originating this sub-TLV to its
+   neighbor" would match 4.5.
+```
+
 ### RFC 8660: Segment Routing with the MPLS Data Plane {#ra_rfc8660}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0177 | 2.5.1, 2.6 | "the ingress node MUST resolve this collision by using this same "Incoming Label Collision resolution procedure" and by using the data of the receiving node. / All FEC types, except for the SR Policy, are ordered using the default administrative distance defined by the implementation." | Section 2.6 requires an ingress to reproduce the receiving node's collision resolution, but step 1 of the tiebreak (Section 2.5.1) depends on administrative distances that, for dynamically assigned SIDs, are "defined by the implementation" and are not advertised, and the routing-instance identifier used in the FEC encoding may be derived from local configuration. An ingress therefore cannot in general compute the receiving node's winner from IGP data, so the MUST of 2.6 is not implementable when the two routers run different implementations (Section 2.5.1 only requires the same tiebreaking rules, not the same administrative distances). | ambiguity | none: RFC has no errata |
+| RA-1343 | 2.5.1, A.2.7 | "(Prefix, Routing Instance, Topology, Algorithm) is encoded as (Prefix Length, Prefix, routing_instance_id, Topology, SR Algorithm). / FEC1 has prefix length=32, and FEC2 has prefix length=30, so FEC2 wins." | Because the prefix length is the most significant field and the smallest numerical value wins, a colliding less specific prefix always beats a more specific one (A.2.7: the /30 beats the /32). This is the opposite of the longest-match intuition an implementer brings from IP forwarding, and the normative text of 2.5.1 never states it; it is visible only by working through the encoding or the informative example. Because 2.6 requires an ingress to reproduce the receiving node's choice, an implementation that prefers the longer prefix installs outgoing labels for the FEC that lost at the receiving node, which is the misforwarding 2.6 is meant to prevent. | ambiguity | none: RFC has no errata |
+| RA-1344 | 2.5, 2.5.1 | "An implementation MUST NOT allow the MCCs belonging to the same router to assign the same incoming label to more than one SR FEC. (2.5) / Explicit SID assignment to a FEC that maps to a label outside the SRGB irrespective of the owner MCC. (2.5.1)" | (1) Section 2.5 forbids MCCs on one router from assigning one label to more than one FEC, yet step 3 of the procedure and Examples A.2.1, A.2.2 and A.2.9 resolve exactly that case (OSPF and IS-IS, or two IS-IS instances, on Node A deriving label 1005 / 1006 / 1014). Whether the MUST NOT is a requirement on local allocation only (explicit and dynamic labels) or is met by applying the procedure is not stated. (2) The administrative distance classes are "explicit SID assignment ... outside the SRGB" and "dynamic SID assignment"; a Prefix-SID index configured on the router (static, survives a reboot, inside the SRGB) belongs to neither. (3) The FEC encoding gives widths for every field except outgoing_interface_id and the number of adjacencies of a parallel adjacency, so two implementations can order (next hop, interface) and parallel adjacency FECs differently. | ambiguity | none: RFC has no errata |
+| RA-1345 | A.2.13 | "The FEC tiebreakers match, and they have the same FEC type codepoint=140.  Thus, FEC2 wins based on the IPv4 address family being preferred over IPv6." | Both FECs of Example 13 are SR Policies (Endpoint, Color), whose FEC type codepoint in 2.5.1 is 150; 140 is the Parallel Adjacency type. | error | none: RFC has no errata; **proposed erratum below** |
+| RA-1346 | A.3.2 | "The rule described in Section 2.6 means that Node A MUST NOT install a VPN route with label stack = <S3,S4,V1> (corresponding to FEC2.)" | The route steered over FEC2 is R2, whose VPN label is V2 ("R2 with VPN label=V2, BGP next hop = 192.0.2.81"); <S3,S4,V1> combines FEC2's SID list with R1's VPN label and is not a stack any rule would produce. | error | none: RFC has no errata; **proposed erratum below** |
+| RA-1347 | A.1, A.2.12 | "for its "south" adjacency to R3: 9003 (Figure 2) / By applying the steps in Section 2.8, the outgoing label downloaded to R1's FIB corresponding to the global SID index "8" is 1008" | Figure 2 lists three adjacencies from R2 to R3 ("north", "east", "south") and none to R5, while Figure 1 draws two R2-R3 links and a path R2-R5-R3, and the text says R2 sends "using one of the two links connected to R3". The outgoing label is computed per 2.4 and 2.10.1 (with the neighbour's SRGB), not 2.8, which covers the incoming label downloaded to the FIB. In A.2.12 "the incoming label for 1017" is garbled, and the mapping-server entry (range 100 from 203.0.113.1/32) does not give its starting index, which is needed for 203.0.113.17/32 to map to index 17. | editorial | none: RFC has no errata |
+
+Proposed erratum RA-1345 (RFC 8660, Section A.2.13; type: Technical):
+
+```
+Original Text
+-------------
+   The FEC tiebreakers match, and they have the same FEC type
+   codepoint=140.
+
+Corrected Text
+--------------
+   The FEC tiebreakers match, and they have the same FEC type
+   codepoint=150.
+
+Notes
+-----
+   Section 2.5.1: "150: SR Policy [RFC8402]"; "140: Parallel
+   Adjacency [RFC8402]".
+```
+
+Proposed erratum RA-1346 (RFC 8660, Section A.3.2; type: Technical):
+
+```
+Original Text
+-------------
+   MUST NOT install a VPN route with label stack = <S3,S4,V1>
+   (corresponding to FEC2.)
+
+Corrected Text
+--------------
+   MUST NOT install a VPN route with label stack = <S3,S4,V2>
+   (corresponding to FEC2.)
+
+Notes
+-----
+   R1 (V1) uses FEC1 <S1,S2>; R2 (V2) would use FEC2 <S3,S4>.
+```
 
 ### RFC 8661: Segment Routing MPLS Interworking with LDP {#ra_rfc8661}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -4532,7 +5019,7 @@ Notes
 
 ### RFC 8667: IS-IS Extensions for Segment Routing {#ra_rfc8667}
 
-Depth: deep. Errata: 1 errata: 1 verified. 
+Depth: deep. Errata: 1 errata: 1 verified. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -4624,7 +5111,7 @@ Notes
 
 ### RFC 8668: Advertising Layer 2 Bundle Member Link Attributes in IS-IS {#ra_rfc8668}
 
-Depth: deep. Errata: 1 errata: 1 verified. 
+Depth: deep. Errata: 1 errata: 1 verified. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -4655,7 +5142,7 @@ Notes
 
 ### RFC 8706: Restart Signaling for IS-IS {#ra_rfc8706}
 
-Depth: deep. Errata: none (the RFC has no errata). Obsoletes: RFC 5306.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Obsoletes: RFC 5306.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -4718,7 +5205,7 @@ Notes
 
 ### RFC 8754: IPv6 Segment Routing Header (SRH) {#ra_rfc8754}
 
-Depth: deep. Errata: 2 errata: 2 verified. 
+Depth: deep. Errata: 2 errata: 2 verified. Status: Proposed Standard. Updated by: RFC 9800.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -4771,9 +5258,76 @@ Notes
    the intended placement.
 ```
 
+### RFC 8918: Invalid TLV Handling in IS-IS {#ra_rfc8918}
+
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 5305, RFC 6232.
+
+| ID | Section | Quote | Issue | Severity | Erratum |
+|---|---|---|---|---|---|
+| RA-1348 | 3.1, 3.4, 4 | "TLVs in a PDU (other than LSP purges) that are disallowed MUST be ignored and MUST NOT cause the PDU itself to be rejected by the receiving IS. (3.1) / The correct setting for "LSP" is "n". (3.4)" | With 3.4 the POI TLV (type 13) is disallowed in LSPs (registry LSP:n), so by 3.1 a POI TLV in an LSP with non-zero Remaining Lifetime MUST be ignored and the LSP MUST NOT be rejected; 4 adds that rejection of an LSP for TLV content "will result in inconsistent LSP Databases". RFC 6233 Section 3, which this document does not update and cites in 4 only for purge acceptance, still says "ISs MUST NOT accept LSPs with a non-zero Remaining Lifetime that contain the POI TLV". 3.4 also rewrites the RFC 6232 sentence from "MUST NOT be found" to "MUST NOT be sent", turning it into a sender-only rule, which agrees with 3.1 but leaves the RFC 6233 receiver rule in place. A receiver following RFC 6233 drops such an LSP while one following this document stores and floods it, which is the LSDB divergence 4 is meant to prevent. | contradiction | none: RFC has no errata; **proposed erratum below** |
+| RA-1349 | 1, 3.1, 4 | "PDUs that are valid must be accepted [ISO10589] even if an individual TLV contained within that PDU is not understood or is invalid in some way (e.g., incorrect syntax, data value out of range, etc.). (1)" | The Introduction states for all PDUs that an invalid TLV (bad syntax, out-of-range value) does not make the PDU unacceptable, but the normative text covers only two cases: disallowed TLVs in non-purge PDUs (3.1) and non-conforming TLVs in LSPs (4, "MUST NOT cause the LSP itself to be rejected"). Nothing normative says whether an IIH or SNP with a malformed allowed TLV (for example an IP Interface Address TLV whose length is not a multiple of 4, an empty Area Addresses TLV, or a malformed Three-Way Adjacency TLV) is discarded or processed without that TLV. Some of these TLVs are essential to adjacency formation, so both readings occur; the lowercase "must" with a reference to ISO 10589 does not say which ISO rule is meant. | ambiguity | none: RFC has no errata; **proposed erratum below** |
+| RA-1350 | 3.2 | "the extensions defined by [RFC6232] are not compatible with the behavior defined in [RFC5304]; therefore, they can only be safely enabled when all nodes support the extensions. / it is RECOMMENDED that implementations provide controls for their enablement." | The section recommends an enablement control for POI generation (RFC 6232) and for strict purge acceptance (RFC 5304), but RFC 6233 Section 3, which it cites as the current purge acceptance rule, makes POI insertion mandatory for an implementation that implements authentication ("The POI TLV MUST be added"). Whether an implementation with authentication that keeps POI generation disabled (the safe setting this section describes for a mixed network) conforms to RFC 6233 is not said. The section also summarises RFC 6233 only as adding the Purge column; the RFC 6233 rule that a purge with an unregistered TLV is acceptable when it also carries the POI TLV is not restated, so 3.2 reads as "allowed = Purge column y" only. | ambiguity | none: RFC has no errata |
+| RA-1351 | 4, 3.3 | "The definition MUST include what action to take when the format/content of the TLV does not conform to the specification / receiving nodes MUST verify that the TLV conforms to the standard definition." | The requirement is placed on the documents that define codepoints, but most existing definitions (for example RFC 5305 for sub-TLVs of TLV 22 and the prefix length of TLV 135) state no such action, and this document, although it updates RFC 5305, does not supply one or a default. A receiver that "MUST verify" conformance therefore still has to choose between ignoring the sub-TLV, the containing TLV entry, or the whole TLV when an older definition is silent; only rejection of the LSP is excluded. "Ignored" in 3.1 / 3.3 also does not say whether an ignored TLV is still kept in the stored and re-flooded LSP (it must be, since the LSP is flooded unchanged, but the text does not say so). | ambiguity | none: RFC has no errata |
+
+Proposed erratum RA-1348 (RFC 8918, Section 3.1, 3.4, 4; type: Technical):
+
+```
+Original Text
+-------------
+   This document also updates the previously quoted text from
+   Section 3 of [RFC6232] to be:
+
+Corrected Text
+--------------
+   This document also updates the previously quoted text from
+   Section 3 of [RFC6232] to be: [quoted text unchanged]. Consistent
+   with Section 3.1, the sentence in Section 3 of [RFC6233] "ISs
+   MUST NOT accept LSPs with a non-zero Remaining Lifetime that
+   contain the POI TLV" is replaced by: "A POI TLV received in an
+   LSP with a non-zero Remaining Lifetime MUST be ignored; its
+   presence MUST NOT cause the LSP to be rejected."
+
+Notes
+-----
+   Section 3.4 marks the POI TLV LSP:n and Section 3.1 requires
+   disallowed TLVs to be ignored without rejecting the PDU, but RFC
+   6233 Section 3 keeps a receiver rule that rejects the LSP. The
+   document lists only RFC 5305 and RFC 6232 as updated. The working
+   group should say which rule applies; the corrected text assumes
+   Section 3.1 is intended. This may need a document update rather
+   than an erratum.
+```
+
+Proposed erratum RA-1349 (RFC 8918, Section 1, 3.1, 4; type: Technical):
+
+```
+Original Text
+-------------
+   PDUs that are valid must be accepted [ISO10589] even if an
+   individual TLV contained within that PDU is not understood or is
+   invalid in some way (e.g., incorrect syntax, data value out of
+   range, etc.).
+
+Corrected Text
+--------------
+   (Clarification.) State whether the rule applies to all PDU types
+   or only to LSPs as in Section 4, e.g.: "LSPs that are valid MUST
+   be accepted even if an individual TLV contained within that LSP
+   is not understood or is invalid in some way (Section 4). For IIHs
+   and SNPs, the treatment of an invalid TLV is defined by the
+   document that specifies the TLV."
+
+Notes
+-----
+   Section 1 speaks of PDUs in general, but the normative
+   requirement in Section 4 is limited to LSPs. Implementations
+   differ on IIHs with a malformed TLV that is used for adjacency
+   formation.
+```
+
 ### RFC 8986: Segment Routing over IPv6 (SRv6) Network Programming {#ra_rfc8986}
 
-Depth: deep. Errata: 2 errata: 1 verified, 1 rejected. 
+Depth: deep. Errata: 2 errata: 1 verified, 1 rejected. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -4801,7 +5355,7 @@ Notes
 
 ### RFC 9256: Segment Routing Policy Architecture {#ra_rfc9256}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 8402.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 8402.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -4810,13 +5364,37 @@ Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 8402.
 
 ### RFC 9294: Application-Specific Link Attributes Advertisement Using the Border Gateway Protocol - Link State (BGP-LS) {#ra_rfc9294}
 
-Depth: deep (section 3 and 4 rules (1), (2)(A)-(G) in full). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
-Nothing notable found at this depth.
+| ID | Section | Quote | Issue | Severity | Erratum |
+|---|---|---|---|---|---|
+| RA-1352 | 4 (2)(B), 3 | "When the IS-IS ASLA sub-TLV has the RSVP-TE application bit set, then the link attributes for the corresponding IS-IS ASLA sub-TLVs MUST be encoded using the respective BGP-LS top-level TLVs (4 (2)(B)) / the attributes advertised within the ASLA TLV take precedence for the applications indicated in the ASLA TLV encoding (3)" | An IS-IS ASLA sub-TLV with the RSVP-TE bit and other bits (for example R and S) falls under rule (1) (encode in a BGP-LS ASLA TLV) and rule (2)(B) (encode at top level); the text does not say whether the BGP-LS ASLA copy keeps or clears the RSVP-TE bit. If it keeps it, the Section 3 precedence rule makes the ASLA copy authoritative for RSVP-TE, so the top-level encoding that (2)(B) and Section 3 require ("REQUIRED to be advertised as a top-level TLV when used to carry link attributes specific to RSVP-TE") has no effect for receivers that support this document. The rules also do not say which source wins at top level when both legacy IS-IS sub-TLVs (with or without an L-flag ASLA) and an RSVP-TE-bit ASLA sub-TLV carry values, nor how a zero-length-mask BGP-LS ASLA TLV (rule (2)(E), all applications) ranks against the top-level TLVs for RSVP-TE under the precedence rule, since it "indicates" no specific application. | ambiguity | none: RFC has no errata |
+| RA-1353 | 4.1 | "The next rule that applies is (2)(c), and it is determined that collation is required for applications S and F" | The illustration cites the rules as (2)(c), (2)(d) and (2)(e), while Section 4 labels them (2)(C), (2)(D) and (2)(E); lower-case (a), (b), (c) are also used in the same subsection for the three IS-IS advertisements, so "(2)(c)" can be misread as advertisement (c). "The next rule that applies" also skips over rule (2)(E), which is the rule that keeps item 4 of the "final set" (later cited correctly as "(2)(e)"). | editorial | none: RFC has no errata; **proposed erratum below** |
+
+Proposed erratum RA-1353 (RFC 9294, Section 4.1; type: Editorial):
+
+```
+Original Text
+-------------
+   The next rule that applies is (2)(c), and it is determined that
+   collation is required for applications S and F;
+
+Corrected Text
+--------------
+   The next rule that applies is (2)(C), and it is determined that
+   collation is required for applications S and F;
+
+Notes
+-----
+   The same subsection uses (a), (b), (c) for the IS-IS
+   advertisements, so the lower-case rule labels are ambiguous. The
+   same change applies to "(2)(d)" and "(2)(e)" later in Section
+   4.1.
+```
 
 ### RFC 9346: IS-IS Extensions in Support of Inter-Autonomous System (AS) MPLS and GMPLS Traffic Engineering {#ra_rfc9346}
 
-Depth: deep. Errata: none (the RFC has no errata). Obsoletes: RFC 5316.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Obsoletes: RFC 5316.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -4859,12 +5437,16 @@ Notes
 
 ### RFC 9350: IGP Flexible Algorithm {#ra_rfc9350}
 
-Depth: deep (IS-IS sections in full; OSPF-only sections 5.2, 7, 9, 10 scanned). Errata: 2 errata: 1 verified, 1 held. 
+Depth: deep. Errata: 2 errata: 1 verified, 1 held. Status: Proposed Standard. Updated by: RFC 9843, RFC 9917.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0184 | 13.1 vs 8 | "During the route computation, it is possible for the Flex-Algorithm-specific metric to exceed the maximum value that can be stored in an unsigned 32-bit variable. In such scenarios, the value MUST be considered to be of value 0xFFFFFFFF during the computation and advertised as such." | A metric that saturates at 0xFFFFFFFF and is advertised as such in a FAPM is, by Section 8 ("Flex-Algorithm prefix metric larger than MAX_PATH_METRIC ... MUST NOT be considered"), unusable in the next area, while the same overflow in the default algorithm is clamped to MAX_PATH_METRIC (0xFE000000) and stays usable (RFC 5305 3). A prefix reachable at a large cost in algorithm 0 thus becomes unreachable for the flex-algorithm across an ABR. Whether saturating at 0xFFFFFFFF (rather than at MAX_PATH_METRIC) is intended is not stated. | contradiction | none: RFC has 2 errata, none on this point; **proposed erratum below** |
 | RA-0185 | 5.3, 6 | "If it appears more than once, the IS-IS FAD sub-TLV MUST be ignored by the receiver." | Sections 6.1 to 6.5 give receive rules for duplicates but none for a sub-sub-TLV whose Length is not a multiple of 4 (a sender MUST only). Whether such a FAD is invalid (stop participating, 5.3) or only the sub-sub-TLV is ignored is left open; ignoring only an exclude rule changes the computed paths. | ambiguity | none: RFC has 2 errata, none on this point |
+| RA-1354 | 13.1, 8 | "The FAPM MUST NOT be advertised with IS-IS L1 or L2 intra-area, OSPFv2 intra-area, or OSPFv3 intra-area routes. / If the FAPM for the Flex-Algorithm is not advertised with the inter-area or external prefix reachability advertisement, the prefix MUST be considered as unreachable for that Flex-Algorithm." | With the M-flag, a receiver must decide per prefix advertisement whether it is inter-area (FAPM required, otherwise unreachable) or intra-area (FAPM ignored). OSPF marks this by LSA type; IS-IS has no route-type field, and the document does not say how an IS-IS receiver classifies a prefix: a level 2 prefix that an L1/L2 router propagated from its level 1 area (RFC 5302, no up/down bit, possibly with the R-flag of RFC 7794 or without it) can be read as an L2 intra-area route (reachable without FAPM) or as an inter-area route (unreachable without FAPM). Routers that classify differently compute different flex-algorithm reachability for the same prefix, and the 5.1 "IS-IS L1 or L2 intra-area" wording does not settle it. | ambiguity | none: RFC has 2 errata, none on this point; **proposed erratum below** |
+| RA-1355 | 5.1, 5.3, 15.1 | "An IS-IS L1/L2 router MAY be configured to regenerate the winning FAD from level 2 ... / A router that is not configured to participate in a particular Flex-Algorithm MUST ignore FAD sub-TLV advertisements for such Flex-Algorithm." | Regeneration of the level 2 winning FAD into level 1 (5.1, 15.1) requires the L1/L2 router to run the 5.3 selection for that algorithm, but 5.3 requires a router that does not participate in the algorithm to ignore its FAD advertisements, and 5.3 explicitly allows non-participating routers to advertise FADs. Whether a non-participating L1/L2 router may (or must) select and regenerate the level 2 winning FAD is not stated; if it may not, an operator relying on 15.1 ("configure the FAD in one or multiple routers in level 2") loses the definition in level 1 areas whose border routers do not participate. Also unstated: what the regenerating router advertises (or withdraws) when no level 2 FAD exists any more. | ambiguity | none: RFC has 2 errata, none on this point; **proposed erratum below** |
+| RA-1356 | 13 | "check if all colors that are part of the include-all rule are also set on the link.  If all such colors are not set on the link, the link MUST be pruned from the computation." | "If all such colors are not set" can be read as "if none of the colors is set" (prune only links with no listed color, which is the include-any rule) or as "if not all of the colors are set" (prune links missing any listed color). Only the second gives an include-all rule distinct from rule 3. RFC 9917 (which updates RFC 9350) copies the sentence unchanged into its rule registry (12.3, rule 4) and its reverse-affinity rule (11, rule 10). | ambiguity | none: RFC has 2 errata, none on this point; **proposed erratum below** |
+| RA-1357 | 15.3, 18.4.8 | "The link can be made the link of last resort by setting the TE metric value in the Flex-Algorithm ASLA delay advertisement for the link to the value of (2^24 - 1) in IS-IS" | (a) 15.3 sets the TE metric "in the Flex-Algorithm ASLA delay advertisement"; the TE metric is carried in the ASLA TE Default Metric (IS-IS) / TE Metric (OSPF) advertisement, not the delay one (copy of the preceding paragraph). (b) Table 14 (18.4.8) labels its first column "Bit Number" although it lists sub-TLV type values. | editorial | none: RFC has 2 errata, none on this point; **proposed erratum below** |
 
 Proposed erratum RA-0184 (RFC 9350, Section 13.1 vs 8; type: Technical):
 
@@ -4888,9 +5470,96 @@ Notes
    receive rule should be stated.
 ```
 
+Proposed erratum RA-1354 (RFC 9350, Section 13.1, 8; type: Technical):
+
+```
+Original Text
+-------------
+   The FAPM MUST NOT be advertised with IS-IS L1 or L2 intra-area,
+   OSPFv2 intra-area, or OSPFv3 intra-area routes.
+
+Corrected Text
+--------------
+   (Clarification needed.) Add: "For IS-IS, a prefix advertisement
+   is considered inter-area if it is a level 1 advertisement with
+   the up/down bit set, or a level 2 advertisement with the R-flag
+   [RFC7794] set that was propagated from level 1; all other
+   advertisements are intra-area."
+
+Notes
+-----
+   The classification determines whether a prefix without a FAPM is
+   unreachable in an M-flag Flex-Algorithm. The proposed text is one
+   possible rule; RFC 7794 R-flag availability on TLV 135
+   236 depends on the Prefix Attribute Flags sub-TLV being present.
+```
+
+Proposed erratum RA-1355 (RFC 9350, Section 5.1, 5.3, 15.1; type: Technical):
+
+```
+Original Text
+-------------
+   A router that is not configured to participate in a particular
+   Flex-Algorithm MUST ignore FAD sub-TLV advertisements for such
+   Flex-Algorithm.
+
+Corrected Text
+--------------
+   A router that is not configured to participate in a particular
+   Flex-Algorithm MUST ignore FAD sub-TLV advertisements for such
+   Flex-Algorithm for the purpose of path computation. An L1/L2
+   router configured to regenerate the FAD (Section 5.1) performs
+   the selection of Section 5.3 for that Flex-Algorithm in level 2
+   regardless of its participation.
+
+Notes
+-----
+   Section 5.3 also says non-participating routers MAY advertise
+   FADs, so the regenerating router need not participate; the
+   selection rule for that case is missing.
+```
+
+Proposed erratum RA-1356 (RFC 9350, Section 13; type: Technical):
+
+```
+Original Text
+-------------
+   If all such colors are not set on the link, the link MUST be
+   pruned from the computation.
+
+Corrected Text
+--------------
+   If any such color is not set on the link, the link MUST be pruned
+   from the computation.
+
+Notes
+-----
+   The same sentence appears in RFC 9917 Sections 11 and 12.3 (rules
+   4 and 10).
+```
+
+Proposed erratum RA-1357 (RFC 9350, Section 15.3, 18.4.8; type: Editorial):
+
+```
+Original Text
+-------------
+   by setting the TE metric value in the Flex-Algorithm ASLA delay
+   advertisement for the link
+
+Corrected Text
+--------------
+   by setting the TE metric value in the Flex-Algorithm ASLA TE
+   metric advertisement for the link
+
+Notes
+-----
+   In Section 18.4.8 Table 14 the column heading "Bit Number" should
+   read "Type".
+```
+
 ### RFC 9352: IS-IS Extensions to Support Segment Routing over the IPv6 Data Plane {#ra_rfc9352}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 7370.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 7370.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -4917,7 +5586,7 @@ Notes
 
 ### RFC 9377: IS-IS Flood Reflection {#ra_rfc9377}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Experimental.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -4943,7 +5612,7 @@ Notes
 
 ### RFC 9479: IS-IS Application-Specific Link Attributes {#ra_rfc9479}
 
-Depth: deep. Errata: none (the RFC has no errata). Obsoletes: RFC 8919.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Obsoletes: RFC 8919.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -4952,11 +5621,15 @@ Depth: deep. Errata: none (the RFC has no errata). Obsoletes: RFC 8919.
 
 ### RFC 9502: IGP Flexible Algorithm in IP Networks {#ra_rfc9502}
 
-Depth: deep (IS-IS sections in full, OSPF scanned). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0194 | 6.1, 6.2 | "If the Algorithms in the IS-IS IPv4 Algorithm Prefix Reachability TLV are outside the Flex-Algorithm range (128-255), the IS-IS IPv4 Algorithm Prefix Reachability TLV MUST be ignored by the receiver." | The Algorithm is a field of each prefix entry, and a TLV carries several entries. Read literally, one entry with an out-of-range algorithm makes the receiver drop the valid entries packed in the same TLV, so the set of reachable prefixes depends on how the originator packed them. Ignoring only the offending entry is the more likely intent (the entries remain parseable). | ambiguity | none: RFC has no errata; **proposed erratum below** |
+| RA-1358 | 6.1, 6.2 | "Optional Sub-TLV-length (1 octet):  Number of octets used by sub-TLVs / Optional sub-TLVs (variable length)" | Figure 4 draws the Sub-tlv-len octet in every prefix entry, but the field list calls it "Optional", and unlike the Extended IP Reachability TLV (RFC 5305 4.1, where the S bit of the control octet says whether the sub-TLV length is present) the Flags octet of TLV 126 has no bit announcing it. A TLV holds several prefix entries, so a receiver can only find the next entry if it knows whether the octet is there; if it is optional, the encoding cannot be parsed. The number of octets of the Prefix field ("Prefix (variable length)") is also not stated (RFC 5305 packs the prefix into the minimal number of octets). TLV 127 inherits both points ("identical ... except that it has a distinct type"). | ambiguity | none: RFC has no errata; **proposed erratum below** |
+| RA-1359 | 8, 6.4 | "The IP Algorithm Prefix Reachability advertisement as described in Section 5 includes the MTID value that associates the prefix with a specific topology." | Section 5 specifies participation (the IP Algorithm sub-TLV / TLV), which carries no MTID; prefix reachability is Section 6. The OSPFv3 IP Algorithm Prefix Reachability sub-TLV (6.4, Figure 7) also has no MT-ID field, so the statement that the advertisement "includes the MTID value" holds for IS-IS (6.1) and OSPFv2 (6.3) only. | error | none: RFC has no errata; **proposed erratum below** |
+| RA-1360 | 6.3, 6.4 | "0 1 2 3 4 5 6 7 8 / +-+-+-+-+-+-+-+-+-+ / \|E\|   Reserved    \|" | The Flags field of the OSPFv2 IP Algorithm Prefix Reachability sub-TLV is one octet, but its figure numbers nine bit positions (0 to 8); Table 6 assigns bits 0 to 7. Sections 6.3 and 6.4 also speak of receiving "multiple OSPFv2 [OSPFv3] IP Algorithm Prefix Reachability TLVs" where sub-TLVs are meant, and 6.4 repeats "in an OSPFv3 OSPFv3 IP Algorithm Prefix Reachability Sub-TLV". | editorial | none: RFC has no errata; **proposed erratum below** |
+| RA-1361 | 6.1, 6.2, 12 | "If a router receives multiple IPv4 Algorithm Prefix Reachability advertisements for the same prefix, from different originators, where all of them do not advertise the same algorithm, it MUST ignore all of them" | "all of them do not advertise the same algorithm" can be read as "not all advertise the same algorithm" (any disagreement) or "none advertise the same algorithm". The scope of "the same prefix" is also open: advertisements of the prefix in different topologies (MTID) or at different levels are not said to be compared or not. Section 12 relies on this rule as an attack vector (one rogue originator suppresses a prefix), so the reading decides how much a single bad advertisement removes. | ambiguity | none: RFC has no errata; **proposed erratum below** |
 
 Proposed erratum RA-0194 (RFC 9502, Section 6.1, 6.2; type: Technical):
 
@@ -4979,9 +5652,90 @@ Notes
    The same text appears for IPv6 in Section 6.2.
 ```
 
+Proposed erratum RA-1358 (RFC 9502, Section 6.1, 6.2; type: Technical):
+
+```
+Original Text
+-------------
+   Optional Sub-TLV-length (1 octet):  Number of octets used by
+   sub-TLVs Optional sub-TLVs (variable length)
+
+Corrected Text
+--------------
+   Sub-TLV-length (1 octet):  Number of octets used by sub-TLVs;
+   this field is always present and is 0 when no sub-TLVs follow.
+   Sub-TLVs (variable length):  present only when Sub-TLV-length is
+   non-zero.
+
+Notes
+-----
+   The prefix field should also be stated as occupying the minimum
+   number of octets needed for Pfx Length bits, as in RFC 5305
+   Section 4.1.
+```
+
+Proposed erratum RA-1359 (RFC 9502, Section 8, 6.4; type: Technical):
+
+```
+Original Text
+-------------
+   The IP Algorithm Prefix Reachability advertisement as described
+   in Section 5 includes the MTID value that associates the prefix
+   with a specific topology.
+
+Corrected Text
+--------------
+   The IP Algorithm Prefix Reachability advertisement as described
+   in Section 6 includes, for IS-IS and OSPFv2, the MTID value that
+   associates the prefix with a specific topology.
+
+Notes
+-----
+   For OSPFv3 the topology is that of the parent TLV (RFC 8362),
+   since the sub-TLV has no MT-ID field.
+```
+
+Proposed erratum RA-1360 (RFC 9502, Section 6.3, 6.4; type: Editorial):
+
+```
+Original Text
+-------------
+   0 1 2 3 4 5 6 7 8 +-+-+-+-+-+-+-+-+-+ |E|   Reserved    |
+   +-+-+-+-+-+-+-+-+-+
+
+Corrected Text
+--------------
+   0 1 2 3 4 5 6 7 +-+-+-+-+-+-+-+-+ |E|  Reserved   |
+   +-+-+-+-+-+-+-+-+
+
+Notes
+-----
+   Also "Reachability TLVs" should read "Reachability Sub-TLVs" in
+   the different-originators paragraphs of 6.3 and 6.4, and the
+   duplicated "OSPFv3" in 6.4 removed.
+```
+
+Proposed erratum RA-1361 (RFC 9502, Section 6.1, 6.2, 12; type: Technical):
+
+```
+Original Text
+-------------
+   where all of them do not advertise the same algorithm, it MUST
+   ignore all of them
+
+Corrected Text
+--------------
+   where not all of them advertise the same algorithm in the same
+   topology (MTID), it MUST ignore all of them
+
+Notes
+-----
+   The same wording appears in 6.2, 6.3 and 6.4.
+```
+
 ### RFC 9800: Compressed SRv6 Segment List Encoding {#ra_rfc9800}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 8754.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 8754.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -5028,13 +5782,17 @@ Notes
 
 ### RFC 9843: IGP Flexible Algorithms: Bandwidth, Delay, Metrics, and Constraints {#ra_rfc9843}
 
-Depth: deep (IS-IS sections in full, OSPF sections scanned). Errata: none (the RFC has no errata). Updates: RFC 9350.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 9350. Updated by: RFC 9917.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0195 | 4.1.3.2 | "The Bandwidth Metric MUST be set to the maximum metric value of 4,261,412,864." | In IS-IS the Generic Metric sub-TLV carries a 3-octet metric (Section 2.1: "A metric value of 0xFFFFFF is considered a maximum link metric"), so 4,261,412,864 (0xFE000000, MAX_PATH_METRIC of RFC 5305) cannot be the metric of a link; the value is also not the 0xFFFFFF "last resort" value of Section 2.1. The rule for links below the first threshold therefore has no representable result. | contradiction | none: RFC has no errata; **proposed erratum below** |
 | RA-0196 | 4.1.4.2 | "The Bandwidth Metric MUST be set to the maximum metric value of 4,294,967,296." | 4,294,967,296 is 2^32 and does not fit the 4-octet metric; Section 2.2 gives 4,294,967,295 (0xFFFFFFFF) as the maximum link metric for OSPF. | error | none: RFC has no errata; **proposed erratum below** |
 | RA-0197 | 4.1.3.1, 4.1.3.2 | "\|    Flags   \|     Reserved                                     \|" | In the IS-IS FADRB and FADBT sub-TLV figures the Flags field is drawn about 6 bits wide, while the text defines "Flags (1 octet)"; the Reserved field and the following fields therefore do not start on the bit positions the ruler shows. Meaning is clear from the text (1-octet Flags, 3-octet Reserved). | editorial | none: RFC has no errata; **proposed erratum below** |
+| RA-1362 | 4.1.3.1, 4.1.4.1 | "When granularity_bw is less than or equal to Total_link_bandwidth, then: Metric calculation:  (Reference_bandwidth) / (Total_link_bandwidth - (Modulus of(Total_link_bandwidth, granularity_bw)))" | The formula is undefined for two values the encoding allows: a Granularity Bandwidth of 0 (0 <= Total_link_bandwidth always holds, so the "Modulus of (x, 0)" branch is taken, a remainder by zero) and a Total_link_bandwidth of 0 (a link advertising Maximum Link Bandwidth 0: either branch divides by zero). Only a zero Reference Bandwidth is excluded. The operands are IEEE 754 single-precision values in bytes per second, yet "the division used here is integer division" and "Modulus" are not defined for them (truncate each operand to an integer first, or compute in floating point and truncate the quotient; for a fractional granularity the results differ), so routers can derive different metrics for the same link, which breaks the "common understanding" that loop-free Flex-Algorithm forwarding relies on (RFC 9350 4). | ambiguity | none: RFC has no errata; **proposed erratum below** |
+| RA-1363 | 4.1.3.1, 4.1.3.2, 4.1.4.1, 4.1.4.2, 4, 5 | "If a Generic Metric sub-TLV with a Bandwidth metric-type is advertised for a link, the Flex-Algorithm calculation MUST use the advertised Bandwidth Metric and MUST NOT use the automatically derived metric for that link. / If only some links among the parallel links have advertised the Bandwidth Metric: - The Bandwidth Metric for such links MUST be ignored." | The first sentence (repeated in every automatic-calculation section, in Section 4 "overrides this automatic computation" and unconditionally in Section 5 rule 1 "it MUST be used during the Flex-Algorithm calculation") requires the advertised Bandwidth Metric; the Interface Group Mode bullets that follow require the same advertised metric to be ignored when only some parallel links carry one. The text does not say that the Interface Group Mode rule is an exception to the MUST, nor how "parallel links" are delimited (per neighbour pair, per direction, per topology), so an implementation following Section 5 rule 1 and one following the bullets compute different metrics for the same link. | contradiction | none: RFC has no errata; **proposed erratum below** |
+| RA-1364 | 4.1.4.1, 4.1.4.2 | "Length (2 octets): ... For this sub-TLV, Length is set to 14. / For this sub-TLV, Length is set to 2 + N*8 octets." | Figure 10 (OSPF FADRB) has a 32-bit Flags / Reserved word followed by two 4-octet bandwidths, i.e. 12 octets of value; 14 matches no reading of the figure (Flags 1 + Reserved 3 gives 12; Flags 1 + Reserved 1 gives 10). Figure 11 (OSPF FADBT) has the same 4-octet Flags / Reserved word followed by N pairs of 4-octet threshold and 4-octet metric, i.e. 4 + 8N, not 2 + 8N. Neither text gives the size of the Reserved field, so a receiver validating Length against the figure rejects every conforming sub-TLV built from the text, and vice versa. Also in 4.1.4.2: "Metric value range (1 - 4,294,967,296 (0xFFFFFFFF))" gives 2^32 in decimal (0xFFFFFFFF is 4,294,967,295), the same slip RA-0196 records for rule 1. | error | none: RFC has no errata; **proposed erratum below** |
+| RA-1365 | 4.1.3.2, 4.1.4.2 | "When the computed link bandwidth is greater than or equal to Bandwidth Threshold X and less than Bandwidth Threshold X+1: The Bandwidth Metric MUST be set to Threshold Metric X." | The rules assume Bandwidth Threshold 1 < 2 < ... < N, but nothing requires the sender to order the thresholds or tells the receiver what to do when they are not ascending (or are equal, or are NaN / negative IEEE values). With unordered thresholds the intervals overlap or are empty, and the result depends on whether a receiver evaluates rule 1, rule 4 or rule 5 first. The labels "Minimum Link Bandwidth" (Threshold 1) and "Maximum Link Bandwidth" (Threshold N) also reuse the names of the advertised link attribute. | ambiguity | none: RFC has no errata; **proposed erratum below** |
 
 Proposed erratum RA-0195 (RFC 9843, Section 4.1.3.2; type: Technical):
 
@@ -5090,9 +5848,100 @@ Notes
    Editorial.
 ```
 
+Proposed erratum RA-1362 (RFC 9843, Section 4.1.3.1, 4.1.4.1; type: Technical):
+
+```
+Original Text
+-------------
+   When granularity_bw is less than or equal to
+   Total_link_bandwidth, then:
+
+Corrected Text
+--------------
+   When granularity_bw is non-zero and less than or equal to
+   Total_link_bandwidth, then: [formula]. When granularity_bw is
+   zero, or greater than Total_link_bandwidth, then:
+   Reference_bandwidth
+   Total_link_bandwidth. If Total_link_bandwidth is zero, the link
+   MUST be pruned from the Flex-Algorithm calculation. Bandwidth
+   values are converted to unsigned integers (bytes per second,
+   fractions truncated) before the computation.
+
+Notes
+-----
+   Applies equally to IS-IS (4.1.3.1) and OSPF (4.1.4.1). The
+   proposed handling of zero values and the integer conversion are
+   one possible choice.
+```
+
+Proposed erratum RA-1363 (RFC 9843, Section 4.1.3.1, 4.1.3.2, 4.1.4.1, 4.1.4.2, 4, 5; type: Technical):
+
+```
+Original Text
+-------------
+   If the Generic Metric sub-TLV with Bandwidth metric-type is
+   advertised for the link as described in Section 4, it MUST be
+   used during the Flex-Algorithm calculation.
+
+Corrected Text
+--------------
+   (Section 5, rule 1) If the Generic Metric sub-TLV with Bandwidth
+   metric-type is advertised for the link as described in Section 4,
+   it MUST be used during the Flex-Algorithm calculation, except in
+   Interface Group Mode when only some of the parallel links
+   advertise it (Sections 4.1.3 and 4.1.4), in which case it MUST be
+   ignored for all of them.
+
+Notes
+-----
+   The same pair of sentences appears in Sections 4.1.3.1, 4.1.3.2,
+   4.1.4.1 and 4.1.4.2; Section 4 and Section 5 rule 1 state the
+   override without the exception.
+```
+
+Proposed erratum RA-1364 (RFC 9843, Section 4.1.4.1, 4.1.4.2; type: Technical):
+
+```
+Original Text
+-------------
+   For this sub-TLV, Length is set to 14.
+
+Corrected Text
+--------------
+   For this sub-TLV, Length is set to 12. (4.1.4.2: For this
+   sub-TLV, Length is set to 4 + N*8 octets.) Reserved (3 octets):
+   MUST be set to zero by the sender and MUST be ignored by the
+   receiver.
+
+Notes
+-----
+   The IS-IS counterparts (Length 9 and 1 + 7N, Section 4.1.3) are
+   consistent with their figures. In 4.1.4.2 the Threshold Metric
+   range should read "1 - 4,294,967,295 (0xFFFFFFFF)".
+```
+
+Proposed erratum RA-1365 (RFC 9843, Section 4.1.3.2, 4.1.4.2; type: Technical):
+
+```
+Original Text
+-------------
+   N MUST be greater than or equal to 1.
+
+Corrected Text
+--------------
+   N MUST be greater than or equal to 1, and the Bandwidth
+   Thresholds MUST be listed in strictly ascending order. A receiver
+   MUST treat a FADBT sub-TLV whose thresholds are not strictly
+   ascending as unsupported (Section 5.3 of [RFC9350]).
+
+Notes
+-----
+   Applies to IS-IS (4.1.3.2) and OSPF (4.1.4.2).
+```
+
 ### RFC 9855: Topology Independent Fast Reroute Using Segment Routing {#ra_rfc9855}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -5118,7 +5967,7 @@ Notes
 
 ### RFC 9885: Multi-Part TLVs in IS-IS {#ra_rfc9885}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -5148,23 +5997,23 @@ Notes
 
 ### RFC 9917: IGP Flexible Algorithms Reverse Affinity Constraint {#ra_rfc9917}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 9350, RFC 9843.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 9350, RFC 9843.
 
 Nothing notable found at this depth.
 
 ### RFC 9929: IGP Unreachable Prefix Announcement {#ra_rfc9929}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 Nothing notable found at this depth.
 
 ## MPLS, LDP and mLDP {#ra_ldp}
 
-46 RFCs in this area (46 deep); 115 findings, 46 of them proposed errata.
+51 RFCs in this area (51 deep); 160 findings, 75 of them proposed errata.
 
 ### RFC 3032: MPLS Label Stack Encoding {#ra_rfc3032}
 
-Depth: deep. Errata: 4 errata: 3 verified, 1 held. 
+Depth: deep. Errata: 4 errata: 3 verified, 1 held. Status: Proposed Standard. Updated by: RFC 3270, RFC 3443, RFC 4182, RFC 5129, RFC 5332, RFC 5462, RFC 5586, RFC 7274, RFC 9017.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -5228,12 +6077,17 @@ Notes
 
 ### RFC 3036: LDP Specification {#ra_rfc3036}
 
-Depth: deep (obsoleted by RFC 5036; checked only for the mechanical hits). Errata: 3 errata: 1 verified, 2 rejected. 
+Depth: deep. Errata: 3 errata: 1 verified, 2 rejected. Status: Proposed Standard. Obsoleted by: RFC 5036.
+
+Resolved by a later RFC or re-targeted to its successor (kept for reference; not counted as open findings):
+
+| ID | Section | Issue as found | Outcome | Resolution |
+|---|---|---|---|---|
+| RA-0573 | 3.5.1.2.2 | Cross-reference names a section that does not exist. | Resolved | RFC 5036 (obsoletes RFC 3036) removes the sentence. |
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0572 | 3.5.1.2.1 | ""If the Message Type is < 0x8000 (high order bit = 0) it is an / error signaled by the Unknown Message Type Status Code."" | Section 3.5 defines the first bit as the U bit and the Message Type as the remaining 15 bits, so a Message Type value can never be >= 0x8000; the test is on the U bit, not on the type. 3.5.1.2.2 repeats this for TLVs ("If the TLV type is < 0x8000"), where the type is only 14 bits (U and F precede it). RFC 5036 3.5.1.2.1/3.5.1.2.2 keep the same wording. | contradiction | none: RFC has 3 errata, none on this point; **proposed erratum below** |
-| RA-0573 | 3.5.1.2.2 | ""silently dropped.  Section "Unknown TLV in Known Message Type" / elaborates on this behavior."" | No section with this title exists; the U-bit handling of unknown TLVs is described in Section 3.3 (Type-Length-Value Encoding, U and F bits). | error | erratum 346 (Verified), technical |
 | RA-0574 | 2.5.4 | ""OPERATIONAL   Receive Shutdown msg                NON EXISTENT / Action: Transmit Shutdown msg and"" | LDP has no Shutdown message; shutdown is a Notification carrying the Shutdown Status Code (3.5.1.2.4). The figure also shows "Init msg or Timeout" / "or Timeout" transitions to NON EXISTENT from INITIALIZED/OPENREC/OPENSENT, while the table lists Timeout only for OPERATIONAL. The surrounding text also has "established established". RFC 5036 2.5.4 keeps the table and figure. | ambiguity | none: RFC has 3 errata, none on this point |
 | RA-0575 | 3.4.4.1 | ""behave as if the containing message has traversed a loop by sending a / Notification message signaling Loop Detected in reply to the sender"" | For a Label Mapping, 2.8.2 ("signal Loop Detected status to the source") leaves the vehicle open, while Appendix A.1.2 (LMp.8, "Label Release ... Loop Detected Status code") answer a detected loop with a Label Release carrying the Loop Detected status, not with a Notification. The general hop-count rule in 3.4.4.1 does not carve out the Label Mapping case. Same sentence contains "it must must determine". Later RFCs: RFC 5036 (obsoletes RFC 3036) keeps the rule (Section 3.4.4.1); only the doubled word is fixed. | contradiction | none: RFC has 3 errata, none on this point |
 | RA-0576 | A.1.2 | ""LMp.21  Execute procedure Send_Message (Peer, Label Mapping, FEC, / PrevAdvLabel, SAttributes)."" | LMp.21 is reached only when LMp.18 found that no label mapping for FEC was previously sent to Peer, so PrevAdvLabel ("The label for FEC, if any, previously advertised") is undefined there. The step needs to allocate a label (as Send_Label does) rather than reuse a previous one. RFC 5036 LMp.21 keeps the text (adds only Note 13 on split horizon). | error | none: RFC has 3 errata, none on this point; **proposed erratum below** |
@@ -5261,6 +6115,8 @@ Corrected Text
 Notes
 -----
    RFC 5036 retains the text.
+   Status note: RFC 3036 is obsoleted by RFC 5036; an erratum report
+   against it may be held or rejected for that reason.
 ```
 
 Proposed erratum RA-0576 (RFC 3036, Section A.1.2; type: Technical):
@@ -5278,11 +6134,13 @@ Corrected Text
 Notes
 -----
    RFC 5036 retains the text.
+   Status note: RFC 3036 is obsoleted by RFC 5036; an erratum report
+   against it may be held or rejected for that reason.
 ```
 
 ### RFC 3212: Constraint-Based LSP Setup using LDP {#ra_rfc3212}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 3468, RFC 7358.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -5351,13 +6209,13 @@ Notes
 
 ### RFC 3429: Assignment of the 'OAM Alert Label' for Multiprotocol Label Switching Architecture (MPLS) Operation and Maintenance (OAM) Functions {#ra_rfc3429}
 
-Depth: deep (normative statements). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Informational.
 
 Nothing notable found at this depth.
 
 ### RFC 3443: Time To Live (TTL) Processing in Multi-Protocol Label Switching (MPLS) Networks {#ra_rfc3443}
 
-Depth: deep (normative statements of 2 and 3). Errata: none (the RFC has no errata). Updates: RFC 3032.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 3032. Updated by: RFC 5462.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -5365,7 +6223,7 @@ Depth: deep (normative statements of 2 and 3). Errata: none (the RFC has no erra
 
 ### RFC 3468: The Multiprotocol Label Switching (MPLS) Working Group decision on MPLS signaling protocols {#ra_rfc3468}
 
-Depth: deep (only (MPLS WG decision on CR-LDP, informational). Errata: 1 errata: 1 verified. 
+Depth: deep. Errata: 1 errata: 1 verified. Status: Informational. Updates: RFC 3212, RFC 3472, RFC 3475, RFC 3476.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -5373,7 +6231,7 @@ Depth: deep (only (MPLS WG decision on CR-LDP, informational). Errata: 1 errata:
 
 ### RFC 3478: Graceful Restart Mechanism for Label Distribution Protocol {#ra_rfc3478}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -5429,7 +6287,7 @@ Notes
 
 ### RFC 3479: Fault Tolerance for the Label Distribution Protocol (LDP) {#ra_rfc3479}
 
-Depth: deep (Sections 4.1 to 4.3 and 8.2 FT Session TLV read; the FT protection / check-pointing procedures skimmed). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -5473,7 +6331,7 @@ Notes
 
 ### RFC 4023: Encapsulating MPLS in IP or Generic Routing Encapsulation (GRE) {#ra_rfc4023}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 5332.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -5538,13 +6396,13 @@ Notes
 
 ### RFC 4950: ICMP Extensions for Multiprotocol Label Switching {#ra_rfc4950}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 Nothing notable found at this depth.
 
 ### RFC 5036: LDP Specification {#ra_rfc5036}
 
-Depth: deep. Errata: 11 errata: 1 verified, 6 held, 4 rejected. Obsoletes: RFC 3036.
+Depth: deep. Errata: 11 errata: 1 verified, 6 held, 4 rejected. Status: Draft Standard. Obsoletes: RFC 3036. Updated by: RFC 6720, RFC 6790, RFC 7358, RFC 7552.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -5660,7 +6518,7 @@ Notes
 
 ### RFC 5283: LDP Extension for Inter-Area Label Switched Paths (LSPs) {#ra_rfc5283}
 
-Depth: deep (normative statements). Errata: 2 errata: 2 held. 
+Depth: deep. Errata: 2 errata: 2 held. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -5708,7 +6566,7 @@ Notes
 
 ### RFC 5331: MPLS Upstream Label Assignment and Context-Specific Label Space {#ra_rfc5331}
 
-Depth: deep. Errata: 7 errata: 1 verified, 5 held, 1 rejected. 
+Depth: deep. Errata: 7 errata: 1 verified, 5 held, 1 rejected. Status: Proposed Standard. Updated by: RFC 7274.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -5717,7 +6575,7 @@ Depth: deep. Errata: 7 errata: 1 verified, 5 held, 1 rejected.
 
 ### RFC 5332: MPLS Multicast Encapsulations {#ra_rfc5332}
 
-Depth: deep (all normative statements). Errata: none (the RFC has no errata). Updates: RFC 3032, RFC 4023.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 3032, RFC 4023.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -5763,7 +6621,7 @@ Notes
 
 ### RFC 5443: LDP IGP Synchronization {#ra_rfc5443}
 
-Depth: deep. Errata: 1 errata: 1 rejected. 
+Depth: deep. Errata: 1 errata: 1 rejected. Status: Informational. Updated by: RFC 6138, RFC 10041.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -5792,21 +6650,86 @@ Notes
 
 ### RFC 5561: LDP Capabilities {#ra_rfc5561}
 
-Depth: deep (3 to 9). Errata: none (the RFC has no errata). Updates: RFC 5036.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0209 | 6, 7 | "If the U-bit is 1, then the speaker MUST silently ignore the Capability Parameter and allow the session to be established. However, if the U-bit is 0, then speaker SHOULD send a Notification message to the peer before terminating the session." | The U-bit handling of an unsupported Capability Parameter is specified only for Initialization messages (Section 6). For a Capability message (Section 7) the text does not say whether an unsupported capability with U = 0 terminates an established session, is answered with Unsupported Capability without closing it, or is ignored; nor what a speaker does when a peer withdraws (S = 0) a capability it never advertised, or changes one whose capability document allows only Initialization (for example RFC 6389 Section 3). | ambiguity | none: RFC has no errata |
+| RA-1366 | 3, 6, 8 | "the speaker SHOULD send a Notification message to the peer before terminating the session.  The Status Code in the Status TLV of the Notification message MUST be Unsupported Capability (6) / The E-bit of the Status TLV carried in a Notification message that includes this status code MUST be set to 0. (8)" | Section 6 (U-bit 0 capability not supported, or a capability document that requires the session to end) uses Unsupported Capability as the notification sent before the session is terminated, while Section 8 makes that status advisory (E = 0). In RFC 5036 (3.5.1.1) the session is closed after a notification whose status code indicates a fatal error, and a receiver ends a session only on a fatal notification; with E = 0 the receiver of the notification cannot tell that the session is being closed for this reason and treats the following TCP close as an unexplained failure (it may retry immediately with the same Initialization message). The same section structure is used for duplicate Capability Parameters (3), where the notification is Malformed TLV Value. The text does not say whether, when terminating, the E bit should be set or a separate fatal notification should follow. | ambiguity | none: RFC has no errata |
+| RA-1367 | 3.1 | "One example of a Backward Capability TLV is the "FT Session TLV"" | The term defined in the same section is "Backward Compatibility TLV". | editorial | none: RFC has no errata; **proposed erratum below** |
+
+Proposed erratum RA-1367 (RFC 5561, Section 3.1; type: Editorial):
+
+```
+Original Text
+-------------
+   One example of a Backward Capability TLV is the "FT Session TLV"
+
+Corrected Text
+--------------
+   One example of a Backward Compatibility TLV is the "FT Session
+   TLV"
+
+Notes
+-----
+   Editorial.
+```
 
 ### RFC 5586: MPLS Generic Associated Channel {#ra_rfc5586}
 
-Depth: deep (4 in full). Errata: 2 errata: 1 verified, 1 rejected. Updates: RFC 3032, RFC 4385, RFC 5085.
+Depth: deep. Errata: 2 errata: 1 verified, 1 rejected. Status: Proposed Standard. Updates: RFC 3032, RFC 4385, RFC 5085. Updated by: RFC 6423, RFC 7026, RFC 7214, RFC 7274.
 
-Nothing notable found at this depth.
+| ID | Section | Quote | Issue | Severity | Erratum |
+|---|---|---|---|---|---|
+| RA-1368 | 4.2.1.1, 4.2 | "Upon reception of the labeled packet, the targeted destination, after having checked both the LSP Label and GAL LSEs fields, SHOULD pass the whole packet to the appropriate processing entity." | The procedure assumes the LSP label is still present when the packet reaches the LER D (Figure 6). If the LSP uses penultimate hop popping, C pops the LSP label and D receives the GAL as the top label: D cannot check an LSP label and has no label from which to learn which LSP the G-ACh message belongs to, and C sees the GAL exposed (the Note says the GAL becomes visible "when the LSP label is popped") although C is not the destination and 4.2 forbids forwarding "based on the GAL label". The document neither requires UHP (or explicit null) for LSPs that carry a G-ACh nor says how the egress identifies the LSP when PHP is used. | ambiguity | none: RFC has 2 errata, none on this point; **proposed erratum below** |
+| RA-1369 | 4.2.1.2 | "Intermediate nodes of the MPLS Section MUST NOT modify the G-ACh message, the ACH and the GAL towards the tail-end LSR (Z)." | An MPLS Section is defined (1.3) as a server layer between "adjacent nodes", and Figure 7 shows A and Z directly connected; 4.2.1.2 itself says "Only A and Z can insert, extract, or process packets on this G-ACh". There are no MPLS-layer intermediate nodes, so the requirement either has no subject or refers to server-layer nodes that do not process MPLS at all. | editorial | none: RFC has 2 errata, none on this point; **proposed erratum below** |
+
+Proposed erratum RA-1368 (RFC 5586, Section 4.2.1.1, 4.2; type: Technical):
+
+```
+Original Text
+-------------
+   Upon reception of the labeled packet, the targeted destination,
+   after having checked both the LSP Label and GAL LSEs fields,
+   SHOULD pass the whole packet to the appropriate processing
+   entity.
+
+Corrected Text
+--------------
+   (Add before this paragraph) An LSP that carries a G-ACh MUST NOT
+   use penultimate hop popping (the egress LER advertises a non-null
+   label or explicit null), so that the LSP label identifying the
+   LSP is present at the targeted destination.
+
+Notes
+-----
+   MPLS-TP deployments typically use UHP, but RFC 5586 places no
+   restriction on PHP and states (4.2) that outside MPLS-TP the GAL
+   may appear anywhere in the stack.
+```
+
+Proposed erratum RA-1369 (RFC 5586, Section 4.2.1.2; type: Editorial):
+
+```
+Original Text
+-------------
+   Intermediate nodes of the MPLS Section MUST NOT modify the G-ACh
+   message, the ACH and the GAL towards the tail-end LSR (Z).
+
+Corrected Text
+--------------
+   Nodes of the server layer between A and Z (if any) do not process
+   the MPLS label stack and therefore do not modify the G-ACh
+   message, the ACH or the GAL.
+
+Notes
+-----
+   Likely carried over from the LSP case in Section 4.2.1.1.
+```
 
 ### RFC 5918: Label Distribution Protocol (LDP) 'Typed Wildcard' Forward Equivalence Class (FEC) {#ra_rfc5918}
 
-Depth: deep (read in full). Errata: 2 errata: 1 verified, 1 held. 
+Depth: deep (read in full). Errata: 2 errata: 1 verified, 1 held. Status: Proposed Standard. Updated by: RFC 7358.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -5815,7 +6738,7 @@ Depth: deep (read in full). Errata: 2 errata: 1 verified, 1 held.
 
 ### RFC 5919: Signaling LDP Label Advertisement Completion {#ra_rfc5919}
 
-Depth: deep (3 to 5). Errata: 1 errata: 1 held. 
+Depth: deep. Errata: 1 errata: 1 held. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -5823,7 +6746,7 @@ Depth: deep (3 to 5). Errata: 1 errata: 1 held.
 
 ### RFC 6138: LDP IGP Synchronization for Broadcast Networks {#ra_rfc6138}
 
-Depth: deep (Informational). Errata: none (the RFC has no errata). Updates: RFC 5443.
+Depth: deep. Errata: none (the RFC has no errata). Status: Informational. Updates: RFC 5443.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -5833,7 +6756,7 @@ Depth: deep (Informational). Errata: none (the RFC has no errata). Updates: RFC 
 
 ### RFC 6370: MPLS Transport Profile (MPLS-TP) Identifiers {#ra_rfc6370}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -5862,15 +6785,15 @@ Notes
 
 ### RFC 6378: MPLS Transport Profile (MPLS-TP) Linear Protection {#ra_rfc6378}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 7214, RFC 7271, RFC 7324.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
-| RA-0601 | 4.3.3.2, Appendix A | "A local Signal Fail on the protection path input when in local Unavailable state ... SHALL cause the LER to remain in local Unavailable state and transmit an SF(0,0) message. / All other local inputs SHALL be ignored." | The text defines a local SF-P only for local Unavailable state; in remote Unavailable state (UA:LO:R, UA:P:R) the input falls under "All other local inputs SHALL be ignored". Appendix A, Part 1 instead has UA:LO:R / SF-P = footnote [1] ("transmit SF(0,0)") and UA:P:R / SF-P = UA:P:L (a transition to local Unavailable). Appendix A says the text is authoritative on a mismatch, so an implementation following the text keeps sending NR(0,0) while one following the table sends SF(0,0), and the peer's view of the protection path differs (the local SF on protection is never reported). The (by implication) parenthesis in the text is also misleading, since a local SF-P in UA:LO:L is masked by the higher-priority Lockout. | contradiction | none: RFC has no errata; **proposed erratum below** |
-| RA-0602 | 4.3.3.4, Appendix A | "A remote Forced Switch message SHALL cause the LER go into remote Protecting administrative state, and if in local Protecting failure state, the LER SHALL transmit the SF(1,1) message / PF:W:L  \| [11]  \| [12] \|PA:F:R\|" | In Part 2 of the table, PF:W:L with a remote FS goes to PA:F:R without a footnote, so by the Appendix A rule ("If the message to be sent ... deviates from the table below, it is noted in the footnotes") the LER sends the PA:F:R default NR(0,1), while the text requires SF(1,1). Footnote [12] also says "Transition to UA" without saying UA:P:R, the only remote Unavailable state that a remote SF-P can produce. The same row and footnote [11]/[12] are the only places where the local SF-W survives a remote-caused transition, so the missing footnote changes what the peer learns about the working path. | contradiction | none: RFC has no errata; **proposed erratum below** |
-| RA-0603 | 3.5, 4.3.3.5 | "If the WTR timer expires prior to being stopped, it SHALL generate a WTR Expires local signal / If the WTR timer is running, then a remote NR message SHALL be ignored.  If the WTR timer is stopped, then a remote NR message SHALL cause the LER to go into Normal state." | The WTR timer has two states, Running and Stopped, and only a Stop command is said to put it into Stopped. Expiry generates WTR Expires but the timer's state after expiry is not given. The exit from Wait-to-Restore depends on the timer being "stopped"; if an expired timer is not "Stopped", an LER that sent NR(0,1) after expiry ignores the peer's NR for ever. Also an LER that entered WTR remotely (PF:W:R + remote WTR) never started its own timer; the rule then relies on "stopped" meaning "not running". The remote NR rule also does not distinguish NR(0,1) from NR(0,0). | ambiguity | none: RFC has no errata |
-| RA-0604 | 4.3.2 | "The remote message from the far-end LER is assigned a priority just below the similar local input." | Remote WTR, remote DNR and remote NR have no "similar local input" in the ten-entry local priority list (WTR Expires and No Request are not the same requests), so their priority relative to local inputs is undefined; the state tables settle individual cases but the general rule used to resolve local and remote inputs (Section 3.6.1) cannot be applied to them. The priority list has "Signal Degrade on working" but no SD on protection, although Section 3.1 defines SD for either path. | ambiguity | none: RFC has no errata |
-| RA-0605 | 4.1 | "If no valid PSC message is received, over a period of several continual messages intervals, the last valid received message remains applicable." | No loss-of-PSC-session detection or reaction is defined: a peer that stops sending (or a protection path that silently drops the G-ACh) leaves the last remote request in force indefinitely, e.g. a remote FS keeps traffic on the protection path. "Several" intervals is not quantified. Also "it is RECOMMENDED that the default interval ... SHOULD be no longer than 3.3 ms" doubles the requirement keyword. | ambiguity | none: RFC has no errata |
+| RA-0601 | 4.3.3.2, Appendix A | "A local Signal Fail on the protection path input when in local Unavailable state ... SHALL cause the LER to remain in local Unavailable state and transmit an SF(0,0) message. / All other local inputs SHALL be ignored." | The text defines a local SF-P only for local Unavailable state; in remote Unavailable state (UA:LO:R, UA:P:R) the input falls under "All other local inputs SHALL be ignored". Appendix A, Part 1 instead has UA:LO:R / SF-P = footnote [1] ("transmit SF(0,0)") and UA:P:R / SF-P = UA:P:L (a transition to local Unavailable). Appendix A says the text is authoritative on a mismatch, so an implementation following the text keeps sending NR(0,0) while one following the table sends SF(0,0), and the peer's view of the protection path differs (the local SF on protection is never reported). The (by implication) parenthesis in the text is also misleading, since a local SF-P in UA:LO:L is masked by the higher-priority Lockout. Later RFCs: RFC 7271 Section 11.1 settles this for the APS mode only; the PSC mode keeps the text of this RFC. | contradiction | none: RFC has no errata; **proposed erratum below** |
+| RA-0602 | 4.3.3.4, Appendix A | "A remote Forced Switch message SHALL cause the LER go into remote Protecting administrative state, and if in local Protecting failure state, the LER SHALL transmit the SF(1,1) message / PF:W:L  \| [11]  \| [12] \|PA:F:R\|" | In Part 2 of the table, PF:W:L with a remote FS goes to PA:F:R without a footnote, so by the Appendix A rule ("If the message to be sent ... deviates from the table below, it is noted in the footnotes") the LER sends the PA:F:R default NR(0,1), while the text requires SF(1,1). Footnote [12] also says "Transition to UA" without saying UA:P:R, the only remote Unavailable state that a remote SF-P can produce. The same row and footnote [11]/[12] are the only places where the local SF-W survives a remote-caused transition, so the missing footnote changes what the peer learns about the working path. Later RFCs: RFC 7271 Section 11 settles this for the APS mode only; the PSC mode keeps the text of this RFC. | contradiction | none: RFC has no errata; **proposed erratum below** |
+| RA-0603 | 3.5, 4.3.3.5 | "If the WTR timer expires prior to being stopped, it SHALL generate a WTR Expires local signal / If the WTR timer is running, then a remote NR message SHALL be ignored.  If the WTR timer is stopped, then a remote NR message SHALL cause the LER to go into Normal state." | The WTR timer has two states, Running and Stopped, and only a Stop command is said to put it into Stopped. Expiry generates WTR Expires but the timer's state after expiry is not given. The exit from Wait-to-Restore depends on the timer being "stopped"; if an expired timer is not "Stopped", an LER that sent NR(0,1) after expiry ignores the peer's NR for ever. Also an LER that entered WTR remotely (PF:W:R + remote WTR) never started its own timer; the rule then relies on "stopped" meaning "not running". The remote NR rule also does not distinguish NR(0,1) from NR(0,0). Later RFCs: RFC 7271 (Section 11 and its state table footnote) settles this for the APS mode only. RFC 7324 Section 4.3.3.4 adds a rule that puts both ends into Wait-to-Restore, which makes the undefined timer state after expiry decisive; Appendix A is not updated by either. | ambiguity | none: RFC has no errata |
+| RA-0604 | 4.3.2 | "The remote message from the far-end LER is assigned a priority just below the similar local input." | Remote WTR, remote DNR and remote NR have no "similar local input" in the ten-entry local priority list (WTR Expires and No Request are not the same requests), so their priority relative to local inputs is undefined; the state tables settle individual cases but the general rule used to resolve local and remote inputs (Section 3.6.1) cannot be applied to them. The priority list has "Signal Degrade on working" but no SD on protection, although Section 3.1 defines SD for either path. Later RFCs: RFC 7271 Section 10.2 settles this for the APS mode only (single priority list including the remote requests); the PSC mode keeps the text of this RFC. | ambiguity | none: RFC has no errata |
+| RA-0605 | 4.1 | "If no valid PSC message is received, over a period of several continual messages intervals, the last valid received message remains applicable." | No loss-of-PSC-session detection or reaction is defined: a peer that stops sending (or a protection path that silently drops the G-ACh) leaves the last remote request in force indefinitely, e.g. a remote FS keeps traffic on the protection path. "Several" intervals is not quantified. Also "it is RECOMMENDED that the default interval ... SHOULD be no longer than 3.3 ms" doubles the requirement keyword. Later RFCs: RFC 7271 Section 12 settles this for the APS mode only (alarm after 3.5 intervals without a message, no switching); the PSC mode keeps the text of this RFC. | ambiguity | none: RFC has no errata |
 | RA-0606 | 2.1, 4.2.6 | "MEG     Managed Entity Group / 0: indicates that the protection path is not transporting user data traffic (in 1:n architecture)" | MEG is "Maintenance Entity Group" (RFC 6371); the Path field text refers to the 1:n architecture, which Section 1.2 puts out of scope, where 1:1 is meant. Section 6 has "that is can be used" and "carried between in the G-ACh consenting nodes". | editorial | none: RFC has no errata; **proposed erratum below** |
 
 Proposed erratum RA-0601 (RFC 6378, Section 4.3.3.2, Appendix A; type: Technical):
@@ -5937,17 +6860,108 @@ Notes
 
 ### RFC 6388: Label Distribution Protocol Extensions for Point-to-Multipoint and Multipoint-to-Multipoint Label Switched Paths {#ra_rfc6388}
 
-Depth: deep (2, 3.1 to 3.2, 5, 11 in full; 3.3, 7, 8 by MUST/SHOULD). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 7358.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0213 | 2.4.1.1 | "1. The candidate upstream LSRs are numbered from lower to higher IP address. ... 3. The selected upstream LSR U is the LSR that has the number H." | The procedure exists so that all receivers on a LAN elect the same upstream LSR, but it does not say which address of a candidate is used (LSR Id, LDP transport address, or the candidate's address on the LAN), how IPv4 and IPv6 candidates are ordered against each other, or that numbering starts at 0 (H = CRC32 mod N ranges from 0 to N - 1, so numbering from 1 leaves the highest candidate unused and H = 0 unmatched). Two receivers that resolve these differently elect different forwarders, which is the duplication the procedure is meant to avoid. | ambiguity | none: RFC has no errata |
 | RA-0214 | 2.4.2.2 | "then Z propagates the Label Withdraw for <X, Y> to its upstream T, by sending a Label Withdraw <X, Y, L1> where L1 is the label Z had previously advertised to T" | Section 2.4.1.4 uses T for the downstream LSR that sent the Label Mapping and U for the upstream LSR; here T names the upstream. The procedure is clear from "its upstream", but the letter swap makes the two sections read as if Withdraws go to the downstream peer. | editorial | none: RFC has no errata |
 | RA-0215 | 2.1, 3.1 | "The P2MP Capability TLV MUST be advertised in the LDP Initialization message. ... If the peer has not advertised the corresponding capability, then label messages using the P2MP FEC Element SHOULD NOT be sent to the peer." | The capability is tied to Initialization only (no dynamic advertisement via RFC 5561 Capability messages, unlike RFC 6389 which says so explicitly), and sending P2MP / MP2MP FEC Elements to a peer without the capability is only a SHOULD NOT. Receive handling of such an element from a peer that did not advertise the capability is not stated (RFC 5561 leaves it to the capability document). | ambiguity | none: RFC has no errata |
+| RA-1370 | 8.3 | "If an LSR receives a Label Mapping message with an MBB parameter from downstream LSR-D and its upstream LSR-U has not advertised that it is MBB capable, the LSR MUST send an MBB notification immediately to LSR-U (see Section 8.4)." | The MBB notification (Notification with MBB Status code 2) acknowledges a downstream LSR's MBB Label Mapping (8.1, 8.4.4), so in this case it can only be meant for LSR-D, whose switch-over would otherwise wait for the timeout. Sending it to LSR-U, as written, contradicts the sentence just before ("If an LSR has not advertised that it is MBB capable, its LDP peers MUST NOT send it messages that include MBB parameters"), since LSR-U is exactly the peer without the capability, and it gives LSR-U a notification for a label it never assigned. | error | none: RFC has no errata; **proposed erratum below** |
+| RA-1371 | 9, 3.2, 11 | "Type:  The type of FEC Element Type.  Either the P2MP FEC Element or the MP2MP FEC Element using the values defined for those FEC Elements when carried in the FEC TLV" | There is no single "MP2MP FEC Element": Section 3.2 defines two, MP2MP upstream (0x07) and MP2MP downstream (0x08), whose labels go in opposite directions. Section 9 does not say whether a typed wildcard for MP2MP carries 0x07, 0x08 or either, nor whether a wildcard of one type (for example in a Label Withdraw or Release) applies to the labels of that direction only or to the whole MP2MP LSP. A sender using 0x08 to mean "all MP2MP state" and a receiver applying it to downstream labels only leave the upstream labels in place. | ambiguity | none: RFC has no errata; **proposed erratum below** |
+| RA-1372 | 2.2, 2.3, 3.2 | "Opaque Length:  The length of the opaque value, in octets. / Opaque Value:  One or more MP opaque value elements" | The error handling of 2.2 (which 3.2 applies to MP2MP) covers only an Address Length that does not match the Address Family. It does not say what a receiver does when the opaque value elements do not exactly fill Opaque Length (an element running past it, or trailing octets), when Opaque Length is 0 although "one or more" elements are required, or when an element has the Reserved basic type 0 (Section 11). Transit LSRs need not interpret the opaque value (2.3), so the checks belong to roots and leaves, but whether a malformed opaque value is an "Unknown FEC", a malformed TLV or an opaque value that never matches is not stated. For the extended type, "Value: ... interpreted as specified by the Type field" should refer to the Extended Type field. | ambiguity | none: RFC has no errata |
+| RA-1373 | 5.2.1, 11 | "Since the notification does not refer to any particular message, the Message ID and Message Type fields are set to 0." | The figure above the sentence shows the Notification message's own Message ID field, which RFC 5036 requires to identify the message, while "Message Type" exists only inside the Status TLV, so the sentence presumably means the Message ID and Message Type fields of the Status TLV. It is also left unstated which status code the Status TLV carries (only Section 11 names "LDP MP status", 0x00000040) and with which E and F bits. | ambiguity | none: RFC has no errata; **proposed erratum below** |
+| RA-1374 | 8.1, 3.3.2.2, 3 | "When LSR-U receives the MBB notification from LSR-U, it transitions to LSP state #3 / There is no need to send an MP2MP-U Label Withdraw <X, Y, Lu> to D because node D already removed Lu" | In 8.1 the MBB notification comes from LSR-U's own upstream LSR, not from LSR-U. In 3.3.2.2 the upstream label that transit node Z assigned to D is Lu' (3.3.1.5: "sends an MP2MP-U Label Mapping <X, Y, Lu'> to node D"); Lu is the label Z received from its own upstream U, which the next paragraph releases to U. Section 3 also reads "acting equally an as Ingress or Egress LSR". | editorial | none: RFC has no errata; **proposed erratum below** |
+
+Proposed erratum RA-1370 (RFC 6388, Section 8.3; type: Technical):
+
+```
+Original Text
+-------------
+   the LSR MUST send an MBB notification immediately to LSR-U (see
+   Section 8.4).
+
+Corrected Text
+--------------
+   the LSR MUST send an MBB notification immediately to LSR-D (see
+   Section 8.4).
+
+Notes
+-----
+   Section 8.4.4 describes the MBB notification as sent to the
+   downstream LSR (N2) that sent the MBB Label Mapping; LSR-U, not
+   being MBB capable, must not receive MBB parameters.
+```
+
+Proposed erratum RA-1371 (RFC 6388, Section 9, 3.2, 11; type: Technical):
+
+```
+Original Text
+-------------
+   Type:  The type of FEC Element Type.  Either the P2MP FEC Element
+   or the MP2MP FEC Element using the values defined for those FEC
+   Elements when carried in the FEC TLV as defined in this document.
+
+Corrected Text
+--------------
+   Type:  The type of FEC Element Type: the P2MP FEC Element (0x06),
+   the MP2MP upstream FEC Element (0x07) or the MP2MP downstream FEC
+   Element (0x08), using the values defined for those FEC Elements
+   when carried in the FEC TLV as defined in this document.  A typed
+   wildcard of one MP2MP type applies only to the labels bound to
+   FEC Elements of that type.
+
+Notes
+-----
+   The scope of an MP2MP typed wildcard (one direction or both)
+   should be stated.
+```
+
+Proposed erratum RA-1373 (RFC 6388, Section 5.2.1, 11; type: Technical):
+
+```
+Original Text
+-------------
+   Since the notification does not refer to any particular message,
+   the Message ID and Message Type fields are set to 0.
+
+Corrected Text
+--------------
+   The Status TLV carries the status code "LDP MP status" (Section
+   11) with the E and F bits clear.  Since the notification does not
+   refer to any particular message, the Message ID and Message Type
+   fields of the Status TLV are set to 0.
+
+Notes
+-----
+   RFC 5036 Section 3.4.6 defines the Status TLV fields (U, F,
+   Status Code with E and F bits, Message ID, Message Type).
+```
+
+Proposed erratum RA-1374 (RFC 6388, Section 8.1, 3.3.2.2, 3; type: Editorial):
+
+```
+Original Text
+-------------
+   When LSR-U receives the MBB notification from LSR-U, it
+   transitions to LSP state #3 and sends an MBB notification to
+   LSR-D.
+
+Corrected Text
+--------------
+   When LSR-U receives the MBB notification from its upstream LSR,
+   it transitions to LSP state #3 and sends an MBB notification to
+   LSR-D.
+
+Notes
+-----
+   In 3.3.2.2 "<X, Y, Lu> to D ... removed Lu" should read Lu'; in 3
+   "an as" should read "as an".
+```
 
 ### RFC 6389: MPLS Upstream Label Assignment for LDP {#ra_rfc6389}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -5976,19 +6990,38 @@ Notes
 
 ### RFC 6512: Using Multipoint LDP When the Backbone Has No Route to the Root {#ra_rfc6512}
 
-Depth: deep (2, 3). Errata: 2 errata: 2 verified. 
+Depth: deep. Errata: 2 errata: 2 verified. Status: Proposed Standard.
 
-Nothing notable found at this depth.
+| ID | Section | Quote | Issue | Severity | Erratum |
+|---|---|---|---|---|---|
+| RA-1375 | 3.2.1, 3.1 | "At PE1 in Figure 4, the LSP to be created is associated with a particular VPN Routing and Forwarding Table (VRF)." | Figure 4 is the VPN-Recursive Opaque Value encoding; the inter-AS topology with PE1, P1, ASBR1, ASBR2, P2 and PE2 is Figure 5. In 3.1 "value field of is own" should read "of its own". The informal notation of 3.2.1 lists the inner value as "root, RD, opaque value" while the encoding of 3.1 places the RD first, followed by the complete inner FEC element; an implementer should follow 3.1. | editorial | none: RFC has 2 errata, none on this point; **proposed erratum below** |
+
+Proposed erratum RA-1375 (RFC 6512, Section 3.2.1, 3.1; type: Editorial):
+
+```
+Original Text
+-------------
+   At PE1 in Figure 4, the LSP to be created
+
+Corrected Text
+--------------
+   At PE1 in Figure 5, the LSP to be created
+
+Notes
+-----
+   Editorial; the order of fields on the wire is the one given in
+   Section 3.1 (RD, then the P2MP or MP2MP FEC element).
+```
 
 ### RFC 6667: LDP 'Typed Wildcard' Forwarding Equivalence Class (FEC) for PWid and Generalized PWid FEC Elements {#ra_rfc6667}
 
-Depth: deep (read in full). Errata: none (the RFC has no errata). 
+Depth: deep (read in full). Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 Nothing notable found at this depth.
 
 ### RFC 6720: The Generalized TTL Security Mechanism (GTSM) for the Label Distribution Protocol (LDP) {#ra_rfc6720}
 
-Depth: deep (read in full). Errata: none (the RFC has no errata). Updates: RFC 5036.
+Depth: deep (read in full). Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 5036. Updated by: RFC 7552.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -5996,23 +7029,100 @@ Depth: deep (read in full). Errata: none (the RFC has no errata). Updates: RFC 5
 
 ### RFC 6790: The Use of Entropy Labels in MPLS Forwarding {#ra_rfc6790}
 
-Depth: deep. Errata: 1 errata: 1 held. Updates: RFC 3031, RFC 3107, RFC 3209, RFC 5036.
+Depth: deep. Errata: 1 errata: 1 held. Status: Proposed Standard. Updates: RFC 3031, RFC 3107, RFC 3209, RFC 5036. Updated by: RFC 7274, RFC 7447, RFC 8012.
 
-Resolved by a later RFC (kept for reference; not counted as open findings):
+Resolved by a later RFC or re-targeted to its successor (kept for reference; not counted as open findings):
 
-| ID | Section | Issue as found | Resolution |
-|---|---|---|---|
-| RA-0053 | 5.2 | The Entropy Label Capability attribute is described only as "of value 28"; | RFC 7447 (updates RFC 6790) deprecates the BGP Entropy Label Capability attribute. |
+| ID | Section | Issue as found | Outcome | Resolution |
+|---|---|---|---|---|
+| RA-0053 | 5.2 | The Entropy Label Capability attribute is described only as "of value 28"; | Resolved | RFC 7447 (updates RFC 6790) deprecates the BGP Entropy Label Capability attribute. |
+
+| ID | Section | Quote | Issue | Severity | Erratum |
+|---|---|---|---|---|---|
+| RA-1376 | 4.2, 4.3, 4.4 | "X MAY choose different values for the TTL and TC fields if it is known that the ELI will not be exposed as the top label at any point along the LSP (as may happen in cases where PHP is used and the ELI and EL are not stripped at the penultimate hop (see Section 4.4)." | The example is the opposite case. When PHP is used and the penultimate hop does not strip ELI and EL (Section 4.4 makes stripping optional), the egress receives <ELI, EL, ...> with the ELI as the top label; Section 4.3 requires that egress to pop it ("an egress LSR that signals both ELC and implicit null MUST pop the ELI"). The ELI is therefore exposed exactly in the cited case, and is not exposed only with UHP or when the penultimate hop strips the pair. An implementer following the example sets non-copied TTL / TC on an ELI that becomes the top label, which an egress may use for the TTL and TC of the payload (4.1: "MAY use the tunnel TL's or ELI's TTL"). The parenthesis is also unbalanced. | error | none: RFC has 1 errata, none on this point; **proposed erratum below** |
+| RA-1377 | 5.1.1 | "If X understands the ELC TLV, and if any of the advertisements it received for FEC F does not include the ELC TLV, X MUST NOT include the ELC TLV in its own advertisements of F." | An LSR using liberal label retention (the RFC 5036 default for downstream unsolicited) holds Label Mappings for F from every neighbour, including neighbours that are not next hops for F and upstream neighbours that use X as their own next hop. Read literally, a single non-ELC mapping from any of them withdraws ELC for the whole FEC, although only the mappings of the next hop(s) actually used determine whether the egress can pop ELs; conversely, a mapping from a non-next-hop neighbour cannot make the path EL-capable. Whether "the advertisements it received for FEC F" means all retained mappings or only those of the next hops used for forwarding, and what happens when the next-hop set changes without any mapping being resent (not listed among the re-evaluation triggers), is not stated. | ambiguity | none: RFC has 1 errata, none on this point; **proposed erratum below** |
+| RA-1378 | 6, header, 5.1, 8 | "This memo updates LSP traceroute by specifying that the value from the label range is to be placed in the entropy label." | Section 6 states a normative change to LSP traceroute (RFC 4379, since obsoleted by RFC 8029), but the header lists "Updates: 3031, 3107, 3209, 5036" without RFC 4379, so implementers of LSP traceroute are not pointed to it. Smaller slips: 5.1 calls the Label Mapping a "Label Mapping Message TLV" and says "This bit MUST be set be set to 1"; Section 8 explains "The line with LS: shows the label stack on the wire", but the figures label those lines "Data Plane:" / "X-A:". | editorial | none: RFC has 1 errata, none on this point; **proposed erratum below** |
+
+Proposed erratum RA-1376 (RFC 6790, Section 4.2, 4.3, 4.4; type: Technical):
+
+```
+Original Text
+-------------
+   (as may happen in cases where PHP is used and the ELI and EL are
+   not stripped at the penultimate hop (see Section 4.4).
+
+Corrected Text
+--------------
+   (as may happen in cases where UHP is used, or where PHP is used
+   and the ELI and EL are stripped at the penultimate hop (see
+   Section 4.4)).
+
+Notes
+-----
+   With PHP and no stripping at the penultimate hop, the ELI arrives
+   at the egress as the top label (Sections 4.3 and 5: "even if Y
+   signals an implicit null label ... Y MUST be prepared to pop the
+   ELI and EL").
+```
+
+Proposed erratum RA-1377 (RFC 6790, Section 5.1.1; type: Technical):
+
+```
+Original Text
+-------------
+   If X understands the ELC TLV, and if any of the advertisements it
+   received for FEC F does not include the ELC TLV, X MUST NOT
+   include the ELC TLV in its own advertisements of F.  If all the
+   advertised Mappings for F include the ELC TLV, then X MUST
+   advertise its Mapping for F with the ELC TLV.
+
+Corrected Text
+--------------
+   If X understands the ELC TLV, and if any of the Label Mappings
+   for FEC F received from the next hops X uses to forward F does
+   not include the ELC TLV, X MUST NOT include the ELC TLV in its
+   own advertisements of F.  If all such Mappings include the ELC
+   TLV, then X MUST advertise its Mapping for F with the ELC TLV.  X
+   MUST also re-evaluate the status of ELC for F when its set of
+   next hops for F changes.
+
+Notes
+-----
+   With liberal label retention, mappings from non-next-hop
+   neighbours are retained but do not describe the path used.
+   Next-hop changes (IGP reconvergence) change the egress capability
+   without any LDP message, so they need to be a re-evaluation
+   trigger too.
+```
+
+Proposed erratum RA-1378 (RFC 6790, Section 6, header, 5.1, 8; type: Editorial):
+
+```
+Original Text
+-------------
+   This memo updates LSP traceroute by specifying that the value
+   from the label range is to be placed in the entropy label.
+
+Corrected Text
+--------------
+   (Header) Updates: 3031, 3107, 3209, 4379, 5036. (Section 8) The
+   lines below "Data Plane:" show the label stack on the wire.
+
+Notes
+-----
+   RFC 8012 (which updates RFC 6790) later specified ping and
+   traceroute with entropy labels; RFC 8029 obsoletes RFC 4379.
+```
 
 ### RFC 6826: Multipoint LDP In-Band Signaling for Point-to-Multipoint and Multipoint-to-Multipoint Label Switched Paths {#ra_rfc6826}
 
-Depth: deep (read in full). Errata: none (the RFC has no errata). 
+Depth: deep (read in full). Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 7438.
 
 Nothing notable found at this depth.
 
 ### RFC 7032: LDP Downstream-on-Demand in Seamless MPLS {#ra_rfc7032}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -6044,37 +7154,135 @@ Notes
 
 ### RFC 7140: LDP Extensions for Hub and Spoke Multipoint Label Switched Path {#ra_rfc7140}
 
-Depth: deep (3, 6). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 7358.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0218 | 6 | "In order to ensure that the leaf node sends the LSP Ping Echo Reply along the HSMP upstream path, the R flag (Validate Reverse Path) in the Global Flags field defined in [RFC6426] is reused here." | In RFC 6426 3.4 the R flag asks the responder to return reverse-path FEC information; it does not select the path the reply takes. Here the same flag also obliges the leaf to send the reply on the HSMP upstream path. A responder that implements only RFC 6426 sends the reply by its usual means with a Reverse-path Target FEC Stack, so the root cannot tell whether the upstream path was exercised. | ambiguity | none: RFC has no errata |
+| RA-1379 | 3.5.2 | "If deleting L from Z's forwarding state for downstream <X, Y> results in no state remaining for <X, Y>, then Z propagates the HSMP-D Label Withdraw <X, Y, L> to its upstream node U for <X, Y>." | L is the label that the downstream node D advertised to Z (and that Z has just released to D). The withdraw Z sends to its upstream U must carry the label Z itself advertised to U for <X, Y> (L' in Section 3.4.2, where Z "will allocate a label L' ... and send an HSMP-D Label Mapping <X, Y, L'> to U"). The corresponding RFC 6388 text (2.4.2.2) says so explicitly: "by sending a Label Withdraw <X, Y, L1> where L1 is the label Z had previously advertised to T". A literal implementation withdraws a label U never received from Z, which U cannot match (RFC 5036 3.5.10 then treats it as a withdraw of the FEC with a label it does not know). | error | none: RFC has no errata; **proposed erratum below** |
+| RA-1380 | 3.4.1, 3.4.2, 3.4.3 | "A leaf node Z of an HSMP LSP <X, Y> determines its upstream LSR U for <X, Y> as per Section 3.3, allocates a label L, and sends an HSMP-D Label Mapping <X, Y, L> to U." | The upstream-LSR determination (the RFC 6388 2.4.1.1 rule) and the downstream-LSR rule are in Section 3.4; Section 3.3 only lists definitions of the FEC Elements and messages. 3.4.1 and 3.4.2 ("determines its upstream LSR U for <X, Y> as per Section 3.3") and 3.4.3 ("Node Z determines the downstream HSMP LSR as per Section 3.3") point to the wrong section, while 3.4.2 later cites the same rule correctly ("as per Section 3.4"). | editorial | none: RFC has no errata; **proposed erratum below** |
+
+Proposed erratum RA-1379 (RFC 7140, Section 3.5.2; type: Technical):
+
+```
+Original Text
+-------------
+   then Z propagates the HSMP-D Label Withdraw <X, Y, L> to its
+   upstream node U for <X, Y>.
+
+Corrected Text
+--------------
+   then Z propagates the HSMP-D Label Withdraw <X, Y, L'> to its
+   upstream node U for <X, Y>, where L' is the label Z had
+   previously advertised to U for <X, Y>.
+
+Notes
+-----
+   Matches RFC 6388 Section 2.4.2.2 for P2MP LSPs.
+```
+
+Proposed erratum RA-1380 (RFC 7140, Section 3.4.1, 3.4.2, 3.4.3; type: Editorial):
+
+```
+Original Text
+-------------
+   determines its upstream LSR U for <X, Y> as per Section 3.3
+
+Corrected Text
+--------------
+   determines its upstream LSR U for <X, Y> as per Section 3.4
+
+Notes
+-----
+   Occurrences: 3.4.1 (leaf), 3.4.2 first paragraph (transit), 3.4.3
+   (root, "downstream HSMP LSR as per Section 3.3").
+```
 
 ### RFC 7246: Multipoint Label Distribution Protocol In-Band Signaling in a Virtual Routing and Forwarding (VRF) Table Context {#ra_rfc7246}
 
-Depth: deep (normative lines and opaque encodings). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 7438.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0610 | 2, 3.3, 3.4 | "then it uses the RD encoded in the opaque value field to determine the VRF context.  (This RD will be associated with one of the PEs VRFs.) / Mask Len:  The number of contiguous one bits that are left justified and used as a mask, 1 octet." | The root PE selects the VRF by the RD in the opaque value, but nothing says what it does when no local VRF has that RD (RD changed, mis-configuration, an RD shared by two VRFs, or a VRF without the in-band group range of Section 1): ignore the Label Mapping, send a Notification (which status), or hold the state until the VRF appears. Section 1 makes the group-range configuration a MUST on every PE but gives no receiver behaviour for a FEC whose group is outside the configured range. For the Bidir values, "Mask Len" does not say what the mask applies to (the Group, giving a group range for the RP state of RFC 6826 2.3, or the RP), nor which values are valid (0 to 32 / 128) and what a receiver does with a larger value. Section 1 also has an unbalanced parenthesis ("per VRF defined in [RFC4364])."). | ambiguity | none: RFC has no errata |
 
-### RFC 7274: Allocating and Retiring Special-Purpose MPLS Labels {#ra_rfc7274}
+### RFC 7271: MPLS Transport Profile (MPLS-TP) Linear Protection to Match the Operational Expectations of Synchronous Digital Hierarchy, Optical Transport {#ra_rfc7271}
 
-Depth: deep (2, 3 in full). Errata: none (the RFC has no errata). Updates: RFC 3032, RFC 3038, RFC 3209, RFC 3811, RFC 4182, RFC 4928, RFC 5331, RFC 5586, RFC 5921, RFC 5960, RFC 6391, RFC 6478, RFC 6790.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 6378. Updated by: RFC 8234.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
-| RA-0611 | 3.1, 5 (Table 1) | "Values 0-15 of the "Extended Special-Purpose MPLS Label Values" registry are set aside as reserved. / Label 7 (when received) retains its meaning as Entropy Label Indicator (ELI) whether a regular special-purpose label or an ESPL" | Table 1 marks ESPL values 0-15 "Reserved. Never to be made available for allocation", without noting that value 7 after an XL is not dropped but processed as ELI; a reader of the registry alone would drop it as for 0-6 and 8-15. The XL "MUST have the bottom-of-stack bit clear", but no receiver action is given for an XL with S = 1 (no label follows): the drop rule covers only an XL "followed by a label with value 0-6 or 8-15". Section 4 lists RFC 5586 and RFC 5921 among the documents whose "reserved labels" wording is updated, yet both are cited only as informative references. | ambiguity | none: RFC has no errata |
+| RA-1381 | 11, 11.2 (notes 9, 11, 13), Appendix D | "The WTR timer is started only when the node that has recovered from a local failure or degradation enters the WTR state.  A node that is entering into the WTR state due to a remote WTR message does not start the WTR timer. / (11) If the received NR message has Path=1, transition to the WTR state if the domain is configured for revertive behavior" | Footnote (11) (PF:W:R or PF:DW:R receiving NR with Path=1) enters WTR on a remote NR, which is neither of the two cases the rule covers, and unlike (13) ("The WTR timer is not initiated") it does not say whether the timer starts. Example 2 (informative) shows both nodes starting the timer in this transition, but only because each had a local SF-W just before. In the race that RFC 7324 Section 5 addresses (both nodes in remote Protecting failure because of a stale remote SF-W, no local failure), a strict reading of the rule starts no timer: both nodes then sit in WTR sending WTR(0,1), a remote WTR in WTR state is "i", and footnote (12) is never reached, so neither returns to Normal. RFC 7324 5 says the node "starts the WTR timer" in this case for PSC mode. Later RFCs: RFC 8234 (updates RFC 7271) changes four cells of the remote-message table and redefines the 'ignore' entries (Sections 4.2 and 4.3) but leaves footnote (11) and the WTR timer rule as they are; its initialization rule (Section 4.1) raises the same timer question. | ambiguity | none: RFC has no errata; **proposed erratum below** |
+| RA-1382 | 9.1.1, 9.2, 9.2.1 | "A node MUST include its Capabilities TLV in every PSC message that it transmits. (9.1.1) / the node that has the ability to send and process the PSC mode Capabilities TLV MUST be able to both send the PSC mode Capabilities TLV and send no Capabilities TLV at all. (9.2.1)" | 9.1.1 requires the TLV in every message, while 9.2.1 requires a configurable option to send none. The comparison rule ("compare the Flags value to its most recent Flags value transmitted") does not cover a node that transmits no TLV, nor a received message without a TLV: it is not said that absence equals Flags 0x0, so an APS-mode node receiving messages without a TLV, or a PSC-mode node configured to send none and receiving Flags 0x0, cannot tell whether there is a mismatch. 9.2 says other combinations "are not supported" but, if both ends send the same unsupported combination, 9.1.1 declares the domain "running in the mode indicated by that set of capabilities" with no behaviour defined. On a mismatch, "MUST NOT perform any protection switching" does not say whether traffic already on the protection path stays there or reverts. | ambiguity | none: RFC has no errata |
+| RA-1383 | 12, 1 | "If the value of the PT field of one side is 2 (i.e., selector bridge) and that of the other side is 1 or 3 (i.e., permanent bridge), then this event MUST be notified to the operator and each node MUST NOT perform any protection switching / If the "Revertive (R)" bit mismatches, two sides will interwork" | RFC 7324 Section 4 (published a month later, updating RFC 6378, which this document builds on, and stating that it "has an impact on" this document) requires instead that for {BP, BS} "the node transmitting BP MUST switch to BS mode if it is supported", for {UP, BS} the BS node switches to UP, and for an R mismatch "the node indicating non-revertive MUST switch to Revertive if it is supported". Section 12 here is scoped to APS mode, but RFC 7324 gives no mode scope, so an APS-mode implementation has two opposite MUSTs for a bridge-type mismatch (stop switching vs adopt the peer's type) and two behaviours for an R mismatch (interwork per the tables, Example 3, vs change its own setting). Section 12 also leaves open whether "MUST NOT perform any protection switching" (bridge mismatch, Capabilities mismatch, loss of PSC messages) ends automatically when the condition clears or only "until the operator resolves" it, and what happens to traffic already switched. | contradiction | none: RFC has no errata |
+| RA-1384 | 4, 4.3, Appendix C, 10.2 | "In addition, this capability introduces the Freeze command as described in Appendix C. (4) / Until the Freeze is cleared, additional local commands are rejected, and condition changes and received PSC information are ignored. (Appendix C)" | Freeze is made part of the priority modification capability (flag 0x80000000, hence of APS mode), but it appears only in an informative appendix: it is absent from the 10.2 priority list, from the 10.3 acceptance rules and from the 11.1 / 11.2 state tables. It is not said whether Operator Clear or Lockout are among the "additional local commands" rejected during Freeze, whether a local defect raised during Freeze is retained (10.3 says defects are retained "persistently") and acted on when Freeze is cleared, or how "the state ... is recomputed" after Clear Freeze given that received PSC information was ignored (whether the last received remote message is used). Whether an APS-mode implementation must implement Freeze is also not stated. | ambiguity | none: RFC has no errata |
+| RA-1385 | 4.4, 10.2, Appendix D | "the list of local requests in order of priority SHALL be as follows (from highest to lowest): o Clear Signal Fail o Signal Fail on Protection path o Forced Switch o Signal Fail on Working path / transmits SF(l,l) messages" | 4.4 presents a four-entry list as "the list of local requests" under SHALL, omitting Operator Clear and Lockout (which 10.2 places above Clear Signal Fail) and naming "Clear Signal Fail" where 10.2 has "Clear Signal Fail or Degrade". Appendix D Example 3 step (2) writes "SF(l,l)" with the letter l for the digit 1, and Example 2 step (5) speaks of the "last received APS message", a term not defined (PSC message). | editorial | none: RFC has no errata; **proposed erratum below** |
+
+Proposed erratum RA-1381 (RFC 7271, Section 11, 11.2 (notes 9, 11, 13), Appendix D; type: Technical):
+
+```
+Original Text
+-------------
+   (11) If the received NR message has Path=1, transition to the WTR
+   state if the domain is configured for revertive behavior, else
+   transition to the DNR state.  If the received NR message has
+   Path=0, transition to the Normal state.
+
+Corrected Text
+--------------
+   (11) If the received NR message has Path=1, transition to the WTR
+   state and start the WTR timer if the domain is configured for
+   revertive behavior, else transition to the DNR state.  If the
+   received NR message has Path=0, transition to the Normal state.
+
+Notes
+-----
+   Section 11 limits starting the timer to a node recovering from a
+   local failure and excludes entry by a remote WTR message; note
+   (11) is a third case. Example 2 assumes the timer starts. RFC
+   7324 Section 5 requires it for the corresponding PSC-mode
+   transition.
+```
+
+Proposed erratum RA-1385 (RFC 7271, Section 4.4, 10.2, Appendix D; type: Editorial):
+
+```
+Original Text
+-------------
+   transmits SF(l,l) messages.
+
+Corrected Text
+--------------
+   transmits SF(1,1) messages.
+
+Notes
+-----
+   The complete list is in Section 10.2; Section 4.4 should refer to
+   it or state that only the relative order of the listed entries is
+   changed.
+```
+
+### RFC 7274: Allocating and Retiring Special-Purpose MPLS Labels {#ra_rfc7274}
+
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 3032, RFC 3038, RFC 3209, RFC 3811, RFC 4182, RFC 4928, RFC 5331, RFC 5586, RFC 5921, RFC 5960, RFC 6391, RFC 6478, RFC 6790. Updated by: RFC 9017.
+
+| ID | Section | Quote | Issue | Severity | Erratum |
+|---|---|---|---|---|---|
+| RA-0611 | 3.1, 5 (Table 1) | "Values 0-15 of the "Extended Special-Purpose MPLS Label Values" registry are set aside as reserved. / Label 7 (when received) retains its meaning as Entropy Label Indicator (ELI) whether a regular special-purpose label or an ESPL" | Table 1 marks ESPL values 0-15 "Reserved. Never to be made available for allocation", without noting that value 7 after an XL is not dropped but processed as ELI; a reader of the registry alone would drop it as for 0-6 and 8-15. The XL "MUST have the bottom-of-stack bit clear", but no receiver action is given for an XL with S = 1 (no label follows): the drop rule covers only an XL "followed by a label with value 0-6 or 8-15". Section 4 lists RFC 5586 and RFC 5921 among the documents whose "reserved labels" wording is updated, yet both are cited only as informative references. Later RFCs: RFC 9017 Section 4 (updates RFC 7274) requires dropping a packet whose Extension Label is followed by any label 0 to 15 (value 7 included), which removes the first point; no receiver action is given for an Extension Label with the bottom-of-stack bit set, and the reference point remains. | ambiguity | none: RFC has no errata |
 
 ### RFC 7307: LDP Extensions for Multi-Topology {#ra_rfc7307}
 
-Depth: deep (3, 4.1, 5 in full; 4.3, 9 by MUST/SHOULD). Errata: 2 errata: 2 held. 
+Depth: deep. Errata: 2 errata: 2 held. Status: Proposed Standard. Updated by: RFC 9658.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0219 | 3.3 | "\|Typed Wcard (5)\|    FEC Type   \|   Len = 6     \|  AF = MT IP ..\|" | Figure 4 draws the type-specific part as a 2-octet Address Family and a 2-octet MT-ID, 4 octets, but labels Len = 6. RFC 5918 defines Len as the length of the type-specific information, so either the figure omits a 2-octet field (for example a Reserved field as in the MT Prefix FEC element) or the label is wrong. | contradiction | none: RFC has 2 errata, none on this point; **proposed erratum below** |
 | RA-0220 | 3.5.1, 3.5.2 | "The MT-ID field of the MT Typed Wildcard FEC element MUST be set to "Wildcard Topology" when it is specified in the MT Capability TLV." | Section 3.5.2 announces capability "for multiple Multi-Topologies" with "one or more MT Typed FEC elements", each with its "corresponding 'MT-ID'", which a mandatory Wildcard Topology MT-ID makes impossible. | contradiction | none: RFC has 2 errata, none on this point |
 | RA-0221 | 3.5.2 | "Each side of the node sends a label release to its peer once it receives the label release messages even though each side has already cleaned up all the LSPs locally." | In RFC 5036 a Label Release answers a Label Withdraw; the sentence follows the withdrawal of all non-default-MT mappings, so "once it receives the label withdraw messages" is meant. As written, each side would answer Releases with Releases. | editorial | none: RFC has 2 errata, none on this point; **proposed erratum below** |
+| RA-1386 | 3.7, 5.1 | "the LSR MUST abort the processing of the FEC element and SHOULD send a notification message with status code "Invalid Topology ID" to the sender. (3.7) / An LSR should respond with an "Invalid Topology ID" status code ... The LSR MUST also discard the entire message before sending the Notification message. (5.1)" | The two sections give different rules for the same event. 3.7 (MT-ID "Unassigned" in the registry) aborts only the offending FEC element, so the other elements of a multi-element Label Mapping or Withdraw are processed; 5.1 (MT-ID "not locally known or not supported", a superset that includes unassigned values) discards the whole message. The notification is SHOULD in 3.7 and lowercase "should" in 5.1. A receiver of a Label Withdraw carrying one valid and one unknown-topology element either withdraws the valid FEC or keeps it, depending on the section followed, and the sender cannot tell which. | contradiction | none: RFC has 2 errata, none on this point |
+| RA-1387 | 3.2 | "The value of MT-ID 0 corresponds to the default topology and MUST be ignored on receipt so as to not cause any conflict/confusion with existing non-MT procedures." | "Ignored" can mean that the MT-ID field is ignored (the element is processed as an ordinary IPv4/IPv6 Prefix FEC in the default topology) or that the FEC element carrying MT-ID 0 is ignored (not processed at all). The two readings differ in whether a binding is installed, and a peer that sends MT IP elements with MT-ID 0 interoperates only with the first. The text also does not say whether a sender may use MT IP with MT-ID 0 at all. | ambiguity | none: RFC has 2 errata, none on this point |
+| RA-1388 | 5 | "If an LSR receives an error notification from a peer for a session, it terminates the LDP session by closing the TCP transport connection for the session and discarding all multi-topology label mappings learned via the session." | The sentence copies RFC 5036 Section 1.4, where "Error Notifications" is a defined term meaning notifications that signal fatal errors (E bit set). In lowercase and without that context it reads as every error notification, including the advisory "Invalid Topology ID" (0x00000031, E bit clear) that Section 5.1 tells a peer to send for a single bad MT-ID; taken that way one unknown topology would tear down the session and every default-topology LSP with it. | editorial | none: RFC has 2 errata, none on this point; **proposed erratum below** |
+| RA-1389 | 3.5.1, 4.1, 13.2 | "The encoding of the Typed Wildcard FEC element, as defined in [RFC5918], is defined in Section 4.1 ("Typed Wildcard FEC element") of this document. (3.5.1)" | Section 4.1 contains no encoding; the MT Typed Wildcard FEC element is defined in Section 3.3 (Figure 4). Section 4.1 also refers to itself ("The defined format in Section 4.1 ... allows an LSR to perform wildcard FEC operations"). The [RFC3813] reference repeats its author list ("June 2004.  Srinivasan, C., Viswanathan, A., and T. Nadeau,"). | editorial | none: RFC has 2 errata, none on this point; **proposed erratum below** |
 
 Proposed erratum RA-0219 (RFC 7307, Section 3.3; type: Technical):
 
@@ -6112,9 +7320,159 @@ Notes
    Label Withdraw.
 ```
 
+Proposed erratum RA-1388 (RFC 7307, Section 5; type: Editorial):
+
+```
+Original Text
+-------------
+   If an LSR receives an error notification from a peer for a
+   session, it terminates the LDP session
+
+Corrected Text
+--------------
+   If an LSR receives a fatal error notification (E bit set) from a
+   peer for a session, it terminates the LDP session
+
+Notes
+-----
+   RFC 5036 Section 1.4 ("Error Notifications, used to signal fatal
+   errors") and Section 3.5.1.1.
+```
+
+Proposed erratum RA-1389 (RFC 7307, Section 3.5.1, 4.1, 13.2; type: Editorial):
+
+```
+Original Text
+-------------
+   is defined in Section 4.1 ("Typed Wildcard FEC element") of this
+   document.
+
+Corrected Text
+--------------
+   is defined in Section 3.3 ("LDP FEC Elements with MT IP AF") of
+   this document.
+
+Notes
+-----
+   The same correction applies to the third paragraph of Section
+   4.1.
+```
+
+### RFC 7324: Updates to MPLS Transport Profile Linear Protection {#ra_rfc7324}
+
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 6378.
+
+| ID | Section | Quote | Issue | Severity | Erratum |
+|---|---|---|---|---|---|
+| RA-1390 | 3, 5 | "If the LER is in remote Protecting Administrative state due to a remote Forced Switch, a local Signal Fail indication on the protection path SHALL cause the LER to remain in remote Protecting administrative state and transmit an SF(0,1) message." | The new bullet creates a state that RFC 6378 4.3.3.3 never reached: remote Protecting administrative with an active local SF on protection. The RFC 6378 remote-message rules for that state do not cover it. A remote NR(0,0) (the far end clearing its FS) moves the LER to Normal only when "there is no active local Signal Fail indication" and handles only a local SF on working, so with a local SF-P no transition is defined (the LER should go to local Unavailable and send SF(0,0)). A remote Lockout or remote SF-P moves the LER to remote Unavailable sending NR(0,0), so the local protection failure is again reported as NR, the inaccuracy that Section 3 sets out to remove ("a node should not be sending NR if it has a local failure"). The extended states of RFC 6378 Appendix A (e.g. PA:F:R) do not distinguish a remote Protecting administrative state with an active local SF-P, so the table gives no guidance either. | ambiguity | none: RFC has no errata; **proposed erratum below** |
+| RA-1391 | 5 | "A remote No Request message SHALL be ignored if in local Protecting administrative state. / it fixes a similar issue -- if a node receives NR while in Remote administrative state, the value of FPath and Path have no bearing on the node's reaction to this NR." | The change replaces only the first sentence of the RFC 6378 4.3.3.3 bullet, which concerns local Protecting administrative state, while the justification speaks of a node in remote administrative state. The following sentences of the same bullet ("If in remote Protecting administrative state and there is no active local Signal Fail indication, then the LER SHALL go to Normal state") were written for "A remote NR(0,0) message" and are not changed, so it is not clear whether a remote NR(0,1) in remote Protecting administrative state now leads to Normal (as the justification says) or is still covered by "All other remote messages SHALL be ignored". The deadlock description also says the nodes "transition into a remotely triggered WTR, and remain in remotely triggered WTR", but under RFC 6378 4.3.3.5 a remote SF-W in Wait-to-Restore leads to remote Protecting failure state, which is where the new 4.3.3.4 bullet applies. | contradiction | none: RFC has no errata; **proposed erratum below** |
+| RA-1392 | 2.1, 2.2.1, 2.2.2 | "Ensure the overall length of the message matches the value in the TLV Length + 12. / An implementation detecting a malformed TLV SHOULD alert the operator as described in Section 2.2.1." | The PSC message (RFC 6378 Figure 2) has no length field of its own; its "overall length" is derived from the lower layer. On Ethernet, a PSC message with no TLVs is padded to the minimum frame size, so a receiver that applies the equality check literally finds extra octets and, by "MUST drop the message", discards every such message. The text does not say whether trailing octets beyond TLV Length + 12 are ignored, nor whether 12 includes the 4-octet G-ACh header (it does by Figure 2). Section 2.2.2 says only to alert the operator on a malformed TLV (Length not a multiple of 4, or a TLV that overruns TLV Length) but not whether the message is dropped or only that TLV ignored. RFC 6378 4.2.7 also still says TLV Length "MUST be 0" for basic operation, which a receiver checking "fields prior to TLV Length are consistent with RFC 6378" may apply. | ambiguity | none: RFC has no errata; **proposed erratum below** |
+| RA-1393 | 4.3, 4.1, 4.2 | "If there is a trigger that would cause the protection LSP to be used, such as SF or MS, a node MUST NOT use the protection LSP to carry traffic." | The prohibition applies to an "irreconcilable" mismatch, but PSC has no negotiation and no capability signalling, so a node cannot know whether the peer supports the mode it is expected to adopt; the text gives no time or condition after which a mismatch becomes irreconcilable. Read as applying from the first mismatched message, a transient mismatch during reconfiguration blocks protection against an SF on working, and the text does not say which state the PSC state machine enters or which message is sent when a trigger is suppressed (e.g. whether SF(1,0) is still sent). "SF" is not qualified: an SF on protection never uses the protection LSP, so SF-W is presumably meant. 4.2 uses lowercase "must behave as in Section 4.3" for the same rule that 4.1 states as MUST. | ambiguity | none: RFC has no errata |
+| RA-1394 | 6 | "So, in the first example it is the local SF that drives the PSC Control logic / This will result in the PSC Control logic receiving both a local FS and remove FS." | The first example is [L(FS), R(FS)], so the local FS (not SF) drives the logic; "remove FS" should be "remote FS". The replacement paragraph also drops the RFC 6378 4.3.3 phrase "as if the LER is in the Normal state" without saying from which state the reevaluation is applied: the transitions are defined per current state, and for the cases of this section (L(FS) removed in PA:F:L with R(FS) active) the current-state tables give a different result (Normal) from the one intended (PA:F:R). | error | none: RFC has no errata; **proposed erratum below** |
+
+Proposed erratum RA-1390 (RFC 7324, Section 3, 5; type: Technical):
+
+```
+Original Text
+-------------
+   o  If the LER is in remote Protecting Administrative state due to
+   a remote Forced Switch, a local Signal Fail indication on the
+   protection path SHALL cause the LER to remain in remote
+   Protecting administrative state and transmit an SF(0,1) message.
+
+Corrected Text
+--------------
+   (Add to Section 4.3.3.3 of RFC 6378.) o  If in remote Protecting
+   administrative state due to a remote Forced Switch with an active
+   local Signal Fail on the protection path, a remote NR message
+   SHALL cause the LER to go into local Unavailable state and
+   transmit an SF(0,0) message, and a remote Lockout of protection
+   or remote Signal Fail on protection message SHALL cause the LER
+   to go into remote Unavailable state and transmit an SF(0,0)
+   message.
+
+Notes
+-----
+   Section 3 introduced SF(0,1) in remote Protecting administrative
+   state but did not adjust the remote-message reactions of RFC 6378
+   4.3.3.3 for the new local condition.
+```
+
+Proposed erratum RA-1391 (RFC 7324, Section 5; type: Technical):
+
+```
+Original Text
+-------------
+   o  A remote No Request message SHALL be ignored if in local
+   Protecting administrative state.
+
+Corrected Text
+--------------
+   o  A remote No Request message SHALL be ignored if in local
+   Protecting administrative state.  If in remote Protecting
+   administrative state and there is no active local Signal Fail
+   indication, then a remote No Request message (regardless of the
+   values of FPath and Path) SHALL cause the LER to go to Normal
+   state and begin transmitting an NR(0,0) message. [remaining
+   sentences of the bullet unchanged]
+
+Notes
+-----
+   The whole RFC 6378 bullet should be restated so that the
+   "regardless of FPath and Path" intent applies to the remote
+   Protecting administrative case. The issue #8 description should
+   say "remote Protecting failure state".
+```
+
+Proposed erratum RA-1392 (RFC 7324, Section 2.1, 2.2.1, 2.2.2; type: Technical):
+
+```
+Original Text
+-------------
+   o  Ensure the overall length of the message matches the value in
+   the TLV Length + 12.
+
+Corrected Text
+--------------
+   o  Ensure the overall length of the message, including the
+   4-octet G-ACh header, is at least the value in the TLV Length +
+   12; octets beyond that length (e.g., link-layer padding) MUST be
+   ignored.
+
+Notes
+-----
+   Link layers with a minimum frame size (e.g., Ethernet) add
+   padding that is indistinguishable from message content. The
+   action for a malformed TLV (drop the message or ignore the TLV)
+   should also be stated.
+```
+
+Proposed erratum RA-1394 (RFC 7324, Section 6; type: Technical):
+
+```
+Original Text
+-------------
+   So, in the first example it is the local SF that drives the PSC
+   Control logic, and in the second example it is the local Lockout
+   that drives the PSC Control logic.
+
+Corrected Text
+--------------
+   So, in the first example it is the local FS that drives the PSC
+   Control logic, and in the second example it is the local Lockout
+   that drives the PSC Control logic.
+
+Notes
+-----
+   The first example in Section 6 is [L(FS), R(FS)]. The replacement
+   text for RFC 6378 4.3.3 should also say that the reevaluation is
+   performed as if the LER were in Normal state, as the replaced
+   text did, or name the state.
+```
+
 ### RFC 7349: LDP Hello Cryptographic Authentication {#ra_rfc7349}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -6187,7 +7545,7 @@ Notes
 
 ### RFC 7358: Label Advertisement Discipline for LDP Forwarding Equivalence Classes (FECs) {#ra_rfc7358}
 
-Depth: deep (read in full; procedural update of FEC documents). Errata: none (the RFC has no errata). Updates: RFC 3212, RFC 4447, RFC 5036, RFC 5918, RFC 6388, RFC 7140.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 3212, RFC 4447, RFC 5036, RFC 5918, RFC 6388, RFC 7140.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -6195,13 +7553,54 @@ Depth: deep (read in full; procedural update of FEC documents). Errata: none (th
 
 ### RFC 7438: Multipoint LDP (mLDP) In-Band Signaling with Wildcards {#ra_rfc7438}
 
-Depth: deep (3 to 6). Errata: none (the RFC has no errata). Updates: RFC 6826, RFC 7246.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 6826, RFC 7246.
 
-Nothing notable found at this depth.
+| ID | Section | Quote | Issue | Severity | Erratum |
+|---|---|---|---|---|---|
+| RA-1395 | 3.2, 6 | "the TLV identifies the collection of PIM-SSM trees that have the source address as their root. (3.2) / Note that some of these streams may have SSM group addresses, while some may have ASM group addresses. (6)" | Section 3.2 defines an (S, wildcard group) value as the set of PIM-SSM trees rooted at S, while Section 6 tells the Ingress LSR to forward every stream of S found in its multicast routing table, explicitly including ASM groups. Section 3.4 forbids a wildcard source with an ASM group unless source discovery and pruning are known to be unnecessary, but places no such restriction on ASM streams pulled in by a wildcard group, so an Ingress LSR following Section 6 can attach ASM (S,G) streams to an MP-LSP that the Egress LSR requested as SSM-only. | contradiction | none: RFC has no errata; **proposed erratum below** |
+| RA-1396 | 2 | "The Egress LSRs of an MP-LSP are LSPs that receive MPLS multicast data packets from upstream on that MP-LSP" | Egress LSRs are routers (LSRs), not LSPs. | editorial | none: RFC has no errata; **proposed erratum below** |
+
+Proposed erratum RA-1395 (RFC 7438, Section 3.2, 6; type: Technical):
+
+```
+Original Text
+-------------
+   the TLV identifies the collection of PIM-SSM trees that have the
+   source address as their root.
+
+Corrected Text
+--------------
+   the TLV identifies the collection of IP multicast trees (SSM or
+   ASM groups) that have the source address as their root; see
+   Section 6.
+
+Notes
+-----
+   Alternatively Section 6 could restrict the streams to SSM groups;
+   either way the two sections should agree.
+```
+
+Proposed erratum RA-1396 (RFC 7438, Section 2; type: Editorial):
+
+```
+Original Text
+-------------
+   The Egress LSRs of an MP-LSP are LSPs that receive MPLS multicast
+   data packets
+
+Corrected Text
+--------------
+   The Egress LSRs of an MP-LSP are LSRs that receive MPLS multicast
+   data packets
+
+Notes
+-----
+   Editorial.
+```
 
 ### RFC 7473: Controlling State Advertisements of Non-negotiated LDP Applications {#ra_rfc7473}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 8223.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -6250,13 +7649,16 @@ Notes
 
 ### RFC 7552: Updates to LDP for IPv6 {#ra_rfc7552}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 5036, RFC 6720.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 5036, RFC 6720.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0054 | 6.1.1 | "Dual-Stack capability: TLV code point (Ox0701)" | The Dual-Stack capability TLV code point is printed with a letter O ("Ox0701"); it is 0x0701. | editorial | none: RFC has no errata; **proposed erratum below** |
 | RA-0228 | 6.1.1 | "\|TR     \|        Reserved       \|     MBZ                       \|" | The figure has three fields after TR (Reserved, MBZ) but the text defines only TR and Reserved, and no TLV Length is given (4 by the figure). A receiver does not know whether a Length other than 4 is an error. The section also does not say what happens when both sides agree on TR = 0110 (LDPoIPv6) but only IPv4 Hellos are received from the peer (for example, IPv6 Hellos filtered): no IPv6 transport address is known, so rule 2b cannot be applied and no session forms, while a TR mismatch (rule 1) discards all Hellos and also prevents any session. | ambiguity | none: RFC has no errata; **proposed erratum below** |
 | RA-0229 | 7.2 | "MUST NOT advertise FEC-label bindings for link-local or IPv4-mapped IPv6 addresses (defined in Section 2.5.5.2 of [RFC4291])" | Section 2.5.5.2 of RFC 4291 defines IPv4-mapped addresses only; link-local unicast addresses are defined in Section 2.5.6. Section 7.1 cites 2.5.5.2 correctly for IPv4-mapped addresses alone. | editorial | none: RFC has no errata |
+| RA-1397 | 6.1.1 | "c) both IPv4 and IPv6 Hellos are received, then the neighbor is deemed as a noncompliant Dual-stack neighbor and is not allowed to have any LDP session.  A Notification message should be sent (with status code of 'Dual-Stack Noncompliance', 0x00000033)." | An LDP Notification is sent over an LDP session (TCP connection); in case 3c the neighbour "is not allowed to have any LDP session", so there is nothing to send it on unless a session already exists or one is opened only to send the notification. Rule 1 (TR mismatch) separates the two cases ("discard the Hello message and log an error"; "If an LDP session was already in place, ... send a fatal Notification"), rule 3c does not, and uses lower-case "should" for a status code that Section 10 registers as fatal (E bit 1). It also does not say whether the Hellos are discarded (rule 1) or the adjacencies kept, which decides whether the condition clears by itself when one family's Hellos stop. | ambiguity | none: RFC has no errata |
+| RA-1398 | 5.1, 9 | "[RFC6720] allows for the implementation to statically (via configuration) and/or dynamically override the default behavior (enable/disable GTSM) on a per-peer basis. (9) / the LDP Link Hello packets MUST have their IPv6 Hop Limit set to 255, be checked for the same upon receipt (5.1)" | Section 5.1 and the last paragraph of Section 9 make the Hop Limit 255 send and check for IPv6 Link Hellos unconditional, while the paragraph in between says GTSM can be disabled per peer and that "GTSM negotiation would ultimately disable GTSM between the LSR and its peer(s)". Whether the per-peer override (and RFC 6720 negotiation) applies to IPv6 Link Hellos, or only to the LDPoIPv6 TCP connection that Section 9 merely recommends protecting, is not stated; a Link Hello from a peer that disabled GTSM would otherwise be dropped before any LDP processing. | ambiguity | none: RFC has no errata |
+| RA-1399 | 11 | "The extensions defined in this document only clarify the behavior of LDP; they do not define any new protocol procedures.  Hence, this document does not add any new security issues to LDP." | The document does define new protocol elements and procedures: the Dual-Stack capability TLV (0x0701), two fatal status codes, the transport-preference role logic, session resets on preference mismatch or non-compliance, and mandatory GTSM on IPv6 Link Hellos. A forged or mis-set TR value or Dual-Stack TLV (for example in a targeted Hello from an off-link sender when GTSM is not used for targeted Hellos) can reset an established session (6.1.1 rule 1, 3a, 3b), which the Security Considerations do not mention. | editorial | none: RFC has no errata |
 
 Proposed erratum RA-0054 (RFC 7552, Section 6.1.1; type: Editorial):
 
@@ -6296,7 +7698,7 @@ Notes
 
 ### RFC 7715: Multipoint LDP (mLDP) Node Protection {#ra_rfc7715}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -6304,15 +7706,26 @@ Depth: deep. Errata: none (the RFC has no errata).
 
 ### RFC 8223: Application-Aware Targeted LDP {#ra_rfc8223}
 
-Depth: deep. Errata: 1 errata: 1 rejected. Updates: RFC 7473.
+Depth: deep. Errata: 1 errata: 1 rejected. Status: Proposed Standard. Updates: RFC 7473.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0231 | 2.2 | "On receipt of a valid TAC TLV, an LSR MUST generate its own TAC TLV with TAEs consisting of unique TA-Ids that it supports over the tLDP session." | The procedure assumes the responder sees the initiator's TAC before sending its own Initialization, which holds only when the responder is the passive side (RFC 5036 2.5.4); a responder that has the active role sends its Initialization first. The text also allows a TAC with "zero or more TAEs" while a null intersection forces 'Targeted Application Capability Mismatch', so an empty TAC always rejects the session; the unit of "a maximum value -- that is, 0xFFFF" for the retry interval is not given; and the registry text says the range is 0x0001-0xFFFE while listing 0x0000 as Reserved and leaving 0xFFFF unassigned and unlisted. | ambiguity | none: RFC has 1 errata, none on this point |
 
+### RFC 8234: Updates to MPLS Transport Profile (MPLS-TP) Linear Protection in Automatic Protection Switching (APS) Mode {#ra_rfc8234}
+
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 7271.
+
+| ID | Section | Quote | Issue | Severity | Erratum |
+|---|---|---|---|---|---|
+| RA-1484 | 4.1 | "the node starts at the WTR state sending NR(0,1) or at the DNR state sending DNR(0,1) / Stop the WTR timer if it is running." | A node that remembers the protection path as active restarts in the WTR state after the first action has stopped the WTR timer, and the section does not say whether the timer is started on entry. RFC 7271 Section 11 starts the timer only when a node that has recovered from a local failure or degradation enters WTR, which an initializing node with no local request is not. If the timer is not started, the node leaves WTR only through a remote message, so when and whether it reverts depends on the reading; two implementations of this section can therefore revert at different times or not at all. | ambiguity | none: RFC has no errata |
+| RA-1485 | 4.3 | "Therefore, the last received message MUST be treated as if it were NR and only the local request shall be evaluated." | RFC 7271 gives NR messages different meanings by their Path value: NR with Path=1 leads to WTR (footnote 11) and NR(0,0) does not. The rule does not say which Path value the substituted NR carries, so after the protection path recovers, one implementation re-evaluates as for NR(0,0) and another as for NR(0,1). "Only the local request shall be evaluated" also uses a lower-case "shall" next to the MUST. | ambiguity | none: RFC has no errata |
+| RA-1486 | 4.3 | "If it is set, the state machine will transit to the supposed state, which can be Normal or DNR as indicated in the footnotes to the state transition table in Section 11.1 of [RFC7271]." | The new text for the "i" flag depends on whether "re-evaluation is triggered", a condition this document does not define (RFC 7271 Section 11 uses re-evaluation for several events). The "supposed state" is taken from the footnotes of the local-request table (11.1), while "i" cells also occur in the remote-message table (11.2), whose footnotes are different. The text does not say which footnote applies to an "i" in 11.2, or what happens where no footnote names a state. | ambiguity | none: RFC has no errata |
+| RA-1487 | 4.1, 5 | "Clear any operator command in the Local Request Logic. / tightening the description of the initializing behavior may help to protect networks from restart attacks." | Every operator command, including Lockout of protection and Forced Switch, is lost when the PSC Control Logic re-initializes, and the node may then start on the protection path (WTR or DNR state) or move traffic once a local failure is seen. The document does not say whether configured commands are restored, or whether the operator is notified that a Lockout set for maintenance is no longer in force. The Security Considerations do not mention that a forced restart removes such commands. | ambiguity | none: RFC has no errata |
+
 ### RFC 8320: LDP Extensions to Support Maximally Redundant Trees {#ra_rfc8320}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -6342,7 +7755,7 @@ Notes
 
 ### RFC 8356: Experimental Codepoint Allocation for the Path Computation Element Communication Protocol (PCEP) {#ra_rfc8356}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 5440.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 5440.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -6368,9 +7781,61 @@ Notes
    Indicators registry.
 ```
 
+### RFC 9017: Special-Purpose Label Terminology {#ra_rfc9017}
+
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 3032, RFC 7274.
+
+| ID | Section | Quote | Issue | Severity | Erratum |
+|---|---|---|---|---|---|
+| RA-1400 | 5, 4 | "It does not affect forwarding in the MPLS data plane (5) / an LSR processing a packet with an XL at the top of the label stack immediately followed by a label with a value in the range 0-15 MUST drop the packet. (4)" | Section 4 changes data-plane behaviour: under RFC 7274 3.1, label 7 after an XL "retains its meaning as Entropy Label Indicator" and the packet was not to be dropped for it; the replacement text requires an LSR with the XL on top to drop such a packet, and allows earlier LSRs to forward it. The Security Considerations state that the document only describes terminology and does not affect forwarding, so the effect of the new drop rule (for example on traffic from senders that placed ELI after XL under the old wording) is not considered. The new text also covers only an XL "immediately followed by" a label; an XL with the S bit set, which RFC 7274 forbids sending ("MUST have the bottom-of-stack bit clear"), still has no receive rule. | contradiction | none: RFC has no errata; **proposed erratum below** |
+| RA-1401 | 2, 3 | "The range 0-1048575 of eSPLs is specified in RFC 7274 [RFC7274]. (2) / SPLs from the range 16-1048575 are called "Extended Special-Purpose Labels" (eSPLs). (3)" | Section 2 applies the term "eSPLs" to the whole registry range 0-1048575, while Section 3, which defines the term, limits it to 16-1048575 and says values 0-15 of that registry "do not need a name". The background therefore uses the new term outside its definition. | editorial | none: RFC has no errata; **proposed erratum below** |
+
+Proposed erratum RA-1400 (RFC 9017, Section 5, 4; type: Technical):
+
+```
+Original Text
+-------------
+   This document describes the terminology to be used when
+   describing and specifying the use of SPLs.  It does not affect
+   forwarding in the MPLS data plane,
+
+Corrected Text
+--------------
+   This document describes the terminology to be used when
+   describing and specifying the use of SPLs.  Apart from the
+   clarification in Section 4, which requires an LSR to drop a
+   packet in which an XL at the top of the label stack is
+   immediately followed by label 7, it does not affect forwarding in
+   the MPLS data plane,
+
+Notes
+-----
+   RFC 7274 Section 3.1 treated label 7 after an XL as ELI; the
+   replacement text in Section 4 makes the LSR that sees the XL on
+   top drop the packet.
+```
+
+Proposed erratum RA-1401 (RFC 9017, Section 2, 3; type: Editorial):
+
+```
+Original Text
+-------------
+   The range 0-1048575 of eSPLs is specified in RFC 7274 [RFC7274].
+
+Corrected Text
+--------------
+   The range 0-1048575 of the "Extended Special-Purpose MPLS Label
+   Values" registry is specified in RFC 7274 [RFC7274].
+
+Notes
+-----
+   Terminology document; the definition in Section 3 should be
+   applied in Section 2.
+```
+
 ### RFC 9658: Multipoint LDP Extensions for Multi-Topology Routing {#ra_rfc9658}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 7307.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 7307.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -6378,13 +7843,13 @@ Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 7307.
 
 ### RFC 9789: MPLS Network Actions (MNAs) Framework {#ra_rfc9789}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Informational. Updated by: RFC 9994.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0613 | 2.3.1 | ""An MNA node MUST use the RLD determined by selecting the first advertised non-zero value from the following: ... The RLD advertised for the link"" | A Link MSD is advertised by a node for one of its own links. The text does not say which link applies when a NAS-pushing node evaluates a downstream node: the downstream node's link on which the packet arrives, or its link toward the next hop. The text also does not say whether "the first ... non-zero value" means that an advertised RLD of 0 is ignored or means "cannot read". | ambiguity | none: RFC has no errata |
 | RA-0614 | 2.3.1 | ""A node SHOULD use signaling (e.g., the signaling described in [RFC9088] and [RFC9089]) to determine this."" | RFC 9088 and RFC 9089 define ERLD signaling (MSD-Type 2) and the ELC, not RLD. RLD (MSD-Type 3) is carried by the generic MSD encodings of RFC 8491 (IS-IS) and RFC 8476 (OSPF). RFC 8476 is not referenced. | editorial | none: RFC has no errata |
-| RA-0615 | 2.1 | ""Ingress to Egress (I2E): Only the last node on the path will perform the action."" | The name "Ingress to Egress" suggests an action that the ingress applies and the egress consumes, but the definition limits it to the last node. It is unclear whether the "last node" is the LSP egress or the node that pops the NAS (for example, with PHP, the penultimate node). | ambiguity | none: RFC has no errata |
+| RA-0615 | 2.1 | ""Ingress to Egress (I2E): Only the last node on the path will perform the action."" | The name "Ingress to Egress" suggests an action that the ingress applies and the egress consumes, but the definition limits it to the last node. It is unclear whether the "last node" is the LSP egress or the node that pops the NAS (for example, with PHP, the penultimate node). Later RFCs: RFC 9994 Sections 5.3 and 9.3 (updates RFC 9789) limit these actions to the egress and forbid the penultimate node to remove the last such sub-stack; Section 7 leaves removal by a penultimate-hop-popping node out of scope. | ambiguity | none: RFC has no errata |
 | RA-0616 | 3.6.1 | ""the BIER approach meets the design goal of [RFC8296] to determine that the payload is IPv4, IPv6, or a packet with a header that includes a pseudowire control word."" | First nibble 5 is chosen so that a transit LSR does not mistake the BIER header for IPv4, IPv6 or a control word. As written, the sentence says the goal is to determine that the payload IS one of those, which is the opposite. The previous sentence says that the payload cannot be concluded to be BIER. | ambiguity | none: RFC has no errata; **proposed erratum below** |
 | RA-0617 | 1.3 | ""\| BoS          \| Bottom of Stack     \| [RFC6790]                 \|"" | The Bottom of Stack (S) bit is defined in RFC 3032, which this document already cites for LSE. RFC 6790 only uses it. | editorial | none: RFC has no errata; **proposed erratum below** |
 
@@ -6426,9 +7891,106 @@ Notes
    The S bit is defined in RFC 3032 Section 2.1.
 ```
 
+### RFC 9994: MPLS Network Action (MNA) Sub-Stack Specification Including In-Stack Network Actions and Data {#ra_rfc9994}
+
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 9789.
+
+| ID | Section | Quote | Issue | Severity | Erratum |
+|---|---|---|---|---|---|
+| RA-1402 | 13.2.1, 4.2, 4.3, 6.2 | "There are, at most, 14 Format D LSEs per opcode (due to the NASL limit of 15 and the constraint of Format D requiring a Format C LSE), so there are at most 20 + 14 * 30 = 440 bit positions." | The number of Format D LSEs following an opcode is given by that LSE's NAL field, which is 3 bits (4.2, 4.3), so at most 7 Format D LSEs can belong to one opcode; the bound of 14 derived from NASL is not reachable, and bit positions 230 to 439 of the registry cannot be encoded. The text also says Format D requires a Format C LSE, but 4.2, 5 and 6.2 ("LSE Formats: B, C, D") allow Format D after a Format B LSE; with Format B the Data field has 13 bits, so the numbering "Bit Position 20 is the most significant bit in the first LSE Format D Data field" leaves positions 13-19 undefined and does not say whether flags in the first Format D after a Format B start at 13 or at 20. | error | none: RFC has no errata; **proposed erratum below** |
+| RA-1403 | 5.2, 4.3 | "Thus, the available bits for data that can change by a transit node or differ among packets of the same flow in Format A and Format B LSEs is 0, in a Format C LSE 7 (bits 20-22 and 25-28)" | In Format C (Figure 4) bits 20-22 are the low bits of the 16-bit Data field, bit 23 is S, bits 24-27 are the 4-bit Data field, bit 28 is U and bits 29-31 are NAL. The mutable data bits outside the label field are therefore 20-22 and 24-27; "25-28" omits data bit 24 and includes the U bit, so an implementation following the text would place flow-varying data in the U bit. The count (7) and the Format D range (20-22 and 24-31) are correct. | error | none: RFC has no errata; **proposed erratum below** |
+| RA-1404 | 4.2, 4.3, 4.4, 5 | "The NAL value MUST be less than or equal to the NASL value in the Format B LSE.  If not, the packet MUST be dropped. (4.3) / The most significant bit MUST be set. (4.4)" | The only length check given for a Format C LSE is NAL <= NASL; nothing requires that the Format B NAL plus, for each Format C LSE, 1 + its NAL add up to NASL, or says what a receiver does when a Format C NAL runs past the end of the NAS as given by NASL (or when the LSE expected to be Format C has its most significant bit set, i.e. looks like Format D). The receiver action for a Format D LSE whose most significant bit is 0 is also not stated. Different parsers will therefore treat a malformed NAS differently (drop, skip the NAS, or misparse the following labels as NAS LSEs), which matters because a misparsed NAS changes which LSEs are later treated as forwarding labels. | ambiguity | none: RFC has no errata |
+| RA-1405 | 7, 5.3, 9.3 | "The behavior of a node where a NAS with I2E and HbH scopes is also removed along with popping the forwarding label on a PHP node is outside the scope of this document. (7) / the penultimate node and penultimate SR-MPLS segment node MUST NOT remove the last copy of an HbH or I2E NAS (9.3)" | Section 9.3 (and 5.3 for HbH: "the penultimate node MUST NOT remove a NAS with HbH scope") forbids exactly the removal that Section 7 declares out of scope, without saying whether Section 7 means MNA-incapable PHP nodes only. Section 5.3 also states that for HbH "All nodes along the path MUST process the NAS", while Section 7 requires that the NAS never be on top at an MNA-incapable node, which can then neither process nor remove it; the rule should be limited to MNA-capable nodes. Which node processes an I2E NAS when an MNA-incapable penultimate node pops it together with the transport label is left open. | contradiction | none: RFC has no errata; **proposed erratum below** |
+| RA-1406 | 12.3, 5.2 | "If a transit LSR chooses to use as much of the whole label stack as feasible as a key for the load-balancing function, the MNA-reserved label MUST NOT be used as a key for the load-balancing function, as specified in Section 4.3 of [RFC6790]." | Only the Format A LSE (bSPL 4) is excluded. The Format B, C and D LSEs that follow are not labels, but an MNA-incapable LSR hashing the whole stack uses their 20-bit label fields as keys; Section 5.2 forbids flow-varying data there in general but then permits mutable data in the label field "where it is known that a load-balancing of data flows is not used", without saying that every LSR on the path, including MNA-incapable ones, must then avoid label-stack hashing. The text also does not say whether an MNA-capable LSR should exclude the whole NAS from the key. | ambiguity | none: RFC has no errata |
+| RA-1407 | 13.2.2, 11 | "Opcode is an integer with value 1-126. (13.2.2) / The RLD on the filtering node MUST be higher than the RLD on all other nodes in the provider MPLS domain. (11)" | The registry field is limited to 1-126, but Table 5 assigns a registration procedure to 127 and Table 6 registers opcodes 0 and 127. In Section 11, "higher than the RLD on all other nodes" cannot be met when a domain has two or more filtering border nodes with the same RLD, since each is among the "other nodes" of the other; "at least as high as" (or "not lower than that of any non-filtering node") is presumably meant. | editorial | none: RFC has no errata; **proposed erratum below** |
+
+Proposed erratum RA-1402 (RFC 9994, Section 13.2.1, 4.2, 4.3, 6.2; type: Technical):
+
+```
+Original Text
+-------------
+   There are, at most, 14 Format D LSEs per opcode (due to the NASL
+   limit of 15 and the constraint of Format D requiring a Format C
+   LSE), so there are at most 20 + 14 * 30 = 440 bit positions.  The
+   value listed in the Bit Position column is an integer with value
+   between 0-439.
+
+Corrected Text
+--------------
+   There are, at most, 7 Format D LSEs per opcode (due to the 3-bit
+   NAL field), so there are at most 20 + 7 * 30 = 230 bit positions.
+    The value listed in the Bit Position column is an integer with
+   value between 0-229.  When opcode 1 is carried in a Format B LSE,
+   Bit Positions 13-19 are not present and Bit Position 20 is the
+   most significant bit of the first Format D LSE that follows it.
+
+Notes
+-----
+   Sections 4.2 and 4.3 define NAL as a 3-bit count of the Format D
+   LSEs following an opcode LSE; Sections 4.2, 5 and 6.2 allow
+   Format D after Format B. Table 4 (ranges up to 439) would need
+   the same correction.
+```
+
+Proposed erratum RA-1403 (RFC 9994, Section 5.2, 4.3; type: Technical):
+
+```
+Original Text
+-------------
+   in a Format C LSE 7 (bits 20-22 and 25-28), and in a Format D LSE
+   11 (bits 20-22 and 24-31).
+
+Corrected Text
+--------------
+   in a Format C LSE 7 (bits 20-22 and 24-27), and in a Format D LSE
+   11 (bits 20-22 and 24-31).
+
+Notes
+-----
+   Per Figure 4, bit 28 of a Format C LSE is the U bit and bits
+   24-27 are the 4-bit Data field.
+```
+
+Proposed erratum RA-1405 (RFC 9994, Section 7, 5.3, 9.3; type: Technical):
+
+```
+Original Text
+-------------
+   The behavior of a node where a NAS with I2E and HbH scopes is
+   also removed along with popping the forwarding label on a PHP
+   node is outside the scope of this document.
+
+Corrected Text
+--------------
+   The behavior of an MNA-incapable node that removes a NAS with I2E
+   or HbH scope along with the forwarding label when performing PHP
+   is outside the scope of this document; an MNA-capable PHP node
+   follows Section 9.3.
+
+Notes
+-----
+
+```
+
+Proposed erratum RA-1407 (RFC 9994, Section 13.2.2, 11; type: Editorial):
+
+```
+Original Text
+-------------
+   Opcode is an integer with value 1-126.
+
+Corrected Text
+--------------
+   Opcode is an integer with value 0-127.
+
+Notes
+-----
+   Tables 5 and 6 cover 0 and 127.
+```
+
 ### RFC 10041: Advertising Unreachable Links in OSPF {#ra_rfc10041}
 
-Depth: deep. Errata: 1 errata: 1 reported. Updates: RFC 5443, RFC 6987, RFC 8379, RFC 8770.
+Depth: deep. Errata: 1 errata: 1 reported. Status: Proposed Standard. Updates: RFC 5443, RFC 6987, RFC 8379, RFC 8770.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -6520,11 +8082,11 @@ Notes
 
 ## Pseudowires, VPLS and ICCP {#ra_pw}
 
-23 RFCs in this area (23 deep); 87 findings, 36 of them proposed errata.
+23 RFCs in this area (23 deep); 103 findings, 47 of them proposed errata.
 
 ### RFC 4385: Pseudowire Emulation Edge-to-Edge (PWE3) Control Word for Use over an MPLS PSN {#ra_rfc4385}
 
-Depth: deep. Errata: 1 errata: 1 verified. 
+Depth: deep. Errata: 1 errata: 1 verified. Status: Proposed Standard. Updated by: RFC 5586.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -6554,7 +8116,7 @@ Notes
 
 ### RFC 4446: IANA Allocations for Pseudowire Edge to Edge Emulation (PWE3) {#ra_rfc4446}
 
-Depth: deep (registries). Errata: 1 errata: 1 verified. 
+Depth: deep. Errata: 1 errata: 1 verified. Status: Best Current Practice (BCP 116).
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -6608,43 +8170,26 @@ Notes
 
 ### RFC 4447: Pseudowire Setup and Maintenance Using the Label Distribution Protocol (LDP) {#ra_rfc4447}
 
-Depth: deep. Errata: 10 errata: 8 held, 2 rejected. 
+Depth: deep. Errata: 10 errata: 8 held, 2 rejected. Status: Proposed Standard. Obsoleted by: RFC 8077. Updated by: RFC 6723, RFC 6870, RFC 7358.
+
+Resolved by a later RFC or re-targeted to its successor (kept for reference; not counted as open findings):
+
+| ID | Section | Issue as found | Outcome | Resolution |
+|---|---|---|---|---|
+| RA-0621 | 5.3.3, 1 | Ingress/egress roles of PE1 and PE2 in 5.3.3 contradict Section 1. | Re-targeted | RFC 8077 (obsoletes RFC 4447) repeats the text in Section 6.2.3; recorded as RA-1073. |
+| RA-0623 | 6.1 | Section 6.1 never says which PW types "these PWs" are; | Re-targeted | RFC 8077 (obsoletes RFC 4447) repeats the text in Section 7.1; recorded as RA-1074. |
+| RA-0625 | 5.3.2 | PW info length: unclear whether sub-element Type and Length octets are counted. | Re-targeted | RFC 8077 (obsoletes RFC 4447) repeats the text in Section 6.2.2; recorded as RA-1075. |
+| RA-0626 | 6.3 | A Generalized PWid FEC (0x81) has no PW ID field; | Re-targeted | RFC 8077 (obsoletes RFC 4447) repeats the text in Section 6.5; recorded as RA-1076. |
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
-| RA-0621 | 5.3.3, 1 | "The egress PE (PE1), which has knowledge of the ingress PE, initiates the setup by sending a Label Mapping Message to the ingress PE (PE2)." | Section 1 defines "PE1 will be defined as the ingress router, and PE2 as the egress router". Section 5.3.3 swaps the roles (PE1 egress, PE2 ingress) in the same procedure in which PE1 is the signalling initiator. Since a Label Mapping is sent by the PE that will receive traffic on that label, PE1 is the egress of the PE2-to-PE1 direction only; the role names conflict with Section 1. RFC 8077 5.3.3 (line "The egress PE (PE1), which has knowledge of the ingress PE") carries the same text. | contradiction | none: RFC has 10 errata, none on this point; **proposed erratum below** |
-| RA-0622 | 5.4.1 | "a simple label withdraw method MAY also be supported as a legacy means of signaling PW status / The PW status signaling procedures described in this section MUST be fully implemented." | The same section makes the label withdraw method optional (MAY, with a dedicated error "Label Withdraw PW Status Method Not Supported" for PEs that lack it) and then requires all procedures "described in this section" to be fully implemented. What happens after a PE sends the "Method Not Supported" Label Release (PW stays down, retry, or operator action) is also not stated. | contradiction | none: RFC has 10 errata, none on this point |
-| RA-0623 | 6.1 | "6.1.  PW Types for Which the Control Word is REQUIRED / The Label Mapping messages that are sent in order to set up these PWs MUST have c=1." | Section 6.1 never says which PW types "these PWs" are; the list is only in the encapsulation documents. An implementation of this document alone cannot know when to send "Illegal C-bit". RFC 8077 7.1 keeps the same heading and wording. | ambiguity | none: RFC has 10 errata, none on this point |
-| RA-0624 | 5.3.3, 6.1, 6.2 | "send a Label Withdraw message with a "Wrong C-bit" status code / a Label Release message MUST be sent, with an "Illegal C-bit" status code" | The LDP base specification (RFC 3036 3.5.10, 3.5.11) defines only an optional Label TLV for Label Withdraw and Label Release; it does not define a Status TLV in these messages. This document requires status codes in Withdraw and Release ("Wrong C-bit", "Illegal C-bit", "Unassigned/Unrecognized TAI", "Label Withdraw PW Status Method Not Supported") without defining the encoding (presumably a Status TLV as an optional parameter) or its E and F bits. | ambiguity | none: RFC has 10 errata, none on this point |
-| RA-0625 | 5.3.2 | "The PW information length field contains the length of the SAII, TAII, and AGI, combined in octets." | Whether the length counts only the three Value fields or also the Type and Length octets of each sub-element is not stated; the encoding (a Length octet per sub-element and "the null string can be sent by setting the length byte to 0") suggests the latter, which is what implementations do. RFC 8077 5.3.2 keeps the sentence. | ambiguity | erratum 3555 (Held for Document Update), editorial |
-| RA-0626 | 6.3 | "A Label Release message initiated by a PE router must always include the PW ID." | A Generalized PWid FEC (0x81) has no PW ID field; the sentence applies to the PWid FEC (0x80) only. It also sits next to "A wild card Label Release message MUST include only the group ID", which has no PW ID either. RFC 8077 6.3 repeats the sentence. | editorial | none: RFC has 10 errata, none on this point |
-| RA-0627 | 5, 5.1, 5.4.3, 6.2, 7.1 | "The PEs will establish an LDP session using the Extended Discovery mechanism described in [LDP, sections 2.4.2 and 2.5]." | Several small errors: the tag [LDP] is not in the reference list (it is [RFC3036]); the 5.1 table gives "FEC" as the "Defined for Message" of two TLVs, which is not an LDP message (Label Mapping is meant); 5.4.3 says the PW Status TLV is sent "following the PW FEC and the interface parameter sub-TLVs" while its figure places it after the Generic Label TLV; 6.2 "the one that prefers not to use it is has no extra protocol"; 7.1 names 0x096C "Group ID TLV" while 5.3.2.2 calls it "PW Grouping ID TLV"; 7.2 truncates the 0x2B name ("Label Withdraw PW Status Method"). | editorial | none: RFC has 10 errata, none on this point |
-
-Proposed erratum RA-0621 (RFC 4447, Section 5.3.3, 1; type: Technical):
-
-```
-Original Text
--------------
-   The egress PE (PE1), which has knowledge of the ingress PE,
-   initiates the setup by sending a Label Mapping Message to the
-   ingress PE (PE2).
-
-Corrected Text
---------------
-   PE1, which has knowledge of PE2, initiates the setup by sending a
-   Label Mapping Message to PE2. (For the PW direction from PE2 to
-   PE1 that this message signals, PE1 is the egress and PE2 the
-   ingress.)
-
-Notes
------
-   Section 1 defines PE1 as ingress and PE2 as egress. The same text
-   is in RFC 8077 Section 5.3.3.
-```
+| RA-0622 | 5.4.1 | "a simple label withdraw method MAY also be supported as a legacy means of signaling PW status / The PW status signaling procedures described in this section MUST be fully implemented." | The same section makes the label withdraw method optional (MAY, with a dedicated error "Label Withdraw PW Status Method Not Supported" for PEs that lack it) and then requires all procedures "described in this section" to be fully implemented. What happens after a PE sends the "Method Not Supported" Label Release (PW stays down, retry, or operator action) is also not stated. Later RFCs: RFC 8077 (obsoletes RFC 4447) drops the sentence requiring all procedures to be fully implemented, which settles the contradiction; Section 6.3.1 still does not say what follows a 'Label Withdraw PW Status Method Not Supported' release. | contradiction | none: RFC has 10 errata, none on this point |
+| RA-0624 | 5.3.3, 6.1, 6.2 | "send a Label Withdraw message with a "Wrong C-bit" status code / a Label Release message MUST be sent, with an "Illegal C-bit" status code" | The LDP base specification (RFC 3036 3.5.10, 3.5.11) defines only an optional Label TLV for Label Withdraw and Label Release; it does not define a Status TLV in these messages. This document requires status codes in Withdraw and Release ("Wrong C-bit", "Illegal C-bit", "Unassigned/Unrecognized TAI", "Label Withdraw PW Status Method Not Supported") without defining the encoding (presumably a Status TLV as an optional parameter) or its E and F bits. Later RFCs: RFC 8077 (obsoletes RFC 4447) keeps the status codes in Label Withdraw and Label Release messages (Sections 7.1 and 7.2) without defining their encoding. | ambiguity | none: RFC has 10 errata, none on this point |
+| RA-0627 | 5, 5.1, 5.4.3, 6.2, 7.1 | "The PEs will establish an LDP session using the Extended Discovery mechanism described in [LDP, sections 2.4.2 and 2.5]." | Several small errors: the tag [LDP] is not in the reference list (it is [RFC3036]); the 5.1 table gives "FEC" as the "Defined for Message" of two TLVs, which is not an LDP message (Label Mapping is meant); 5.4.3 says the PW Status TLV is sent "following the PW FEC and the interface parameter sub-TLVs" while its figure places it after the Generic Label TLV; 6.2 "the one that prefers not to use it is has no extra protocol"; 7.1 names 0x096C "Group ID TLV" while 5.3.2.2 calls it "PW Grouping ID TLV"; 7.2 truncates the 0x2B name ("Label Withdraw PW Status Method"). Later RFCs: RFC 8077 (obsoletes RFC 4447) fixes the reference tag, the TLV name, the message table and the grammar slip, but keeps 'following the PW FEC and the Interface Parameter Sub-TLVs' (Section 6.3.3). | editorial | none: RFC has 10 errata, none on this point |
 
 ### RFC 4448: Encapsulation Methods for Transport of Ethernet over MPLS Networks {#ra_rfc4448}
 
-Depth: deep (Sections 2 to 6; informational Appendices A and B skimmed). Errata: 1 errata: 1 held. 
+Depth: deep. Errata: 1 errata: 1 held. Status: Proposed Standard. Updated by: RFC 5462, RFC 8469.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -6675,7 +8220,7 @@ Notes
 
 ### RFC 4623: Pseudowire Emulation Edge-to-Edge (PWE3) Fragmentation and Reassembly {#ra_rfc4623}
 
-Depth: deep (normative statements). Errata: 4 errata: 4 verified. 
+Depth: deep. Errata: 4 errata: 4 verified. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -6685,7 +8230,7 @@ Depth: deep (normative statements). Errata: 4 errata: 4 verified.
 
 ### RFC 4761: Virtual Private LAN Service (VPLS) Using BGP for Auto-Discovery and Signaling {#ra_rfc4761}
 
-Depth: deep (normative statements extracted). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 5462, RFC 8395, RFC 8614.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -6717,7 +8262,7 @@ Notes
 
 ### RFC 4762: Virtual Private LAN Service (VPLS) Using Label Distribution Protocol (LDP) Signaling {#ra_rfc4762}
 
-Depth: deep. Errata: 2 errata: 1 verified, 1 held. 
+Depth: deep. Errata: 2 errata: 1 verified, 1 held. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -6775,13 +8320,13 @@ Notes
 
 ### RFC 5003: Attachment Individual Identifier (AII) Types for Aggregation {#ra_rfc5003}
 
-Depth: deep. Errata: 1 errata: 1 held. 
+Depth: deep. Errata: 1 errata: 1 held. Status: Proposed Standard.
 
 Nothing notable found at this depth.
 
 ### RFC 5085: Pseudowire Virtual Circuit Connectivity Verification (VCCV): A Control Channel for Pseudowires {#ra_rfc5085}
 
-Depth: deep. Errata: 1 errata: 1 verified. 
+Depth: deep. Errata: 1 errata: 1 verified. Status: Proposed Standard. Updated by: RFC 5586.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -6811,19 +8356,24 @@ Notes
 
 ### RFC 6073: Segmented Pseudowire {#ra_rfc6073}
 
-Depth: deep (7, 10, 14 in full; 8, 9 by MUST/SHOULD). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 6723, RFC 7267.
 
-Resolved by a later RFC (kept for reference; not counted as open findings):
+Resolved by a later RFC or re-targeted to its successor (kept for reference; not counted as open findings):
 
-| ID | Section | Issue as found | Resolution |
-|---|---|---|---|
-| RA-0244 | 14.5, 7.4.1 | Length of sub-TLV 0x06 is 14 octets per Section 7.4.1, not 12. | RFC 7267 Section 6 (updates RFC 6073) sets the length of sub-TLV 0x06 to 14. |
+| ID | Section | Issue as found | Outcome | Resolution |
+|---|---|---|---|---|
+| RA-0244 | 14.5, 7.4.1 | Length of sub-TLV 0x06 is 14 octets per Section 7.4.1, not 12. | Resolved | RFC 7267 Section 6 (updates RFC 6073) sets the length of sub-TLV 0x06 to 14. |
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0245 | 7.4.1, 7.6 | "The SP-PE TLV MUST contain the appropriate mandatory sub-TLVs specified below." | None of the sub-TLVs that follow is marked mandatory: 0x01 and 0x05 apply only to FEC 128 or FEC 129 segments, the description, local and remote IP address sub-TLVs are "OPTIONAL", and 0x06 is "recommended". Loop detection (7.6) compares the S-PE's "own IP address" with the received TLVs, which only works when each S-PE includes the optional Local IP address sub-TLV (0x03); VCCV to an S-PE (9.5) needs the same. The text therefore requires a set of mandatory sub-TLVs that it never defines. | contradiction | none: RFC has no errata; **proposed erratum below** |
 | RA-0246 | 10 | "Only one SP-PE TLV can be present in this message. This message is then relayed by each S-PE unchanged." | The status notification carries the PWid FEC or Generalized ID FEC of the segment it is sent on, and each SS-PW has its own PWid or AII (7.2); item i in the same section says the PWid "is set to the value of the PW segment of the next hop". The message is therefore never relayed unchanged: at least its FEC (and, per 10.1.5 / 10.2, possibly its SP-PE TLV) is rewritten at each S-PE. | contradiction | none: RFC has no errata |
 | RA-0247 | 7.2.1 | "The SAII and TAII are compared as unsigned integers; if the SAII is larger, then the T-PE assumes the active role." | For AII Type 2 the identifiers are 12-octet structures (Global ID, Prefix, AC ID) and AII Type 1 is 4 octets; "compared as unsigned integers" does not say whether the AII Type and Length octets take part, how identifiers of different types or lengths compare, or what happens when they are equal. | ambiguity | none: RFC has no errata |
+| RA-1408 | 9.6.1.3 | "The operation to be taken by the node receiving the echo reply in response to an echo request depends on the VCCV mode of operation described above.  See Section 9.5.2 for detailed procedures." | Section 9.5.2 is "MS-PW and VCCV CC Type 2" (two lines saying CC Type 2 is not supported). The detailed procedures for handling echo replies in each mode (connectivity verification, path verification, path trace) are in Section 9.6.2. | error | none: RFC has no errata; **proposed erratum below** |
+| RA-1409 | 9.5.1, 9.6.2.1 | "When using CC Type 1 for MS-PWs, the PE transmitting the VCCV packet MUST set the TTL to the appropriate value to reach the destination S-PE. (9.5.1) / However, VCCV Type 1 (which can be use for end-to-end verification only) is only supported if the CW is enabled. (9.6.2.1)" | Section 9.5.1 describes CC Type 1 aimed at an S-PE by setting the PW label TTL, while 9.6.2.1 says CC Type 1 can be used for end-to-end verification only; 9.6.2.2 then tells an S-PE that a TTL-expired packet is recognised as VCCV "by checking the CW", which again supposes CC Type 1 to an intermediate node. Whether a T-PE may target an S-PE with CC Type 1 is therefore stated both ways. 9.6.2.3 also says "support the Control Word CC Type 3", mixing CC Type 1 (control word) and CC Type 3 (TTL expiry); and "can be use" should be "can be used". | contradiction | none: RFC has no errata |
+| RA-1410 | 9.6.1.1, 7.4.1 | "The necessary SP-PE sub-TLVs are: 0x01 PWid of last PW segment traversed / 0x03 Local IP address of PW Switching Point / 0x04 Remote IP address of last PW Switching Point traversed or of the T-PE" | The list covers only FEC 128 segments. For a segment signalled with FEC 129, the target FEC of the echo request has to be built from sub-TLV 0x05 (FEC Element of last PW segment traversed), which is not listed; 0x04 is itself optional ("SHOULD only be included if ...") so the previous-hop address may have to be taken from the 0x03 of the preceding SP-PE TLV. 9.6.2.5 (iii) likewise speaks only of "the FEC 128 information for the next segment". | ambiguity | none: RFC has no errata |
+| RA-1411 | 10.1 | "however, only the failure from the remote closest S-PE will be stored (last PW status message received).  The PW status word received is just ORed to any existing remote PW status already stored on the T-PE." | The two sentences give different rules for the T-PE's remote status: keeping only the last received status message replaces the stored word, ORing accumulates bits from every S-PE and from the remote T-PE. The same section says an S-PE ORs each failure into its stored word and also that "only the last PW status message is stored" when the same bit is received more than once. Since clearing (10.1.5) sends a message with the bit cleared, the OR reading can never clear a bit set by another S-PE, while the replace reading can lose a fault still present elsewhere on the MS-PW. | contradiction | none: RFC has no errata |
+| RA-1412 | 4, 7.4.1, 8.4.2, 8.7.1 | "This document describes procedures for building multi-segment pseudowires using manual configuration of the switching point PE1. (4)" | In Figure 3, PE1 is a T-PE; the switching point is S-PE1 (SPE1), as the next sentence says ("selection of S-PE1"). Other slips: 7.4.1 limits the description string to "80 characters" while it is UTF-8 encoded (octets or characters is not stated, and the sub-TLV Length is one octet); 8.4.2 "transitioning from "Up" or "Down"" (to); 8.7.1 (iv) "the switching node SHOULD NOT allow the session to be established by sending a CDN message" reads as forbidding the CDN, where the intent is to refuse the session by sending a CDN with Result Code 31. | editorial | none: RFC has no errata |
 
 Proposed erratum RA-0245 (RFC 6073, Section 7.4.1, 7.6; type: Technical):
 
@@ -6848,14 +8398,37 @@ Notes
    proposed text is one possible resolution for the working group.
 ```
 
+Proposed erratum RA-1408 (RFC 6073, Section 9.6.1.3; type: Technical):
+
+```
+Original Text
+-------------
+   See Section 9.5.2 for detailed procedures.
+
+Corrected Text
+--------------
+   See Section 9.6.2 for detailed procedures.
+
+Notes
+-----
+   Section 9.5.2 only states that CC Type 2 is not supported for
+   MS-PWs; the per-mode procedures referred to are in Section 9.6.2
+   (9.6.2.1 to 9.6.2.5).
+```
+
 ### RFC 6074: Provisioning, Auto-Discovery, and Signaling in Layer 2 Virtual Private Networks (L2VPNs) {#ra_rfc6074}
 
-Depth: deep (3.1.2, 3.2, 4.2, 6, 7 in full; 3.3 to 3.5 by MUST/SHOULD). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0248 | 3.2.3, 3.2.2.1 | "The AGI field in this case consists of a Type of 1, a length field of value 8, and the 8 bytes of the VPLS-id." | The VPLS-id is carried in BGP as an 8-octet Extended Community (type 0x00 or 0x01, sub-type 0x0A, then a 6-octet value), but the AGI is also 8 octets. Whether "the 8 bytes of the VPLS-id" are the Extended Community octets including type and sub-type, or an RD-style encoding of the 6-octet value (2-octet RD type, then AS / IPv4 address and number), is not stated; implementations are known to use the RD-style form, which is not what a literal reading gives. PEs that differ never match each other's Label Mappings. | ambiguity | none: RFC has no errata; **proposed erratum below** |
 | RA-0249 | 3.2.2.1 | "If a PE receives a BGP update from which any of the elements specified above is absent, the update should be ignored." | "Ignored" (lower-case "should") is not defined against BGP route handling: if a previous advertisement of the same NLRI was valid, ignoring the update leaves the old route and its PWs in place although the advertiser replaced it; RFC 7606 would instead treat such a route as withdrawn, or keep it but not use it. The text also does not say whether a route reflector, which does not import the route, should still reflect it. | ambiguity | none: RFC has no errata |
+| RA-1413 | 3.3.3, 6 | "then PE2 sends a Label Release or CDN message to PE1, with a Status Code meaning "Attachment Circuit already bound to remote Attachment Circuit"." | Section 6 registers only two LDP status codes (0x00000030 "Attachment Circuit bound to different PE", 0x0000002D "Attachment Circuit bound to different remote Attachment Circuit") and two L2TP Result Codes (27, 28). No code "Attachment Circuit already bound to remote Attachment Circuit" exists, so the duplicate-pool case of 3.3.3 cannot be encoded; an implementer must either reuse 0x2D / 28 (whose name describes a different condition, a binding to a different remote AC) or invent a value. | error | none: RFC has no errata; **proposed erratum below** |
+| RA-1414 | 4.1 | "For VPWS, the BGP advertisement and PW signaling are exactly as described in Section 3.3. ... These PEs will then be able to establish the appropriate PW signaling protocol session and establish the full mesh of pseudowires as described in Section 3.2.3." | Section 3.2.3 is the VPLS signaling procedure (AGI = VPLS-id, TAII = PE_addr); the VPWS (colored pools) signaling, with the pool numbers as SAII / TAII, is Section 3.3.3, which the same paragraph's first sentence points to via Section 3.3. | error | none: RFC has no errata; **proposed erratum below** |
+| RA-1415 | 3.4, 3.3.2.1 | "During BGP-based auto-discovery, the pool color is still encoded in the RD, but if the pool is configured with a set of "export RTs", these are encoded in the RTs of the BGP Update messages INSTEAD of the color (3.4)" | Section 3.3.2.1, to which 3.4 refers as the full-mesh base case, does not encode the color in the RD: the RD is an identifier of the VPWS instance prepended to the pool number, the VPWS identifier is carried in an Extended Community, and the color is encoded in the RT ("with the RT that encodes the pool's color"). "Still encoded in the RD" therefore describes neither procedure, and a partial-mesh receiver cannot tell from the text whether to derive a pool's color from its RD or from the VPWS-identifier community once the RTs no longer carry it. | contradiction | none: RFC has no errata |
+| RA-1416 | 3.5.1, 3.5.2 | "A "Remote" list: {<IP address, k>} ... In the above example, E would be given the remote list: {<2, F>}. (3.5.1) / As part of the discovery procedure, the N-PE advertises the number of U-PEs for each VPLS.  See Section 3.2.2 for details. (3.5.2)" | The remote list is defined as <IP address, k> but both examples (<2, F> and "an element <i, F>") put the count first. More importantly, 3.5.2 says an N-PE advertises "the number of U-PEs for each VPLS" and points to 3.2.2, which defines no field for such a count: 3.2.2.1 only says an N-PE advertises one NLRI per VSI (RD plus a U-PE address). A receiving N-PE has to infer k from the number of NLRIs it receives from that N-PE for the VPLS (which mixes with the RD:PE_addr NLRIs of non-distributed PEs and with multiple RDs per VPLS); the computation of the local and remote lists from discovery is not specified. | ambiguity | none: RFC has no errata |
+| RA-1417 | 3.1.2, 3.2.2.1, 3.3.2.1 | "then PE2 sends a Call Disconnect Notify (CDN) message to PE1, with a Status Code meaning "Attachment Circuit bound to different PE" (3.1.2)" | For L2TP the CDN carries a Result Code (Section 6 registers Result Codes 27 and 28), not a Status Code. The BGP summaries list "an Extended Community Attribute containing the VPLS-id" and "an Extended Community Attribute containing one or more RTs" as if they were two attributes; an UPDATE carries a single Extended Communities attribute holding both. 3.3.2.1 also has "PE routers that have pools switches with the same color" (stray word). | editorial | none: RFC has no errata |
 
 Proposed erratum RA-0248 (RFC 6074, Section 3.2.3, 3.2.2.1; type: Technical):
 
@@ -6882,9 +8455,54 @@ Notes
    stated.
 ```
 
+Proposed erratum RA-1413 (RFC 6074, Section 3.3.3, 6; type: Technical):
+
+```
+Original Text
+-------------
+   then PE2 sends a Label Release or CDN message to PE1, with a
+   Status Code meaning "Attachment Circuit already bound to remote
+   Attachment Circuit".
+
+Corrected Text
+--------------
+   (Either name an existing code, e.g. "with the Status Code
+   'Attachment Circuit bound to different remote Attachment Circuit'
+   (Section 6)", or register a new LDP status code and L2TP Result
+   Code for this condition.)
+
+Notes
+-----
+   Section 6 registers only "bound to different PE" (0x00000030
+   27) and "bound to different remote Attachment Circuit"
+   (0x0000002D
+   28). The condition in Section 3.3.3 (a second PW between the same
+   pair of pools) has no code of its own.
+```
+
+Proposed erratum RA-1414 (RFC 6074, Section 4.1; type: Technical):
+
+```
+Original Text
+-------------
+   establish the full mesh of pseudowires as described in Section
+   3.2.3.  A partial mesh can similarly be established
+
+Corrected Text
+--------------
+   establish the full mesh of pseudowires as described in Section
+   3.3.3.  A partial mesh can similarly be established
+
+Notes
+-----
+   In the VPWS paragraph of Section 4.1 the reference should be to
+   the colored-pool signaling of Section 3.3.3; Section 3.2.3 is the
+   VPLS case already covered by the preceding paragraph.
+```
+
 ### RFC 6310: Pseudowire (PW) Operations, Administration, and Maintenance (OAM) Message Mapping {#ra_rfc6310}
 
-Depth: deep. Errata: 1 errata: 1 held. 
+Depth: deep. Errata: 1 errata: 1 held. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -7009,7 +8627,7 @@ Notes
 
 ### RFC 6391: Flow-Aware Transport of Pseudowires over an MPLS Packet Switched Network {#ra_rfc6391}
 
-Depth: deep (1.3 to 5). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 7274.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -7037,7 +8655,7 @@ Notes
 
 ### RFC 6478: Pseudowire Status for Static Pseudowires {#ra_rfc6478}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 5885.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 5885. Updated by: RFC 7274.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -7089,7 +8707,7 @@ Notes
 
 ### RFC 6718: Pseudowire Redundancy {#ra_rfc6718}
 
-Depth: deep (read in full; Informational requirements). Errata: none (the RFC has no errata). 
+Depth: deep (read in full; Informational requirements). Errata: none (the RFC has no errata). Status: Informational.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -7097,7 +8715,7 @@ Depth: deep (read in full; Informational requirements). Errata: none (the RFC ha
 
 ### RFC 6870: Pseudowire Preferential Forwarding Status Bit {#ra_rfc6870}
 
-Depth: deep. Errata: 1 errata: 1 held. Updates: RFC 4447.
+Depth: deep. Errata: 1 errata: 1 held. Status: Proposed Standard. Updates: RFC 4447. Updated by: RFC 7771.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -7202,7 +8820,7 @@ Notes
 
 ### RFC 7267: Dynamic Placement of Multi-Segment Pseudowires {#ra_rfc7267}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 6073.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 6073.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -7232,7 +8850,7 @@ Notes
 
 ### RFC 7275: Inter-Chassis Communication Protocol for Layer 2 Virtual Private Network (L2VPN) Provider Edge (PE) Redundancy {#ra_rfc7275}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -7241,6 +8859,11 @@ Depth: deep. Errata: none (the RFC has no errata).
 | RA-0254 | 4.2.1, 8 | "S-bit ... 0 - The TLV is withdrawing the capability specified by the TLV Code Point." | Section 8 lets a peer withdraw the ICCP capability with a Capability message (S = 0, RFC 5561 dynamic capabilities), but the ICCP Connection state machine has no event for a withdrawn capability: CAPREC, CONNECTING and OPERATIONAL leave only on "LDP session torn down" or an RG Disconnect. Whether a withdrawal takes the RG connections (and their applications) down, and to which state they return, is not specified. | ambiguity | none: RFC has no errata |
 | RA-0255 | 6.4.1 | "iii. ICCP Application Connection Count Exceeded (0x00010003) This is used to reject a new incoming Application Connection that would cause the local PE's ICCP connection count to exceed its capabilities." | The code is for the Application Connection count; the text says "ICCP connection count", which is the condition of code ii. | editorial | none: RFC has no errata; **proposed erratum below** |
 | RA-0256 | 4.6 | "A PE that requires a separate LDP session will advertise a separate LDP adjacency with a non-zero label space identifier." | The ICCP connection state machine is per LDP session (NONEXISTENT means "no LDP session"); with a dedicated session the text does not say which of the two sessions carries the RG, whether the ICCP capability is advertised on both, or what happens to the RG when only one of them fails. A non-zero label space identifier also denotes a per-interface label space in RFC 5036. | ambiguity | none: RFC has no errata |
+| RA-1418 | 7.2.7 | "Partner Port Number ... 2 octets encoding the LACP Partner Port Number ... The Port Number MUST be encoded with the Node ID, as discussed above." | The Node ID encoding of 7.2.3 (most significant bit 1, next three bits the RG member's Node ID) exists to make the Port Numbers of the PEs in an RG unique. The Partner Port Number is the port number chosen by the partner system (the multi-homed CE, 9.2.2.3 "on the Partner (i.e., multi-homed device) side"), which knows nothing about the RG Node IDs, so the sender cannot encode it with a Node ID and a receiver that checks the encoding rejects valid State TLVs. The requirement can only apply to the Actor Port Number (which carries the same sentence). | error | none: RFC has no errata; **proposed erratum below** |
+| RA-1419 | 9.2.2.1, 9.2.2.2, 7.2.3 | "every PE MUST use the values for the two parameters that are supplied by the PE with the numerically lowest value (among RG members) of System Aggregation Priority." | "System Aggregation Priority" is not defined; the mLACP System Config TLV (7.2.3) carries only "System Priority" (and System ID, Node ID). 9.2.2.2 uses the same undefined term to choose the Aggregator MAC address. Neither rule says how equal priorities are resolved (two PEs with the default LACP priority are the common case), so PEs can select different System IDs and MAC addresses and present two LACP systems to the CE. | ambiguity | none: RFC has no errata; **proposed erratum below** |
+| RA-1420 | 9.1.3.1, 9.1.3.2, 7.1.3, 7.1.4 | "If this condition is not satisfied after the PEs have exchanged "PW-RED State TLVs", a PE MUST disable the associated pseudowire(s)" | Both mode sections evaluate PW Priority "after the PEs have exchanged 'PW-RED State TLVs'" and choose the active PE "after all of the PEs in an RG have exchanged their 'PW-RED State TLVs'", but the PW Priority is carried only in the PW-RED Config TLV (7.1.3); the State TLV (7.1.4) carries ROID and local / remote PW status. An implementer cannot tell whether the priority check and the election wait for State TLVs, for Config TLVs, or for both (for example after a Config change that only alters the priority). | error | none: RFC has no errata; **proposed erratum below** |
+| RA-1421 | 6.4, 6.4.1, 4.2 | "The Notification message MUST only be sent to a PE that is already part of an RG." | 4.2 requires a PE to reject an RG Connect for an RG it is not a member of, and 6.4.1 i defines "Unknown ICCP RG" for exactly that case ("an RG that is not configured on the local PE"). The rejecting PE has no RG in common with the sender, so the 6.4 restriction, read literally, forbids the Notification that 4.2 and 6.4.1 i require. Whether "already part of an RG" means an RG configured locally, the RG named in the message, or any LDP peer with the ICCP capability is not stated. | ambiguity | none: RFC has no errata; **proposed erratum below** |
+| RA-1422 | 4.4.2, 6.3, 6.4.1, 9.1.3, 9.2.2.3, 7.2.2.1 | "RESET: This state indicates that an ICCP connection is operational between the PEs but that the Application Connection has not been initialized yet or has been resent." | Editorial inconsistencies: (a) 4.4.2 "has been resent" for "has been reset"; (b) 9.1.3 and 9.2.2.3 order the response by the "'Synchronization Response TLV' with the 'Synchronization Data Start' flag", a TLV name that does not exist (7.1.6 / 7.2.10 define the "Synchronization Data TLV"); (c) status codes are named differently in the text and in 12.4 ("RG Removed" / "ICCP RG Removed" in 6.3, "Rejected Message" / "ICCP Rejected Message" and "Incompatible Protocol Version" / "Incompatible ICCP Protocol Version" in 6.4.1 and 4.4.1); (d) the mLACP Disconnect Cause String (7.2.2.1) has no encoding, while the PW-RED one (7.1.2.1) is UTF-8 without terminating null. | editorial | none: RFC has no errata; **proposed erratum below** |
 
 Proposed erratum RA-0252 (RFC 7275, Section 4.2.1, 4.4.2, 4.2; type: Technical):
 
@@ -7286,9 +8909,121 @@ Notes
    4.4 ii); the description repeats the wording of code 0x00010002.
 ```
 
+Proposed erratum RA-1418 (RFC 7275, Section 7.2.7; type: Technical):
+
+```
+Original Text
+-------------
+   The Port Number MUST be encoded with the Node ID, as discussed
+   above.
+
+Corrected Text
+--------------
+   (Partner Port Number) The Partner Port Number is the value
+   received from the partner system and is not encoded with the Node
+   ID.
+
+Notes
+-----
+   The Node ID encoding (Section 7.2.3) applies to port numbers
+   assigned by the PEs of the RG; the partner system assigns its own
+   port numbers. The sentence is correct for the Actor Port Number
+   in the same TLV.
+```
+
+Proposed erratum RA-1419 (RFC 7275, Section 9.2.2.1, 9.2.2.2, 7.2.3; type: Technical):
+
+```
+Original Text
+-------------
+   every PE MUST use the values for the two parameters that are
+   supplied by the PE with the numerically lowest value (among RG
+   members) of System Aggregation Priority.
+
+Corrected Text
+--------------
+   every PE MUST use the values for the two parameters that are
+   supplied by the PE with the numerically lowest System Priority
+   (Section 7.2.3) among RG members; if several PEs advertise the
+   same lowest System Priority, the values of the one among them
+   with the numerically lowest System ID are used.
+
+Notes
+-----
+   Section 7.2.3 defines only "System Priority". The same term and
+   the same missing tie rule occur in Section 9.2.2.2 for the
+   Aggregator MAC address.
+```
+
+Proposed erratum RA-1420 (RFC 7275, Section 9.1.3.1, 9.1.3.2, 7.1.3, 7.1.4; type: Technical):
+
+```
+Original Text
+-------------
+   If this condition is not satisfied after the PEs have exchanged
+   "PW-RED State TLVs", a PE MUST disable the associated
+   pseudowire(s) and SHOULD raise an alarm to alert the operator.
+
+Corrected Text
+--------------
+   If this condition is not satisfied after the PEs have exchanged
+   "PW-RED Config TLVs", a PE MUST disable the associated
+   pseudowire(s) and SHOULD raise an alarm to alert the operator.
+
+Notes
+-----
+   Occurs twice in 9.1.3.1 and once in 9.1.3.2. The election ("the
+   PE with the best PW Priority ... advertises active Preferential
+   Forwarding status") also needs the State TLVs, so the corrected
+   text could say "PW-RED Config TLVs and PW-RED State TLVs" there.
+```
+
+Proposed erratum RA-1421 (RFC 7275, Section 6.4, 6.4.1, 4.2; type: Technical):
+
+```
+Original Text
+-------------
+   The Notification message MUST only be sent to a PE that is
+   already part of an RG.
+
+Corrected Text
+--------------
+   The Notification message MUST only be sent to a PE with which the
+   ICCP capability has been exchanged (Section 8) and which is
+   configured as a member of at least one RG of the local PE, or in
+   response to an "RG Connect" message (Section 6.4.1, codes i and
+   ii).
+
+Notes
+-----
+   Section 4.2 ("A device MUST reject an incoming 'RG Connect'
+   message if ... the PE is not a member of the RG") and Section
+   6.4.1 i rely on sending the Notification to a PE with which the
+   local PE shares no RG.
+```
+
+Proposed erratum RA-1422 (RFC 7275, Section 4.4.2, 6.3, 6.4.1, 9.1.3, 9.2.2.3, 7.2.2.1; type: Editorial):
+
+```
+Original Text
+-------------
+   initialized yet or has been resent.
+
+Corrected Text
+--------------
+   initialized yet or has been reset.
+
+Notes
+-----
+   In 9.1.3 and 9.2.2.3 "Synchronization Response TLV" should read
+   "Synchronization Data TLV". Section 7.2.2.1 could add "encoded in
+   UTF-8 format. The string does not include a terminating null
+   character", as in Section 7.1.2.1.
+```
+
 ### RFC 7338: Requirements and Framework for Point-to-Multipoint Pseudowires over MPLS Packet Switched Networks {#ra_rfc7338}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Informational.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -7296,16 +9031,106 @@ Depth: deep. Errata: none (the RFC has no errata).
 
 ### RFC 7361: LDP Extensions for Optimized MAC Address Withdrawal in a Hierarchical Virtual Private LAN Service (H-VPLS) {#ra_rfc7361}
 
-Depth: deep (5 in full; 3, 6, 7 by MUST/SHOULD). Errata: 1 errata: 1 verified. 
+Depth: deep. Errata: 1 errata: 1 verified. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0257 | 5.1.1, 5.1.2 | "The U-bit and F-bit [RFC5036] are set to forward if unknown so that potential intermediate VPLS PE-rs devices unaware of the new TLV can just propagate it transparently." | With U = 1 a PE-rs that does not know the TLV ignores it and processes the Address Withdraw with an empty MAC list per RFC 4762, i.e. flushes all MACs except those learned from the sender ("flush-all-but-mine"). For the optimized procedure (N = 1, "flush-all-from-me") that is the complement of the requested action, not a harmless fallback; the document relies on "the assumption ... that the MAC Flush TLV is understood by all devices before it is turned on", but the U-bit choice makes a partial deployment silently do the opposite rather than fail. The rationale given (transparent propagation) does not fit LDP, whose Address Withdraw messages are regenerated per session rather than forwarded. | ambiguity | none: RFC has 1 errata, none on this point |
 | RA-0258 | 5.1.3 | "When optimized MAC flushing is not supported, a MAC Flush TLV is received with N = 0 in the MAC flush message" | A receiver that does not support optimized flushing cannot interpret the TLV at all; the sentence means a TLV received with N = 0 (flush-all-but-mine, the RFC 4762 semantics), whatever the receiver supports. As written it ties the value of N to the receiver's capability. | editorial | none: RFC has 1 errata, none on this point |
+| RA-1423 | 3.2, 2, 3, 5.1.2, 5.1.3 | "Note that in the case of negative MAC flushing the list SHOULD be only the MACs for the affected MTU-s. / the MAC Flush TLV MUST be sent in an existing LDP address withdraw message with an empty MAC list" | Section 3.2 says the negative ("flush-all-from-me") message SHOULD carry the MAC addresses of the affected MTU-s and describes an empty list only as the fallback. Section 2 defines a "MAC flush message" as an address withdraw "without a MAC List TLV", Section 3 says the solutions "are applicable only to LDP address withdraw messages with empty MAC lists", Section 5.1.2 requires the N = 1 TLV to be sent with an empty MAC list, and Section 5.1.3 tells a receiver of a message with "a valid MAC address list" to "ignore the option and deal with MAC addresses explicitly as per [RFC4762]". A sender following 3.2 therefore produces a message whose N flag every receiver ignores. Sections 2 and 3 also disagree on whether the empty list is an absent MAC List TLV or a MAC List TLV of length 0. | contradiction | none: RFC has 1 errata, none on this point; **proposed erratum below** |
+| RA-1424 | 3 | "This is accomplished by sending an LDP address withdraw message -- a new message defined in this document -- from the PE that is no longer connected to the MTU-s with the primary PW." | The address withdraw message with a MAC List TLV is defined in RFC 4762 (Section 6.2); this document defines only the MAC Flush Parameters TLV carried in it. The parenthesis, apparently carried over from RFC 4762, says the opposite, and conflicts with Section 5.1.2 ("sent in an existing LDP address withdraw message"). | error | none: RFC has 1 errata, none on this point; **proposed erratum below** |
+| RA-1425 | 5.2, 7.1 | "0x0407 \| PBB B-MAC List Sub-TLV    \| [RFC7361]  \| / 0x0408 \| PBB I-SID List Sub-TLV    \| [RFC7361]  \|" | Erratum 4380 corrects the sub-TLV types in 5.2 to the one-octet values 0x01 and 0x02 that the Sub-TLV Type field of Figure 5.1.1 can hold, but Section 7.1 still registers 0x0407 and 0x0408 in the LDP "TLV Type Name Space", where they occupy top-level LDP TLV code points that no message carries, and no registry for the sub-TLVs of the MAC Flush Parameters TLV is created. The one-octet values 0x01 and 0x02 are thus not recorded by IANA, and future sub-TLVs (Section 5.1.1: "Any sub-TLV definition for the above TLV MUST address the actions in combination with other existing sub-TLVs") have no registry to be assigned from. | error | none: RFC has 1 errata, none on this point (related: erratum 4380 (Verified), technical); **proposed erratum below** |
+| RA-1426 | 5.2, 5.2.1 | "Value: One or a list of 24-bit I-SIDs that represent the I-component FIB(s) where the MAC flushing needs to take place. / If the PBB B-MAC List Sub-TLV is not included in a received message, then all B-MAC-to-C-MAC associations in all I-SID FIBs" | The sub-TLV values are lists of 48-bit B-MACs and 24-bit I-SIDs, but the text does not say that each element occupies exactly 6 and 3 octets without padding, that Length must be a multiple of 6 (or 3), nor what a receiver does with a Length that is not. For N = 1 ("flush-all-from-me") without a B-MAC List sub-TLV, 5.2.1 flushes all C-MACs of the selected I-SIDs, whatever B-MAC they were learned behind; in PBB the source ("me") is identified only by the B-MACs (5.1.1: "either the LDP session ... or the B-MAC(s) listed"), so a negative flush without B-MACs flushes associations of other PEs too, although 5.2.1 item 2 only says the list "SHOULD be listed". | ambiguity | none: RFC has 1 errata, none on this point |
+| RA-1427 | 5.1.1 | "\|C\|N\|    MBZ    \| (MBZ = MUST Be Zero) / MBZ flags: The rest of the flags SHOULD be set to zero on transmission and ignored on reception." | The figure labels the unassigned flags "MUST Be Zero" while the text below makes zero a SHOULD on transmission. The receive rule (ignore) is the same either way; the transmit requirement level differs. | editorial | none: RFC has 1 errata, none on this point; **proposed erratum below** |
+
+Proposed erratum RA-1423 (RFC 7361, Section 3.2, 2, 3, 5.1.2, 5.1.3; type: Technical):
+
+```
+Original Text
+-------------
+   Note that in the case of negative MAC flushing the list SHOULD be
+   only the MACs for the affected MTU-s.  If the list is empty, then
+   the negative MAC flush procedures will result in flushing and
+   relearning all attached MTU-s devices for the originating PE-rs.
+
+Corrected Text
+--------------
+   Note that a negative MAC flush message carries an empty MAC list
+   (Section 5.1.2); it results in flushing and relearning all MAC
+   addresses learned from the originating PE-rs over the PW on which
+   the message is received.
+
+Notes
+-----
+   Section 2 ("without a MAC List TLV") and Section 3 ("with an
+   empty MAC list") should also use one wording.
+```
+
+Proposed erratum RA-1424 (RFC 7361, Section 3; type: Technical):
+
+```
+Original Text
+-------------
+   This is accomplished by sending an LDP address withdraw message
+   -- a new message defined in this document -- from the PE that is
+   no longer connected to the MTU-s with the primary PW.
+
+Corrected Text
+--------------
+   This is accomplished by sending an LDP address withdraw message
+   -- as defined in [RFC4762] -- from the PE that is no longer
+   connected to the MTU-s with the primary PW.
+
+Notes
+-----
+   The new element of this document is the MAC Flush Parameters TLV
+   (Section 5.1.1).
+```
+
+Proposed erratum RA-1425 (RFC 7361, Section 5.2, 7.1; type: Technical):
+
+```
+Original Text
+-------------
+   0x0406 | MAC Flush Parameters TLV  | [RFC7361]  | 0x0407 | PBB
+   B-MAC List Sub-TLV    | [RFC7361]  | 0x0408 | PBB I-SID List
+   Sub-TLV    | [RFC7361]  |
+
+Corrected Text
+--------------
+   0x0406 | MAC Flush Parameters TLV  | [RFC7361]  | (and a new
+   sub-registry "MAC Flush Parameters TLV Sub-TLV Types": 0x01 PBB
+   B-MAC List Sub-TLV, 0x02 PBB I-SID List Sub-TLV, 0x03-0xFF
+   Unassigned)
+
+Notes
+-----
+   The erratum notes say the two code points were requested from
+   IANA as LDP TLVs by mistake ("the two kinds tlv were sub-tlv, not
+   LDP TLV"); the IANA section needs the matching change.
+```
+
+Proposed erratum RA-1427 (RFC 7361, Section 5.1.1; type: Editorial):
+
+```
+Original Text
+-------------
+   MBZ flags: The rest of the flags SHOULD be set to zero on
+   transmission and ignored on reception.
+
+Corrected Text
+--------------
+   MBZ flags: The rest of the flags MUST be set to zero on
+   transmission and MUST be ignored on reception.
+
+Notes
+-----
+   Section 7.2 lists bits 2-7 as Unassigned.
+```
 
 ### RFC 7771: Switching Provider Edge (S-PE) Protection for MPLS and MPLS Transport Profile (MPLS-TP) Static Multi-Segment Pseudowires {#ra_rfc7771}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 6870.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 6870.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -7355,7 +9180,7 @@ Notes
 
 ### RFC 8077: Pseudowire Setup and Maintenance Using the Label Distribution Protocol (LDP) {#ra_rfc8077}
 
-Depth: deep. Errata: 1 errata: 1 rejected. Obsoletes: RFC 4447, RFC 6723.
+Depth: deep. Errata: 1 errata: 1 rejected. Status: Internet Standard (STD 84). Obsoletes: RFC 4447, RFC 6723.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -7470,7 +9295,7 @@ Notes
 
 ### RFC 8338: Signaling Root-Initiated Point-to-Multipoint Pseudowire Using LDP {#ra_rfc8338}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 7385.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 7385.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -7521,11 +9346,11 @@ Notes
 
 ## RSVP, RSVP-TE and GMPLS {#ra_rsvp}
 
-48 RFCs in this area (48 deep); 167 findings, 59 of them proposed errata.
+48 RFCs in this area (48 deep); 171 findings, 62 of them proposed errata.
 
 ### RFC 2205: Resource ReSerVation Protocol (RSVP) -- Version 1 Functional Specification {#ra_rfc2205}
 
-Depth: deep. Errata: 1 errata: 1 held. 
+Depth: deep. Errata: 1 errata: 1 held. Status: Proposed Standard. Updated by: RFC 2750, RFC 3936, RFC 4495, RFC 5946, RFC 6437, RFC 6780.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -7557,7 +9382,7 @@ Notes
 
 ### RFC 2209: Resource ReSerVation Protocol (RSVP) -- Version 1 Message Processing Rules {#ra_rfc2209}
 
-Depth: deep (lightly (informational processing rules). Errata: 1 errata: 1 held. 
+Depth: deep. Errata: 1 errata: 1 held. Status: Informational.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -7587,12 +9412,15 @@ Notes
 
 ### RFC 2210: The Use of RSVP with IETF Integrated Services {#ra_rfc2210}
 
-Depth: deep (Sections 2.3 and 3 read in full; 1, 2, 4 and the appendix skimmed). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0259 | 3.3.6, 3.3.2 | "Words 2-7: Default general characterization parameters / 4   \|  zero extension of ..           IS hop cnt (16-bit unsigned)  \|" | In the complete ADSPEC example the default general parameters fragment occupies words 2 to 10 (header plus the 8 words its own length field gives), not "Words 2-7"; the Guaranteed fragment then correctly starts at word 11. The example also shows IS hop count and composed MTU as zero-extended 16-bit values, while the fragment definition in 3.3.2 gives "IS hop cnt (32-bit unsigned integer)" and "Composed MTU (32-bit unsigned integer)"; RFC 2215 limits the values but the two figures differ on the encoding a receiver must accept. | contradiction | none: RFC has no errata; **proposed erratum below** |
 | RA-0260 | 3.3.5 | "(c) - Length of per-service data, two words not including header / (c) - Parameter ID, parameter 6" | In the override example the legend uses "(c)" twice and the figure uses "(d)" for both the parameter ID and the flags, so the labels do not match the fields. Section 3.2.1: "than that value should be used" for "then". | editorial | none: RFC has no errata |
+| RA-1428 | 2.3.2 | "Generally, only the "global" PATH_MTU parameter (service 1, parameter 9) will be present, in which case its value is a legal MTU for all reservation requests." | The composed PATH_MTU general parameter is parameter number 10, as this document itself gives in 3.3.2 ("(n) - Parameter ID, parameter 10 (composed path MTU from [RFC 2215])") and in the 3.3.6 example ("parameter 10 (PATH_MTU general parameter)"). In RFC 2215 the odd number 9 is the local (per-element) MTU value, which is not carried in an ADSPEC. A receiver that looks for parameter 9 finds no MTU. | error | none: RFC has no errata; **proposed erratum below** |
+| RA-1429 | 3.2.2 | "1   \| 0 (a) \|    Unused             \|            10 (b)             \| / (b) - Overall length (9 words not including header)" | In the Guaranteed service FLOWSPEC the figure gives an overall length of 10 and 10 words follow the message header (words 2 to 11: the per-service header plus 9 words of data, which matches the per-service length 9 in field (d)); legend (b) says 9 words. A decoder that validates the overall length against the legend rejects conforming objects. | contradiction | none: RFC has no errata; **proposed erratum below** |
+| RA-1430 | 3.3.3, 3.3.4, 3.3.5 | "The minimum size of a non-empty guaranteed service data fragment is 8 32-bit words. (3.3.3) / The minimum size of the controlled-load service data fragment is 1 32-bit word. (3.3.4)" | The two "minimum size" statements count differently: the Guaranteed figure is the data length excluding the per-service header (the fragment occupies 9 words), the Controlled-Load figure includes the header (its data length is 0). The pseudocode in 3.3.5 also has an unterminated comment ("/* Adspec parameter processing rules *") and a garbled action ("<compose the arriving and values and update the adspec>", "local" missing). | editorial | none: RFC has no errata |
 
 Proposed erratum RA-0259 (RFC 2210, Section 3.3.6, 3.3.2; type: Technical):
 
@@ -7612,9 +9440,47 @@ Notes
    32-bit unsigned integers.
 ```
 
+Proposed erratum RA-1428 (RFC 2210, Section 2.3.2; type: Technical):
+
+```
+Original Text
+-------------
+   Generally, only the "global" PATH_MTU parameter (service 1,
+   parameter 9) will be present
+
+Corrected Text
+--------------
+   Generally, only the "global" PATH_MTU parameter (service 1,
+   parameter 10) will be present
+
+Notes
+-----
+   Sections 3.3.2 and 3.3.6 use parameter 10 for the composed path
+   MTU; RFC 2215 assigns 10 to PATH_MTU (composed) and 9 to the
+   local value.
+```
+
+Proposed erratum RA-1429 (RFC 2210, Section 3.2.2; type: Technical):
+
+```
+Original Text
+-------------
+   (b) - Overall length (9 words not including header)
+
+Corrected Text
+--------------
+   (b) - Overall length (10 words not including header)
+
+Notes
+-----
+   The Controlled-Load FLOWSPEC of 3.2.1 is consistent (overall 7,
+   per-service 6); the Guaranteed one adds the 3-word RSpec
+   parameter, giving 10 and 9.
+```
+
 ### RFC 2211: Specification of the Controlled-Load Network Element Service {#ra_rfc2211}
 
-Depth: deep (only (IntServ controlled-load, background). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -7648,7 +9514,7 @@ Notes
 
 ### RFC 2212: Specification of Guaranteed Quality of Service {#ra_rfc2212}
 
-Depth: deep (only (IntServ guaranteed service, background). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -7695,7 +9561,7 @@ Notes
 
 ### RFC 2747: RSVP Cryptographic Authentication {#ra_rfc2747}
 
-Depth: deep. Errata: 1 errata: 1 verified. 
+Depth: deep. Errata: 1 errata: 1 verified. Status: Proposed Standard. Updated by: RFC 3097.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -7731,7 +9597,7 @@ Notes
 
 ### RFC 2750: RSVP Extensions for Policy Control {#ra_rfc2750}
 
-Depth: deep (normative statements). Errata: none (the RFC has no errata). Updates: RFC 2205.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 2205.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -7741,7 +9607,7 @@ Depth: deep (normative statements). Errata: none (the RFC has no errata). Update
 
 ### RFC 2961: RSVP Refresh Overhead Reduction Extensions {#ra_rfc2961}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 5063.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -7773,13 +9639,13 @@ Notes
 
 ### RFC 3097: RSVP Cryptographic Authentication -- Updated Message Type Value {#ra_rfc3097}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 2747.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 2747.
 
 Nothing notable found at this depth.
 
 ### RFC 3175: Aggregation of RSVP for IPv4 and IPv6 Reservations {#ra_rfc3175}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 5350.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -7813,7 +9679,7 @@ Notes
 
 ### RFC 3209: RSVP-TE: Extensions to RSVP for LSP Tunnels {#ra_rfc3209}
 
-Depth: deep. Errata: 2 errata: 1 verified, 1 held. 
+Depth: deep. Errata: 2 errata: 1 verified, 1 held. Status: Proposed Standard. Updated by: RFC 3936, RFC 4420, RFC 4874, RFC 5151, RFC 5420, RFC 5711, RFC 6780, RFC 6790, RFC 7274.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -7865,7 +9731,7 @@ Notes
 
 ### RFC 3270: Multi-Protocol Label Switching (MPLS) Support of Differentiated Services {#ra_rfc3270}
 
-Depth: deep. Errata: 1 errata: 1 rejected. 
+Depth: deep. Errata: 1 errata: 1 rejected. Status: Proposed Standard. Updates: RFC 3032. Updated by: RFC 5462.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -7875,13 +9741,13 @@ Depth: deep. Errata: 1 errata: 1 rejected.
 
 ### RFC 3471: Generalized Multi-Protocol Label Switching (GMPLS) Signaling Functional Description {#ra_rfc3471}
 
-Depth: deep (normative statements of 3 to 12). Errata: 1 errata: 1 verified. 
+Depth: deep. Errata: 1 errata: 1 verified. Status: Proposed Standard. Updated by: RFC 4201, RFC 4328, RFC 4872, RFC 6002, RFC 6003, RFC 6205, RFC 7074, RFC 7699, RFC 8359.
 
-Resolved by a later RFC (kept for reference; not counted as open findings):
+Resolved by a later RFC or re-targeted to its successor (kept for reference; not counted as open findings):
 
-| ID | Section | Issue as found | Resolution |
-|---|---|---|---|
-| RA-0661 | 12 | Value 51 (L2SC) is defined in Section 3.1.1 but missing from the IANA list. | RFC 7074 Section 5 (updates RFC 3471) revises the Switching Types registry, which lists 51 Layer-2 Switch Capable (L2SC); the omission remains only in the text of RFC 3471 Section 12. |
+| ID | Section | Issue as found | Outcome | Resolution |
+|---|---|---|---|---|
+| RA-0661 | 12 | Value 51 (L2SC) is defined in Section 3.1.1 but missing from the IANA list. | Resolved | RFC 7074 Section 5 (updates RFC 3471) revises the Switching Types registry, which lists 51 Layer-2 Switch Capable (L2SC); the omission remains only in the text of RFC 3471 Section 12. |
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -7890,7 +9756,7 @@ Resolved by a later RFC (kept for reference; not counted as open findings):
 
 ### RFC 3472: Generalized Multi-Protocol Label Switching (GMPLS) Signaling Constraint-based Routed Label Distribution Protocol (CR-LDP) Extensions {#ra_rfc3472}
 
-Depth: deep (CR-LDP binding, background only). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 3468, RFC 4201.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -7919,7 +9785,7 @@ Notes
 
 ### RFC 3473: Generalized Multi-Protocol Label Switching (GMPLS) Signaling Resource ReserVation Protocol-Traffic Engineering (RSVP-TE) Extensions {#ra_rfc3473}
 
-Depth: deep. Errata: 7 errata: 7 verified. 
+Depth: deep. Errata: 7 errata: 7 verified. Status: Proposed Standard. Updated by: RFC 4003, RFC 4201, RFC 4420, RFC 4783, RFC 4873, RFC 4874, RFC 4974, RFC 5063, RFC 5151, RFC 5420, RFC 6002, RFC 6003, RFC 6780, RFC 8359.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -7999,7 +9865,7 @@ Notes
 
 ### RFC 3475: Documentation of IANA assignments for Constraint-Based LSP setup using LDP (CR-LDP) Extensions for Automatic Switched Optical Network (ASON) {#ra_rfc3475}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Informational. Updated by: RFC 3468.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -8025,7 +9891,7 @@ Notes
 
 ### RFC 3477: Signalling Unnumbered Links in Resource ReSerVation Protocol - Traffic Engineering (RSVP-TE) {#ra_rfc3477}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 6107.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -8034,7 +9900,7 @@ Depth: deep. Errata: none (the RFC has no errata).
 
 ### RFC 3988: Maximum Transmission Unit Signalling Extensions for the Label Distribution Protocol {#ra_rfc3988}
 
-Depth: deep (normative statements, TLV format). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Experimental.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -8042,7 +9908,7 @@ Depth: deep (normative statements, TLV format). Errata: none (the RFC has no err
 
 ### RFC 4090: Fast Reroute Extensions to RSVP-TE for LSP Tunnels {#ra_rfc4090}
 
-Depth: deep. Errata: 3 errata: 3 verified. 
+Depth: deep. Errata: 3 errata: 3 verified. Status: Proposed Standard. Updated by: RFC 8271, RFC 8537, RFC 8796, RFC 9705.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -8168,7 +10034,7 @@ Notes
 
 ### RFC 4105: Requirements for Inter-Area MPLS Traffic Engineering {#ra_rfc4105}
 
-Depth: deep (requirements document; normative statements extracted). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Informational.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -8194,7 +10060,7 @@ Notes
 
 ### RFC 4124: Protocol Extensions for Support of Diffserv-aware MPLS Traffic Engineering {#ra_rfc4124}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -8223,13 +10089,13 @@ Notes
 
 ### RFC 4125: Maximum Allocation Bandwidth Constraints Model for Diffserv-aware MPLS Traffic Engineering {#ra_rfc4125}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Experimental.
 
 Nothing notable found at this depth.
 
 ### RFC 4126: Max Allocation with Reservation Bandwidth Constraints Model for Diffserv-aware MPLS Traffic Engineering & Performance Comparisons {#ra_rfc4126}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Experimental.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -8256,13 +10122,13 @@ Notes
 
 ### RFC 4127: Russian Dolls Bandwidth Constraints Model for Diffserv-aware MPLS Traffic Engineering {#ra_rfc4127}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Experimental.
 
 Nothing notable found at this depth.
 
 ### RFC 4206: Label Switched Paths (LSP) Hierarchy with Generalized Multi-Protocol Label Switching (GMPLS) Traffic Engineering (TE) {#ra_rfc4206}
 
-Depth: deep (normative statements of 3 to 7). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 6001, RFC 6107.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -8272,7 +10138,7 @@ Depth: deep (normative statements of 3 to 7). Errata: none (the RFC has no errat
 
 ### RFC 4561: Definition of a Record Route Object (RRO) Node-Id Sub-Object {#ra_rfc4561}
 
-Depth: deep. Errata: 1 errata: 1 verified. 
+Depth: deep. Errata: 1 errata: 1 verified. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -8303,13 +10169,13 @@ Notes
 
 ### RFC 4726: A Framework for Inter-Domain Multiprotocol Label Switching Traffic Engineering {#ra_rfc4726}
 
-Depth: deep (only (framework, informational). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Informational.
 
 Nothing notable found at this depth.
 
 ### RFC 4872: RSVP-TE Extensions in Support of End-to-End Generalized Multi-Protocol Label Switching (GMPLS) Recovery {#ra_rfc4872}
 
-Depth: deep. Errata: 9 errata: 6 verified, 1 held, 2 rejected. Updates: RFC 3471.
+Depth: deep. Errata: 9 errata: 6 verified, 1 held, 2 rejected. Status: Proposed Standard. Updates: RFC 3471. Updated by: RFC 4873, RFC 6780, RFC 9270.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -8369,7 +10235,7 @@ Notes
 
 ### RFC 4873: GMPLS Segment Recovery {#ra_rfc4873}
 
-Depth: deep (normative statements of 2 to 9). Errata: 9 errata: 4 verified, 2 held, 3 rejected. Updates: RFC 3473, RFC 4872.
+Depth: deep. Errata: 9 errata: 4 verified, 2 held, 3 rejected. Status: Proposed Standard. Updates: RFC 3473, RFC 4872. Updated by: RFC 9270.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -8441,7 +10307,7 @@ Notes
 
 ### RFC 4874: Exclude Routes - Extension to Resource ReserVation Protocol-Traffic Engineering (RSVP-TE) {#ra_rfc4874}
 
-Depth: deep (all normative statements of 1.2 to 7). Errata: 1 errata: 1 verified. Updates: RFC 3209, RFC 3473.
+Depth: deep. Errata: 1 errata: 1 verified. Status: Proposed Standard. Updates: RFC 3209, RFC 3473. Updated by: RFC 6001, RFC 8390.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -8508,7 +10374,7 @@ Notes
 
 ### RFC 4875: Extensions to Resource Reservation Protocol - Traffic Engineering (RSVP-TE) for Point-to-Multipoint TE Label Switched Paths (LSPs) {#ra_rfc4875}
 
-Depth: deep. Errata: 15 errata: 2 verified, 10 held, 3 rejected. 
+Depth: deep. Errata: 15 errata: 2 verified, 10 held, 3 rejected. Status: Proposed Standard. Updated by: RFC 6510.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -8606,7 +10472,7 @@ Notes
 
 ### RFC 4920: Crankback Signaling Extensions for MPLS and GMPLS RSVP-TE {#ra_rfc4920}
 
-Depth: deep. Errata: 2 errata: 2 verified. 
+Depth: deep. Errata: 2 errata: 2 verified. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -8653,7 +10519,7 @@ Notes
 
 ### RFC 5063: Extensions to GMPLS Resource Reservation Protocol (RSVP) Graceful Restart {#ra_rfc5063}
 
-Depth: deep. Errata: 1 errata: 1 held. Updates: RFC 2961, RFC 3473.
+Depth: deep. Errata: 1 errata: 1 held. Status: Proposed Standard. Updates: RFC 2961, RFC 3473.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -8686,7 +10552,7 @@ Notes
 
 ### RFC 5150: Label Switched Path Stitching with Generalized Multiprotocol Label Switching Traffic Engineering (GMPLS TE) {#ra_rfc5150}
 
-Depth: deep (normative statements of 3 to 6). Errata: 1 errata: 1 verified. 
+Depth: deep. Errata: 1 errata: 1 verified. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -8719,7 +10585,7 @@ Notes
 
 ### RFC 5151: Inter-Domain MPLS and GMPLS Traffic Engineering -- Resource Reservation Protocol-Traffic Engineering (RSVP-TE) Extensions {#ra_rfc5151}
 
-Depth: deep. Errata: 1 errata: 1 verified. Updates: RFC 3209, RFC 3473.
+Depth: deep. Errata: 1 errata: 1 verified. Status: Proposed Standard. Updates: RFC 3209, RFC 3473.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -8729,7 +10595,7 @@ Depth: deep. Errata: 1 errata: 1 verified. Updates: RFC 3209, RFC 3473.
 
 ### RFC 5152: A Per-Domain Path Computation Method for Establishing Inter-Domain Traffic Engineering (TE) Label Switched Paths (LSPs) {#ra_rfc5152}
 
-Depth: deep (normative statements of 4 to 7). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -8756,7 +10622,7 @@ Notes
 
 ### RFC 5284: User-Defined Errors for RSVP {#ra_rfc5284}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -8805,7 +10671,7 @@ Notes
 
 ### RFC 5420: Encoding of Attributes for MPLS LSP Establishment Using Resource Reservation Protocol Traffic Engineering (RSVP-TE) {#ra_rfc5420}
 
-Depth: deep. Errata: 2 errata: 1 held, 1 rejected. Obsoletes: RFC 4420. Updates: RFC 3209, RFC 3473.
+Depth: deep. Errata: 2 errata: 1 held, 1 rejected. Status: Proposed Standard. Obsoletes: RFC 4420. Updates: RFC 3209, RFC 3473. Updated by: RFC 6510.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -8836,7 +10702,7 @@ Notes
 
 ### RFC 5495: Description of the Resource Reservation Protocol - Traffic-Engineered (RSVP-TE) Graceful Restart Procedures {#ra_rfc5495}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Informational.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -8883,7 +10749,7 @@ Notes
 
 ### RFC 5712: MPLS Traffic Engineering Soft Preemption {#ra_rfc5712}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -8930,7 +10796,7 @@ Notes
 
 ### RFC 6107: Procedures for Dynamically Signaled Hierarchical Label Switched Paths {#ra_rfc6107}
 
-Depth: deep (normative lines; 3.5, 3.6 in full). Errata: 2 errata: 1 verified, 1 held. Updates: RFC 3477, RFC 4206.
+Depth: deep. Errata: 2 errata: 1 verified, 1 held. Status: Proposed Standard. Updates: RFC 3477, RFC 4206.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -8942,7 +10808,7 @@ Depth: deep (normative lines; 3.5, 3.6 in full). Errata: 2 errata: 1 verified, 1
 
 ### RFC 6510: Resource Reservation Protocol (RSVP) Message Formats for Label Switched Path (LSP) Attributes Objects {#ra_rfc6510}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 4875, RFC 5420.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 4875, RFC 5420.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -8976,7 +10842,7 @@ Notes
 
 ### RFC 7074: Revised Definition of the GMPLS Switching Capability and Type Fields {#ra_rfc7074}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 3471, RFC 4202, RFC 4203, RFC 5307.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 3471, RFC 4202, RFC 4203, RFC 5307.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -8985,11 +10851,12 @@ Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 3471, RFC 4202, 
 
 ### RFC 7570: Label Switched Path (LSP) Attribute in the Explicit Route Object (ERO) {#ra_rfc7570}
 
-Depth: deep (Sections 2 to 3.2.3 read; IANA and security not read). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0286 | 2.1 | "The size of the ERO subobject limits the size of the Hop Attributes TLV to 250 bytes." | An ERO subobject Length is 8 bits and (RFC 3209 4.3.3) a multiple of 4, so its maximum is 252 octets; after the 4-octet subobject header (L/Type, Length, Reserved and R bit) at most 248 octets remain for Hop Attributes TLVs (each with its own 4-octet RFC 5420 header). 250 is not reachable. | error | none: RFC has no errata; **proposed erratum below** |
+| RA-1431 | 2.2, 2.3 | "Unknown flags SHOULD trigger the generation of a PathErr with Error Code "Unknown Attributes Bit" as defined in [RFC5420], Section 5.2. / When the R bit is not set, a node MUST examine the attributes TLV present in the subobject following the rules described in [RFC5420], Section 4.2." | 2.2 asks for a PathErr on any unknown flag in an Attribute Flags TLV carried in the Hop Attributes subobject, independent of the R bit. 2.3 sends a node to RFC 5420 4.2 when R is clear, and RFC 5420 4.2 says the opposite: "An LSR that supports the Attribute Flags TLV but does not recognize a bit set in the Attribute Flags TLV MUST forward the TLV unchanged" (no error). With R clear (attributes "not required"), an implementation following 2.2 tears the LSP down for an unknown optional flag, one following 2.3 ignores it, which defeats the purpose of the R bit. Only with R set (RFC 5420 5.2) do the two sections agree. | contradiction | none: RFC has no errata; **proposed erratum below** |
 
 Proposed erratum RA-0286 (RFC 7570, Section 2.1; type: Technical):
 
@@ -9010,9 +10877,32 @@ Notes
    the 4-octet subobject header.
 ```
 
+Proposed erratum RA-1431 (RFC 7570, Section 2.2, 2.3; type: Technical):
+
+```
+Original Text
+-------------
+   Unknown flags SHOULD trigger the generation of a PathErr with
+   Error Code "Unknown Attributes Bit" as defined in [RFC5420],
+   Section 5.2.
+
+Corrected Text
+--------------
+   When the R bit is set, unknown flags SHOULD trigger the
+   generation of a PathErr with Error Code "Unknown Attributes Bit"
+   as defined in [RFC5420], Section 5.2. When the R bit is clear,
+   unknown flags are ignored, following [RFC5420], Section 4.2.
+
+Notes
+-----
+   Section 2.3 maps R = 1 to RFC 5420 5.2 (LSP_REQUIRED_ATTRIBUTES)
+   and R = 0 to RFC 5420 4.2 (LSP_ATTRIBUTES); only the former
+   generates "Unknown Attributes Bit".
+```
+
 ### RFC 8169: Residence Time Measurement in MPLS Networks {#ra_rfc8169}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -9084,7 +10974,7 @@ Notes
 
 ### RFC 8271: Updates to the Resource Reservation Protocol for Fast Reroute of Traffic Engineering GMPLS Label Switched Paths (LSPs) {#ra_rfc8271}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 4090.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 4090.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -9137,7 +11027,7 @@ Notes
 
 ### RFC 8390: RSVP-TE Path Diversity Using Exclude Route {#ra_rfc8390}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 4874.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 4874.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -9193,7 +11083,7 @@ Notes
 
 ### RFC 8796: RSVP-TE Summary Fast Reroute Extensions for Label Switched Path (LSP) Tunnels {#ra_rfc8796}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 4090.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 4090.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -9225,11 +11115,11 @@ Notes
 
 ## PCEP and PCE {#ra_pcep}
 
-37 RFCs in this area (37 deep); 151 findings, 77 of them proposed errata.
+37 RFCs in this area (37 deep); 156 findings, 79 of them proposed errata.
 
 ### RFC 5088: OSPF Protocol Extensions for Path Computation Element (PCE) Discovery {#ra_rfc5088}
 
-Depth: deep. Errata: 4 errata: 2 verified, 2 held. 
+Depth: deep. Errata: 4 errata: 2 verified, 2 held. Status: Proposed Standard. Updated by: RFC 9353.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -9279,7 +11169,7 @@ Notes
 
 ### RFC 5440: Path Computation Element (PCE) Communication Protocol (PCEP) {#ra_rfc5440}
 
-Depth: deep. Errata: 8 errata: 6 verified, 2 held. 
+Depth: deep. Errata: 8 errata: 6 verified, 2 held. Status: Proposed Standard. Updated by: RFC 7896, RFC 8253, RFC 8356, RFC 9488, RFC 9756.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -9549,7 +11439,7 @@ Notes
 
 ### RFC 5441: A Backward-Recursive PCE-Based Computation (BRPC) Procedure to Compute Shortest Constrained Inter-Domain Traffic Engineering Label Switched {#ra_rfc5441}
 
-Depth: deep. Errata: 1 errata: 1 verified. 
+Depth: deep. Errata: 1 errata: 1 verified. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -9580,7 +11470,7 @@ Notes
 
 ### RFC 5520: Preserving Topology Confidentiality in Inter-Domain Path Computation Using a Path-Key-Based Mechanism {#ra_rfc5520}
 
-Depth: deep. Errata: 4 errata: 2 verified, 2 held. 
+Depth: deep. Errata: 4 errata: 2 verified, 2 held. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -9589,7 +11479,7 @@ Depth: deep. Errata: 4 errata: 2 verified, 2 held.
 
 ### RFC 5521: Extensions to the Path Computation Element Communication Protocol (PCEP) for Route Exclusions {#ra_rfc5521}
 
-Depth: deep. Errata: 3 errata: 3 verified. 
+Depth: deep. Errata: 3 errata: 3 verified. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -9622,7 +11512,7 @@ Notes
 
 ### RFC 5541: Encoding of Objective Functions in the Path Computation Element Communication Protocol (PCEP) {#ra_rfc5541}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -9654,7 +11544,7 @@ Notes
 
 ### RFC 5886: A Set of Monitoring Tools for Path Computation Element (PCE)-Based Architecture {#ra_rfc5886}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -9743,7 +11633,7 @@ Notes
 
 ### RFC 6805: The Application of the Path Computation Element Architecture to the Determination of a Sequence of Domains in MPLS and GMPLS {#ra_rfc6805}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Informational.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -9788,7 +11678,7 @@ Notes
 
 ### RFC 7897: Domain Subobjects for the Path Computation Element Communication Protocol (PCEP) {#ra_rfc7897}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Experimental.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -9812,7 +11702,7 @@ Notes
 
 ### RFC 8231: Path Computation Element Communication Protocol (PCEP) Extensions for Stateful PCE {#ra_rfc8231}
 
-Depth: deep. Errata: 9 errata: 7 verified, 1 held, 1 rejected. 
+Depth: deep. Errata: 9 errata: 7 verified, 1 held, 1 rejected. Status: Proposed Standard. Updated by: RFC 8786, RFC 9353, RFC 9753, RFC 9756, RFC 9862.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -9901,7 +11791,7 @@ Notes
 
 ### RFC 8232: Optimizations of Label Switched Path State Synchronization Procedures for a Stateful PCE {#ra_rfc8232}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -9960,7 +11850,7 @@ Notes
 
 ### RFC 8233: Extensions to the Path Computation Element Communication Protocol (PCEP) to Compute Service-Aware Label Switched Paths (LSPs) {#ra_rfc8233}
 
-Depth: deep. Errata: 1 errata: 1 held. 
+Depth: deep. Errata: 1 errata: 1 held. Status: Proposed Standard. Updated by: RFC 9756.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -10032,7 +11922,7 @@ Notes
 
 ### RFC 8253: PCEPS: Usage of TLS to Provide a Secure Transport for the Path Computation Element Communication Protocol (PCEP) {#ra_rfc8253}
 
-Depth: deep. Errata: 1 errata: 1 held. Updates: RFC 5440.
+Depth: deep. Errata: 1 errata: 1 held. Status: Proposed Standard. Updates: RFC 5440. Updated by: RFC 9916.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -10107,7 +11997,7 @@ Notes
 
 ### RFC 8281: Path Computation Element Communication Protocol (PCEP) Extensions for PCE-Initiated LSP Setup in a Stateful PCE Model {#ra_rfc8281}
 
-Depth: deep. Errata: 1 errata: 1 verified. 
+Depth: deep. Errata: 1 errata: 1 verified. Status: Proposed Standard. Updated by: RFC 9756.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -10166,7 +12056,7 @@ Notes
 
 ### RFC 8306: Extensions to the Path Computation Element Communication Protocol (PCEP) for Point-to-Multipoint Traffic Engineering Label Switched Paths {#ra_rfc8306}
 
-Depth: deep. Errata: 1 errata: 1 verified. Obsoletes: RFC 6006.
+Depth: deep. Errata: 1 errata: 1 verified. Status: Proposed Standard. Obsoletes: RFC 6006. Updated by: RFC 9353.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -10225,7 +12115,7 @@ Notes
 
 ### RFC 8408: Conveying Path Setup Type in PCE Communication Protocol (PCEP) Messages {#ra_rfc8408}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 8664.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -10234,7 +12124,7 @@ Depth: deep. Errata: none (the RFC has no errata).
 
 ### RFC 8623: Stateful Path Computation Element (PCE) Protocol Extensions for Usage with Point-to-Multipoint TE Label Switched Paths (LSPs) {#ra_rfc8623}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 9756.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -10362,7 +12252,7 @@ Notes
 
 ### RFC 8664: Path Computation Element Communication Protocol (PCEP) Extensions for Segment Routing {#ra_rfc8664}
 
-Depth: deep. Errata: 1 errata: 1 verified. Updates: RFC 8408.
+Depth: deep. Errata: 1 errata: 1 verified. Status: Proposed Standard. Updates: RFC 8408. Updated by: RFC 9756, RFC 9933.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -10467,7 +12357,7 @@ Notes
 
 ### RFC 8685: Path Computation Element Communication Protocol (PCEP) Extensions for the Hierarchical Path Computation Element (H-PCE) Architecture {#ra_rfc8685}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 9756.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -10476,6 +12366,11 @@ Depth: deep. Errata: none (the RFC has no errata).
 | RA-0324 | 3.2.1.1 | "the receiving PCE will ignore the H-PCE related parameters because they are all encoded in TLVs in standard PCEP objects." | Not all H-PCE parameters are TLVs: the OF codes 12 to 14 (Section 3.4.1) are values of the OF object, METRIC types 20 and 21 (Section 3.5) are values of the METRIC T field, and the SVEC O bit and the NO-PATH-VECTOR bits are flags. A legacy PCE does not ignore an unknown OF code or METRIC type with the P flag set; Section 3.4.2 itself sends such cases to the RFC 5440 / RFC 5541 error procedures. The backward-compatibility claim is therefore true only for the H-PCE-CAPABILITY, H-PCE-FLAG and Domain-ID TLVs. | contradiction | none: RFC has no errata; **proposed erratum below** |
 | RA-0325 | 3.4.1, 3.5 | "A path P passes through K unique domains {Dpi, (i=1...K)}. / If a domain is re-entered, then the domain should be double counted." | MTD ("Minimize the number of Transit Domains") is defined by K, the number of unique domains including ingress and egress, while the Domain Count metric (T=20) counts a re-entered domain twice. The two quantities differ for paths with re-entry, and neither says whether ingress and egress domains count. The MBN formula counts domain transitions between consecutive links, which equals the number of border nodes only when each transition has a single border node (area boundaries), not for inter-AS links with an ASBR on each side, and it does not say to which domain an inter-AS link belongs. | ambiguity | none: RFC has no errata |
 | RA-0326 | 3.2.2 | "Type=1: The Domain ID field carries a 2-byte AS number. Padded with trailing zeros to a 4-byte boundary." | It is not stated whether the TLV Length includes the padding of the Domain ID (Length 8) or excludes it as RFC 5440 7.1 TLV padding (Length 6), nor whether Area-Len for type 4 counts octets of the area address. Both encodings are found. | ambiguity | none: RFC has no errata |
+| RA-1432 | 3.4.1, 3.5 | "D(Li) = 1 if link Li and Li+1 belong to different domains; D(Lk) = 0 if link Lk and Lk+1 belong to the same domain. / B(P) = sum{D(Lpi), (i=1...K-1)}." | MBN is named "Minimize the number of Border Nodes", but B(P) counts the places where two consecutive links of the path belong to different domains, i.e. domain transitions. In an area-based network a transition passes one border node (the ABR), but an inter-AS transition passes two (the ASBRs at each end of the inter-AS link), and the inter-AS link itself belongs to no single domain, so D() is undefined for it. The definition also mixes indices (D(Lpi) defined through D(Li) and D(Lk)). The Border Node Count metric (T=21, "number of border nodes crossed") is defined in words only, so B(P) and the metric can differ for the same path. | ambiguity | none: RFC has no errata |
+| RA-1433 | 2.1.3 | "A PCC may be able to limit the number of domains crossed by applying a limit on these metrics.  See Section 3.4 for details." | The Domain Count and Border Node Count metrics and their use as bounds are specified in Section 3.5 (METRIC Object); Section 3.4 specifies objective functions. | editorial | none: RFC has no errata; **proposed erratum below** |
+| RA-1434 | 3.2.1 | "If both peers attempt to set the P-flag, then the session establishment MUST fail, and the PCEP speaker MUST respond with a PCErr message using Error-Type 1 (PCEP session establishment failure)" | No Error-value is given; the Error-Type 1 values of RFC 5440 describe malformed or unacceptable Open messages and session parameters, none of which names a role conflict. The opposite case, two PCEs that both include the TLV with P clear (each expecting to be the parent, or neither asking), is not addressed, although "The parent PCE MUST include this TLV and unset the P-flag" makes it indistinguishable from a parent-to-parent session. | ambiguity | none: RFC has no errata; **proposed erratum below** |
+| RA-1435 | 1.2, 3.3.1, 4.2, 9.2 | "This document uses the terminology defined in [RFC4655] and [RFC5440], and the additional terms defined in Section 1.4 of [RFC6805]. / Refer to Section 3.7 of [RFC7897] for details." | The terminology of RFC 6805 and RFC 4655, and the ERO domain subobjects of RFC 7897 that carry the domain sequence requested by the S bit (3.3.1, 4.2), are needed to implement this document, but RFC 4655, RFC 6805 and RFC 7897 are listed as informative references. RFC 7897 Section 3.7 (ERO) exists, so the pointer is correct; its classification is not. | editorial | none: RFC has no errata |
+| RA-1436 | 4.1, 6.1.2 | "the peer PCE SHOULD send a PCErr message to the child PCE and MUST specify Error-Type=28 (H-PCE Error) and Error-Value=2 / If a parent PCE receives requests from an unauthorized child PCE, the request SHOULD be dropped." | Section 4.1 answers a child the peer "does not want to act as the parent for" with PCErr 28/2, while Section 6.1.2 drops requests from an "unauthorized" child. The text does not say how an unwanted child differs from an unauthorized one, nor whether "dropped" means silently discarded (leaving the child to time out) or not computed but still answered. | ambiguity | none: RFC has no errata |
 
 Proposed erratum RA-0322 (RFC 8685, Section 4.2; type: Technical):
 
@@ -10543,9 +12438,50 @@ Notes
    encoded in TLVs" statement.
 ```
 
+Proposed erratum RA-1433 (RFC 8685, Section 2.1.3; type: Editorial):
+
+```
+Original Text
+-------------
+   A PCC may be able to limit the number of domains crossed by
+   applying a limit on these metrics.  See Section 3.4 for details.
+
+Corrected Text
+--------------
+   A PCC may be able to limit the number of domains crossed by
+   applying a limit on these metrics.  See Section 3.5 for details.
+
+Notes
+-----
+   Section 3.4 covers objective functions; the METRIC types 20 and
+   21 and the B flag usage are in Section 3.5.
+```
+
+Proposed erratum RA-1434 (RFC 8685, Section 3.2.1; type: Technical):
+
+```
+Original Text
+-------------
+   then the session establishment MUST fail, and the PCEP speaker
+   MUST respond with a PCErr message using Error-Type 1 (PCEP
+   session establishment failure) as per [RFC5440].
+
+Corrected Text
+--------------
+   then the session establishment MUST fail, and the PCEP speaker
+   MUST respond with a PCErr message using Error-Type 1 (PCEP
+   session establishment failure) and Error-value 1 (reception of an
+   invalid Open message or a non Open message) as per [RFC5440].
+
+Notes
+-----
+   A dedicated Error-value would be clearer; Error-value 1 is the
+   closest existing one.
+```
+
 ### RFC 8697: Path Computation Element Communication Protocol (PCEP) Extensions for Establishing Relationships between Sets of Label Switched Paths (LSPs) {#ra_rfc8697}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 9756.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -10575,7 +12511,7 @@ Notes
 
 ### RFC 8741: Ability for a Stateful Path Computation Element (PCE) to Request and Obtain Control of a Label Switched Path (LSP) {#ra_rfc8741}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -10583,7 +12519,7 @@ Depth: deep. Errata: none (the RFC has no errata).
 
 ### RFC 8745: Path Computation Element Communication Protocol (PCEP) Extensions for Associating Working and Protection Label Switched Paths (LSPs) with St {#ra_rfc8745}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 9756.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -10613,7 +12549,7 @@ Notes
 
 ### RFC 8751: Hierarchical Stateful Path Computation Element (PCE) {#ra_rfc8751}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Informational.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -10645,7 +12581,7 @@ Notes
 
 ### RFC 8779: Path Computation Element Communication Protocol (PCEP) Extensions for GMPLS {#ra_rfc8779}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 9756.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -10763,13 +12699,13 @@ Notes
 
 ### RFC 8786: Updated Rules for Processing Stateful PCE Request Parameters Flags {#ra_rfc8786}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 8231.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 8231.
 
 Nothing notable found at this depth.
 
 ### RFC 8800: Path Computation Element Communication Protocol (PCEP) Extension for Label Switched Path (LSP) Diversity Constraint Signaling {#ra_rfc8800}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 9756.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -10822,13 +12758,13 @@ Notes
 
 ### RFC 9005: Path Computation Element Communication Protocol (PCEP) Extension for Associating Policies and Label Switched Paths (LSPs) {#ra_rfc9005}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 Nothing notable found at this depth.
 
 ### RFC 9050: Path Computation Element Communication Protocol (PCEP) Procedures and Extensions for Using the PCE as a Central Controller (PCECC) of LSPs {#ra_rfc9050}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 9756.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -10904,7 +12840,7 @@ Notes
 
 ### RFC 9059: Path Computation Element Communication Protocol (PCEP) Extensions for Associated Bidirectional Label Switched Paths (LSPs) {#ra_rfc9059}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 9756.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -10934,7 +12870,7 @@ Notes
 
 ### RFC 9357: Label Switched Path (LSP) Object Flag Extension for Stateful PCE {#ra_rfc9357}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 9756.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -10942,13 +12878,13 @@ Depth: deep. Errata: none (the RFC has no errata).
 
 ### RFC 9488: Local Protection Enforcement in the Path Computation Element Communication Protocol (PCEP) {#ra_rfc9488}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 5440.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 5440.
 
 Nothing notable found at this depth.
 
 ### RFC 9603: Path Computation Element Communication Protocol (PCEP) Extensions for IPv6 Segment Routing {#ra_rfc9603}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 9756, RFC 9933.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -10998,7 +12934,7 @@ Notes
 
 ### RFC 9604: Carrying Binding Label/SID in PCE-Based Networks {#ra_rfc9604}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 9756.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -11046,7 +12982,7 @@ Notes
 
 ### RFC 9757: Path Computation Element Communication Protocol (PCEP) Extensions for Native IP Networks {#ra_rfc9757}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Experimental.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -11117,7 +13053,7 @@ Notes
 
 ### RFC 9862: Path Computation Element Communication Protocol (PCEP) Extensions for Segment Routing (SR) Policy Candidate Paths {#ra_rfc9862}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 8231.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 8231.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -11150,7 +13086,7 @@ Notes
 
 ### RFC 9916: Updates to the Usage of TLS to Provide a Secure Transport for the Path Computation Element Communication Protocol (PCEP) {#ra_rfc9916}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 8253.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 8253.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -11208,7 +13144,7 @@ Notes
 
 ### RFC 9933: Carrying SR-Algorithm in Path Computation Element Communication Protocol (PCEP) {#ra_rfc9933}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 8664, RFC 9603.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 8664, RFC 9603.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -11275,11 +13211,11 @@ Notes
 
 ## Multicast: PIM, IGMP, MLD and MVPN {#ra_mcast}
 
-23 RFCs in this area (23 deep); 69 findings, 29 of them proposed errata.
+24 RFCs in this area (24 deep); 92 findings, 42 of them proposed errata.
 
 ### RFC 2236: Internet Group Management Protocol, Version 2 {#ra_rfc2236}
 
-Depth: deep. Errata: 3 errata: 2 verified, 1 rejected. Updates: RFC 1112.
+Depth: deep. Errata: 3 errata: 2 verified, 1 rejected. Status: Proposed Standard. Updates: RFC 1112. Updated by: RFC 3376, RFC 9776.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -11307,16 +13243,16 @@ Notes
 
 ### RFC 2710: Multicast Listener Discovery (MLD) for IPv6 {#ra_rfc2710}
 
-Depth: deep (normative statements extracted). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 3590, RFC 3810, RFC 9777.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
-| RA-0750 | 3, 5, 6, 9 | "To be valid, the Report message MUST come from a link-local IPv6 Source Address, be at least 24 octets long, and have a correct MLD checksum." | Every message must carry a link-local source, but a node joining its solicited-node group for Duplicate Address Detection has no usable link-local address yet, and Section 5 requires Reports for solicited-node addresses; the document does not say which source such a Report uses or whether a router accepts it (RFC 3590 later updated this RFC to allow the unspecified address). The receive validity rules also omit the Hop Limit 1 and Router Alert conditions that Section 3 imposes on senders, so an off-link Report with a spoofed link-local source and Hop Limit > 1 is "valid". Section 9 relies on the link-local check alone to defend against off-link forgery. | ambiguity | none: RFC has no errata |
+| RA-0750 | 3, 5, 6, 9 | "To be valid, the Report message MUST come from a link-local IPv6 Source Address, be at least 24 octets long, and have a correct MLD checksum." | Every message must carry a link-local source, but a node joining its solicited-node group for Duplicate Address Detection has no usable link-local address yet, and Section 5 requires Reports for solicited-node addresses; the document does not say which source such a Report uses or whether a router accepts it (RFC 3590 later updated this RFC to allow the unspecified address). The receive validity rules also omit the Hop Limit 1 and Router Alert conditions that Section 3 imposes on senders, so an off-link Report with a spoofed link-local source and Hop Limit > 1 is "valid". Section 9 relies on the link-local check alone to defend against off-link forgery. Later RFCs: RFC 3590 Section 4 (updates RFC 2710) settles the main point: Reports and Done messages are sent from the unspecified address when no link-local address is available, and routers silently discard them. The receive checks (Hop Limit 1, Router Alert) are not addressed. | ambiguity | none: RFC has no errata |
 | RA-0751 | 6 | "This event is significant only in the "Listerners Present" state and when the router is a Querier." | "Listerners" for "Listeners"; "Multicast- Address-Specific" (Section 5) has a stray space; "link-layer multicast address that can be generated" (Section 4) should be plural. | editorial | none: RFC has no errata |
 
 ### RFC 3376: Internet Group Management Protocol, Version 3 {#ra_rfc3376}
 
-Depth: deep. Errata: 8 errata: 2 verified, 3 held, 3 rejected. Obsoletes: RFC 2236.
+Depth: deep. Errata: 8 errata: 2 verified, 3 held, 3 rejected. Status: Proposed Standard. Obsoleted by: RFC 9776. Updates: RFC 2236. Updated by: RFC 4604.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -11344,11 +13280,68 @@ Corrected Text
 Notes
 -----
    RFC 9776 retains both texts.
+   Status note: RFC 3376 is obsoleted by RFC 9776; an erratum report
+   against it may be held or rejected for that reason.
+```
+
+### RFC 3590: Source Address Selection for the Multicast Listener Discovery (MLD) Protocol {#ra_rfc3590}
+
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 2710.
+
+| ID | Section | Quote | Issue | Severity | Erratum |
+|---|---|---|---|---|---|
+| RA-1437 | 4, 5, 6 | "For hosts and routers, all received MLD messages from an unspecified source address are silently discarded.  This is the required behavior from [RFC 2710] and is not changed by this document. (6) / these messages will be dropped if the implementation does not consider the unspecified address to be link-local in scope. (5)" | Section 6 states that discarding MLD messages from :: is required by RFC 2710 for hosts and routers, but Section 5 says the treatment by RFC 2710 implementations "is dependent upon how the implementation treats the unspecified address", i.e. not required. Section 4 gives receive rules only for Queries (any node) and for Reports / Done at routers; it does not say that a host must ignore a Report from :: for MLDv1 report suppression (RFC 2710 4: a host that hears another host's Report for a group cancels its own). A host that suppresses its Report on hearing a :: Report from a node in DAD, while the router discards that Report, leaves the group without a recorded listener until the next Query cycle. The "no new security impacts" conclusion rests on the Section 6 statement. | contradiction | none: RFC has no errata; **proposed erratum below** |
+| RA-1438 | 3, 5 | "MLD reports are to be sent using an unspecified source address prior to DAD being started (3) / RFC 2710 implementations discarding these packets will have no affect on the packet's sender (5)" | Section 3 places the :: Reports "prior to DAD being started", while the first paragraph of Section 3 and Section 4 tie them to the period when no valid link-local address exists (during DAD of the link-local address). "no affect" should be "no effect"; "The discrepancies ... has led" should be "have led". | editorial | none: RFC has no errata; **proposed erratum below** |
+
+Proposed erratum RA-1437 (RFC 3590, Section 4, 5, 6; type: Technical):
+
+```
+Original Text
+-------------
+   For hosts and routers, all received MLD messages from an
+   unspecified source address are silently discarded.  This is the
+   required behavior from [RFC 2710] and is not changed by this
+   document.
+
+Corrected Text
+--------------
+   Routers MUST silently discard all received MLD messages from the
+   unspecified address, and hosts MUST silently discard Queries from
+   the unspecified address and MUST NOT use a Report from the
+   unspecified address to suppress their own Reports.
+
+Notes
+-----
+   Section 5 states that RFC 2710 implementations may or may not
+   drop such messages. A Report sent from "::" during DAD can cancel
+   another host's pending Report while being discarded by the
+   router.
+```
+
+Proposed erratum RA-1438 (RFC 3590, Section 3, 5; type: Editorial):
+
+```
+Original Text
+-------------
+   This document fixes this problem by specifying that MLD reports
+   are to be sent using an unspecified source address prior to DAD
+   being started
+
+Corrected Text
+--------------
+   This document fixes this problem by specifying that MLD reports
+   are to be sent using the unspecified source address while no
+   valid link-local address is available (i.e., before and during
+   DAD of the link-local address)
+
+Notes
+-----
+   Section 4 is the normative rule; Section 3 should match it.
 ```
 
 ### RFC 3810: Multicast Listener Discovery Version 2 (MLDv2) for IPv6 {#ra_rfc3810}
 
-Depth: deep. Errata: 3 errata: 1 verified, 2 held. Updates: RFC 2710.
+Depth: deep. Errata: 3 errata: 1 verified, 2 held. Status: Proposed Standard. Obsoleted by: RFC 9777. Updates: RFC 2710. Updated by: RFC 4604.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -11356,7 +13349,7 @@ Depth: deep. Errata: 3 errata: 1 verified, 2 held. Updates: RFC 2710.
 
 ### RFC 4604: Using Internet Group Management Protocol Version 3 (IGMPv3) and Multicast Listener Discovery Protocol Version 2 (MLDv2) for Source-Specific {#ra_rfc4604}
 
-Depth: deep (normative statements). Errata: none (the RFC has no errata). Updates: RFC 3376, RFC 3810.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 3376, RFC 3810.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -11393,7 +13386,7 @@ Notes
 
 ### RFC 4607: Source-Specific Multicast for IP {#ra_rfc4607}
 
-Depth: deep (normative statements). Errata: 3 errata: 1 verified, 2 rejected. 
+Depth: deep. Errata: 3 errata: 1 verified, 2 rejected. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -11419,7 +13412,7 @@ Notes
 
 ### RFC 4610: Anycast-RP Using Protocol Independent Multicast (PIM) {#ra_rfc4610}
 
-Depth: deep (normative statements). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -11454,12 +13447,14 @@ Notes
 
 ### RFC 5015: Bidirectional Protocol Independent Multicast (BIDIR-PIM) {#ra_rfc5015}
 
-Depth: deep (Sections 3.1 to 3.7 and 5 read; 3.3 / 3.4 forwarding and Join/Prune rules read for state only). Errata: 1 errata: 1 verified. 
+Depth: deep. Errata: 1 errata: 1 verified. Status: Proposed Standard. Updated by: RFC 8736, RFC 9436.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0364 | 3.5.3.5, 3.6, 3.7.2 | "DFT = BOperiod + OPlow; MC = 0 / DFT = OPlow_int; MC = 0 / Interval: The backoff interval in milliseconds to be used by routers with worse metrics than the offering router." | The state table uses "BOperiod" and "OPlow_int", neither of which is defined in Section 3.6 (which defines Offer_Period, Backoff_Period, OPlow, OPhigh). For a router receiving a Backoff it is not said whether BOperiod is the Interval carried in the received Backoff message (the natural reading of 3.7.2) or the local Backoff_Period; for the DF sending Backoff ("DFT = BOperiod") it is presumably the local value. If a receiver uses a local value shorter than the DF's, it re-offers and takes over (Offer, MC reaches Election_Robustness) before the DF sends Pass, giving two acting DFs. 3.5.2.1 also uses "Offer_Interval" for the Offer_Period of 3.6. | ambiguity | none: RFC has 1 errata, none on this point; **proposed erratum below** |
 | RA-0365 | 3.5.3.1, 3.7.1 | "Used by the DF to record the identity and advertised metrics of the router that has made the last offer, for use when sending the Path message." | PIM has no Path message; the Pass message is meant. Section 3.7.1: "A standard checksum IP checksum is used" (doubled word). Errata: Erratum 3762 covers "Path message"; the doubled word in 3.7.1 is not in any erratum. | editorial | erratum 3762 (Verified), editorial |
+| RA-1439 | 3.5.2, 3.5.3.2, 3.7.1 | "When a router is participating in a DF election for an RPA on the interface that its MRIB indicates as the RPF Interface, then that router MUST always advertise an infinite metric in its election messages." | The election messages carry a 32-bit Sender Metric Preference and a 32-bit Sender Metric (3.7.1, also the Offering and New Winner fields of 3.7.2 and 3.7.3), but the document never gives the encoding of an "infinite" metric. PIM-SM, to which 3.5.1 defers for comparison, has no wire value either, and its Assert carries a 31-bit preference after the RPT bit, so implementations that reuse assert encodings may send 0x7FFFFFFF / 0xFFFFFFFF while others send 0xFFFFFFFF / 0xFFFFFFFF. A receiver that tests for one value treats the other as a very poor but finite metric, so it cannot recognise that the sender has no path (for example on the RPA's own link, where both routers must advertise infinity), and the Lose state's "no router on the link has a path to the RPA" (3.5.3.1) cannot be detected reliably. | ambiguity | none: RFC has 1 errata, none on this point |
+| RA-1440 | 3.5.3.5, 3.5.3.4 | "Lose \| Recv Pass for us: -> Offer DF = Sender; DFT = OPlow; MC = 0 (Figure 3) / On receipt of a Pass message, set the DF to be the target of the message and record its metrics. (3.5.3.4)" | In Figure 3 a router in Lose, Win or Backoff state that receives a Pass naming itself as the new winner goes to Offer with "DF = Sender", i.e. records the router that has just resigned ("The old DF stops performing its tasks at the time the Pass message transmission is made", 3.5.2.2) as the acting DF, while 3.5.3.4 defines the DF on receipt of a Pass as its target. Until its Offers complete, the router therefore sends Joins (RPF_DF, 3.1.4) to a router that has stopped being DF, and the old DF, now in Lose with DF = Best, sees the receiver's Offers. Whether "Sender" is intended (conservative: no DF is assumed) or "Target" (as 3.5.3.4) is not stated, and in the Offer state the same event leads directly to Win. | ambiguity | none: RFC has 1 errata, none on this point |
 
 Proposed erratum RA-0364 (RFC 5015, Section 3.5.3.5, 3.6, 3.7.2; type: Technical):
 
@@ -11481,7 +13476,7 @@ Notes
 
 ### RFC 5059: Bootstrap Router (BSR) Mechanism for Protocol Independent Multicast (PIM) {#ra_rfc5059}
 
-Depth: deep. Errata: 3 errata: 2 verified, 1 held. Obsoletes: RFC 2362. Updates: RFC 4601.
+Depth: deep. Errata: 3 errata: 2 verified, 1 held. Status: Proposed Standard. Obsoletes: RFC 2362. Updates: RFC 4601. Updated by: RFC 8736, RFC 9436.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -11513,7 +13508,7 @@ Notes
 
 ### RFC 5771: IANA Guidelines for IPv4 Multicast Address Assignments {#ra_rfc5771}
 
-Depth: deep. Errata: 2 errata: 2 held. Obsoletes: RFC 3138, RFC 3171. Updates: RFC 2780.
+Depth: deep. Errata: 2 errata: 2 held. Status: Best Current Practice (BCP 51). Obsoletes: RFC 3138, RFC 3171. Updates: RFC 2780.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -11561,7 +13556,7 @@ Notes
 
 ### RFC 6037: Cisco Systems' Solution for Multicast in BGP/MPLS IP VPNs {#ra_rfc6037}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Historic.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -11588,6 +13583,8 @@ Corrected Text
 Notes
 -----
    Aligns 4.4.1 with 3.1 and 4.4.
+   Status note: RFC 6037 has the status Historic; an erratum report
+   against it may be held or rejected for that reason.
 ```
 
 Proposed erratum RA-0768 (RFC 6037, Section 4.6.1.1; type: Technical):
@@ -11606,6 +13603,8 @@ Corrected Text
 Notes
 -----
    Clarification only.
+   Status note: RFC 6037 has the status Historic; an erratum report
+   against it may be held or rejected for that reason.
 ```
 
 Proposed erratum RA-0769 (RFC 6037, Section 5.2.1; type: Technical):
@@ -11625,20 +13624,94 @@ Notes
 -----
    Also 5 O: "Designated Forwarder election" C: "Designated Router
    election".
+   Status note: RFC 6037 has the status Historic; an erratum report
+   against it may be held or rejected for that reason.
 ```
 
 ### RFC 6513: Multicast in MPLS/BGP IP VPNs {#ra_rfc6513}
 
-Depth: deep (5.1, 7.1, 9.1 in full; other normative sections by MUST/SHOULD). Errata: 2 errata: 1 verified, 1 held. 
+Depth: deep. Errata: 2 errata: 1 verified, 1 held. Status: Proposed Standard. Updated by: RFC 7582, RFC 7900, RFC 7988.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0370 | 5.1.3 | "1. The PEs in the candidate set are numbered from lowest to highest IP address, starting from 0. ... The result is taken modulo n, where n is the number of PEs in the candidate set." | The candidate set is defined as a set of triples <route, Upstream PE, Upstream RD>, one per route with the same prefix, so one PE can appear several times (one route per RD). Step 1 numbers "PEs", but whether a PE appearing under two RDs is numbered once or twice, and so whether n counts PEs or routes, is not stated; PEs that differ select different upstream PEs, and steady-state duplication or loss follows. The default procedure also defines ordering only for "a 32-bit IP address", leaving IPv6 Upstream PEs (and mixed sets) to the implementer. | ambiguity | none: RFC has 2 errata, none on this point |
 | RA-0371 | 5.1.3 | "Another procedure, which SHOULD be implemented, is to use the Installed UMH Route as the Selected UMH Route." | Three procedures are given (one MUST and default, one MUST but disabled, one SHOULD) without a mechanism for PEs to agree which is in use; the text itself notes that mixing them leads to "steady state duplication of traffic" unless wrong-PE discard (9.1.1) is in place. Consistency is left to configuration. | ambiguity | none: RFC has 2 errata, none on this point |
+| RA-1441 | 5.3.3, 5.3.1, 9.3.2 | "If a PE has pruned a C-source from a shared C-multicast tree, and it needs to "unprune" that source from that tree, it does so by withdrawing the route that pruned the source from the tree." | Section 5.3.1 states that "There is no C-multicast route corresponding to the PIM function of pruning a source off the shared tree", and Section 9.3.2 that "there is no need to have any kind of C-multicast route that has the semantics of a PIM Prune(S,G,rpt) message"; the only C-multicast route types are source tree join and shared tree join (5.3.1). Section 5.3.3 nevertheless describes un-pruning by withdrawing "the route that pruned the source", a route the document says does not exist. An implementer cannot tell whether some route (for example a Source Active A-D route, whose withdrawal 9.3.2 describes) is meant, or whether the paragraph is a leftover. | contradiction | none: RFC has 2 errata, none on this point; **proposed erratum below** |
+| RA-1442 | 5.1.3 | "The default procedure, which MUST be implemented, is to select the route whose corresponding Upstream PE address is numerically highest" | The UMH Route Candidate Set has one entry per route (one per RD), so the same Upstream PE can appear several times with different Upstream RDs (a PE with two VRFs of the MVPN, or a multihomed site advertised under two RDs). The default procedure then has a tie between routes with the same, highest Upstream PE, and the text gives no tie-breaker, although the Selected Upstream RD goes into the NLRI of the C-multicast route (5.3.1) and so decides which route the Upstream PE receives. The claim that "all PEs will have the same default Upstream PE selection" holds for the PE but not for the Selected UMH Route and RD. | ambiguity | none: RFC has 2 errata, none on this point; **proposed erratum below** |
+| RA-1443 | 7.4.2.2 | "\|     Type      \|           Length            \|    Reserved     \| / Length (16 bits): 16 / Reserved (8 bits)" | In both S-PMSI Join figures (the generic TLV and the Type 1 message) the Length field is drawn over 15 bit positions (bits 8 to 22) and the following field (Value, Reserved) over 9 (bits 23 to 31), while the text gives Length 16 bits and Reserved 8 bits. The text and the Length value 16 (1 + 2 + 1 + 3 x 4 octets) agree with each other, so the figures are wrong, but an implementer working from the figures misplaces the field boundary. | contradiction | none: RFC has 2 errata, none on this point; **proposed erratum below** |
+| RA-1444 | 7.4.2.1, 7.4.2.2 | "traffic for a particular C-flow can be switched back to the MI-PMSI simply by ceasing to send S-PMSI Joins for that C-flow. / If a PE (other than the transmitter) does not receive any packets over the S-PMSI P-tunnel for this amount of time, the PE will prune itself" | The S-PMSI Join is refreshed every S-PMSI_INTERVAL (60 s), but no hold time is defined after which a receiver forgets a binding whose Joins have stopped; the only receiver timer, S-PMSI_TIMEOUT (3 minutes), runs on data packets. A receiver that applies the "discard from the wrong P-tunnel" logic of 7.1.2 / 9.1.1 therefore has no defined moment at which it starts accepting the flow on the MI-PMSI again after the transmitter "ceases to send S-PMSI Joins", other than waiting for the data timeout. | ambiguity | none: RFC has 2 errata, none on this point |
+| RA-1445 | 12.1.1 | "the optional GRE key field is used to identify a particular MVPN.  In this case, each PE would have to advertise a key field value for each MVPN; each PE would assign the key field value that it expects to receive." | No mechanism is given for advertising the GRE key: the PMSI Tunnel attribute for ingress replication carries an MPLS label as its demultiplexor (6.4.5, RFC 6514 5), and neither document defines a field for a GRE key. Two PEs using IP-in-GRE unicast P-tunnels therefore cannot learn each other's keys by protocol, and the receiver cannot otherwise tell which MVPN an unlabelled GRE packet belongs to. | ambiguity | none: RFC has 2 errata, none on this point |
+| RA-1446 | 3.2.2, 6.4.5, 8 | "Moreover, the use of ingress replication by any PE for an MVPN implies that all other PEs MUST use ingress replication for this MVPN." | The requirement is stated without scope. Section 6.4.5 lets ingress replication instantiate "any kind of PMSI" (so one PE might use it for an S-PMSI while I-PMSIs use mLDP or RSVP-TE), and Section 8 instantiates every inter-AS segment of a segmented P-tunnel as a unicast P-tunnel while the intra-AS segments may use any technology. Read literally, a single ingress-replicated S-PMSI, or an ASBR-ASBR segment, would force every PE of the MVPN onto ingress replication; whether the MUST applies only to I-PMSIs, per AS, or to PEs only is not stated. | ambiguity | none: RFC has 2 errata, none on this point |
+
+Proposed erratum RA-1441 (RFC 6513, Section 5.3.3, 5.3.1, 9.3.2; type: Technical):
+
+```
+Original Text
+-------------
+   If a PE has pruned a C-source from a shared C-multicast tree, and
+   it needs to "unprune" that source from that tree, it does so by
+   withdrawing the route that pruned the source from the tree.
+
+Corrected Text
+--------------
+   (Paragraph deleted.  Sources are not pruned from a shared
+   C-multicast tree by C-multicast routes; see Sections 5.3.1 and
+   9.3.2.)
+
+Notes
+-----
+   Apparently a leftover from an earlier draft that had a
+   C-multicast route with Prune(S,G,rpt) semantics. The source-tree
+   switch is handled by Source Active A-D routes (Section 9.3.2, RFC
+   6514 Section 13).
+```
+
+Proposed erratum RA-1442 (RFC 6513, Section 5.1.3; type: Technical):
+
+```
+Original Text
+-------------
+   The default procedure, which MUST be implemented, is to select
+   the route whose corresponding Upstream PE address is numerically
+   highest, where a 32-bit IP address is treated as a 32-bit
+   unsigned integer.
+
+Corrected Text
+--------------
+   The default procedure, which MUST be implemented, is to select
+   the route whose corresponding Upstream PE address is numerically
+   highest, where a 32-bit IP address is treated as a 32-bit
+   unsigned integer; if several routes have that Upstream PE, the
+   one whose Upstream RD is numerically lowest is selected.
+
+Notes
+-----
+   The tie-break proposed is one possibility; any deterministic rule
+   shared by all PEs would do, since the Selected Upstream RD is
+   carried in the C-multicast route.
+```
+
+Proposed erratum RA-1443 (RFC 6513, Section 7.4.2.2; type: Technical):
+
+```
+Original Text
+-------------
+   |     Type      |           Length            |    Reserved     |
+
+Corrected Text
+--------------
+   |     Type      |             Length            |    Reserved   |
+
+Notes
+-----
+   The same one-bit shift is in the generic Type
+   Length
+   Value figure at the start of Section 7.4.2.2.
+```
 
 ### RFC 6514: BGP Encodings and Procedures for Multicast in MPLS/BGP IP VPNs {#ra_rfc6514}
 
-Depth: deep. Errata: 3 errata: 3 held. 
+Depth: deep. Errata: 3 errata: 3 held. Status: Proposed Standard. Updated by: RFC 6515, RFC 6625, RFC 7385, RFC 7441, RFC 7582, RFC 7899, RFC 7900, RFC 7902, RFC 7988, RFC 8534, RFC 9081, RFC 9573, RFC 10018.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -11788,7 +13861,7 @@ Notes
 
 ### RFC 6515: IPv4 and IPv6 Infrastructure Addresses in BGP Updates for Multicast VPN {#ra_rfc6515}
 
-Depth: deep (read in full). Errata: 1 errata: 1 rejected. Updates: RFC 6514.
+Depth: deep (read in full). Errata: 1 errata: 1 rejected. Status: Proposed Standard. Updates: RFC 6514.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -11796,21 +13869,64 @@ Depth: deep (read in full). Errata: 1 errata: 1 rejected. Updates: RFC 6514.
 
 ### RFC 6625: Wildcards in Multicast VPN Auto-Discovery Routes {#ra_rfc6625}
 
-Depth: deep (3, 4 in full). Errata: 1 errata: 1 held. Updates: RFC 6514.
+Depth: deep. Errata: 1 errata: 1 held. Status: Proposed Standard. Updates: RFC 6514. Updated by: RFC 7582, RFC 7900, RFC 8534.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0373 | 3.2.1 | "Otherwise, if there is an installed S-PMSI A-D route originated by PE2, whose NLRI contains (C-*,C-*), then (C-S,C-G) matches that route." | The "Otherwise" chain makes the match exclusive: a (C-S,C-G) state matches only the most specific installed S-PMSI route from its upstream PE. Erratum 5605 (held) argues that several routes can match at once (for example while switching from a (C-*,C-*) to a (C-S,C-G) S-PMSI), and the AD note points to the later changes in RFC 7582, RFC 7900 and RFC 8534. A receiver that joins only the best match may lose packets while the ingress moves the flow between trees. Later RFCs: RFC 8534 Section 3 (updates RFC 6625) keeps a single match for reception but has it ignore S-PMSI routes without tunnel information, and adds a separate match for tracking; the tunnel-switch case is not addressed. | ambiguity | erratum 5605 (Held for Document Update), technical |
+| RA-1447 | 4.3 | "Specifically, if a PE receives a (C-S,C-*) S-PMSI A-D route, and the PE can determine that C-G is not an SSM group address, the PE SHOULD "ignore" this S-PMSI A-D route." | A (C-S,C-*) route carries no C-G (the group is the wildcard), so the condition cannot be evaluated on the received route. The rule can only be meant per flow: the route is not used for a (C-S,C-G) whose C-G is not an SSM address, which is what the matching rules of 3.1 and 3.2.1 already say ("AND if C-G is an SSM group address"). Read literally, the sentence is either never applicable or invites a PE to drop the whole route because some flow it is interested in is ASM. The same section also switches to "then PE1 applies the procedures" although no PE1 is introduced there. | error | none: RFC has 1 errata, none on this point; **proposed erratum below** |
+| RA-1448 | 1.3 | "This can be useful when the C-group addresses are SSM (Single Source Multicast) addresses." | SSM is Source-Specific Multicast (RFC 4607, RFC 3569), not "Single Source Multicast". | editorial | none: RFC has 1 errata, none on this point; **proposed erratum below** |
+| RA-1449 | 4.4, 3.2.2 | "The PE has a currently originated a C-multicast Shared Tree Join route for (C-*,C-G) (4.4)" | Stray "a" ("has a currently originated a"). In 3.2.2 "(C-*,C-G) matches a non-wildcard S-PMSI A-D route (as detailed in Section 12.3 of [MVPN-BGP])" is unclear: RFC 6514 12.3 does not define a match between (C-*,C-G) and a non-wildcard route; it describes when a PE with only a Shared Tree Join joins an (C-S,C-G) S-PMSI tunnel (via Source Active routes). The "Single Source"/ASM wording and these slips leave the reader to reconstruct the intended RFC 6514 relationship. | editorial | none: RFC has 1 errata, none on this point |
+
+Proposed erratum RA-1447 (RFC 6625, Section 4.3; type: Technical):
+
+```
+Original Text
+-------------
+   Specifically, if a PE receives a (C-S,C-*) S-PMSI A-D route, and
+   the PE can determine that C-G is not an SSM group address, the PE
+   SHOULD "ignore" this S-PMSI A-D route.
+
+Corrected Text
+--------------
+   Specifically, a (C-S,C-*) S-PMSI A-D route is never matched
+   (Sections 3.1 and 3.2.1) by a (C-S,C-G) whose C-G is not an SSM
+   group address; for such C-flows the PE SHOULD "ignore" this
+   S-PMSI A-D route.
+
+Notes
+-----
+   A (C-S,C-*) route has a wildcard group, so "C-G is not an SSM
+   group address" cannot be determined from the route. The matching
+   rules in Sections 3.1 and 3.2.1 already restrict (C-S,C-*)
+   matches to SSM groups; the sentence should be phrased per C-flow.
+```
+
+Proposed erratum RA-1448 (RFC 6625, Section 1.3; type: Editorial):
+
+```
+Original Text
+-------------
+   SSM (Single Source Multicast) addresses
+
+Corrected Text
+--------------
+   SSM (Source-Specific Multicast) addresses
+
+Notes
+-----
+   SSM is defined in RFC 4607 as Source-Specific Multicast.
+```
 
 ### RFC 7385: IANA Registry for P-Multicast Service Interface (PMSI) Tunnel Type Code Points {#ra_rfc7385}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 6514.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 6514. Updated by: RFC 8317, RFC 8338.
 
 Nothing notable found at this depth.
 
 ### RFC 7442: Carrying Protocol Independent Multicast - Sparse Mode (PIM-SM) in Any-Source Multicast (ASM) Mode Trees over Multipoint LDP (mLDP) {#ra_rfc7442}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -11818,7 +13934,7 @@ Depth: deep. Errata: none (the RFC has no errata).
 
 ### RFC 7524: Inter-Area Point-to-Multipoint (P2MP) Segmented Label Switched Paths (LSPs) {#ra_rfc7524}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 8534.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -11847,7 +13963,7 @@ Notes
 
 ### RFC 7761: Protocol Independent Multicast - Sparse Mode (PIM-SM): Protocol Specification (Revised) {#ra_rfc7761}
 
-Depth: deep. Errata: 4 errata: 2 verified, 1 held, 1 rejected. Obsoletes: RFC 4601.
+Depth: deep. Errata: 4 errata: 2 verified, 1 held, 1 rejected. Status: Internet Standard (STD 83). Obsoletes: RFC 4601. Updated by: RFC 8736, RFC 9436.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -11943,7 +14059,7 @@ Notes
 
 ### RFC 8534: Explicit Tracking with Wildcard Routes in Multicast VPN {#ra_rfc8534}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 6514, RFC 6625, RFC 7524, RFC 7582, RFC 7900.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 6514, RFC 6625, RFC 7524, RFC 7582, RFC 7900.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -12027,7 +14143,7 @@ Notes
 
 ### RFC 9026: Multicast VPN Fast Upstream Failover {#ra_rfc9026}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -12058,12 +14174,18 @@ Notes
 
 ### RFC 9776: Internet Group Management Protocol, Version 3 {#ra_rfc9776}
 
-Depth: deep (sections 4, 6, 7.3, 8 and Appendix C in full; host-side 5 and 7.2 scanned). Errata: none (the RFC has no errata). Obsoletes: RFC 3376. Updates: RFC 2236.
+Depth: deep. Errata: none (the RFC has no errata). Status: Internet Standard (STD 100). Obsoletes: RFC 3376. Updates: RFC 2236.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0376 | 8.12 vs 9777 9.12 | "This value SHOULD be [Robustness Variable] times [Query Interval] plus (10 times the Max Response Time in the last received Query Message)." | Section 4.1.1 defines Max Response Time "in units of 1/10 second", so converting it to seconds divides by 10; "10 times the Max Response Time" gives a value 100 times too large if read in seconds, or one second-unit per 1/100 s if read in units. The MLDv2 republication (RFC 9777 9.12) keeps "plus ([Query Response Interval])" for the same timer, so the two documents, updated together, disagree on the formula. The text also turns the RFC 3376 MUST into a SHOULD and says hosts should use default values for a figure that depends on the last received Query. | error | none: RFC has no errata; **proposed erratum below** |
 | RA-0377 | 8.4, 8.13 | "This value MUST be ([Robustness Variable] times [Query Interval]) plus (2 * [Query Response Interval]). (8.4) / This value MUST be ([Robustness Variable] times [Query Interval]) plus [Query Response Interval]. (8.13)" | In RFC 3376 the Older Host Present Interval equalled the Group Membership Interval, so a group kept its older-version compatibility mode for as long as the older host's membership lasted. With 8.4 changed (Erratum 6725) and 8.13 unchanged, compatibility mode now ends one Query Response Interval before the membership created by the older report expires; during that window IGMPv3 BLOCK and TO_IN records are processed for a group whose only member may be an IGMPv1/v2 host. Whether 8.13 was meant to follow 8.4 is not said. RFC 9777 9.4 / 9.13 has the same split. | ambiguity | none: RFC has no errata |
+| RA-1450 | 9 | "IGMP provides any form of confidentiality.  This means any device on a link can passively receive any IGMP message on the link." | A word is missing and the sentence states the opposite of what is meant: IGMP provides no confidentiality, as the next sentence and the rest of the section explain. | editorial | none: RFC has no errata; **proposed erratum below** |
+| RA-1451 | 6.6.2, 7.3.1 | "If a router receives an older version General Query, it MUST use the oldest version of IGMP on the network. (6.6.2) / This must be administratively assured; routers that desire to be compatible with IGMPv1 and IGMPv2 MUST have a configuration option (7.3.1)" | Section 6.6.2 reads as an automatic downgrade triggered by receipt of an older-version General Query, while Section 7.3.1 says the lowest version is "administratively assured" through configuration and that a router "not explicitly configured to use IGMPv1 or IGMPv2" that receives such a Query only logs a rate-limited warning. An implementer cannot tell whether a received IGMPv1/IGMPv2 General Query must change the router's operating version or only be reported. The same pair of statements was in RFC 3376. | contradiction | none: RFC has no errata; **proposed erratum below** |
+| RA-1452 | 7.2.1 | "When the IGMPv2 Querier Present timer expires, a host switches to Host Compatibility Mode of IGMPv3." | Table 11 keeps IGMPv1 mode while the IGMPv1 Querier Present timer runs, whatever the IGMPv2 timer does; the sentence switches the host to IGMPv3 when the IGMPv2 timer expires even if the IGMPv1 timer is still running. The router-side text in Section 7.3.2 was given the missing condition ("When the IGMPv2-Host-Present Timer expires and the IGMPv1-Host-Present Timer is not running"), the host-side text was not. | contradiction | none: RFC has no errata; **proposed erratum below** |
+| RA-1453 | 6.2.3, 6.4.2 | "Source timers are always updated (for a particular group) whenever the source is present in a received record for that group." | Table 9 does not update source timers for every source present in a record: for INCLUDE (A) + BLOCK (B) no timer is set (only Q(G,A*B) is sent), and for EXCLUDE (X,Y) + BLOCK (A) or TO_EX (A) only A-X-Y is set (to the Group Timer), so sources of A already in X or Y keep their timers. The general statement in 6.2.3 contradicts the tables, which are the operative rules. | contradiction | none: RFC has no errata |
+| RA-1454 | 4.1.12, 5.2, 9.1 | "a system MUST accept and process any Query whose IP Destination Address field contains any of the addresses (unicast or multicast) assigned to the interface (4.1.12) / Hosts SHOULD ignore v1, v2, or v3 General Queries sent to a multicast address other than 224.0.0.1 (9.1)" | A General Query sent to a group the interface has joined (an address "assigned to the interface") must be accepted by 4.1.12 and should be ignored by 9.1. Section 9.1 also says hosts "SHOULD ignore v2 or v3 Queries without the Router Alert option", 4.1.12 has no such exception, and 5.2 describes only the processing of "a Query with the Router Alert option", leaving open how an IGMPv1 Query (which carries no Router Alert) or an accepted Query without it is processed. | contradiction | none: RFC has no errata |
+| RA-1455 | 5.1, 6.4, 8.14.3, 9.3 | "the non-existent pending report to merge with can be treated as a Source-Change Report with empty ALLOW and BLOCK records (5.1) / ignore IGMPv1/IGMPv2 Report and IGMPv2 DONE messages (6.4)" | Terminology slips: "Source-Change Report" is not defined (State-Change Report / Source-List-Change Record are); "DONE" is the MLD message name, the IGMPv2 message is Leave Group; 8.14.3 and 9.3 say "Source-and-Group Specific Query" where the rest of the document says "Group-and-Source Specific Query". Section 8.3 says the number of seconds of the Query Response Interval "must be less than the [Query Interval]" while 8.14.2 says the Query Interval "MUST be equal to or longer than" the Max Response Time, so the equal case is allowed by one and excluded by the other. | editorial | none: RFC has no errata |
 
 Proposed erratum RA-0376 (RFC 9776, Section 8.12 vs 9777 9.12; type: Technical):
 
@@ -12090,13 +14212,80 @@ Notes
    formula is intended, IGMPv3 and MLDv2 should agree.
 ```
 
+Proposed erratum RA-1450 (RFC 9776, Section 9; type: Editorial):
+
+```
+Original Text
+-------------
+   IGMP provides any form of confidentiality.
+
+Corrected Text
+--------------
+   IGMP does not provide any form of confidentiality.
+
+Notes
+-----
+   The following sentence ("any device on a link can passively
+   receive any IGMP message") shows that the intended statement is
+   that IGMP provides no confidentiality.
+```
+
+Proposed erratum RA-1451 (RFC 9776, Section 6.6.2, 7.3.1; type: Technical):
+
+```
+Original Text
+-------------
+   If a router receives an older version General Query, it MUST use
+   the oldest version of IGMP on the network.
+
+Corrected Text
+--------------
+   If a router receives an older version General Query, the oldest
+   version of IGMP on the network has to be used; as described in
+   Section 7.3.1, this is assured administratively, and a router
+   that is not configured for that version logs a warning.
+
+Notes
+-----
+   Section 7.3.1 requires a configuration option and only a
+   rate-limited warning when an unconfigured router receives an
+   IGMPv1 or IGMPv2 General Query, so the MUST in Section 6.6.2
+   cannot be met automatically as written. The text is unchanged
+   from RFC 3376.
+```
+
+Proposed erratum RA-1452 (RFC 9776, Section 7.2.1; type: Technical):
+
+```
+Original Text
+-------------
+   When the IGMPv2 Querier Present timer expires, a host switches to
+   Host Compatibility Mode of IGMPv3.
+
+Corrected Text
+--------------
+   When the IGMPv2 Querier Present timer expires and the IGMPv1
+   Querier Present timer is not running, a host switches to Host
+   Compatibility Mode of IGMPv3.
+
+Notes
+-----
+   Section 7.3.2 contains the corresponding condition for routers;
+   Table 11 keeps IGMPv1 mode while the IGMPv1 Querier Present timer
+   runs.
+```
+
 ### RFC 9777: Multicast Listener Discovery Version 2 (MLDv2) for IPv6 {#ra_rfc9777}
 
-Depth: deep (sections 5, 7, 8 router parts, 9; host-side scanned). Errata: none (the RFC has no errata). Obsoletes: RFC 3810. Updates: RFC 2710.
+Depth: deep. Errata: none (the RFC has no errata). Status: Internet Standard (STD 101). Obsoletes: RFC 3810. Updates: RFC 2710.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0378 | 9.5 | "This value MUST be ([Robustness Variable] times ([Query Interval]) plus (0.5 times [Query Response Interval])." | Unbalanced parentheses (three opening, two closing before "plus"); RFC 9776 8.5 has the correct form. | editorial | none: RFC has no errata; **proposed erratum below** |
+| RA-1456 | 9.12 | "This value MUST be ([Robustness Variable] times [Query Interval] in the last Query received) plus ([Query Response Interval])." | The Older-Version-Querier-Present Timer is set when an MLDv1 Query is received (8.2.1, 9.12), but an MLDv1 Query carries neither QQIC nor QRV, so "[Query Interval] in the last Query received" has no value, and a host has no configured [Query Response Interval]. The same text in RFC 3376 was the subject of erratum 4375; RFC 9776 Section 8.12 replaced it ("It is RECOMMENDED to use the default values ... as hosts do not know the values configured on the querying routers"), while this document, published together with RFC 9776, keeps the unresolvable formula. Hosts will pick different values (defaults, last MLDv2 QQI, the MLDv1 Maximum Response Delay). | ambiguity | none: RFC has no errata; **proposed erratum below** |
+| RA-1457 | 7.6.1, 11 | "MLDv2 uses the S flag to ensure robustness, as explained in Section 2.1. (7.6.1) / IANA has assigned the ICMPv6 message Type value of 143 for Version 2 Multicast Listener Report messages, as specified in Section 4. (11)" | The S flag is explained in Section 2.2 (last paragraph); Section 2.1 covers listener state only. The Version 2 Report format is specified in Section 5.2 (Type 143 in Section 5); Section 4 describes per-socket and per-interface state. Both references were carried over from RFC 3810. | editorial | none: RFC has no errata; **proposed erratum below** |
+| RA-1458 | 7.2.3, 6.1, 8.2.1, 10.1, 10.2, 10, B.2 | "During this time, the Querier should send [Last Member Query Count]-1 retransmissions of the query. (7.2.3)" | Several names do not match the terms this document defines: "[Last Member Query Count]" (7.2.3; IGMPv3 name, 9.9 defines Last Listener Query Count); "Source-Change Report" (6.1 note; State-Change Report is meant); "MLDv1 Group Specific Query" (8.2.1; Multicast Address Specific Query); "[Multicast Address Listener Interval]" (10.1, 10.2; 9.4 defines the Multicast Address Listening Interval, MALI); "Group Membership Interval Timer" (B.2; MALI). Section 10 says nodes accept a source that is "a valid link-local address (or the unspecified address)", while 5.1.14 and 5.2.14 require routers and hosts to discard Queries, and routers to discard Reports, sent from the unspecified address, so the parenthetical describes no receiver's check. B.2 also says a "definition of Resv" was added, but the field is now named Flags (5.1.6). | editorial | none: RFC has no errata; **proposed erratum below** |
+| RA-1459 | 9.3, 9.14.2 | "The number of seconds represented by [Query Response Interval] must be less than the [Query Interval]. (9.3) / The value of the Query Interval MUST be equal to or greater than the Maximum Response Delay used to calculate the Maximum Response Code inserted in General Query Messages. (9.14.2)" | Section 9.3 requires the Query Response Interval to be strictly less than the Query Interval; Section 9.14.2 (with an uppercase MUST) allows them to be equal. The same pair appears in RFC 9776 (8.3, 8.14.2). | contradiction | none: RFC has no errata |
 
 Proposed erratum RA-0378 (RFC 9777, Section 9.5; type: Editorial):
 
@@ -12116,13 +14305,74 @@ Notes
    Editorial.
 ```
 
+Proposed erratum RA-1456 (RFC 9777, Section 9.12; type: Technical):
+
+```
+Original Text
+-------------
+   This value MUST be ([Robustness Variable] times [Query Interval]
+   in the last Query received) plus ([Query Response Interval]).
+
+Corrected Text
+--------------
+   It is RECOMMENDED to use the default values for calculating the
+   interval value, as hosts do not know the values configured on the
+   querying routers. This value SHOULD be ([Robustness Variable]
+   times [Query Interval]) plus (10 times the Maximum Response Delay
+   in the last received Query message).
+
+Notes
+-----
+   Aligns MLDv2 with RFC 9776 Section 8.12, which resolved the same
+   issue for IGMPv3 (RFC 3376 erratum 4375).
+```
+
+Proposed erratum RA-1457 (RFC 9777, Section 7.6.1, 11; type: Editorial):
+
+```
+Original Text
+-------------
+   MLDv2 uses the S flag to ensure robustness, as explained in
+   Section 2.1.
+
+Corrected Text
+--------------
+   MLDv2 uses the S flag to ensure robustness, as explained in
+   Section 2.2.
+
+Notes
+-----
+   Section 11 should likewise read "as specified in Section 5.2".
+```
+
+Proposed erratum RA-1458 (RFC 9777, Section 7.2.3, 6.1, 8.2.1, 10.1, 10.2, 10, B.2; type: Editorial):
+
+```
+Original Text
+-------------
+   During this time, the Querier should send [Last Member Query
+   Count]-1 retransmissions of the query.
+
+Corrected Text
+--------------
+   During this time, the Querier should send [Last Listener Query
+   Count]-1 retransmissions of the query.
+
+Notes
+-----
+   Corresponding replacements: "State-Change Report" (6.1),
+   "Multicast Address Specific Query" (8.2.1), "[Multicast Address
+   Listening Interval]" (10.1, 10.2), "Multicast Address Listening
+   Interval" (B.2).
+```
+
 ## BFD, LSP ping, measurement and time {#ra_oam}
 
-34 RFCs in this area (34 deep); 99 findings, 45 of them proposed errata.
+34 RFCs in this area (34 deep); 112 findings, 53 of them proposed errata.
 
 ### RFC 2330: Advanced Network & Services {#ra_rfc2330}
 
-Depth: deep (only (IPPM framework, informational; IPPM framework, Informational; TWAMP set, no protocol mechanics). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Informational. Updated by: RFC 7312, RFC 8468, RFC 9198.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -12165,7 +14415,7 @@ Notes
 
 ### RFC 4656: A One-way Active Measurement Protocol (OWAMP) {#ra_rfc4656}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 7717, RFC 7718, RFC 8545.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -12260,7 +14510,7 @@ Notes
 
 ### RFC 5357: A Two-Way Active Measurement Protocol (TWAMP) {#ra_rfc5357}
 
-Depth: deep. Errata: 14 errata: 6 verified, 7 held, 1 rejected. 
+Depth: deep. Errata: 14 errata: 6 verified, 7 held, 1 rejected. Status: Proposed Standard. Updated by: RFC 5618, RFC 5938, RFC 6038, RFC 7717, RFC 7750, RFC 8545.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -12270,6 +14520,7 @@ Depth: deep. Errata: 14 errata: 6 verified, 7 held, 1 rejected.
 | RA-0380 | 4.2 vs 4.2.1 | "Copy the packet sequence number into the corresponding reflected packet to the Session-Sender. (4.2) / The Sequence Number generated by the Session-Reflector is independent from the sequence number of the arriving packets. (4.2.1)" | The 4.2 step reads as copying the received sequence number into the reflected Sequence Number field, while 4.2.1 makes that field the reflector's own counter and puts the received value in Sender Sequence Number. Appendix I (TWAMP Light) then lets a stateless reflector copy it, which RFC 8762 later formalised as "stateless" mode. Errata: Verified erratum 1590 scopes the reflector Sequence Number per session; it does not reconcile the 4.2 copy step with 4.2.1. | ambiguity | none: RFC has 14 errata, none on this point (related: erratum 1590 (Verified), technical) |
 | RA-0381 | 3.8 | "If the Accept-Session message was not transmitted at all (for whatever reason, including failure of the TCP connection used for TWAMP-Control), the results of all TWAMP-Test sessions spawned by this TWAMP-Control session MAY be considered invalid." | The paragraph discusses the Accept field of the Stop-Sessions command; the message that may not have been transmitted is the Stop-Sessions message, not Accept-Session (which is the Server's reply to Request-TW-Session). | editorial | none: RFC has 14 errata, none on this point; **proposed erratum below** |
 | RA-0382 | 4.2.1, 6 | "Thus, in authenticated mode, HMAC covers the first block (16 octets); in encrypted mode, HMAC covers the first six blocks (96 octets)." | Security gap: In authenticated mode the reflected packet's first block holds only the reflector Sequence Number and MBZ; the Timestamp, Receive Timestamp, Sender Sequence Number, Sender Timestamp and Sender TTL are neither encrypted nor integrity-protected, so an on-path attacker can alter every value used to compute delay and loss without detection. Section 6 (Security Considerations) does not state this limitation of authenticated mode. | error | none: RFC has 14 errata, none on this point |
+| RA-1460 | 3.8 | "Upon receipt of a TWAMP-Control Stop-Sessions command, the Session-Reflector MUST discard any TWAMP-Test packets that arrive at the current time plus the Timeout (in the Request-TW-Session command)." | Read literally the requirement applies only to packets arriving at one instant (now + Timeout). Sections 3.5 ("MUST reflect them if they arrive within the Timeout interval ... MUST NOT reflect packets that are received beyond the timeout") and 4.2 make clear that packets arriving later than that instant are meant. The same paragraph set also says the Control-Client "MUST account for each accepted Request-Session", the OWAMP command that TWAMP replaces with Request-TW-Session (3.4). | error | none: RFC has 14 errata, none on this point; **proposed erratum below** |
 
 Proposed erratum RA-0379 (RFC 5357, Section 4.2; type: Technical):
 
@@ -12308,15 +14559,62 @@ Notes
    Stop-Sessions.
 ```
 
+Proposed erratum RA-1460 (RFC 5357, Section 3.8; type: Technical):
+
+```
+Original Text
+-------------
+   MUST discard any TWAMP-Test packets that arrive at the current
+   time plus the Timeout (in the Request-TW-Session command).
+
+Corrected Text
+--------------
+   MUST discard any TWAMP-Test packets that arrive later than the
+   current time plus the Timeout (in the Request-TW-Session
+   command).
+
+Notes
+-----
+   Consistent with Sections 3.5 and 4.2; also "each accepted
+   Request-Session" should read "each accepted Request-TW-Session".
+```
+
 ### RFC 5618: Mixed Security Mode for the Two-Way Active Measurement Protocol (TWAMP) {#ra_rfc5618}
 
-Depth: deep (TWAMP set). Errata: none (the RFC has no errata). Updates: RFC 5357.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 5357.
 
-Nothing notable found at this depth.
+| ID | Section | Quote | Issue | Severity | Erratum |
+|---|---|---|---|---|---|
+| RA-1461 | 2, 4.1.2, 4.2 | "This value adds the OPTIONAL ability to use different security modes / the Session-Sender MUST support the mixed security mode (Unauthenticated TEST, Encrypted CONTROL, value 8, bit position 3)" | Section 2 makes the mixed mode OPTIONAL and the Server announces it only if "willing to support" it (3.1), and Section 4 says the extensions are REQUIRED only once the mode has been selected and accepted. Sections 4.1.2 and 4.2 then state without condition that the Session-Sender and the Session-Reflector "MUST support" the mode, which read literally makes every TWAMP implementation (and so every RFC 5357 implementation claiming this update) implement it. Whether support is optional or mandatory is read both ways. | contradiction | none: RFC has no errata; **proposed erratum below** |
+| RA-1462 | 6.1, 6.2, 6.4 | "we expect that new features will be assigned using monotonically increasing single bit positions and in the range [0-31] / 0      Reserved                RFC 5618" | The registry lists Values (0, 1, 2, 4, 8) while its management rule speaks of bit positions 0 to 31, and the registry is said to hold "2^32 possible assignments". Value 0 is registered as "Reserved" with this RFC as reference, although in RFC 4656 Section 3.1 a Modes field of zero is the defined way for a Server to say it does not wish to communicate (and for a client to decline). A registry that mixes values and bit positions leaves unclear whether a future assignment is a bit position or an arbitrary 32-bit value, and whether combinations of bits are themselves registrable. | ambiguity | none: RFC has no errata |
+
+Proposed erratum RA-1461 (RFC 5618, Section 2, 4.1.2, 4.2; type: Technical):
+
+```
+Original Text
+-------------
+   o  the Session-Sender MUST support the mixed security mode
+   (Unauthenticated TEST, Encrypted CONTROL, value 8, bit position
+   3) defined in Section 3.1 of this memo.
+
+Corrected Text
+--------------
+   o  when the mixed security mode (Unauthenticated TEST, Encrypted
+   CONTROL, value 8, bit position 3) defined in Section 3.1 of this
+   memo has been selected, the Session-Sender MUST use the
+   TWAMP-Test Unauthenticated mode.
+
+Notes
+-----
+   The same change applies to the Session-Reflector bullet in
+   Section 4.2. Section 1 and the last paragraph of Section 4
+   already limit the requirements to the case where both sides
+   agreed on the mode.
+```
 
 ### RFC 5880: Bidirectional Forwarding Detection (BFD) {#ra_rfc5880}
 
-Depth: deep. Errata: 8 errata: 4 verified, 3 held, 1 rejected. 
+Depth: deep. Errata: 8 errata: 4 verified, 3 held, 1 rejected. Status: Proposed Standard. Updated by: RFC 7419, RFC 7880, RFC 8562, RFC 9747.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -12419,7 +14717,7 @@ Notes
 
 ### RFC 5881: Bidirectional Forwarding Detection (BFD) for IPv4 and IPv6 (Single Hop) {#ra_rfc5881}
 
-Depth: deep. Errata: 1 errata: 1 verified. 
+Depth: deep. Errata: 1 errata: 1 verified. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -12429,7 +14727,7 @@ Depth: deep. Errata: 1 errata: 1 verified.
 
 ### RFC 5882: Generic Application of Bidirectional Forwarding Detection (BFD) {#ra_rfc5882}
 
-Depth: deep. Errata: 4 errata: 3 verified, 1 held. 
+Depth: deep. Errata: 4 errata: 3 verified, 1 held. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -12439,7 +14737,7 @@ Depth: deep. Errata: 4 errata: 3 verified, 1 held.
 
 ### RFC 5883: Bidirectional Forwarding Detection (BFD) for Multihop Paths {#ra_rfc5883}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -12447,7 +14745,7 @@ Depth: deep. Errata: none (the RFC has no errata).
 
 ### RFC 5884: Bidirectional Forwarding Detection (BFD) for MPLS Label Switched Paths (LSPs) {#ra_rfc5884}
 
-Depth: deep. Errata: 3 errata: 1 verified, 2 held. Updates: RFC 1122.
+Depth: deep. Errata: 3 errata: 1 verified, 2 held. Status: Proposed Standard. Updates: RFC 1122. Updated by: RFC 7726.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -12479,7 +14777,7 @@ Notes
 
 ### RFC 5885: Bidirectional Forwarding Detection (BFD) for the Pseudowire Virtual Circuit Connectivity Verification (VCCV) {#ra_rfc5885}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 6478, RFC 7885.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -12487,7 +14785,7 @@ Depth: deep. Errata: none (the RFC has no errata).
 
 ### RFC 5905: Network Time Protocol Version 4: Protocol and Algorithms Specification {#ra_rfc5905}
 
-Depth: deep (section 6 timestamp formats only, as used by STAMP; diagram hit at line 1018 is the LI / VN / Mode header, field widths 2 + 3 + 3 + 8 + 8 + 8 = 32, not a defect). Errata: 41 errata: 15 verified, 6 reported, 17 held, 3 rejected. Obsoletes: RFC 1305, RFC 4330.
+Depth: deep. Errata: 41 errata: 15 verified, 6 reported, 17 held, 3 rejected. Status: Proposed Standard. Obsoletes: RFC 1305, RFC 4330. Updated by: RFC 7822, RFC 8573, RFC 9109, RFC 9748, RFC 9769.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -12566,15 +14864,48 @@ Notes
 
 ### RFC 5938: Individual Session Control Feature for the Two-Way Active Measurement Protocol (TWAMP) {#ra_rfc5938}
 
-Depth: deep (TWAMP set). Errata: 1 errata: 1 verified. Updates: RFC 5357.
+Depth: deep. Errata: 1 errata: 1 verified. Status: Proposed Standard. Updates: RFC 5357.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0391 | 3.2, 3.4 | "Start-N-Ack messages SHALL have the format defined in the next session." | "Next session" should be "next section" (also for Stop-N-Ack in 3.4). In 3.4 the sentence "The SID is as defined in Section 3.5 of OWAMP [RFC4656] (and TWAMP), and the value MUST be one or greater" attaches the "one or greater" rule to the SID, while 3.2 states it for the Number of Sessions field; the Number of Sessions is meant. | editorial | erratum 2478 (Verified), editorial |
+| RA-1463 | 3.6 | "Thus, the Server SHALL suspend monitoring control connection activity after receiving any Start-N-Sessions command, and after receiving a Stop-N-Sessions command for all corresponding SIDs (and no test sessions are in progress), OR when REFWAIT expires on ALL test sessions initiated by a TWAMP-Control connection, then the SERVWAIT monitoring SHALL resume" | The sentence joins the suspend rule and the resume rule into one clause ("SHALL suspend ... after receiving any Start-N-Sessions command, and after receiving a Stop-N-Sessions command ..."), so read literally the Server also suspends SERVWAIT after the final Stop-N-Sessions, which contradicts the preceding paragraph (suspension covers only the time when any session is in progress) and the resume clause that follows. It also leaves open whether a Start-N-Sessions whose sessions are all refused (non-zero Accept in every Start-N-Ack) suspends SERVWAIT, and how "all corresponding SIDs" is counted when some sessions were stopped by REFWAIT and others by Stop-N-Sessions. | ambiguity | none: RFC has 1 errata, none on this point; **proposed erratum below** |
+| RA-1464 | 3.2, 3.4, 5 | "The number of SID fields that follow MUST be equal to the value in the Number of Sessions field (otherwise, the command MUST NOT be affirmed with a zero Accept field in the Start-N-Ack response)." | The receiver cannot detect a count mismatch: TWAMP-Control has no message length, so the Server reads Number of Sessions SIDs and then the HMAC; a wrong count desynchronises the stream rather than producing a refusable command. The Number of Sessions field is 32 bits with no upper bound tied to the sessions accepted on the connection, so a Control-Client (or, in unauthenticated mode, anyone able to inject into the connection) can make the Server read up to 2^32 x 16 octets before the HMAC; the Security Considerations only refer to RFC 4656 / 5357. The text does not say how a Start-N-Ack or Stop-N-Ack reports SIDs that the Server does not know (which Accept value, and whether they are listed), nor what a Stop-N-Sessions for a session never started does. | ambiguity | none: RFC has 1 errata, none on this point |
+| RA-1465 | 4.2 | "the Session-Reflector MUST ignore TWAMP-Test packets (in the same session/SID) that arrive at the current time plus the Timeout" | "Arrive at the current time plus the Timeout" names an instant; the intent (as for Stop-Sessions in RFC 5357) is packets that arrive after the current time plus the Timeout. Section 6 also says "four command numbers" were assigned "and this memo describes the use of the new commands", while 6.3 says "One experimental value has been assigned" without saying it is value 6 from RFC 5357 rather than an assignment by this memo. | editorial | none: RFC has 1 errata, none on this point |
+
+Proposed erratum RA-1463 (RFC 5938, Section 3.6; type: Technical):
+
+```
+Original Text
+-------------
+   Thus, the Server SHALL suspend monitoring control connection
+   activity after receiving any Start-N-Sessions command, and after
+   receiving a Stop-N-Sessions command for all corresponding SIDs
+   (and no test sessions are in progress), OR when REFWAIT expires
+   on ALL test sessions initiated by a TWAMP-Control connection,
+   then the SERVWAIT monitoring SHALL resume (as though a
+   Stop-N-Sessions command had been received).
+
+Corrected Text
+--------------
+   Thus, the Server SHALL suspend monitoring control connection
+   activity after accepting any session in a Start-N-Sessions
+   command. After a Stop-N-Sessions command has been received for
+   all started SIDs, or REFWAIT has expired on them (so that no test
+   session is in progress), SERVWAIT monitoring SHALL resume (as
+   though a Stop-N-Sessions command had been received).
+
+Notes
+-----
+   Read literally, the sentence says the Server suspends SERVWAIT
+   both after Start-N-Sessions and after the last Stop-N-Sessions,
+   while the preceding paragraph says suspension covers only the
+   time when any test session is in progress.
+```
 
 ### RFC 6038: Two-Way Active Measurement Protocol (TWAMP) Reflect Octets and Symmetrical Size Features {#ra_rfc6038}
 
-Depth: deep. Errata: 7 errata: 5 verified, 2 held. Updates: RFC 5357.
+Depth: deep. Errata: 7 errata: 5 verified, 2 held. Status: Proposed Standard. Updates: RFC 5357.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -12640,16 +14971,65 @@ Notes
 
 ### RFC 6425: Detecting Data-Plane Failures in Point-to-Multipoint MPLS - Extensions to LSP Ping {#ra_rfc6425}
 
-Depth: deep (3, 4.1, 4.2 in full; 4.3 by MUST/SHOULD). Errata: 1 errata: 1 verified. Updates: RFC 4379.
+Depth: deep. Errata: 1 errata: 1 verified. Status: Proposed Standard. Updates: RFC 4379.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0392 | 3.1.1 | "18         56                RSVP P2MP IPv6 Session" | The RSVP P2MP IPv6 Session sub-TLV replaces the 16-octet IPv6 tunnel end point of RFC 4379 by a 4-octet P2MP ID, giving 44 octets; 56 is carried over from RFC 4379 and corrected by verified erratum 3306. | error | erratum 3306 (Verified), editorial |
 | RA-0393 | 3.2.1 | "If a node receives these TLVs in an echo request carrying Multicast LDP, then it will not respond since it is unaware of whether it lies on the path to the address in the sub-TLV." | The same section says a node "MUST respond if the node lies on the path to the address in the sub-TLV". An mLDP egress or bud node whose own address is in the Egress Address sub-TLV knows that it lies on that path, so the blanket "will not respond" for Multicast LDP contradicts the MUST for that node. | contradiction | none: RFC has 1 errata, none on this point |
+| RA-1466 | 4.2.1.3 | "In the first case, the node will behave like a combination of egress and branch node; in the second case, the node will behave like pure egress node / If the address specified in the sub-TLV matches to an address in the node, then the node will behave like a combination of egress and branch node." | The introduction to the bud-node rules maps "just this node" to pure egress behaviour, but the rule for a Node Address sub-TLV that names this node (the case where the request is meant for just this node) prescribes egress-and-branch behaviour, while the Egress Address rule with a matching address prescribes "egress node only". The two behaviours differ in the reply: as pure egress the reply "MUST NOT contain any Downstream Detailed Mapping TLV"; as egress and branch it carries one DDM TLV per downstream path. A bud node addressed by a Node Address sub-TLV can therefore follow either and remain conformant to one sentence. | contradiction | none: RFC has 1 errata, none on this point; **proposed erratum below** |
+| RA-1467 | 3.1.2.1, 10.2 | "[IANA-AF]   IANA Assigned Port Numbers, <http://www.iana.org/assignments/address-family-numbers>." | The reference cited for the Address Family field of the Multicast LDP FEC Stack sub-TLVs ("a value from ADDRESS FAMILY NUMBERS in [IANA-AF]") is titled "IANA Assigned Port Numbers"; the URL and the use are the Address Family Numbers registry. 7.1 and 7.2 also name the parent registry differently ("Multi-Protocol Label Switching (MPLS) ..." vs "Multi-Protocol Label Switching Architecture (MPLS) ..."). | editorial | none: RFC has 1 errata, none on this point; **proposed erratum below** |
+| RA-1468 | 3.4, 4.3.2 | "If the T flag is set to 1 and the TTL of the incoming MPLS label is more than 1, then the receiving node MUST drop the incoming echo request" | "The incoming MPLS label" is not identified when the request arrives with more than one label (for example a P2MP LSP nested in another LSP per RFC 6424, or with an explicit-null or entropy label below); the outermost label, the label of the P2MP LSP under test and the bottom label can carry different TTLs. The PHP clause only covers a request with no label at all, and "All other nodes MUST ignore this bit" also covers an egress node without labels, which then keeps answering every later traceroute probe (as 4.3.2 acknowledges). | ambiguity | none: RFC has 1 errata, none on this point |
+
+Proposed erratum RA-1466 (RFC 6425, Section 4.2.1.3; type: Technical):
+
+```
+Original Text
+-------------
+   In the first case, the node will behave like a combination of
+   egress and branch node; in the second case, the node will behave
+   like pure egress node;
+
+Corrected Text
+--------------
+   (Make the introduction and the rules agree. If the Node Address
+   rule is intended: "... in the second case (an Egress Address
+   sub-TLV that names this node), the node will behave like a pure
+   egress node; ...", and say that a Node Address sub-TLV naming
+   this node is treated as the first case.)
+
+Notes
+-----
+   The four cases in the introduction (all nodes, just this node,
+   another node reachable through this node, a different section of
+   the tree) do not line up with the rules that follow: a Node
+   Address sub-TLV naming the node is the "just this node" case but
+   is given egress-and-branch behaviour, and only an Egress Address
+   sub-TLV naming the node gives pure egress behaviour. The two
+   behaviours differ in whether Downstream Detailed Mapping TLVs are
+   returned.
+```
+
+Proposed erratum RA-1467 (RFC 6425, Section 3.1.2.1, 10.2; type: Editorial):
+
+```
+Original Text
+-------------
+   [IANA-AF]   IANA Assigned Port Numbers,
+
+Corrected Text
+--------------
+   [IANA-AF]   IANA, "Address Family Numbers",
+
+Notes
+-----
+   The URL and the text of Section 3.1.2.1 refer to the Address
+   Family Numbers registry.
+```
 
 ### RFC 6426: MPLS On-Demand Connectivity Verification and Route Tracing {#ra_rfc6426}
 
-Depth: deep (2, 3 in full; 4 by MUST/SHOULD). Errata: 2 errata: 2 verified. Updates: RFC 4379.
+Depth: deep. Errata: 2 errata: 2 verified. Status: Proposed Standard. Updates: RFC 4379.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -12657,6 +15037,8 @@ Depth: deep (2, 3 in full; 4 by MUST/SHOULD). Errata: 2 errata: 2 verified. Upda
 | RA-0394 | 2.1, 2.1.1 | "5         Non IP                       12 ... The new address type is also applicable to the Detailed Downstream Mapping (DDMAP) TLV defined in [RFC6424]." | K is the length of the initial fixed part of the mapping TLV. For the DSMAP, the Non IP layout of Figure 2 (MTU / Address Type / DS Flags, Ingress IF_Num, Egress IF_Num) is 12 octets, the same as IPv4 (K = 12 in RFC 8029 for the DSMAP). The DDMAP adds Return Code, Return Subcode and Sub-tlv Length, which is why its IPv4 K is 16; a single K of 12 "also applicable to" the DDMAP is therefore 4 octets short for that TLV. RFC 8029 copies 12 into its DDMAP Address Type registry, so the inconsistency persists. | contradiction | none: RFC has 2 errata, none on this point; **proposed erratum below** |
 | RA-0395 | 2.2.2, 2.2.3 | "If more than one such TLV is present in an on-demand CV request packet, then error 1 (Malformed echo request received; see Section 3.1 of [RFC4379]) MUST be returned, if it is possible to unambiguously identify the source of the packet." | For the Source Identifier TLV, a request carrying two Source Identifiers has, by construction, no unambiguous source when IP is not used, so the MUST never applies there and the request is silently dropped; the same sentence was copied to the Destination Identifier TLV, where the condition should concern the request's source, as written. What "unambiguously identify" means (an IP header, the reverse LSP of the ACH channel) is not stated. | ambiguity | none: RFC has 2 errata, none on this point |
 | RA-0396 | 3.4.1 | "The Validate FEC Stack (V) flag MAY be set in the echo response when reverse-path connectivity verification is being performed." | In RFC 4379 the V flag is a request flag ("the sender wants FEC validation"); its meaning in an echo response is not defined, and nothing says what the requester does with it. | ambiguity | none: RFC has 2 errata, none on this point |
+| RA-1469 | 3.1, 3.3, 3.4.3, 4.2.3 | "The on-demand CV echo response message MUST be sent on the reverse path of the LSP. (3.1) / If a node receives an MPLS echo request with a reply mode other than 4 ..., and if the node supports that reply mode, then it MAY respond using that reply mode. (3.3)" | For IP-encapsulated on-demand CV (3.1, also 3.2) the response "MUST" go on the reverse path of the LSP, whatever Reply Mode the requester set; RFC 4379 lets the requester ask for a reply by IP/UDP (mode 2) or router alert (mode 3), and 3.3 lets a responder honour a mode other than 4. MPLS-TP LSPs can also be unidirectional or P2MP (3.5), where there is no reverse path. 3.4.3 then makes the requester "MUST" validate that the response arrived on the reverse path of "the bidirectional LSP" without saying whether this applies only when the R flag was set. The drop rule for a missing return LSP is "SHOULD drop" in 3.3 and "MUST drop" in 4.2.3 for the same condition. | ambiguity | none: RFC has 2 errata, none on this point |
+| RA-1470 | 2.3.2 | "The value MAY, for example, be an Attachment Group Identifier (AGI), type 0x01, as defined in [RFC4446]." | RFC 4446 only creates the AGI Type registry; AGI type 1 (the 8-octet AGI) is defined by RFC 6074 (Section 3.2.3 and Section 6: "Type 1 in each registry has been assigned to the AGI and AII formats defined in this document"). Also, an AGI type 1 in the PW FEC is a Type-Length-Value of 10 octets, while the Service Identifier field is 8 octets, so it is the 8-octet value, not the AGI element, that can be carried. | editorial | none: RFC has 2 errata, none on this point; **proposed erratum below** |
 
 Proposed erratum RA-0394 (RFC 6426, Section 2.1, 2.1.1; type: Technical):
 
@@ -12677,9 +15059,30 @@ Notes
    fields.
 ```
 
+Proposed erratum RA-1470 (RFC 6426, Section 2.3.2; type: Editorial):
+
+```
+Original Text
+-------------
+   The value MAY, for example, be an Attachment Group Identifier
+   (AGI), type 0x01, as defined in [RFC4446].
+
+Corrected Text
+--------------
+   The value MAY, for example, be the 8-octet value of an Attachment
+   Group Identifier (AGI) of type 0x01, as defined in [RFC6074] (AGI
+   types are registered as described in [RFC4446]).
+
+Notes
+-----
+   RFC 4446 defines the AGI Type registry; RFC 6074 Section 6
+   assigns and defines AGI type 1. The Service Identifier field
+   holds 8 octets, i.e., the AGI value without its Type and Length.
+```
+
 ### RFC 7110: Return Path Specified Label Switched Path (LSP) Ping {#ra_rfc7110}
 
-Depth: deep. Errata: 3 errata: 3 verified. 
+Depth: deep. Errata: 3 errata: 3 verified. Status: Proposed Standard. Updated by: RFC 7737.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -12710,7 +15113,7 @@ Notes
 
 ### RFC 7130: Bidirectional Forwarding Detection (BFD) on Link Aggregation Group (LAG) Interfaces {#ra_rfc7130}
 
-Depth: deep. Errata: 2 errata: 2 held. 
+Depth: deep. Errata: 2 errata: 2 held. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -12719,13 +15122,13 @@ Depth: deep. Errata: 2 errata: 2 held.
 
 ### RFC 7506: IPv6 Router Alert Option for MPLS Operations, Administration, and Maintenance (OAM) {#ra_rfc7506}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 4379.
+Depth: deep. Errata: none (the RFC has no errata). Status: Historic. Updates: RFC 4379.
 
 Nothing notable found at this depth.
 
 ### RFC 7679: A One-Way Delay Metric for IP Performance Metrics (IPPM) {#ra_rfc7679}
 
-Depth: deep (one-way delay metric; TWAMP set, definitions only). Errata: 1 errata: 1 verified. Obsoletes: RFC 2679.
+Depth: deep. Errata: 1 errata: 1 verified. Status: Internet Standard (STD 81). Obsoletes: RFC 2679.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -12734,7 +15137,7 @@ Depth: deep (one-way delay metric; TWAMP set, definitions only). Errata: 1 errat
 
 ### RFC 7680: A One-Way Loss Metric for IP Performance Metrics (IPPM) {#ra_rfc7680}
 
-Depth: deep (IPPM one-way loss metric; one-way loss metric; TWAMP set, definitions only). Errata: 2 errata: 2 verified. Obsoletes: RFC 2680.
+Depth: deep. Errata: 2 errata: 2 verified. Status: Internet Standard (STD 82). Obsoletes: RFC 2680.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -12759,7 +15162,7 @@ Notes
 
 ### RFC 7717: IKEv2-Derived Shared Secret Key for the One-Way Active Measurement Protocol (OWAMP) and Two-Way Active Measurement Protocol (TWAMP) {#ra_rfc7717}
 
-Depth: deep (TWAMP set: sections 4, 5.1-5.4, 7 read; key derivation formula not re-derived). Errata: none (the RFC has no errata). Updates: RFC 4656, RFC 5357.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 4656, RFC 5357.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -12809,7 +15212,7 @@ Notes
 
 ### RFC 7726: Clarifying Procedures for Establishing BFD Sessions for MPLS Label Switched Paths (LSPs) {#ra_rfc7726}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 5884.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 5884.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -12862,7 +15265,7 @@ Notes
 
 ### RFC 7737: Label Switched Path (LSP) Ping and Traceroute Reply Mode Simplification {#ra_rfc7737}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 7110.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 7110.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -12918,11 +15321,13 @@ Notes
 
 ### RFC 7750: Differentiated Service Code Point and Explicit Congestion Notification Monitoring in the Two-Way Active Measurement Protocol (TWAMP) {#ra_rfc7750}
 
-Depth: deep (TWAMP set). Errata: none (the RFC has no errata). Updates: RFC 5357.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 5357.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0404 | 2.2.1 | "the six (least-significant) bits of the Differentiated Service field MUST be copied from the received Session-Sender test packet into the Sender DSCP (S-DSCP) field;" | In the IPv4 TOS / IPv6 Traffic Class octet the DSCP is the six most significant bits and ECN the two least significant ones (RFC 2474, RFC 3168). "Least-significant" is only correct if "Differentiated Service field" means the 6-bit DS field of RFC 3260; read against the 8-bit octet, an implementer copies ECN plus four DSCP bits. Figure 1 places S-DSCP in bits 0-5 and S-ECN in bits 6-7 of the new octet, which matches the most-significant reading. | ambiguity | none: RFC has no errata; **proposed erratum below** |
+| RA-1471 | 2.2.2, 2.2.1 | "because Sender DSCP and Sender ECN increase the size of the unauthenticated Session-Reflector packet by 4 octets, the Padding Length value SHOULD be greater than or equal to 28 octets" | The unauthenticated Session-Reflector packet of RFC 5357 4.2.1 ends with the 1-octet Sender TTL (41 octets before padding); Figure 2 replaces that with a 4-octet word (Sender TTL, S-DSCP-ECN, 2 octets MBZ), giving 44 octets, an increase of 3, not 4. To keep the reflected packet the same size as the Session-Sender packet (14 octets before padding), the reflector must truncate 30 octets of padding (instead of the 27 of RFC 5357 4.2.1), so the sender's padding must be at least 30 octets; the text asks for 28 and Figure 4 draws the symmetrical Session-Sender packet with "MBZ (28 octets)" (14 + 28 = 42 octets, versus RFC 6038's 27 octets for the base format). None of 3, 4, 28 and 30 agree, so implementations of Symmetrical Size / Reflect Octets with this mode will disagree on truncation length and minimum padding. | error | none: RFC has no errata; **proposed erratum below** |
+| RA-1472 | 2.1, 2.2 | "If the Control-Client agrees to monitor DSCP and ECN on some or all test sessions invoked with this control connection, it MUST set the DSCP and ECN Monitoring flag in the Modes field in the Setup Response message." | The mode is negotiated once per control connection, but the text allows monitoring on only "some" of its test sessions and defines no per-session indication (e.g. in Request-TW-Session). In unauthenticated mode the Session-Reflector packet format changes (Figure 2 adds 3 octets before the padding), so the Session-Sender must know which format each reflected packet uses; with no per-session signal, the only interoperable reading is that every test session of the connection uses the new format, contradicting "some". | ambiguity | none: RFC has no errata; **proposed erratum below** |
 
 Proposed erratum RA-0404 (RFC 7750, Section 2.2.1; type: Technical):
 
@@ -12944,9 +15349,56 @@ Notes
    1 and RFC 3168 suggest the most-significant reading.
 ```
 
+Proposed erratum RA-1471 (RFC 7750, Section 2.2.2, 2.2.1; type: Technical):
+
+```
+Original Text
+-------------
+   because Sender DSCP and Sender ECN increase the size of the
+   unauthenticated Session-Reflector packet by 4 octets, the Padding
+   Length value SHOULD be greater than or equal to 28 octets
+
+Corrected Text
+--------------
+   because the Sender DSCP and ECN field and the following MBZ field
+   increase the size of the unauthenticated Session-Reflector packet
+   by 3 octets (to 44 octets), the Padding Length value SHOULD be
+   greater than or equal to 30 octets (and Figure 4: "MBZ (30
+   octets)")
+
+Notes
+-----
+   Counted from Figure 2: 4 + 8 + 4 + 8 + 4 + 8 + 4 + 4 = 44 octets;
+   RFC 5357 base reflector 41 octets; Session-Sender 14 octets. In
+   authenticated and encrypted modes (Figure 3) S-DSCP-ECN takes one
+   octet of the existing MBZ, so the size is unchanged there.
+```
+
+Proposed erratum RA-1472 (RFC 7750, Section 2.1, 2.2; type: Technical):
+
+```
+Original Text
+-------------
+   If the Control-Client agrees to monitor DSCP and ECN on some or
+   all test sessions invoked with this control connection, it MUST
+   set the DSCP and ECN Monitoring flag
+
+Corrected Text
+--------------
+   If the Control-Client agrees to monitor DSCP and ECN on the test
+   sessions invoked with this control connection, it MUST set the
+   DSCP and ECN Monitoring flag in the Modes field in the Setup
+   Response message; the Session-Reflector then uses the formats of
+   Section 2.2.1 for all test sessions of that control connection.
+
+Notes
+-----
+   TWAMP Light (2.2.3) relies on configuration for the same choice.
+```
+
 ### RFC 7820: UDP Checksum Complement in the One-Way Active Measurement Protocol (OWAMP) and Two-Way Active Measurement Protocol (TWAMP) {#ra_rfc7820}
 
-Depth: deep (TWAMP set: section 3 read). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Experimental.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -12955,7 +15407,7 @@ Depth: deep (TWAMP set: section 3 read). Errata: none (the RFC has no errata).
 
 ### RFC 8029: Detecting Multiprotocol Label Switched (MPLS) Data-Plane Failures {#ra_rfc8029}
 
-Depth: deep. Errata: 6 errata: 2 verified, 3 held, 1 rejected. Obsoletes: RFC 4379, RFC 6424, RFC 6829, RFC 7537. Updates: RFC 1122.
+Depth: deep. Errata: 6 errata: 2 verified, 3 held, 1 rejected. Status: Proposed Standard. Obsoletes: RFC 4379, RFC 6424, RFC 6829, RFC 7537. Updates: RFC 1122. Updated by: RFC 8611, RFC 9041, RFC 9570.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -13045,13 +15497,13 @@ Notes
 
 ### RFC 8186: Support of the IEEE 1588 Timestamp Format in a Two-Way Active Measurement Protocol (TWAMP) {#ra_rfc8186}
 
-Depth: deep. Errata: 1 errata: 1 held. 
+Depth: deep. Errata: 1 errata: 1 held. Status: Proposed Standard.
 
 Nothing notable found at this depth.
 
 ### RFC 8287: Label Switched Path (LSP) Ping/Traceroute for Segment Routing (SR) IGP-Prefix and IGP-Adjacency Segment Identifiers (SIDs) with MPLS Data Pl {#ra_rfc8287}
 
-Depth: deep. Errata: 3 errata: 1 verified, 1 held, 1 rejected. 
+Depth: deep. Errata: 3 errata: 1 verified, 1 held, 1 rejected. Status: Proposed Standard. Updated by: RFC 8690, RFC 9214.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -13082,7 +15534,7 @@ Notes
 
 ### RFC 8545: Well-Known Port Assignments for the One-Way Active Measurement Protocol (OWAMP) and the Two-Way Active Measurement Protocol (TWAMP) {#ra_rfc8545}
 
-Depth: deep (Sections 1 to 5.1). Errata: none (the RFC has no errata). Updates: RFC 4656, RFC 5357.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 4656, RFC 5357.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -13117,7 +15569,7 @@ Notes
 
 ### RFC 8690: Clarification of Segment ID Sub-TLV Length for RFC 8287 {#ra_rfc8690}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 8287.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 8287.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -13149,7 +15601,7 @@ Notes
 
 ### RFC 8762: Simple Two-Way Active Measurement Protocol {#ra_rfc8762}
 
-Depth: deep. Errata: 1 errata: 1 rejected. 
+Depth: deep. Errata: 1 errata: 1 rejected. Status: Proposed Standard. Updated by: RFC 8972.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -13180,7 +15632,7 @@ Notes
 
 ### RFC 8972: Simple Two-Way Active Measurement Protocol Optional Extensions {#ra_rfc8972}
 
-Depth: deep. Errata: 4 errata: 4 verified. Updates: RFC 8762.
+Depth: deep. Errata: 4 errata: 4 verified. Status: Proposed Standard. Updates: RFC 8762.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -13236,7 +15688,7 @@ Notes
 
 ### RFC 9041: Updating the MPLS Label Switched Paths (LSPs) Ping Parameters IANA Registry {#ra_rfc9041}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 8029, RFC 8611.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 8029, RFC 8611.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -13320,7 +15772,7 @@ Notes
 
 ### RFC 9570: Deprecating the Use of Router Alert in LSP Ping {#ra_rfc9570}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 8029.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 8029.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -13402,20 +15854,20 @@ Notes
 
 ## IP, ICMP, neighbour discovery, transport and security {#ra_ip}
 
-93 RFCs in this area (93 deep); 253 findings, 102 of them proposed errata.
+95 RFCs in this area (95 deep); 264 findings, 110 of them proposed errata.
 
 ### RFC 768: User Datagram Protocol {#ra_rfc768}
 
-Depth: deep (whole text). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Internet Standard (STD 6). Updated by: RFC 9868.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
-| RA-0807 | Fields | "Length  is the length  in octets  of this user datagram  including  this header  and the data." | The document does not say what a receiver does when the Length field disagrees with the length of the IP payload (Length below 8, Length greater than the IP payload, or Length smaller than the IP payload with trailing octets). Whether trailing octets are ignored, whether the checksum covers them, and whether the datagram is discarded is left to the implementation (later clarified in part by RFC 1122 4.1.3.4 and RFC 8085). | ambiguity | none: RFC has no errata |
+| RA-0807 | Fields | "Length  is the length  in octets  of this user datagram  including  this header  and the data." | The document does not say what a receiver does when the Length field disagrees with the length of the IP payload (Length below 8, Length greater than the IP payload, or Length smaller than the IP payload with trailing octets). Whether trailing octets are ignored, whether the checksum covers them, and whether the datagram is discarded is left to the implementation (later clarified in part by RFC 1122 4.1.3.4 and RFC 8085). Later RFCs: RFC 9868 Section 10 (updates RFC 768) settles the main cases: the UDP Length must be at least 8 and at most the IP payload, other values are silently dropped, and octets beyond the UDP Length form the options area (Sections 7, 17 and 21). The scope of the drop rule is unclear. | ambiguity | none: RFC has no errata |
 | RA-0808 | Protocol Application | "The major uses of this protocol is the Internet Name Server [3], and the Trivial File Transfer [4]." | Subject-verb agreement ("uses ... is"). References [1], [2], [5] cite the superseded RFC 760, 761 and 762. No technical effect. | editorial | none: RFC has no errata |
 
 ### RFC 791: INTERNET PROTOCOL {#ra_rfc791}
 
-Depth: deep. Errata: 22 errata: 9 verified, 1 reported, 8 held, 4 rejected. 
+Depth: deep. Errata: 22 errata: 9 verified, 1 reported, 8 held, 4 rejected. Status: Internet Standard (STD 5). Obsoletes: RFC 760. Updated by: RFC 1349, RFC 2474, RFC 6864.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -13427,7 +15879,7 @@ Depth: deep. Errata: 22 errata: 9 verified, 1 reported, 8 held, 4 rejected.
 
 ### RFC 792: Internet Control Message Protocol {#ra_rfc792}
 
-Depth: deep (message formats). Errata: 7 errata: 3 verified, 4 held. 
+Depth: deep. Errata: 7 errata: 3 verified, 4 held. Status: Internet Standard (STD 5). Obsoletes: RFC 777. Updated by: RFC 950, RFC 4884, RFC 6633, RFC 6918.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -13455,7 +15907,7 @@ Notes
 
 ### RFC 826: An Ethernet Address Resolution Protocol -- or -- Converting Network Protocol Addresses to 48.bit Ethernet Address for Transmission on Ethern {#ra_rfc826}
 
-Depth: deep (packet reception algorithm and formats). Errata: 4 errata: 1 verified, 2 reported, 1 rejected. 
+Depth: deep. Errata: 4 errata: 1 verified, 2 reported, 1 rejected. Status: Internet Standard (STD 37). Updated by: RFC 5227, RFC 5494.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -13464,7 +15916,7 @@ Depth: deep (packet reception algorithm and formats). Errata: 4 errata: 1 verifi
 
 ### RFC 1042: A Standard for the Transmission of IP Datagrams over IEEE 802 Networks {#ra_rfc1042}
 
-Depth: deep (normative statements). Errata: 3 errata: 1 verified, 2 held. 
+Depth: deep. Errata: 3 errata: 1 verified, 2 held. Status: Internet Standard (STD 43). Obsoletes: RFC 948.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -13517,7 +15969,7 @@ Notes
 
 ### RFC 1071: Computing the Internet Checksum {#ra_rfc1071}
 
-Depth: deep (Sections 1 to 4; the IEN 45 reprint skimmed). Errata: 4 errata: 3 verified, 1 held. 
+Depth: deep. Errata: 4 errata: 3 verified, 1 held. Status: Informational. Updated by: RFC 1141.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -13567,14 +16019,14 @@ Notes
 
 ### RFC 1122: Requirements for Internet Hosts -- Communication Layers {#ra_rfc1122}
 
-Depth: deep. Errata: 13 errata: 6 verified, 6 held, 1 rejected. 
+Depth: deep. Errata: 13 errata: 6 verified, 6 held, 1 rejected. Status: Internet Standard (STD 3). Updates: RFC 793. Updated by: RFC 1349, RFC 4379, RFC 5884, RFC 6093, RFC 6298, RFC 6633, RFC 6864, RFC 8029, RFC 9293.
 
-Resolved by a later RFC (kept for reference; not counted as open findings):
+Resolved by a later RFC or re-targeted to its successor (kept for reference; not counted as open findings):
 
-| ID | Section | Issue as found | Resolution |
-|---|---|---|---|
-| RA-0828 | 4.2.5, 4.2.3.2 | TCP summary: delayed-ACK rule marked MUST (text SHOULD); two rows cite nonexistent 4.2.3.14. | RFC 9293 (which obsoletes the TCP material of RFC 1122): the delayed-ACK rule is a SHOULD in both Section 3.8.6.3 and the Appendix B summary, and the summary cites existing sections. |
-| RA-0831 | 4.2.2.6 | TCPhdrsize includes TCP options, so whether the MSS a peer advertises already allows for options (and whether the advertised value should be reduced for options) is read both ways; | RFC 9293 Section 3.7.1 (which obsoletes the TCP material of RFC 1122) and RFC 6691 Section 2: the MSS option value ignores IP and TCP options, and the sender reduces the data length for the options it sends. |
+| ID | Section | Issue as found | Outcome | Resolution |
+|---|---|---|---|---|
+| RA-0828 | 4.2.5, 4.2.3.2 | TCP summary: delayed-ACK rule marked MUST (text SHOULD); two rows cite nonexistent 4.2.3.14. | Resolved | RFC 9293 (which obsoletes the TCP material of RFC 1122): the delayed-ACK rule is a SHOULD in both Section 3.8.6.3 and the Appendix B summary, and the summary cites existing sections. |
+| RA-0831 | 4.2.2.6 | TCPhdrsize includes TCP options, so whether the MSS a peer advertises already allows for options (and whether the advertised value should be reduced for options) is read both ways; | Resolved | RFC 9293 Section 3.7.1 (which obsoletes the TCP material of RFC 1122) and RFC 6691 Section 2: the MSS option value ignores IP and TCP options, and the sender reduces the data length for the options it sends. |
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -13624,13 +16076,13 @@ Notes
 
 ### RFC 1141: Incremental Updating of the Internet Checksum {#ra_rfc1141}
 
-Depth: deep. Errata: 2 errata: 2 held. 
+Depth: deep. Errata: 2 errata: 2 held. Status: Informational. Updates: RFC 1071. Updated by: RFC 1624.
 
-Resolved by a later RFC (kept for reference; not counted as open findings):
+Resolved by a later RFC or re-targeted to its successor (kept for reference; not counted as open findings):
 
-| ID | Section | Issue as found | Resolution |
-|---|---|---|---|
-| RA-1272 | Description | The incremental update equation gives -0 (0xFFFF) instead of +0; corrected by RFC 1624 Eqn. 3. | RFC 1624 Section 3 (updates RFC 1141) gives the corrected incremental update (Eqn. 3), which avoids the 0x0000 / 0xFFFF error. |
+| ID | Section | Issue as found | Outcome | Resolution |
+|---|---|---|---|---|
+| RA-1272 | Description | The incremental update equation gives -0 (0xFFFF) instead of +0; corrected by RFC 1624 Eqn. 3. | Resolved | RFC 1624 Section 3 (updates RFC 1141) gives the corrected incremental update (Eqn. 3), which avoids the 0x0000 / 0xFFFF error. |
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -13656,7 +16108,7 @@ Notes
 
 ### RFC 1191: Path MTU Discovery {#ra_rfc1191}
 
-Depth: deep (normative statements of 3 to 6). Errata: 1 errata: 1 verified. 
+Depth: deep. Errata: 1 errata: 1 verified. Status: Draft Standard. Obsoletes: RFC 1063.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -13683,7 +16135,7 @@ Notes
 
 ### RFC 1321: The MD5 Message-Digest Algorithm {#ra_rfc1321}
 
-Depth: deep. Errata: 7 errata: 5 verified, 1 held, 1 rejected. 
+Depth: deep. Errata: 7 errata: 5 verified, 1 held, 1 rejected. Status: Informational. Updated by: RFC 6151.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -13693,7 +16145,7 @@ Depth: deep. Errata: 7 errata: 5 verified, 1 held, 1 rejected.
 
 ### RFC 1624: Computation of the Internet Checksum via Incremental Update {#ra_rfc1624}
 
-Depth: deep. Errata: 3 errata: 3 held. Updates: RFC 1141.
+Depth: deep. Errata: 3 errata: 3 held. Status: Informational. Updates: RFC 1141.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -13717,7 +16169,7 @@ Notes
 
 ### RFC 1812: Requirements for IP Version 4 Routers {#ra_rfc1812}
 
-Depth: deep. Errata: 5 errata: 3 verified, 2 held. Obsoletes: RFC 1716, RFC 1009.
+Depth: deep. Errata: 5 errata: 3 verified, 2 held. Status: Proposed Standard. Obsoletes: RFC 1009, RFC 1716. Updated by: RFC 2644, RFC 6633.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -13891,13 +16343,13 @@ Notes
 
 ### RFC 1858: Security Considerations for IP Fragment Filtering {#ra_rfc1858}
 
-Depth: deep (only (fragment filtering, informational). Errata: 1 errata: 1 verified. 
+Depth: deep. Errata: 1 errata: 1 verified. Status: Informational. Updated by: RFC 3128.
 
-Resolved by a later RFC (kept for reference; not counted as open findings):
+Resolved by a later RFC or re-targeted to its successor (kept for reference; not counted as open findings):
 
-| ID | Section | Issue as found | Resolution |
-|---|---|---|---|
-| RA-0837 | 3.2.1, 4.2 | Security gap: The document presents "IF FO=1 and PROTOCOL=TCP then DROP PACKET" as the general algorithm and calls the direct TMIN test on zero-offset fragments unnecessary. | RFC 3128 Section 3 (updates RFC 1858) requires the test on zero-offset fragments (transport length below the minimum) in addition to dropping fragments with offset 1. |
+| ID | Section | Issue as found | Outcome | Resolution |
+|---|---|---|---|---|
+| RA-0837 | 3.2.1, 4.2 | Security gap: The document presents "IF FO=1 and PROTOCOL=TCP then DROP PACKET" as the general algorithm and calls the direct TMIN test on zero-offset fragments unnecessary. | Resolved | RFC 3128 Section 3 (updates RFC 1858) requires the test on zero-offset fragments (transport length below the minimum) in addition to dropping fragments with offset 1. |
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -13905,7 +16357,7 @@ Resolved by a later RFC (kept for reference; not counted as open findings):
 
 ### RFC 1982: Serial Number Arithmetic {#ra_rfc1982}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 1034, RFC 1035.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 1034, RFC 1035.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -13913,7 +16365,7 @@ Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 1034, RFC 1035.
 
 ### RFC 2104: HMAC: Keyed-Hashing for Message Authentication {#ra_rfc2104}
 
-Depth: deep (algorithm definition, Sections 2 and 3). Errata: 7 errata: 1 verified, 3 held, 3 rejected. 
+Depth: deep. Errata: 7 errata: 1 verified, 3 held, 3 rejected. Status: Informational. Updated by: RFC 6151.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -13921,13 +16373,13 @@ Depth: deep (algorithm definition, Sections 2 and 3). Errata: 7 errata: 1 verifi
 
 ### RFC 2113: IP Router Alert Option {#ra_rfc2113}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 5350, RFC 6398.
 
 Nothing notable found at this depth.
 
 ### RFC 2202: Test Cases for HMAC-MD5 and HMAC-SHA-1 {#ra_rfc2202}
 
-Depth: deep (only (HMAC test vectors). Errata: 3 errata: 2 verified, 1 held. 
+Depth: deep. Errata: 3 errata: 2 verified, 1 held. Status: Informational.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -13955,18 +16407,18 @@ Notes
 
 ### RFC 2253: Lightweight Directory Access Protocol (v3): UTF-8 String Representation of Distinguished Names {#ra_rfc2253}
 
-Depth: deep (only (LDAP DN strings, background). Errata: 1 errata: 1 held. Obsoletes: RFC 1779.
+Depth: deep. Errata: 1 errata: 1 held. Status: Proposed Standard. Obsoletes: RFC 1779. Obsoleted by: RFC 4510, RFC 4514. Updated by: RFC 3377.
 
-Resolved by a later RFC (kept for reference; not counted as open findings):
+Resolved by a later RFC or re-targeted to its successor (kept for reference; not counted as open findings):
 
-| ID | Section | Issue as found | Resolution |
-|---|---|---|---|
-| RA-0843 | 3 | Grammar rejects one-letter attribute type names used in the document's own examples. | RFC 4514 (obsoletes RFC 2253), Section 3 and Appendix B: the attribute type uses <descr> from RFC 4512, which allows short names of length 1. |
-| RA-0844 | 2.4, 3 | Section 2.4 lets a generator emit "=" anywhere and "#" anywhere except at the start of a value without escaping, but the grammar's stringchar excludes every "special", including "=" and "#", so such output is not parseable by a strict parser built from Section 3. | RFC 4514 (obsoletes RFC 2253): the string grammar admits '=' and '#' inside a value, only a leading '#' is escaped (Section 2.4), and the LDAPv2-only forms are removed. |
+| ID | Section | Issue as found | Outcome | Resolution |
+|---|---|---|---|---|
+| RA-0843 | 3 | Grammar rejects one-letter attribute type names used in the document's own examples. | Resolved | RFC 4514 (obsoletes RFC 2253), Section 3 and Appendix B: the attribute type uses <descr> from RFC 4512, which allows short names of length 1. |
+| RA-0844 | 2.4, 3 | Section 2.4 lets a generator emit "=" anywhere and "#" anywhere except at the start of a value without escaping, but the grammar's stringchar excludes every "special", including "=" and "#", so such output is not parseable by a strict parser built from Section 3. | Resolved | RFC 4514 (obsoletes RFC 2253): the string grammar admits '=' and '#' inside a value, only a leading '#' is escaped (Section 2.4), and the LDAPv2-only forms are removed. |
 
 ### RFC 2464: Transmission of IPv6 Packets over Ethernet Networks {#ra_rfc2464}
 
-Depth: deep. Errata: 2 errata: 1 verified, 1 rejected. Obsoletes: RFC 1972.
+Depth: deep. Errata: 2 errata: 1 verified, 1 rejected. Status: Proposed Standard. Obsoletes: RFC 1972. Updated by: RFC 6085, RFC 8064.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -13975,7 +16427,7 @@ Depth: deep. Errata: 2 errata: 1 verified, 1 rejected. Obsoletes: RFC 1972.
 
 ### RFC 2644: Changing the Default for Directed Broadcasts in Routers {#ra_rfc2644}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 1812.
+Depth: deep. Errata: none (the RFC has no errata). Status: Best Current Practice (BCP 34). Updates: RFC 1812.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14008,7 +16460,7 @@ Notes
 
 ### RFC 2711: IPv6 Router Alert Option {#ra_rfc2711}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updated by: RFC 6398, RFC 9805.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14016,7 +16468,7 @@ Depth: deep. Errata: none (the RFC has no errata).
 
 ### RFC 2863: The Interfaces Group MIB {#ra_rfc2863}
 
-Depth: deep (only (Interfaces MIB, background). Errata: 1 errata: 1 verified. Obsoletes: RFC 2233.
+Depth: deep. Errata: 1 errata: 1 verified. Status: Draft Standard. Obsoletes: RFC 2233. Updated by: RFC 8892.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14045,7 +16497,7 @@ Notes
 
 ### RFC 3021: Using 31-Bit Prefixes on IPv4 Point-to-Point Links {#ra_rfc3021}
 
-Depth: deep. Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14054,7 +16506,7 @@ Depth: deep. Errata: none (the RFC has no errata).
 
 ### RFC 3128: Protection Against a Variant of the Tiny Fragment Attack {#ra_rfc3128}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 1858.
+Depth: deep. Errata: none (the RFC has no errata). Status: Informational. Updates: RFC 1858.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14081,13 +16533,13 @@ Notes
 
 ### RFC 3174: US Secure Hash Algorithm 1 (SHA1) {#ra_rfc3174}
 
-Depth: deep (only (SHA-1, background). Errata: 2 errata: 2 verified. 
+Depth: deep. Errata: 2 errata: 2 verified. Status: Informational. Updated by: RFC 4634, RFC 6234.
 
-Resolved by a later RFC (kept for reference; not counted as open findings):
+Resolved by a later RFC or re-targeted to its successor (kept for reference; not counted as open findings):
 
-| ID | Section | Issue as found | Resolution |
-|---|---|---|---|
-| RA-0854 | 7.2 | The value 1 equals shaNull in the enumeration of sha1.h, so the reported error is wrong. The shift needs a (uint32_t) cast on each byte. | RFC 6234 (updates RFC 3174) replaces the sample code (Section 8). |
+| ID | Section | Issue as found | Outcome | Resolution |
+|---|---|---|---|---|
+| RA-0854 | 7.2 | The value 1 equals shaNull in the enumeration of sha1.h, so the reported error is wrong. The shift needs a (uint32_t) cast on each byte. | Resolved | RFC 6234 (updates RFC 3174) replaces the sample code (Section 8). |
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14116,7 +16568,7 @@ Notes
 
 ### RFC 3339: Date and Time on the Internet: Timestamps {#ra_rfc3339}
 
-Depth: deep (date-time ABNF). Errata: 7 errata: 4 verified, 3 held. 
+Depth: deep. Errata: 7 errata: 4 verified, 3 held. Status: Proposed Standard. Updated by: RFC 9557.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14125,7 +16577,7 @@ Depth: deep (date-time ABNF). Errata: 7 errata: 4 verified, 3 held.
 
 ### RFC 3629: UTF-8, a transformation format of ISO 10646 {#ra_rfc3629}
 
-Depth: deep (UTF-8 definition). Errata: none (the RFC has no errata). Obsoletes: RFC 2279.
+Depth: deep. Errata: none (the RFC has no errata). Status: Internet Standard (STD 63). Obsoletes: RFC 2279.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14133,7 +16585,7 @@ Depth: deep (UTF-8 definition). Errata: none (the RFC has no errata). Obsoletes:
 
 ### RFC 3971: SEcure Neighbor Discovery (SEND) {#ra_rfc3971}
 
-Depth: deep (only (SEND, background). Errata: 13 errata: 4 verified, 8 held, 1 rejected. 
+Depth: deep. Errata: 13 errata: 4 verified, 8 held, 1 rejected. Status: Proposed Standard. Updated by: RFC 6494, RFC 6495, RFC 6980.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14165,13 +16617,13 @@ Notes
 
 ### RFC 4231: Identifiers and Test Vectors for HMAC-SHA-224, HMAC-SHA-256, HMAC-SHA-384, and HMAC-SHA-512 {#ra_rfc4231}
 
-Depth: deep (only (HMAC-SHA-2 test vectors). Errata: 1 errata: 1 held. 
+Depth: deep. Errata: 1 errata: 1 held. Status: Proposed Standard.
 
 Nothing notable found at this depth.
 
 ### RFC 4291: IP Version 6 Addressing Architecture {#ra_rfc4291}
 
-Depth: deep (normative statements). Errata: 13 errata: 2 verified, 2 reported, 2 held, 7 rejected. Obsoletes: RFC 3513.
+Depth: deep. Errata: 13 errata: 2 verified, 2 reported, 2 held, 7 rejected. Status: Draft Standard. Obsoletes: RFC 3513. Updated by: RFC 5952, RFC 6052, RFC 7136, RFC 7346, RFC 7371, RFC 8064.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14179,7 +16631,7 @@ Depth: deep (normative statements). Errata: 13 errata: 2 verified, 2 reported, 2
 
 ### RFC 4443: Internet Control Message Protocol (ICMPv6) for the Internet Protocol Version 6 (IPv6) Specification {#ra_rfc4443}
 
-Depth: deep. Errata: 6 errata: 4 held, 2 rejected. Obsoletes: RFC 2463. Updates: RFC 2780.
+Depth: deep. Errata: 6 errata: 4 held, 2 rejected. Status: Internet Standard (STD 89). Obsoletes: RFC 2463. Updates: RFC 2780. Updated by: RFC 4884.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14217,7 +16669,7 @@ Notes
 
 ### RFC 4514: Lightweight Directory Access Protocol (LDAP): String Representation of Distinguished Names {#ra_rfc4514}
 
-Depth: deep. Errata: 2 errata: 1 verified, 1 held. Obsoletes: RFC 2253.
+Depth: deep. Errata: 2 errata: 1 verified, 1 held. Status: Proposed Standard. Obsoletes: RFC 2253.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14274,7 +16726,7 @@ Notes
 
 ### RFC 4648: The Base16, Base32, and Base64 Data Encodings {#ra_rfc4648}
 
-Depth: deep (Base16/32/64). Errata: 6 errata: 4 verified, 2 reported. Obsoletes: RFC 3548.
+Depth: deep. Errata: 6 errata: 4 verified, 2 reported. Status: Proposed Standard. Obsoletes: RFC 3548.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14305,7 +16757,7 @@ Notes
 
 ### RFC 4861: Neighbor Discovery for IP version 6 (IPv6) {#ra_rfc4861}
 
-Depth: deep. Errata: 15 errata: 5 verified, 9 held, 1 rejected. Obsoletes: RFC 2461.
+Depth: deep. Errata: 15 errata: 5 verified, 9 held, 1 rejected. Status: Draft Standard. Obsoletes: RFC 2461. Updated by: RFC 5942, RFC 6980, RFC 7048, RFC 7527, RFC 7559, RFC 8028, RFC 8319, RFC 8425, RFC 9131, RFC 9685, RFC 9762, RFC 9926.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14405,7 +16857,7 @@ Notes
 
 ### RFC 4862: IPv6 Stateless Address Autoconfiguration {#ra_rfc4862}
 
-Depth: deep. Errata: 3 errata: 3 held. Obsoletes: RFC 2462.
+Depth: deep. Errata: 3 errata: 3 held. Status: Draft Standard. Obsoletes: RFC 2462. Updated by: RFC 7527, RFC 9762.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14435,7 +16887,7 @@ Notes
 
 ### RFC 4868: Using HMAC-SHA-256, HMAC-SHA-384, and HMAC-SHA-512 with IPsec {#ra_rfc4868}
 
-Depth: deep (only (HMAC-SHA-2 for IPsec, background). Errata: 2 errata: 1 verified, 1 held. 
+Depth: deep. Errata: 2 errata: 1 verified, 1 held. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14444,7 +16896,7 @@ Depth: deep (only (HMAC-SHA-2 for IPsec, background). Errata: 2 errata: 1 verifi
 
 ### RFC 4884: Extended ICMP to Support Multi-Part Messages {#ra_rfc4884}
 
-Depth: deep. Errata: 1 errata: 1 verified. Updates: RFC 792, RFC 4443.
+Depth: deep. Errata: 1 errata: 1 verified. Status: Proposed Standard. Updates: RFC 792, RFC 4443. Updated by: RFC 8335.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14452,7 +16904,7 @@ Depth: deep. Errata: 1 errata: 1 verified. Updates: RFC 792, RFC 4443.
 
 ### RFC 5082: The Generalized TTL Security Mechanism (GTSM) {#ra_rfc5082}
 
-Depth: deep. Errata: none (the RFC has no errata). Obsoletes: RFC 3682.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Obsoletes: RFC 3682.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14460,7 +16912,7 @@ Depth: deep. Errata: none (the RFC has no errata). Obsoletes: RFC 3682.
 
 ### RFC 5116: An Interface and Algorithms for Authenticated Encryption {#ra_rfc5116}
 
-Depth: deep (only (AEAD interface, background). Errata: 6 errata: 2 verified, 4 reported. 
+Depth: deep. Errata: 6 errata: 2 verified, 4 reported. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14469,7 +16921,7 @@ Depth: deep (only (AEAD interface, background). Errata: 6 errata: 2 verified, 4 
 
 ### RFC 5227: IPv4 Address Conflict Detection {#ra_rfc5227}
 
-Depth: deep (normative statements of 1 to 5). Errata: 1 errata: 1 rejected. Updates: RFC 826.
+Depth: deep. Errata: 1 errata: 1 rejected. Status: Proposed Standard. Updates: RFC 826.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14502,7 +16954,7 @@ Notes
 
 ### RFC 5246: The Transport Layer Security (TLS) Protocol Version 1.2 {#ra_rfc5246}
 
-Depth: deep (only (TLS 1.2, background). Errata: 22 errata: 10 verified, 5 held, 7 rejected. Obsoletes: RFC 3268, RFC 4346, RFC 4366. Updates: RFC 4492.
+Depth: deep. Errata: 22 errata: 10 verified, 5 held, 7 rejected. Status: Proposed Standard. Obsoletes: RFC 3268, RFC 4346, RFC 4366. Obsoleted by: RFC 8446, RFC 9846. Updates: RFC 4492. Updated by: RFC 5746, RFC 5878, RFC 6176, RFC 7465, RFC 7507, RFC 7568, RFC 7627, RFC 7685, RFC 7905, RFC 7919, RFC 8447, RFC 9155, RFC 10015.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14514,7 +16966,7 @@ Depth: deep (only (TLS 1.2, background). Errata: 22 errata: 10 verified, 5 held,
 
 ### RFC 5280: Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile {#ra_rfc5280}
 
-Depth: deep (only (X.509 profile, background). Errata: 24 errata: 6 verified, 1 reported, 11 held, 6 rejected. Obsoletes: RFC 3280, RFC 4325, RFC 4630.
+Depth: deep. Errata: 24 errata: 6 verified, 1 reported, 11 held, 6 rejected. Status: Proposed Standard. Obsoletes: RFC 3280, RFC 4325, RFC 4630. Updated by: RFC 6818, RFC 8398, RFC 8399, RFC 9549, RFC 9598, RFC 9608, RFC 9618, RFC 9925, RFC 10007.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14564,7 +17016,7 @@ Notes
 
 ### RFC 5424: The Syslog Protocol {#ra_rfc5424}
 
-Depth: deep (syslog format, normative statements). Errata: 5 errata: 4 reported, 1 held. Obsoletes: RFC 3164.
+Depth: deep. Errata: 5 errata: 4 reported, 1 held. Status: Proposed Standard. Obsoletes: RFC 3164.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14654,7 +17106,7 @@ Notes
 
 ### RFC 5480: Elliptic Curve Cryptography Subject Public Key Information {#ra_rfc5480}
 
-Depth: deep. Errata: 5 errata: 2 verified, 3 held. Updates: RFC 3279.
+Depth: deep. Errata: 5 errata: 2 verified, 3 held. Status: Proposed Standard. Updates: RFC 3279. Updated by: RFC 8813.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14663,7 +17115,7 @@ Depth: deep. Errata: 5 errata: 2 verified, 3 held. Updates: RFC 3279.
 
 ### RFC 5758: Internet X.509 Public Key Infrastructure: Additional Algorithms and Identifiers for DSA and ECDSA {#ra_rfc5758}
 
-Depth: deep. Errata: 1 errata: 1 held. Updates: RFC 3279.
+Depth: deep. Errata: 1 errata: 1 held. Status: Proposed Standard. Updates: RFC 3279.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14691,7 +17143,7 @@ Notes
 
 ### RFC 5869: HMAC-based Extract-and-Expand Key Derivation Function (HKDF) {#ra_rfc5869}
 
-Depth: deep. Errata: 1 errata: 1 reported. 
+Depth: deep. Errata: 1 errata: 1 reported. Status: Informational.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14719,7 +17171,7 @@ Notes
 
 ### RFC 5925: The TCP Authentication Option {#ra_rfc5925}
 
-Depth: deep. Errata: 8 errata: 4 verified, 1 reported, 1 held, 2 rejected. Obsoletes: RFC 2385.
+Depth: deep. Errata: 8 errata: 4 verified, 1 reported, 1 held, 2 rejected. Status: Proposed Standard. Obsoletes: RFC 2385.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14758,11 +17210,14 @@ Notes
 
 ### RFC 5926: Cryptographic Algorithms for the TCP Authentication Option (TCP-AO) {#ra_rfc5926}
 
-Depth: deep (2, 3 in full). Errata: 2 errata: 1 held, 1 rejected. 
+Depth: deep. Errata: 2 errata: 1 held, 1 rejected. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
 | RA-0420 | 3.1.1 | "Output_Length:  The length, in bits, of the key that the KDF will produce.  The Output_length is represented within two octets." | The byte order of the counter-mode input fields is not stated (Output_Length as two octets, implicitly network order), and the Figure 1 pseudo-code lists "len (length of M in octets)" although no M is defined (the input is I). The worked example also writes KDF_alg(Master_Key, 1 \|\| ...) where the PRF is meant, so the KDF appears to call itself. | ambiguity | none: RFC has 2 errata, none on this point; **proposed erratum below** |
+| RA-1473 | 3.2, 3.2.1, 3.2.2 | "The MAC output is then truncated to 96 bits to provide a reasonable trade-off between security and message size" | Neither Section 3.2 nor the MAC_Length definitions say which 96 bits of the 160-bit HMAC-SHA-1 or 128-bit AES-CMAC output are kept. RFC 2104 Section 5 (HMAC-t) and NIST SP 800-38B both keep the leftmost (most significant) bits, but the document defines its own "-96" algorithms without referring to either truncation rule, and RFC 5925 5.1 only says the outputs "are each truncated to 96 bits". Two implementations keeping different halves do not interoperate. | ambiguity | none: RFC has 2 errata, none on this point; **proposed erratum below** |
+| RA-1474 | 3.1.1, 3.1.1.2, 7 | "*  KDF_AES_128_CMAC  based on AES-CMAC-PRF-128 [NIST-SP800-38B][FIPS197] / To handle variable length Master_Keys, we use the same mechanism as described in [RFC4615], Section 3." | AES-CMAC-PRF-128 and its variable-length key step are defined in RFC 4615, which Section 3.1.1.2 uses as the definition of the key-extraction step, yet RFC 4615 is listed only as an informative reference and Section 3.1.1 attributes AES-CMAC-PRF-128 to SP 800-38B, which defines CMAC but not the PRF or the key extraction. Figure 1 restates the procedure, so it can be implemented, but the reference that defines it is classed informative. | editorial | none: RFC has 2 errata, none on this point; **proposed erratum below** |
+| RA-1475 | 3.1.1.3, 5, 2.2 | "UIs SHOULD refer to the choice of KDF_HMAC_SHA1 as simply "SHA1". / SHA1           \| [RFC5926]" | Section 2.2 lists MAC algorithms and KDFs separately and Section 3 says they are "always used in pairs" with each MAC naming its KDF, but the IANA registry ("Cryptographic Algorithms for TCP-AO") registers only the names "SHA1" and "AES128", which Section 3.1.1.3 assigns to the KDFs. Whether a registry entry names a KDF, a MAC, or the MAC/KDF pair (and so what a future entry must define) is not stated; RFC 5925 3.1 has the Master Key Tuple name a KDF and a MAC algorithm as separate parameters. | ambiguity | none: RFC has 2 errata, none on this point |
 
 Proposed erratum RA-0420 (RFC 5926, Section 3.1.1; type: Technical):
 
@@ -14782,9 +17237,50 @@ Notes
    (length of I in octets)".
 ```
 
+Proposed erratum RA-1473 (RFC 5926, Section 3.2, 3.2.1, 3.2.2; type: Technical):
+
+```
+Original Text
+-------------
+   The MAC output is then truncated to 96 bits to provide a
+   reasonable trade-off between security and message size, for
+   fitting into the TCP-AO option field.
+
+Corrected Text
+--------------
+   The MAC output is then truncated to its leftmost (most
+   significant) 96 bits, as in [RFC2104], Section 5, and
+   [NIST-SP800-38B], to provide a reasonable trade-off between
+   security and message size, for fitting into the TCP-AO option
+   field.
+
+Notes
+-----
+   Deployed implementations keep the first 96 bits (as HMAC-SHA1-96
+   in RFC 2404 does); the text should say so.
+```
+
+Proposed erratum RA-1474 (RFC 5926, Section 3.1.1, 3.1.1.2, 7; type: Editorial):
+
+```
+Original Text
+-------------
+   *  KDF_AES_128_CMAC  based on AES-CMAC-PRF-128
+   [NIST-SP800-38B][FIPS197]
+
+Corrected Text
+--------------
+   *  KDF_AES_128_CMAC  based on AES-CMAC-PRF-128
+   [RFC4615][NIST-SP800-38B][FIPS197]
+
+Notes
+-----
+   RFC 4615 should be a normative reference.
+```
+
 ### RFC 5952: A Recommendation for IPv6 Address Text Representation {#ra_rfc5952}
 
-Depth: deep. Errata: 12 errata: 1 verified, 4 held, 7 rejected. Updates: RFC 4291.
+Depth: deep. Errata: 12 errata: 1 verified, 4 held, 7 rejected. Status: Proposed Standard. Updates: RFC 4291.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14833,7 +17329,7 @@ Notes
 
 ### RFC 6040: Tunnelling of Explicit Congestion Notification {#ra_rfc6040}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 3168, RFC 4301, RFC 4774.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 3168, RFC 4301, RFC 4774. Updated by: RFC 9601.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14862,7 +17358,7 @@ Notes
 
 ### RFC 6066: Transport Layer Security (TLS) Extensions: Extension Definitions {#ra_rfc6066}
 
-Depth: deep. Errata: 3 errata: 2 verified, 1 reported. Obsoletes: RFC 4366.
+Depth: deep. Errata: 3 errata: 2 verified, 1 reported. Status: Proposed Standard. Obsoletes: RFC 4366. Updated by: RFC 8446, RFC 8449, RFC 9325, RFC 9846.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14915,19 +17411,19 @@ Notes
 
 ### RFC 6125: Representation and Verification of Domain-Based Application Service Identity within Internet Public Key Infrastructure Using X.509 (PKIX) Ce {#ra_rfc6125}
 
-Depth: deep. Errata: 5 errata: 1 verified, 3 reported, 1 held. 
+Depth: deep. Errata: 5 errata: 1 verified, 3 reported, 1 held. Status: Proposed Standard. Obsoleted by: RFC 9525.
 
-Resolved by a later RFC (kept for reference; not counted as open findings):
+Resolved by a later RFC or re-targeted to its successor (kept for reference; not counted as open findings):
 
-| ID | Section | Issue as found | Resolution |
-|---|---|---|---|
-| RA-0904 | 6.2.1, 1.8 | DNS-ID rule calls a configured name a "derived domain"; Section 1.8 calls it a "delegated domain". | RFC 9525 (obsoletes RFC 6125) no longer uses 'derived domain' or 'delegated domain'; its Section 6 rules replace this text. |
-| RA-0905 | 6.4.3, 7.2 | Partial-label wildcards may be matched, but the rules do not say whether '*' may match the empty string (does "baz*" match "baz"?), whether more than one '*' in a label is allowed, or whether a wildcard immediately above a public suffix ("*.com", "*.co.uk") may be matched. | RFC 9525 (obsoletes RFC 6125) allows the wildcard only as the complete left-most label (Section 6.3), so partial-label matching no longer arises. |
-| RA-0906 | 10.2 | Wrong recommendation number in the X.520 reference. | RFC 9525 (obsoletes RFC 6125) does not carry this reference. |
+| ID | Section | Issue as found | Outcome | Resolution |
+|---|---|---|---|---|
+| RA-0904 | 6.2.1, 1.8 | DNS-ID rule calls a configured name a "derived domain"; Section 1.8 calls it a "delegated domain". | Resolved | RFC 9525 (obsoletes RFC 6125) no longer uses 'derived domain' or 'delegated domain'; its Section 6 rules replace this text. |
+| RA-0905 | 6.4.3, 7.2 | Partial-label wildcards may be matched, but the rules do not say whether '*' may match the empty string (does "baz*" match "baz"?), whether more than one '*' in a label is allowed, or whether a wildcard immediately above a public suffix ("*.com", "*.co.uk") may be matched. | Resolved | RFC 9525 (obsoletes RFC 6125) allows the wildcard only as the complete left-most label (Section 6.3), so partial-label matching no longer arises. |
+| RA-0906 | 10.2 | Wrong recommendation number in the X.520 reference. | Resolved | RFC 9525 (obsoletes RFC 6125) does not carry this reference. |
 
 ### RFC 6234: US Secure Hash Algorithms (SHA and SHA-based HMAC and HKDF) {#ra_rfc6234}
 
-Depth: deep. Errata: 4 errata: 1 verified, 2 reported, 1 held. Obsoletes: RFC 4634. Updates: RFC 3174.
+Depth: deep. Errata: 4 errata: 1 verified, 2 reported, 1 held. Status: Informational. Obsoletes: RFC 4634. Updates: RFC 3174.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14974,7 +17470,7 @@ Notes
 
 ### RFC 6398: IP Router Alert Considerations and Usage {#ra_rfc6398}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 2113, RFC 2711.
+Depth: deep. Errata: none (the RFC has no errata). Status: Best Current Practice (BCP 168). Updates: RFC 2113, RFC 2711.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14982,7 +17478,7 @@ Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 2113, RFC 2711.
 
 ### RFC 6454: The Web Origin Concept {#ra_rfc6454}
 
-Depth: deep. Errata: 1 errata: 1 rejected. 
+Depth: deep. Errata: 1 errata: 1 rejected. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -14990,7 +17486,7 @@ Depth: deep. Errata: 1 errata: 1 rejected.
 
 ### RFC 6455: The WebSocket Protocol {#ra_rfc6455}
 
-Depth: deep. Errata: 18 errata: 3 verified, 6 reported, 4 held, 5 rejected. 
+Depth: deep. Errata: 18 errata: 3 verified, 6 reported, 4 held, 5 rejected. Status: Proposed Standard. Updated by: RFC 7936, RFC 8307, RFC 8441.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -15018,7 +17514,7 @@ Notes
 
 ### RFC 6583: Operational Neighbor Discovery Problems {#ra_rfc6583}
 
-Depth: deep (7 in full; Informational). Errata: none (the RFC has no errata). 
+Depth: deep. Errata: none (the RFC has no errata). Status: Informational.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -15043,7 +17539,7 @@ Notes
 
 ### RFC 6633: Deprecation of ICMP Source Quench Messages {#ra_rfc6633}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 792, RFC 1122, RFC 1812.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 792, RFC 1122, RFC 1812.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -15120,11 +17616,11 @@ Notes
 
 ### RFC 6691: TCP Options and Maximum Segment Size (MSS) {#ra_rfc6691}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 879, RFC 2385.
+Depth: deep. Errata: none (the RFC has no errata). Status: Informational. Obsoleted by: RFC 9293. Updates: RFC 879, RFC 2385.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
-| RA-1283 | Appendix A, 2, 4 | "implementations ignore the "greater than or" part of "SHOULD be greater than or equal to the MTU of the connected network(s)". Thus, the MSS value to be sent in an MSS option must be less than or equal to: EMTU_R - FixedIPhdrsize - FixedTCPhdrsize" | The paragraph first explains that EMTU_R (largest reassemblable datagram) would give 65495 and that implementations instead use the MTU of the connected network, then concludes with a bound expressed in EMTU_R again. Read with the RFC 1122 definition of EMTU_R the conclusion is the 65495 bound just argued against; read with "EMTU_R = MTU of the connected network" it matches Sections 2 and 4 ("effective MTU minus the fixed IP and TCP headers"). The appendix also speaks of "IP options" only; whether IPv6 extension headers that the sender always adds count as options (reduce the data, not the MSS) is not said (RFC 9293 3.7.1 later states it: "IPoptionsize is the size of any IPv4 options or IPv6 extension headers"). | ambiguity | none: RFC has no errata; **proposed erratum below** |
+| RA-1283 | Appendix A, 2, 4 | "implementations ignore the "greater than or" part of "SHOULD be greater than or equal to the MTU of the connected network(s)". Thus, the MSS value to be sent in an MSS option must be less than or equal to: EMTU_R - FixedIPhdrsize - FixedTCPhdrsize" | The paragraph first explains that EMTU_R (largest reassemblable datagram) would give 65495 and that implementations instead use the MTU of the connected network, then concludes with a bound expressed in EMTU_R again. Read with the RFC 1122 definition of EMTU_R the conclusion is the 65495 bound just argued against; read with "EMTU_R = MTU of the connected network" it matches Sections 2 and 4 ("effective MTU minus the fixed IP and TCP headers"). The appendix also speaks of "IP options" only; whether IPv6 extension headers that the sender always adds count as options (reduce the data, not the MSS) is not said (RFC 9293 3.7.1 later states it: "IPoptionsize is the size of any IPv4 options or IPv6 extension headers"). Later RFCs: RFC 9293 (obsoletes RFC 6691) drops the appendix, but Section 3.7.1 still bounds the option value by MMS_R - 20 with MMS_R defined from EMTU_R, so the same question remains. | ambiguity | none: RFC has no errata; **proposed erratum below** |
 
 Proposed erratum RA-1283 (RFC 6691, Section Appendix A, 2, 4; type: Technical):
 
@@ -15147,11 +17643,13 @@ Notes
    the value "should be equal to the effective MTU minus the fixed
    IP and TCP headers" and "must be less than or equal to MMS_R -
    20" (MUST-67).
+   Status note: RFC 6691 is obsoleted by RFC 9293; an erratum report
+   against it may be held or rejected for that reason.
 ```
 
 ### RFC 6818: Updates to the Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile {#ra_rfc6818}
 
-Depth: deep. Errata: 1 errata: 1 verified. Updates: RFC 5280.
+Depth: deep. Errata: 1 errata: 1 verified. Status: Proposed Standard. Updates: RFC 5280.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -15187,7 +17685,7 @@ Notes
 
 ### RFC 6890: Special-Purpose IP Address Registries {#ra_rfc6890}
 
-Depth: deep. Errata: 8 errata: 4 verified, 4 rejected. Obsoletes: RFC 4773, RFC 5156, RFC 5735, RFC 5736.
+Depth: deep. Errata: 8 errata: 4 verified, 4 rejected. Status: Best Current Practice (BCP 153). Obsoletes: RFC 4773, RFC 5156, RFC 5735, RFC 5736. Updated by: RFC 8190.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -15196,13 +17694,13 @@ Depth: deep. Errata: 8 errata: 4 verified, 4 rejected. Obsoletes: RFC 4773, RFC 
 
 ### RFC 6901: JavaScript Object Notation (JSON) Pointer {#ra_rfc6901}
 
-Depth: deep (JSON Pointer, 3 to 5). Errata: 3 errata: 2 reported, 1 rejected. 
+Depth: deep. Errata: 3 errata: 2 reported, 1 rejected. Status: Proposed Standard.
 
 Nothing notable found at this depth.
 
 ### RFC 6979: Deterministic Usage of the Digital Signature Algorithm (DSA) and Elliptic Curve Digital Signature Algorithm (ECDSA) {#ra_rfc6979}
 
-Depth: deep. Errata: 2 errata: 1 verified, 1 held. 
+Depth: deep. Errata: 2 errata: 1 verified, 1 held. Status: Informational.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -15210,7 +17708,7 @@ Depth: deep. Errata: 2 errata: 1 verified, 1 held.
 
 ### RFC 6980: Security Implications of IPv6 Fragmentation with IPv6 Neighbor Discovery {#ra_rfc6980}
 
-Depth: deep (short; libarp follows the MUST NOT on fragmented ND). Errata: none (the RFC has no errata). Updates: RFC 3971, RFC 4861.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 3971, RFC 4861.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -15218,7 +17716,7 @@ Depth: deep (short; libarp follows the MUST NOT on fragmented ND). Errata: none 
 
 ### RFC 7048: Neighbor Unreachability Detection Is Too Impatient {#ra_rfc7048}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 4861.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 4861.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -15262,7 +17760,7 @@ Notes
 
 ### RFC 7112: Implications of Oversized IPv6 Header Chains {#ra_rfc7112}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 2460.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 2460.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -15270,18 +17768,18 @@ Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 2460.
 
 ### RFC 7525: Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS) {#ra_rfc7525}
 
-Depth: deep. Errata: 3 errata: 2 verified, 1 rejected. 
+Depth: deep. Errata: 3 errata: 2 verified, 1 rejected. Status: Best Current Practice. Obsoleted by: RFC 9325. Updated by: RFC 8996.
 
-Resolved by a later RFC (kept for reference; not counted as open findings):
+Resolved by a later RFC or re-targeted to its successor (kept for reference; not counted as open findings):
 
-| ID | Section | Issue as found | Resolution |
-|---|---|---|---|
-| RA-0921 | 6.5 | Revocation list item 3 duplicates item 2. | RFC 9325 (obsoletes RFC 7525) replaces the revocation guidance (Section 7.5); the list is not carried over. |
-| RA-0922 | 4.4, 4.3, 3.4 | Count of issues and "as required by Section 4.2" wrong; 1024-bit DHE option conflicts with 4.3. | RFC 9325 (obsoletes RFC 7525) rewrites the Diffie-Hellman and cipher-suite guidance; the miscounted list and the 1024-bit option are not carried over. |
+| ID | Section | Issue as found | Outcome | Resolution |
+|---|---|---|---|---|
+| RA-0921 | 6.5 | Revocation list item 3 duplicates item 2. | Resolved | RFC 9325 (obsoletes RFC 7525) replaces the revocation guidance (Section 7.5); the list is not carried over. |
+| RA-0922 | 4.4, 4.3, 3.4 | Count of issues and "as required by Section 4.2" wrong; 1024-bit DHE option conflicts with 4.3. | Resolved | RFC 9325 (obsoletes RFC 7525) rewrites the Diffie-Hellman and cipher-suite guidance; the miscounted list and the 1024-bit option are not carried over. |
 
 ### RFC 7527: Enhanced Duplicate Address Detection {#ra_rfc7527}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 4429, RFC 4861, RFC 4862.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 4429, RFC 4861, RFC 4862.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -15392,7 +17890,7 @@ Notes
 
 ### RFC 7748: Elliptic Curves for Security {#ra_rfc7748}
 
-Depth: deep. Errata: 9 errata: 4 verified, 1 held, 4 rejected. 
+Depth: deep. Errata: 9 errata: 4 verified, 1 held, 4 rejected. Status: Informational.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -15402,7 +17900,7 @@ Depth: deep. Errata: 9 errata: 4 verified, 1 held, 4 rejected.
 
 ### RFC 8017: PKCS #1: RSA Cryptography Specifications Version 2.2 {#ra_rfc8017}
 
-Depth: deep (PKCS #1 v2.2; used through OpenSSL). Errata: 6 errata: 5 verified, 1 held. Obsoletes: RFC 3447.
+Depth: deep. Errata: 6 errata: 5 verified, 1 held. Status: Informational. Obsoletes: RFC 3447.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -15470,7 +17968,7 @@ Notes
 
 ### RFC 8032: Edwards-Curve Digital Signature Algorithm (EdDSA) {#ra_rfc8032}
 
-Depth: deep (EdDSA; used through OpenSSL). Errata: 11 errata: 6 verified, 4 held, 1 rejected. 
+Depth: deep. Errata: 11 errata: 6 verified, 4 held, 1 rejected. Status: Informational.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -15516,7 +18014,7 @@ Notes
 
 ### RFC 8064: Recommendation on Stable IPv6 Interface Identifiers {#ra_rfc8064}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 2464, RFC 2467, RFC 2470, RFC 2491, RFC 2492, RFC 2497, RFC 2590, RFC 3146, RFC 3572, RFC 4291, RFC 4338, RFC 4391, RFC 5072, RFC 5121.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 2464, RFC 2467, RFC 2470, RFC 2491, RFC 2492, RFC 2497, RFC 2590, RFC 3146, RFC 3572, RFC 4291, RFC 4338, RFC 4391, RFC 5072, RFC 5121.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -15556,7 +18054,7 @@ Notes
 
 ### RFC 8190: Updates to the Special-Purpose IP Address Registries {#ra_rfc8190}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 6890.
+Depth: deep. Errata: none (the RFC has no errata). Status: Best Current Practice (BCP 153). Updates: RFC 6890.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -15613,13 +18111,13 @@ Notes
 
 ### RFC 8200: Internet Protocol, Version 6 (IPv6) Specification {#ra_rfc8200}
 
-Depth: deep (Sections 3, 4, 4.1 to 4.3 read; 4.4 to 4.8, 5 to 8 checked against the errata list only). Errata: 12 errata: 2 verified, 1 reported, 4 held, 5 rejected. Obsoletes: RFC 2460.
+Depth: deep. Errata: 12 errata: 2 verified, 1 reported, 4 held, 5 rejected. Status: Internet Standard (STD 86). Obsoletes: RFC 2460. Updated by: RFC 9673.
 
-Resolved by a later RFC (kept for reference; not counted as open findings):
+Resolved by a later RFC or re-targeted to its successor (kept for reference; not counted as open findings):
 
-| ID | Section | Issue as found | Resolution |
-|---|---|---|---|
-| RA-0421 | 4, 4.3, 4.2 | Section 4 (with its NOTE) makes Hop-by-Hop processing at transit nodes optional and configuration-driven, while Section 4.3 still describes the header as information for "every node". | RFC 9673 (updates RFC 8200), Sections 5.1 and 5.2: a router that does not process the Hop-by-Hop Options header MUST forward the packet normally and MUST NOT drop it solely because it carries the header; options it does not process are skipped as for action bits 00, and the 01, 10 and 11 actions become 'MAY discard, if so configured'. Not covered by RFC 9673: the 'every node' wording of RFC 8200 Section 4.3, and the same question for the other extension headers (erratum 5933). RFC 9673 itself raises new points (RA-1218 to RA-1221). |
+| ID | Section | Issue as found | Outcome | Resolution |
+|---|---|---|---|---|
+| RA-0421 | 4, 4.3, 4.2 | Section 4 (with its NOTE) makes Hop-by-Hop processing at transit nodes optional and configuration-driven, while Section 4.3 still describes the header as information for "every node". | Resolved | RFC 9673 (updates RFC 8200), Sections 5.1 and 5.2: a router that does not process the Hop-by-Hop Options header MUST forward the packet normally and MUST NOT drop it solely because it carries the header; options it does not process are skipped as for action bits 00, and the 01, 10 and 11 actions become 'MAY discard, if so configured'. Not covered by RFC 9673: the 'every node' wording of RFC 8200 Section 4.3, and the same question for the other extension headers (erratum 5933). RFC 9673 itself raises new points (RA-1218 to RA-1221). |
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -15644,7 +18142,7 @@ Notes
 
 ### RFC 8201: Path MTU Discovery for IP version 6 {#ra_rfc8201}
 
-Depth: deep (lines with requirement words scanned only). Errata: none (the RFC has no errata). Obsoletes: RFC 1981.
+Depth: deep. Errata: none (the RFC has no errata). Status: Internet Standard (STD 87). Obsoletes: RFC 1981.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -15674,7 +18172,7 @@ Notes
 
 ### RFC 8259: The JavaScript Object Notation (JSON) Data Interchange Format {#ra_rfc8259}
 
-Depth: deep. Errata: 16 errata: 5 verified, 1 reported, 2 held, 8 rejected. Obsoletes: RFC 7159.
+Depth: deep. Errata: 16 errata: 5 verified, 1 reported, 2 held, 8 rejected. Status: Internet Standard (STD 90). Obsoletes: RFC 7159.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -15682,7 +18180,7 @@ Depth: deep. Errata: 16 errata: 5 verified, 1 reported, 2 held, 8 rejected. Obso
 
 ### RFC 8319: Support for Adjustable Maximum Router Lifetimes per Link {#ra_rfc8319}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 4861.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 4861.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -15734,7 +18232,7 @@ Notes
 
 ### RFC 8439: ChaCha20 and Poly1305 for IETF Protocols {#ra_rfc8439}
 
-Depth: deep (ChaCha20-Poly1305; used through OpenSSL). Errata: 8 errata: 5 verified, 1 held, 2 rejected. Obsoletes: RFC 7539.
+Depth: deep. Errata: 8 errata: 5 verified, 1 held, 2 rejected. Status: Informational. Obsoletes: RFC 7539.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -15781,18 +18279,18 @@ Notes
 
 ### RFC 8446: The Transport Layer Security (TLS) Protocol Version 1.3 {#ra_rfc8446}
 
-Depth: deep. Errata: 49 errata: 16 verified, 19 held, 14 rejected. Obsoletes: RFC 5077, RFC 5246, RFC 6961. Updates: RFC 5705, RFC 6066.
+Depth: deep. Errata: 49 errata: 16 verified, 19 held, 14 rejected. Status: Proposed Standard. Obsoletes: RFC 5077, RFC 5246, RFC 6961. Obsoleted by: RFC 9846. Updates: RFC 5705, RFC 6066.
 
-Resolved by a later RFC (kept for reference; not counted as open findings):
+Resolved by a later RFC or re-targeted to its successor (kept for reference; not counted as open findings):
 
-| ID | Section | Issue as found | Resolution |
-|---|---|---|---|
-| RA-0947 | 4.2.10 | "PSK cipher suite" is a TLS 1.2 concept that does not exist in TLS 1.3. | RFC 9846 (obsoletes RFC 8446), Section 4.3.10: 'In order to accept early data, the server MUST have selected the first key offered'; the PSK cipher-suite wording is gone. |
-| RA-0948 | 4.4.2.3 | Wrong cross-reference for acceptable certificate signature algorithms. | RFC 9846 (obsoletes RFC 8446) removes the sentence; Section 4.5.1.2 refers to Section 4.3.3 (Signature Algorithms) for acceptable certificate signature algorithms. |
+| ID | Section | Issue as found | Outcome | Resolution |
+|---|---|---|---|---|
+| RA-0947 | 4.2.10 | "PSK cipher suite" is a TLS 1.2 concept that does not exist in TLS 1.3. | Resolved | RFC 9846 (obsoletes RFC 8446), Section 4.3.10: 'In order to accept early data, the server MUST have selected the first key offered'; the PSK cipher-suite wording is gone. |
+| RA-0948 | 4.4.2.3 | Wrong cross-reference for acceptable certificate signature algorithms. | Resolved | RFC 9846 (obsoletes RFC 8446) removes the sentence; Section 4.5.1.2 refers to Section 4.3.3 (Signature Algorithms) for acceptable certificate signature algorithms. |
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
-| RA-0946 | 5.4, 6.2 | "the full encoded TLSInnerPlaintext MUST NOT exceed 2^14 + 1 octets. (5.4) / record_overflow: ... or a record decrypted to a TLSPlaintext record with more than 2^14 bytes (6.2)" | Section 5.4 limits the whole TLSInnerPlaintext (content, type octet and padding) to 2^14 + 1 octets, but no alert or receiver action is given for a record whose content is within 2^14 octets while content plus padding exceeds the limit. The "record_overflow" description in 6.2 covers only TLSPlaintext (content) longer than 2^14 and ciphertext longer than 2^14 + 256. Receivers may accept, or fail with record_overflow or decode_error; behaviour differs between implementations. | ambiguity | none: RFC has 49 errata, none on this point; **proposed erratum below** |
+| RA-0946 | 5.4, 6.2 | "the full encoded TLSInnerPlaintext MUST NOT exceed 2^14 + 1 octets. (5.4) / record_overflow: ... or a record decrypted to a TLSPlaintext record with more than 2^14 bytes (6.2)" | Section 5.4 limits the whole TLSInnerPlaintext (content, type octet and padding) to 2^14 + 1 octets, but no alert or receiver action is given for a record whose content is within 2^14 octets while content plus padding exceeds the limit. The "record_overflow" description in 6.2 covers only TLSPlaintext (content) longer than 2^14 and ciphertext longer than 2^14 + 256. Receivers may accept, or fail with record_overflow or decode_error; behaviour differs between implementations. Later RFCs: RFC 9846 (obsoletes RFC 8446) keeps the text (Sections 5.4 and 6.2): no receiver action for a padded TLSInnerPlaintext above the limit. | ambiguity | none: RFC has 49 errata, none on this point; **proposed erratum below** |
 | RA-0949 | 4.1.3, 6 | "first examine the Random value and, if it matches this value, process it as described in Section 4.1.4). (4.1.3) / Note: TLS defines two generic alerts (see Section 6) to use upon failure to parse a message. (6)" | 4.1.3 has an unbalanced closing parenthesis. The note in Section 6 refers to Section 6 itself; the alerts (decode_error, illegal_parameter) are defined in Section 6.2. Later RFCs: RFC 9846 (obsoletes RFC 8446) removes the unbalanced parenthesis (Section 4.2.3); the Section 6 note on the two generic alerts is unchanged. | editorial | none: RFC has 49 errata, none on this point |
 
 Proposed erratum RA-0946 (RFC 8446, Section 5.4, 6.2; type: Technical):
@@ -15816,11 +18314,13 @@ Notes
 -----
    The record_overflow definition in Section 6.2 should then also
    mention TLSInnerPlaintext rather than only TLSPlaintext.
+   Status note: RFC 8446 is obsoleted by RFC 9846; an erratum report
+   against it may be held or rejected for that reason.
 ```
 
 ### RFC 8448: Example Handshake Traces for TLS 1.3 {#ra_rfc8448}
 
-Depth: deep (TLS 1.3 example traces, informational). Errata: 2 errata: 2 held. 
+Depth: deep. Errata: 2 errata: 2 held. Status: Informational.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -15828,7 +18328,7 @@ Depth: deep (TLS 1.3 example traces, informational). Errata: 2 errata: 2 held.
 
 ### RFC 8449: Record Size Limit Extension for TLS {#ra_rfc8449}
 
-Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 6066.
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 6066.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -15837,7 +18337,7 @@ Depth: deep. Errata: none (the RFC has no errata). Updates: RFC 6066.
 
 ### RFC 9000: QUIC: A UDP-Based Multiplexed and Secure Transport {#ra_rfc9000}
 
-Depth: deep. Errata: 16 errata: 6 verified, 1 reported, 7 held, 2 rejected. 
+Depth: deep. Errata: 16 errata: 6 verified, 1 reported, 7 held, 2 rejected. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -15846,7 +18346,7 @@ Depth: deep. Errata: 16 errata: 6 verified, 1 reported, 7 held, 2 rejected.
 
 ### RFC 9001: Using TLS to Secure QUIC {#ra_rfc9001}
 
-Depth: deep. Errata: 3 errata: 1 verified, 1 reported, 1 rejected. 
+Depth: deep. Errata: 3 errata: 1 verified, 1 reported, 1 rejected. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -15900,7 +18400,7 @@ Notes
 
 ### RFC 9002: QUIC Loss Detection and Congestion Control {#ra_rfc9002}
 
-Depth: deep. Errata: 4 errata: 2 verified, 1 reported, 1 rejected. 
+Depth: deep. Errata: 4 errata: 2 verified, 1 reported, 1 rejected. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -15928,7 +18428,7 @@ Notes
 
 ### RFC 9110: HTTP Semantics {#ra_rfc9110}
 
-Depth: deep. Errata: 14 errata: 6 verified, 2 reported, 6 rejected. Obsoletes: RFC 2818, RFC 7230, RFC 7231, RFC 7232, RFC 7233, RFC 7235, RFC 7538, RFC 7615, RFC 7694. Updates: RFC 3864.
+Depth: deep. Errata: 14 errata: 6 verified, 2 reported, 6 rejected. Status: Internet Standard (STD 97). Obsoletes: RFC 2818, RFC 7230, RFC 7231, RFC 7232, RFC 7233, RFC 7235, RFC 7538, RFC 7615, RFC 7694. Updates: RFC 3864.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -16002,7 +18502,7 @@ Notes
 
 ### RFC 9112: HTTP/1.1 {#ra_rfc9112}
 
-Depth: deep. Errata: 5 errata: 2 verified, 1 reported, 2 rejected. Obsoletes: RFC 7230.
+Depth: deep. Errata: 5 errata: 2 verified, 1 reported, 2 rejected. Status: Internet Standard (STD 99). Obsoletes: RFC 7230. Updated by: RFC 9931.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -16010,7 +18510,7 @@ Depth: deep. Errata: 5 errata: 2 verified, 1 reported, 2 rejected. Obsoletes: RF
 
 ### RFC 9114: HTTP/3 {#ra_rfc9114}
 
-Depth: deep. Errata: 7 errata: 3 verified, 2 reported, 2 rejected. 
+Depth: deep. Errata: 7 errata: 3 verified, 2 reported, 2 rejected. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -16019,7 +18519,7 @@ Depth: deep. Errata: 7 errata: 3 verified, 2 reported, 2 rejected.
 
 ### RFC 9204: QPACK: Field Compression for HTTP/3 {#ra_rfc9204}
 
-Depth: deep. Errata: 2 errata: 1 verified, 1 held. 
+Depth: deep. Errata: 2 errata: 1 verified, 1 held. Status: Proposed Standard.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -16047,7 +18547,7 @@ Notes
 
 ### RFC 9293: Transmission Control Protocol (TCP) {#ra_rfc9293}
 
-Depth: deep. Errata: 9 errata: 4 verified, 2 held, 3 rejected. Obsoletes: RFC 793, RFC 879, RFC 2873, RFC 6093, RFC 6429, RFC 6528, RFC 6691. Updates: RFC 1011, RFC 1122, RFC 5961.
+Depth: deep. Errata: 9 errata: 4 verified, 2 held, 3 rejected. Status: Internet Standard (STD 7). Obsoletes: RFC 793, RFC 879, RFC 2873, RFC 6093, RFC 6429, RFC 6528, RFC 6691. Updates: RFC 1011, RFC 1122, RFC 5961.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -16241,7 +18741,7 @@ Notes
 
 ### RFC 9325: Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport Layer Security (DTLS) {#ra_rfc9325}
 
-Depth: deep. Errata: none (the RFC has no errata). Obsoletes: RFC 7525. Updates: RFC 5288, RFC 6066.
+Depth: deep. Errata: none (the RFC has no errata). Status: Best Current Practice (BCP 195). Obsoletes: RFC 7525. Updates: RFC 5288, RFC 6066. Updated by: RFC 9852, RFC 10015.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -16249,7 +18749,7 @@ Depth: deep. Errata: none (the RFC has no errata). Obsoletes: RFC 7525. Updates:
 
 ### RFC 9525: Service Identity in TLS {#ra_rfc9525}
 
-Depth: deep. Errata: 1 errata: 1 held. Obsoletes: RFC 6125.
+Depth: deep. Errata: 1 errata: 1 held. Status: Proposed Standard. Obsoletes: RFC 6125.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -16315,7 +18815,7 @@ Notes
 
 ### RFC 9673: IPv6 Hop-by-Hop Options Processing Procedures {#ra_rfc9673}
 
-Depth: deep. Errata: 1 errata: 1 verified. Updates: RFC 8200.
+Depth: deep. Errata: 1 errata: 1 verified. Status: Proposed Standard. Updates: RFC 8200.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -16371,9 +18871,87 @@ Notes
    action bits were 00.
 ```
 
+### RFC 9805: Deprecation of the IPv6 Router Alert Option for New Protocols {#ra_rfc9805}
+
+Depth: deep. Errata: none (the RFC has no errata). Status: Proposed Standard. Updates: RFC 2711.
+
+| ID | Section | Quote | Issue | Severity | Erratum |
+|---|---|---|---|---|---|
+| RA-1476 | 4, Appendix A | "Appendix A contains an exhaustive list of protocols that MAY continue to use the IPv6 Router Alert option. (4) / Table 1 contains an exhaustive list of protocols that use the IPv6 Router Alert option. (Appendix A)" | Section 4 first permits every protocol "that use[s] the IPv6 Router Alert option" to continue, then calls Appendix A the exhaustive list of such protocols. The list omits users that hold IPv6 Router Alert values or require the option: MLDv1 (RFC 2710, value 0, still referenced by MLDv2 for compatibility, RFC 9777), Active Networks (value 2, RFC 2711), and the base RSVP specifications (RFC 2205, and RFC 3209 for RSVP-TE), the RSVP row citing only aggregation, receiver proxy, VPN and admission priority extensions. Read literally, a protocol absent from the "exhaustive" list (e.g. an MLDv1 implementation) is not among those that "MAY continue", which contradicts the first sentence of Section 4. | contradiction | none: RFC has no errata; **proposed erratum below** |
+| RA-1477 | 6, 4, 5 | "This document mitigates all security considerations associated with the IPv6 Router Alert option." | Section 4 lets every existing protocol keep using the option "even in future versions", and Section 5 says the two widely deployed users (MLDv2 and MRD) still rely on it, with replacements left to future work. Routers therefore still have to inspect and divert Router Alert packets, and the control-plane exposure described in RFC 6398 and in Section 3 is unchanged. Deprecation for new protocols limits future growth of the problem; it does not mitigate the existing considerations, and the section gives implementers no guidance (rate limiting, protocol-of-interest filtering per RFC 6398) for the uses that remain. | contradiction | none: RFC has no errata; **proposed erratum below** |
+| RA-1478 | 7, 4, Appendix A | "stating that the registry is closed for allocations / The experimental codepoints in this registry have been changed to "Reserved" / Pragmatic Generic Multicast (PGM) is experimental" | Closing the "IPv6 Router Alert Option Values" registry conflicts with Section 4, which allows existing protocols to continue using the option "even in future versions": a future version of an existing protocol that needs a new value (as RSVP aggregation did with values 4-35, RFC 3175) cannot obtain one, and the text does not say whether such versions must reuse existing values. The experimental range being withdrawn was defined by RFC 5350, which is neither cited nor listed as updated. Editorial: Appendix A expands PGM as "Pragmatic Generic Multicast"; RFC 3208 and Table 1 use "Pragmatic General Multicast". | ambiguity | none: RFC has no errata; **proposed erratum below** |
+
+Proposed erratum RA-1476 (RFC 9805, Section 4, Appendix A; type: Technical):
+
+```
+Original Text
+-------------
+   Appendix A contains an exhaustive list of protocols that MAY
+   continue to use the IPv6 Router Alert option.
+
+Corrected Text
+--------------
+   Appendix A lists protocols known to use the IPv6 Router Alert
+   option; any protocol that used the option before the publication
+   of this document MAY continue to use it.
+
+Notes
+-----
+   Values 0 (MLD, including MLDv1 [RFC2710]) and 2 (Active Networks
+   [RFC2711]) of the IPv6 Router Alert Option Values registry, and
+   base RSVP [RFC2205] [RFC3209], are not covered by Table 1. MLDv2
+   [RFC9777] still requires interoperation with MLDv1, so the
+   omission of MLDv1 matters to implementations.
+```
+
+Proposed erratum RA-1477 (RFC 9805, Section 6, 4, 5; type: Technical):
+
+```
+Original Text
+-------------
+   This document mitigates all security considerations associated
+   with the IPv6 Router Alert option.  These security considerations
+   can be found in [RFC2711], [RFC6192], and [RFC6398].
+
+Corrected Text
+--------------
+   This document does not change the security considerations for
+   protocols that continue to use the IPv6 Router Alert option;
+   these can be found in [RFC2711], [RFC6192], and [RFC6398], and
+   routers that process the option remain subject to them.
+   Deprecating the option for new protocols limits the growth of
+   these risks over time.
+
+Notes
+-----
+   Sections 4 and 5 keep the existing uses, so routers continue to
+   divert Router Alert packets to the control plane.
+```
+
+Proposed erratum RA-1478 (RFC 9805, Section 7, 4, Appendix A; type: Technical):
+
+```
+Original Text
+-------------
+   Pragmatic Generic Multicast (PGM) is experimental, and there are
+   no known IPv6 implementations.
+
+Corrected Text
+--------------
+   Pragmatic General Multicast (PGM) is experimental, and there are
+   no known IPv6 implementations.
+
+Notes
+-----
+   The registry's experimental range (65502-65534) was created by
+   RFC 5350; the IANA note changes it without that document being
+   referenced or updated. The PGM expansion differs between the
+   Appendix A text and Table 1.
+```
+
 ### RFC 9846: The Transport Layer Security (TLS) Protocol Version 1.3 {#ra_rfc9846}
 
-Depth: deep. Errata: 5 errata: 1 verified, 4 reported. Obsoletes: RFC 5077, RFC 5246, RFC 6961, RFC 7627, RFC 8422, RFC 8446. Updates: RFC 5705, RFC 6066.
+Depth: deep. Errata: 5 errata: 1 verified, 4 reported. Status: Proposed Standard. Obsoletes: RFC 5077, RFC 5246, RFC 6961, RFC 7627, RFC 8422, RFC 8446. Updates: RFC 5705, RFC 6066.
 
 | ID | Section | Quote | Issue | Severity | Erratum |
 |---|---|---|---|---|---|
@@ -16543,6 +19121,85 @@ Notes
    6 should read "TLS defines generic alerts (see Section 6.2)".
 ```
 
+### RFC 9868: Transport Options for UDP {#ra_rfc9868}
+
+Depth: deep. Errata: 2 errata: 1 verified, 1 held. Status: Proposed Standard. Updates: RFC 768.
+
+| ID | Section | Quote | Issue | Severity | Erratum |
+|---|---|---|---|---|---|
+| RA-1479 | 8, 9 | "These alignment bytes, coupled with OCS as computed over the remainder of the surplus area, ensure that the one's complement sum of the surplus area is zero. (8) / The OCS consists of a 16-bit Internet checksum [RFC1071], computed over the surplus area and including the length of the surplus area as an unsigned 16-bit value. (9)" | Section 8 says the OCS makes the one's complement sum of the surplus area zero; Section 9 adds the surplus-area length to the sum, so it is the sum of the surplus area plus its length that is zero (which is what the middlebox-compensation argument in Section 9 needs). "Remainder of the surplus area" (8) and "the surplus area" (9) also differ on what is summed. Three further points are left to the reader: the byte pairing when the surplus area starts at an odd offset (the text implies pairing relative to the start of the IP datagram, "aligned to the first 2-byte boundary (relative to the start of the IP datagram)", but does not say so for the sum, and an odd-length surplus area needs a pad byte as in RFC 1071); and what a sender transmits when the computed OCS is 0x0000, since "The OCS MUST be non-zero when the UDP checksum is non-zero" while zero means "unused" (RFC 768 transmits a computed zero checksum "as all ones"; nothing equivalent is stated here). | contradiction | none: RFC has 2 errata, none on this point; **proposed erratum below** |
+| RA-1480 | 10, 11.3, 11.7, 11.8 | "Option Lengths (or Extended Lengths, where applicable) smaller than the minimum for the corresponding Kind MUST be treated as an error.  Such errors call into question the remainder of the surplus area and thus MUST result in all UDP Options being silently discarded. / An option is malformed when its length does not indicate (one of) the value(s) stated in the option's specification." | For options with a single fixed length (APC 6, MDS 4, MRDS 5, REQ / RES 6, TIME 10), no "minimum" is defined separately from the stated value, so a length below it (e.g. an APC of length 4) is at once "smaller than the minimum" (discard all options), "malformed" (silently ignore that option only) and, for APC, an "unrecognized APC length" that 11.3 says "MUST receive the same treatment as UDP packets with incorrect APC Option checksum fields" (deliver with a failure indication). The same section adds that "Receivers cannot generally treat unexpected Option Lengths as invalid". Receivers can therefore discard all options, ignore one, or report an APC failure for the same packet. | contradiction | none: RFC has 2 errata, none on this point |
+| RA-1481 | 10, 21, 18 | "The UDP Length MUST be at least as large as the UDP header (8) and no larger than the IP transport payload.  Datagrams with length values outside this range MUST be silently dropped as invalid and logged. (10)" | Section 21 lists the updates to RFC 768 as the meaning of the surplus area and the API extension only; it does not list this receive rule. The requirement sits among rules for UDP Options, so whether every UDP implementation (including those without UDP Options, which Section 18 calls legacy receivers) must now drop and log such datagrams, or only option-aware receivers, is not stated. "Silently dropped ... and logged" also leaves open whether a counter suffices for "logged" (10 then says "All logging SHOULD be rate limited"). | ambiguity | none: RFC has 2 errata, none on this point; **proposed erratum below** |
+| RA-1482 | 14, 6, 11.4 | "if (OCS != 0 and OCS fails) or (OCS == 0 and UDP CS != 0) then deliver the UDP user data but ignore other options (14) / Individual UDP fragments MUST NOT be forwarded to the user. (11.4)" | The Section 14 procedure delivers the UDP user data whenever the UDP checksum passes, but a UDP fragment has empty user data; if its OCS fails, or it carries a malformed or duplicated FRAG Option or an unsupported UNSAFE Option, the procedure delivers a zero-length datagram, while 11.4 forbids forwarding fragments and says reassembly failures "SHOULD NOT generate zero-length frames to the user", and Section 6 makes UDP fragments the exception to delivery. Section 14 then notes for UNSAFE Options that "this still results in the delivery of a zero-length UDP packet". Whether an option-aware receiver delivers a zero-length datagram for a fragment it cannot use is therefore read both ways. | ambiguity | none: RFC has 2 errata, none on this point |
+| RA-1483 | Appendix A | "NB: The JUNK Option is included for debugging purposes and is not intended to be enabled otherwise. / \| UDP OPT MDS  \| Enable UDP MDS Option       \|" | The JUNK Option (Tables 5-7) is not defined anywhere in the document and has no Kind in Table 1, so its format and whether it is an option in the surplus area are unknown. Table 3 writes some socket option names with spaces ("UDP OPT MDS", "UDP OPT MRDS", "UDP OPT REQ", "UDP OPT RES", "UDP OPT AUTH", "UDP OPT EXP", "UDP OPT UEXP") and others with underscores, and Table 2 names the RES sysctl "udp_opt_resp". The appendix is meant "to encourage consistent naming". | editorial | none: RFC has 2 errata, none on this point; **proposed erratum below** |
+
+Proposed erratum RA-1479 (RFC 9868, Section 8, 9; type: Technical):
+
+```
+Original Text
+-------------
+   These alignment bytes, coupled with OCS as computed over the
+   remainder of the surplus area, ensure that the one's complement
+   sum of the surplus area is zero.
+
+Corrected Text
+--------------
+   These alignment bytes, coupled with the OCS as computed in
+   Section 9, ensure that the one's complement sum of the surplus
+   area (with 16-bit words aligned relative to the start of the IP
+   datagram) and of its length is zero. If the computed OCS is zero,
+   it is transmitted as all ones (0xFFFF).
+
+Notes
+-----
+   Section 9 includes the surplus length in the sum; Section 8 omits
+   it. Without an all-ones rule, a sender whose computed OCS is zero
+   cannot satisfy "The OCS MUST be non-zero when the UDP checksum is
+   non-zero".
+```
+
+Proposed erratum RA-1481 (RFC 9868, Section 10, 21, 18; type: Technical):
+
+```
+Original Text
+-------------
+   This document updates [RFC0768] as follows:
+
+Corrected Text
+--------------
+   This document updates [RFC0768] as follows: [...] *  A UDP
+   datagram whose UDP Length is smaller than 8 or larger than the IP
+   transport payload is invalid and MUST be silently dropped
+   (Section 10); this applies to all UDP receivers, whether or not
+   they support UDP Options.
+
+Notes
+-----
+   RFC 768 itself gives no receiver rule for an inconsistent Length;
+   Section 22 says this document "clarifies the interaction between
+   UDP Length and IP Length".
+```
+
+Proposed erratum RA-1483 (RFC 9868, Section Appendix A; type: Editorial):
+
+```
+Original Text
+-------------
+   | UDP OPT MDS  | Enable UDP MDS Option       |
+
+Corrected Text
+--------------
+   | UDP_OPT_MDS  | Enable UDP MDS Option       | (likewise
+   UDP_OPT_MRDS, UDP_OPT_REQ, UDP_OPT_RES, UDP_OPT_AUTH,
+   UDP_OPT_EXP, UDP_OPT_UEXP; and either define the JUNK Option or
+   remove Tables 5-7)
+
+Notes
+-----
+   The appendix exists to encourage consistent naming across
+   implementations.
+```
+
 ## Coverage by RFC {#ra_index}
 
 Every RFC reviewed, with the depth of reading (best of the two passes) and the errata status. Depth and errata categories are defined in [Coverage](#ra_coverage).
@@ -16572,7 +19229,7 @@ Every RFC reviewed, with the depth of reading (best of the two passes) and the e
 | [RFC 2202](#ra_rfc2202) | Test Cases for HMAC-MD5 and HMAC-SHA-1 | [IP](#ra_ip) | deep | 3 (2 verified, 1 held) | 2 | 1 |
 | [RFC 2205](#ra_rfc2205) | Resource ReSerVation Protocol (RSVP) -- Version 1 Functional Specification | [RSVP](#ra_rsvp) | deep | 1 (1 held) | 7 | 1 |
 | [RFC 2209](#ra_rfc2209) | Resource ReSerVation Protocol (RSVP) -- Version 1 Message Processing Rules | [RSVP](#ra_rsvp) | deep | 1 (1 held) | 4 | 1 |
-| [RFC 2210](#ra_rfc2210) | The Use of RSVP with IETF Integrated Services | [RSVP](#ra_rsvp) | deep | none | 2 | 1 |
+| [RFC 2210](#ra_rfc2210) | The Use of RSVP with IETF Integrated Services | [RSVP](#ra_rsvp) | deep | none | 5 | 3 |
 | [RFC 2211](#ra_rfc2211) | Specification of the Controlled-Load Network Element Service | [RSVP](#ra_rsvp) | deep | none | 3 | 1 |
 | [RFC 2212](#ra_rfc2212) | Specification of Guaranteed Quality of Service | [RSVP](#ra_rsvp) | deep | none | 4 | 2 |
 | [RFC 2236](#ra_rfc2236) | Internet Group Management Protocol, Version 2 | [Multicast](#ra_mcast) | deep | 3 (2 verified, 1 rejected) | 3 | 1 |
@@ -16591,7 +19248,7 @@ Every RFC reviewed, with the depth of reading (best of the two passes) and the e
 | [RFC 2961](#ra_rfc2961) | RSVP Refresh Overhead Reduction Extensions | [RSVP](#ra_rsvp) | deep | none | 6 | 1 |
 | [RFC 3021](#ra_rfc3021) | Using 31-Bit Prefixes on IPv4 Point-to-Point Links | [IP](#ra_ip) | deep | none | 2 | 0 |
 | [RFC 3032](#ra_rfc3032) | MPLS Label Stack Encoding | [MPLS/LDP](#ra_ldp) | deep | 4 (3 verified, 1 held) | 4 | 2 |
-| [RFC 3036](#ra_rfc3036) | LDP Specification | [MPLS/LDP](#ra_ldp) | deep | 3 (1 verified, 2 rejected) | 9 | 2 |
+| [RFC 3036](#ra_rfc3036) | LDP Specification | [MPLS/LDP](#ra_ldp) | deep | 3 (1 verified, 2 rejected) | 8 | 2 |
 | [RFC 3097](#ra_rfc3097) | RSVP Cryptographic Authentication -- Updated Message Type Value | [RSVP](#ra_rsvp) | deep | none | 0 | 0 |
 | [RFC 3128](#ra_rfc3128) | Protection Against a Variant of the Tiny Fragment Attack | [IP](#ra_ip) | deep | none | 3 | 1 |
 | [RFC 3174](#ra_rfc3174) | US Secure Hash Algorithm 1 (SHA1) | [IP](#ra_ip) | deep | 2 (2 verified) | 3 | 1 |
@@ -16612,6 +19269,7 @@ Every RFC reviewed, with the depth of reading (best of the two passes) and the e
 | [RFC 3477](#ra_rfc3477) | Signalling Unnumbered Links in Resource ReSerVation Protocol - Traffic Engineering (RSVP-T | [RSVP](#ra_rsvp) | deep | none | 2 | 0 |
 | [RFC 3478](#ra_rfc3478) | Graceful Restart Mechanism for Label Distribution Protocol | [MPLS/LDP](#ra_ldp) | deep | none | 4 | 2 |
 | [RFC 3479](#ra_rfc3479) | Fault Tolerance for the Label Distribution Protocol (LDP) | [MPLS/LDP](#ra_ldp) | deep | none | 5 | 2 |
+| [RFC 3590](#ra_rfc3590) | Source Address Selection for the Multicast Listener Discovery (MLD) Protocol | [Multicast](#ra_mcast) | deep | none | 2 | 2 |
 | [RFC 3629](#ra_rfc3629) | UTF-8, a transformation format of ISO 10646 | [IP](#ra_ip) | deep | none | 1 | 0 |
 | [RFC 3630](#ra_rfc3630) | Traffic Engineering (TE) Extensions to OSPF Version 2 | [IS-IS](#ra_isis) | deep | none | 1 | 1 |
 | [RFC 3719](#ra_rfc3719) | Recommendations for Interoperable Networks using Intermediate System to Intermediate Syste | [IS-IS](#ra_isis) | deep | none | 1 | 1 |
@@ -16638,7 +19296,7 @@ Every RFC reviewed, with the depth of reading (best of the two passes) and the e
 | [RFC 4443](#ra_rfc4443) | Internet Control Message Protocol (ICMPv6) for the Internet Protocol Version 6 (IPv6) Spec | [IP](#ra_ip) | deep | 6 (4 held, 2 rejected) | 4 | 1 |
 | [RFC 4444](#ra_rfc4444) | Management Information Base for Intermediate System to Intermediate System (IS-IS) | [IS-IS](#ra_isis) | deep | 2 (1 held, 1 rejected) | 14 | 5 |
 | [RFC 4446](#ra_rfc4446) | IANA Allocations for Pseudowire Edge to Edge Emulation (PWE3) | [PW](#ra_pw) | deep | 1 (1 verified) | 3 | 2 |
-| [RFC 4447](#ra_rfc4447) | Pseudowire Setup and Maintenance Using the Label Distribution Protocol (LDP) | [PW](#ra_pw) | deep | 10 (8 held, 2 rejected) | 7 | 1 |
+| [RFC 4447](#ra_rfc4447) | Pseudowire Setup and Maintenance Using the Label Distribution Protocol (LDP) | [PW](#ra_pw) | deep | 10 (8 held, 2 rejected) | 3 | 0 |
 | [RFC 4448](#ra_rfc4448) | Encapsulation Methods for Transport of Ethernet over MPLS Networks | [PW](#ra_pw) | deep | 1 (1 held) | 2 | 1 |
 | [RFC 4456](#ra_rfc4456) | BGP Route Reflection: An Alternative to Full Mesh Internal BGP (IBGP) | [BGP](#ra_bgp) | deep | 2 (1 held, 1 rejected) | 3 | 1 |
 | [RFC 4486](#ra_rfc4486) | Subcodes for BGP Cease Notification Message | [BGP](#ra_bgp) | deep | none | 1 | 0 |
@@ -16669,7 +19327,7 @@ Every RFC reviewed, with the depth of reading (best of the two passes) and the e
 | [RFC 4950](#ra_rfc4950) | ICMP Extensions for Multiprotocol Label Switching | [MPLS/LDP](#ra_ldp) | deep | none | 0 | 0 |
 | [RFC 5003](#ra_rfc5003) | Attachment Individual Identifier (AII) Types for Aggregation | [PW](#ra_pw) | deep | 1 (1 held) | 0 | 0 |
 | [RFC 5004](#ra_rfc5004) | Avoid BGP Best Path Transitions from One External to Another | [BGP](#ra_bgp) | deep | none | 1 | 0 |
-| [RFC 5015](#ra_rfc5015) | Bidirectional Protocol Independent Multicast (BIDIR-PIM) | [Multicast](#ra_mcast) | deep | 1 (1 verified) | 2 | 1 |
+| [RFC 5015](#ra_rfc5015) | Bidirectional Protocol Independent Multicast (BIDIR-PIM) | [Multicast](#ra_mcast) | deep | 1 (1 verified) | 4 | 1 |
 | [RFC 5036](#ra_rfc5036) | LDP Specification | [MPLS/LDP](#ra_ldp) | deep | 11 (1 verified, 6 held, 4 rejected) | 14 | 5 |
 | [RFC 5059](#ra_rfc5059) | Bootstrap Router (BSR) Mechanism for Protocol Independent Multicast (PIM) | [Multicast](#ra_mcast) | deep | 3 (2 verified, 1 held) | 5 | 1 |
 | [RFC 5063](#ra_rfc5063) | Extensions to GMPLS Resource Reservation Protocol (RSVP) Graceful Restart | [RSVP](#ra_rsvp) | deep | 1 (1 held) | 3 | 1 |
@@ -16704,7 +19362,7 @@ Every RFC reviewed, with the depth of reading (best of the two passes) and the e
 | [RFC 5316](#ra_rfc5316) | ISIS Extensions in Support of Inter-Autonomous System (AS) MPLS and GMPLS Traffic Engineer | [IS-IS](#ra_isis) | deep | none | 2 | 2 |
 | [RFC 5331](#ra_rfc5331) | MPLS Upstream Label Assignment and Context-Specific Label Space | [MPLS/LDP](#ra_ldp) | deep | 7 (1 verified, 5 held, 1 rejected) | 2 | 0 |
 | [RFC 5332](#ra_rfc5332) | MPLS Multicast Encapsulations | [MPLS/LDP](#ra_ldp) | deep | none | 2 | 2 |
-| [RFC 5357](#ra_rfc5357) | A Two-Way Active Measurement Protocol (TWAMP) | [OAM](#ra_oam) | deep | 14 (6 verified, 7 held, 1 rejected) | 6 | 2 |
+| [RFC 5357](#ra_rfc5357) | A Two-Way Active Measurement Protocol (TWAMP) | [OAM](#ra_oam) | deep | 14 (6 verified, 7 held, 1 rejected) | 7 | 3 |
 | [RFC 5398](#ra_rfc5398) | Autonomous System (AS) Number Reservation for Documentation Use | [BGP](#ra_bgp) | deep | none | 1 | 1 |
 | [RFC 5420](#ra_rfc5420) | Encoding of Attributes for MPLS LSP Establishment Using Resource Reservation Protocol Traf | [RSVP](#ra_rsvp) | deep | 2 (1 held, 1 rejected) | 3 | 1 |
 | [RFC 5424](#ra_rfc5424) | The Syslog Protocol | [IP](#ra_ip) | deep | 5 (4 reported, 1 held) | 4 | 4 |
@@ -16718,9 +19376,9 @@ Every RFC reviewed, with the depth of reading (best of the two passes) and the e
 | [RFC 5521](#ra_rfc5521) | Extensions to the Path Computation Element Communication Protocol (PCEP) for Route Exclusi | [PCEP](#ra_pcep) | deep | 3 (3 verified) | 3 | 1 |
 | [RFC 5541](#ra_rfc5541) | Encoding of Objective Functions in the Path Computation Element Communication Protocol (PC | [PCEP](#ra_pcep) | deep | none | 3 | 1 |
 | [RFC 5543](#ra_rfc5543) | BGP Traffic Engineering Attribute | [BGP](#ra_bgp) | deep | none | 2 | 2 |
-| [RFC 5561](#ra_rfc5561) | LDP Capabilities | [MPLS/LDP](#ra_ldp) | deep | none | 1 | 0 |
-| [RFC 5586](#ra_rfc5586) | MPLS Generic Associated Channel | [MPLS/LDP](#ra_ldp) | deep | 2 (1 verified, 1 rejected) | 0 | 0 |
-| [RFC 5618](#ra_rfc5618) | Mixed Security Mode for the Two-Way Active Measurement Protocol (TWAMP) | [OAM](#ra_oam) | deep | none | 0 | 0 |
+| [RFC 5561](#ra_rfc5561) | LDP Capabilities | [MPLS/LDP](#ra_ldp) | deep | none | 3 | 1 |
+| [RFC 5586](#ra_rfc5586) | MPLS Generic Associated Channel | [MPLS/LDP](#ra_ldp) | deep | 2 (1 verified, 1 rejected) | 2 | 2 |
+| [RFC 5618](#ra_rfc5618) | Mixed Security Mode for the Two-Way Active Measurement Protocol (TWAMP) | [OAM](#ra_oam) | deep | none | 2 | 1 |
 | [RFC 5668](#ra_rfc5668) | 4-Octet AS Specific BGP Extended Community | [BGP](#ra_bgp) | deep | none | 0 | 0 |
 | [RFC 5701](#ra_rfc5701) | IPv6 Address Specific BGP Extended Community Attribute | [BGP](#ra_bgp) | deep | none | 1 | 1 |
 | [RFC 5712](#ra_rfc5712) | MPLS Traffic Engineering Soft Preemption | [RSVP](#ra_rsvp) | deep | none | 2 | 2 |
@@ -16738,17 +19396,17 @@ Every RFC reviewed, with the depth of reading (best of the two passes) and the e
 | [RFC 5918](#ra_rfc5918) | Label Distribution Protocol (LDP) 'Typed Wildcard' Forward Equivalence Class (FEC) | [MPLS/LDP](#ra_ldp) | deep | 2 (1 verified, 1 held) | 2 | 0 |
 | [RFC 5919](#ra_rfc5919) | Signaling LDP Label Advertisement Completion | [MPLS/LDP](#ra_ldp) | deep | 1 (1 held) | 1 | 0 |
 | [RFC 5925](#ra_rfc5925) | The TCP Authentication Option | [IP](#ra_ip) | deep | 8 (4 verified, 1 reported, 1 held, 2 rejected) | 9 | 1 |
-| [RFC 5926](#ra_rfc5926) | Cryptographic Algorithms for the TCP Authentication Option (TCP-AO) | [IP](#ra_ip) | deep | 2 (1 held, 1 rejected) | 1 | 1 |
-| [RFC 5938](#ra_rfc5938) | Individual Session Control Feature for the Two-Way Active Measurement Protocol (TWAMP) | [OAM](#ra_oam) | deep | 1 (1 verified) | 1 | 0 |
+| [RFC 5926](#ra_rfc5926) | Cryptographic Algorithms for the TCP Authentication Option (TCP-AO) | [IP](#ra_ip) | deep | 2 (1 held, 1 rejected) | 4 | 3 |
+| [RFC 5938](#ra_rfc5938) | Individual Session Control Feature for the Two-Way Active Measurement Protocol (TWAMP) | [OAM](#ra_oam) | deep | 1 (1 verified) | 4 | 1 |
 | [RFC 5952](#ra_rfc5952) | A Recommendation for IPv6 Address Text Representation | [IP](#ra_ip) | deep | 12 (1 verified, 4 held, 7 rejected) | 2 | 2 |
 | [RFC 6037](#ra_rfc6037) | Cisco Systems' Solution for Multicast in BGP/MPLS IP VPNs | [Multicast](#ra_mcast) | deep | none | 3 | 3 |
 | [RFC 6038](#ra_rfc6038) | Two-Way Active Measurement Protocol (TWAMP) Reflect Octets and Symmetrical Size Features | [OAM](#ra_oam) | deep | 7 (5 verified, 2 held) | 4 | 3 |
 | [RFC 6040](#ra_rfc6040) | Tunnelling of Explicit Congestion Notification | [IP](#ra_ip) | deep | none | 3 | 1 |
 | [RFC 6066](#ra_rfc6066) | Transport Layer Security (TLS) Extensions: Extension Definitions | [IP](#ra_ip) | deep | 3 (2 verified, 1 reported) | 4 | 2 |
-| [RFC 6073](#ra_rfc6073) | Segmented Pseudowire | [PW](#ra_pw) | deep | none | 3 | 1 |
-| [RFC 6074](#ra_rfc6074) | Provisioning, Auto-Discovery, and Signaling in Layer 2 Virtual Private Networks (L2VPNs) | [PW](#ra_pw) | deep | none | 2 | 1 |
+| [RFC 6073](#ra_rfc6073) | Segmented Pseudowire | [PW](#ra_pw) | deep | none | 8 | 2 |
+| [RFC 6074](#ra_rfc6074) | Provisioning, Auto-Discovery, and Signaling in Layer 2 Virtual Private Networks (L2VPNs) | [PW](#ra_pw) | deep | none | 7 | 3 |
 | [RFC 6107](#ra_rfc6107) | Procedures for Dynamically Signaled Hierarchical Label Switched Paths | [RSVP](#ra_rsvp) | deep | 2 (1 verified, 1 held) | 5 | 0 |
-| [RFC 6119](#ra_rfc6119) | IPv6 Traffic Engineering in IS-IS | [IS-IS](#ra_isis) | deep | none | 1 | 1 |
+| [RFC 6119](#ra_rfc6119) | IPv6 Traffic Engineering in IS-IS | [IS-IS](#ra_isis) | deep | none | 5 | 2 |
 | [RFC 6125](#ra_rfc6125) | Representation and Verification of Domain-Based Application Service Identity within Intern | [IP](#ra_ip) | deep | 5 (1 verified, 3 reported, 1 held) | 0 | 0 |
 | [RFC 6138](#ra_rfc6138) | LDP IGP Synchronization for Broadcast Networks | [MPLS/LDP](#ra_ldp) | deep | none | 3 | 0 |
 | [RFC 6213](#ra_rfc6213) | IS-IS BFD-Enabled TLV | [IS-IS](#ra_isis) | deep | none | 1 | 1 |
@@ -16757,32 +19415,32 @@ Every RFC reviewed, with the depth of reading (best of the two passes) and the e
 | [RFC 6234](#ra_rfc6234) | US Secure Hash Algorithms (SHA and SHA-based HMAC and HKDF) | [IP](#ra_ip) | deep | 4 (1 verified, 2 reported, 1 held) | 2 | 2 |
 | [RFC 6286](#ra_rfc6286) | Autonomous-System-Wide Unique BGP Identifier for BGP-4 | [BGP](#ra_bgp) | deep | 1 (1 held) | 1 | 1 |
 | [RFC 6310](#ra_rfc6310) | Pseudowire (PW) Operations, Administration, and Maintenance (OAM) Message Mapping | [PW](#ra_pw) | deep | 1 (1 held) | 8 | 6 |
-| [RFC 6368](#ra_rfc6368) | Internal BGP as the Provider/Customer Edge Protocol for BGP/MPLS IP Virtual Private Networ | [BGP](#ra_bgp) | deep | 2 (2 verified) | 1 | 0 |
+| [RFC 6368](#ra_rfc6368) | Internal BGP as the Provider/Customer Edge Protocol for BGP/MPLS IP Virtual Private Networ | [BGP](#ra_bgp) | deep | 2 (2 verified) | 3 | 1 |
 | [RFC 6370](#ra_rfc6370) | MPLS Transport Profile (MPLS-TP) Identifiers | [MPLS/LDP](#ra_ldp) | deep | none | 2 | 1 |
 | [RFC 6378](#ra_rfc6378) | MPLS Transport Profile (MPLS-TP) Linear Protection | [MPLS/LDP](#ra_ldp) | deep | none | 6 | 3 |
-| [RFC 6388](#ra_rfc6388) | Label Distribution Protocol Extensions for Point-to-Multipoint and Multipoint-to-Multipoin | [MPLS/LDP](#ra_ldp) | deep | none | 3 | 0 |
+| [RFC 6388](#ra_rfc6388) | Label Distribution Protocol Extensions for Point-to-Multipoint and Multipoint-to-Multipoin | [MPLS/LDP](#ra_ldp) | deep | none | 8 | 4 |
 | [RFC 6389](#ra_rfc6389) | MPLS Upstream Label Assignment for LDP | [MPLS/LDP](#ra_ldp) | deep | none | 1 | 1 |
 | [RFC 6391](#ra_rfc6391) | Flow-Aware Transport of Pseudowires over an MPLS Packet Switched Network | [PW](#ra_pw) | deep | none | 1 | 1 |
 | [RFC 6398](#ra_rfc6398) | IP Router Alert Considerations and Usage | [IP](#ra_ip) | deep | none | 1 | 0 |
-| [RFC 6425](#ra_rfc6425) | Detecting Data-Plane Failures in Point-to-Multipoint MPLS - Extensions to LSP Ping | [OAM](#ra_oam) | deep | 1 (1 verified) | 2 | 0 |
-| [RFC 6426](#ra_rfc6426) | MPLS On-Demand Connectivity Verification and Route Tracing | [OAM](#ra_oam) | deep | 2 (2 verified) | 4 | 1 |
+| [RFC 6425](#ra_rfc6425) | Detecting Data-Plane Failures in Point-to-Multipoint MPLS - Extensions to LSP Ping | [OAM](#ra_oam) | deep | 1 (1 verified) | 5 | 2 |
+| [RFC 6426](#ra_rfc6426) | MPLS On-Demand Connectivity Verification and Route Tracing | [OAM](#ra_oam) | deep | 2 (2 verified) | 6 | 2 |
 | [RFC 6454](#ra_rfc6454) | The Web Origin Concept | [IP](#ra_ip) | deep | 1 (1 rejected) | 1 | 0 |
 | [RFC 6455](#ra_rfc6455) | The WebSocket Protocol | [IP](#ra_ip) | deep | 18 (3 verified, 6 reported, 4 held, 5 rejected) | 4 | 1 |
 | [RFC 6478](#ra_rfc6478) | Pseudowire Status for Static Pseudowires | [PW](#ra_pw) | deep | none | 5 | 2 |
 | [RFC 6510](#ra_rfc6510) | Resource Reservation Protocol (RSVP) Message Formats for Label Switched Path (LSP) Attribu | [RSVP](#ra_rsvp) | deep | none | 2 | 1 |
-| [RFC 6512](#ra_rfc6512) | Using Multipoint LDP When the Backbone Has No Route to the Root | [MPLS/LDP](#ra_ldp) | deep | 2 (2 verified) | 0 | 0 |
-| [RFC 6513](#ra_rfc6513) | Multicast in MPLS/BGP IP VPNs | [Multicast](#ra_mcast) | deep | 2 (1 verified, 1 held) | 2 | 0 |
+| [RFC 6512](#ra_rfc6512) | Using Multipoint LDP When the Backbone Has No Route to the Root | [MPLS/LDP](#ra_ldp) | deep | 2 (2 verified) | 1 | 1 |
+| [RFC 6513](#ra_rfc6513) | Multicast in MPLS/BGP IP VPNs | [Multicast](#ra_mcast) | deep | 2 (1 verified, 1 held) | 8 | 3 |
 | [RFC 6514](#ra_rfc6514) | BGP Encodings and Procedures for Multicast in MPLS/BGP IP VPNs | [Multicast](#ra_mcast) | deep | 3 (3 held) | 8 | 6 |
 | [RFC 6515](#ra_rfc6515) | IPv4 and IPv6 Infrastructure Addresses in BGP Updates for Multicast VPN | [Multicast](#ra_mcast) | deep | 1 (1 rejected) | 1 | 0 |
 | [RFC 6583](#ra_rfc6583) | Operational Neighbor Discovery Problems | [IP](#ra_ip) | deep | none | 1 | 1 |
 | [RFC 6608](#ra_rfc6608) | Subcodes for BGP Finite State Machine Error | [BGP](#ra_bgp) | deep | none | 1 | 0 |
-| [RFC 6625](#ra_rfc6625) | Wildcards in Multicast VPN Auto-Discovery Routes | [Multicast](#ra_mcast) | deep | 1 (1 held) | 1 | 0 |
+| [RFC 6625](#ra_rfc6625) | Wildcards in Multicast VPN Auto-Discovery Routes | [Multicast](#ra_mcast) | deep | 1 (1 held) | 4 | 2 |
 | [RFC 6633](#ra_rfc6633) | Deprecation of ICMP Source Quench Messages | [IP](#ra_ip) | deep | none | 3 | 3 |
 | [RFC 6667](#ra_rfc6667) | LDP 'Typed Wildcard' Forwarding Equivalence Class (FEC) for PWid and Generalized PWid FEC  | [MPLS/LDP](#ra_ldp) | deep | none | 0 | 0 |
 | [RFC 6691](#ra_rfc6691) | TCP Options and Maximum Segment Size (MSS) | [IP](#ra_ip) | deep | none | 1 | 1 |
 | [RFC 6718](#ra_rfc6718) | Pseudowire Redundancy | [PW](#ra_pw) | deep | none | 1 | 0 |
 | [RFC 6720](#ra_rfc6720) | The Generalized TTL Security Mechanism (GTSM) for the Label Distribution Protocol (LDP) | [MPLS/LDP](#ra_ldp) | deep | none | 1 | 0 |
-| [RFC 6790](#ra_rfc6790) | The Use of Entropy Labels in MPLS Forwarding | [MPLS/LDP](#ra_ldp) | deep | 1 (1 held) | 0 | 0 |
+| [RFC 6790](#ra_rfc6790) | The Use of Entropy Labels in MPLS Forwarding | [MPLS/LDP](#ra_ldp) | deep | 1 (1 held) | 3 | 3 |
 | [RFC 6793](#ra_rfc6793) | BGP Support for Four-Octet Autonomous System (AS) Number Space | [BGP](#ra_bgp) | deep | 1 (1 held) | 4 | 3 |
 | [RFC 6805](#ra_rfc6805) | The Application of the Path Computation Element Architecture to the Determination of a Seq | [PCEP](#ra_pcep) | deep | none | 2 | 2 |
 | [RFC 6818](#ra_rfc6818) | Updates to the Internet X.509 Public Key Infrastructure Certificate and Certificate Revoca | [IP](#ra_ip) | deep | 1 (1 verified) | 4 | 1 |
@@ -16800,33 +19458,35 @@ Every RFC reviewed, with the depth of reading (best of the two passes) and the e
 | [RFC 7110](#ra_rfc7110) | Return Path Specified Label Switched Path (LSP) Ping | [OAM](#ra_oam) | deep | 3 (3 verified) | 2 | 1 |
 | [RFC 7112](#ra_rfc7112) | Implications of Oversized IPv6 Header Chains | [IP](#ra_ip) | deep | none | 1 | 0 |
 | [RFC 7130](#ra_rfc7130) | Bidirectional Forwarding Detection (BFD) on Link Aggregation Group (LAG) Interfaces | [OAM](#ra_oam) | deep | 2 (2 held) | 2 | 0 |
-| [RFC 7140](#ra_rfc7140) | LDP Extensions for Hub and Spoke Multipoint Label Switched Path | [MPLS/LDP](#ra_ldp) | deep | none | 1 | 0 |
+| [RFC 7140](#ra_rfc7140) | LDP Extensions for Hub and Spoke Multipoint Label Switched Path | [MPLS/LDP](#ra_ldp) | deep | none | 3 | 2 |
 | [RFC 7153](#ra_rfc7153) | IANA Registries for BGP Extended Communities | [BGP](#ra_bgp) | deep | none | 1 | 0 |
 | [RFC 7246](#ra_rfc7246) | Multipoint Label Distribution Protocol In-Band Signaling in a Virtual Routing and Forwardi | [MPLS/LDP](#ra_ldp) | deep | none | 1 | 0 |
 | [RFC 7267](#ra_rfc7267) | Dynamic Placement of Multi-Segment Pseudowires | [PW](#ra_pw) | deep | none | 3 | 1 |
+| [RFC 7271](#ra_rfc7271) | MPLS Transport Profile (MPLS-TP) Linear Protection to Match the Operational Expectations o | [MPLS/LDP](#ra_ldp) | deep | none | 5 | 2 |
 | [RFC 7274](#ra_rfc7274) | Allocating and Retiring Special-Purpose MPLS Labels | [MPLS/LDP](#ra_ldp) | deep | none | 1 | 0 |
-| [RFC 7275](#ra_rfc7275) | Inter-Chassis Communication Protocol for Layer 2 Virtual Private Network (L2VPN) Provider  | [PW](#ra_pw) | deep | none | 5 | 2 |
+| [RFC 7275](#ra_rfc7275) | Inter-Chassis Communication Protocol for Layer 2 Virtual Private Network (L2VPN) Provider  | [PW](#ra_pw) | deep | none | 10 | 7 |
 | [RFC 7300](#ra_rfc7300) | Reservation of Last Autonomous System (AS) Numbers | [BGP](#ra_bgp) | deep | none | 0 | 0 |
-| [RFC 7307](#ra_rfc7307) | LDP Extensions for Multi-Topology | [MPLS/LDP](#ra_ldp) | deep | 2 (2 held) | 3 | 2 |
+| [RFC 7307](#ra_rfc7307) | LDP Extensions for Multi-Topology | [MPLS/LDP](#ra_ldp) | deep | 2 (2 held) | 7 | 4 |
 | [RFC 7308](#ra_rfc7308) | Extended Administrative Groups in MPLS Traffic Engineering (MPLS-TE) | [IS-IS](#ra_isis) | deep | none | 1 | 1 |
-| [RFC 7311](#ra_rfc7311) | The Accumulated IGP Metric Attribute for BGP | [BGP](#ra_bgp) | deep | none | 2 | 1 |
+| [RFC 7311](#ra_rfc7311) | The Accumulated IGP Metric Attribute for BGP | [BGP](#ra_bgp) | deep | none | 6 | 3 |
 | [RFC 7313](#ra_rfc7313) | Enhanced Route Refresh Capability for BGP-4 | [BGP](#ra_bgp) | deep | none | 2 | 0 |
+| [RFC 7324](#ra_rfc7324) | Updates to MPLS Transport Profile Linear Protection | [MPLS/LDP](#ra_ldp) | deep | none | 5 | 4 |
 | [RFC 7338](#ra_rfc7338) | Requirements and Framework for Point-to-Multipoint Pseudowires over MPLS Packet Switched N | [PW](#ra_pw) | deep | none | 1 | 0 |
 | [RFC 7349](#ra_rfc7349) | LDP Hello Cryptographic Authentication | [MPLS/LDP](#ra_ldp) | deep | none | 4 | 3 |
 | [RFC 7358](#ra_rfc7358) | Label Advertisement Discipline for LDP Forwarding Equivalence Classes (FECs) | [MPLS/LDP](#ra_ldp) | deep | none | 1 | 0 |
-| [RFC 7361](#ra_rfc7361) | LDP Extensions for Optimized MAC Address Withdrawal in a Hierarchical Virtual Private LAN  | [PW](#ra_pw) | deep | 1 (1 verified) | 2 | 0 |
+| [RFC 7361](#ra_rfc7361) | LDP Extensions for Optimized MAC Address Withdrawal in a Hierarchical Virtual Private LAN  | [PW](#ra_pw) | deep | 1 (1 verified) | 7 | 4 |
 | [RFC 7385](#ra_rfc7385) | IANA Registry for P-Multicast Service Interface (PMSI) Tunnel Type Code Points | [Multicast](#ra_mcast) | deep | none | 0 | 0 |
-| [RFC 7438](#ra_rfc7438) | Multipoint LDP (mLDP) In-Band Signaling with Wildcards | [MPLS/LDP](#ra_ldp) | deep | none | 0 | 0 |
+| [RFC 7438](#ra_rfc7438) | Multipoint LDP (mLDP) In-Band Signaling with Wildcards | [MPLS/LDP](#ra_ldp) | deep | none | 2 | 2 |
 | [RFC 7442](#ra_rfc7442) | Carrying Protocol Independent Multicast - Sparse Mode (PIM-SM) in Any-Source Multicast (AS | [Multicast](#ra_mcast) | deep | none | 1 | 0 |
 | [RFC 7447](#ra_rfc7447) | Deprecation of BGP Entropy Label Capability Attribute | [BGP](#ra_bgp) | deep | none | 0 | 0 |
 | [RFC 7473](#ra_rfc7473) | Controlling State Advertisements of Non-negotiated LDP Applications | [MPLS/LDP](#ra_ldp) | deep | none | 2 | 2 |
-| [RFC 7490](#ra_rfc7490) | Remote Loop-Free Alternate (LFA) Fast Reroute (FRR) | [IS-IS](#ra_isis) | deep | none | 2 | 1 |
+| [RFC 7490](#ra_rfc7490) | Remote Loop-Free Alternate (LFA) Fast Reroute (FRR) | [IS-IS](#ra_isis) | deep | none | 7 | 3 |
 | [RFC 7506](#ra_rfc7506) | IPv6 Router Alert Option for MPLS Operations, Administration, and Maintenance (OAM) | [OAM](#ra_oam) | deep | none | 0 | 0 |
 | [RFC 7524](#ra_rfc7524) | Inter-Area Point-to-Multipoint (P2MP) Segmented Label Switched Paths (LSPs) | [Multicast](#ra_mcast) | deep | none | 3 | 1 |
 | [RFC 7525](#ra_rfc7525) | Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport La | [IP](#ra_ip) | deep | 3 (2 verified, 1 rejected) | 0 | 0 |
 | [RFC 7527](#ra_rfc7527) | Enhanced Duplicate Address Detection | [IP](#ra_ip) | deep | none | 4 | 4 |
-| [RFC 7552](#ra_rfc7552) | Updates to LDP for IPv6 | [MPLS/LDP](#ra_ldp) | deep | none | 3 | 2 |
-| [RFC 7570](#ra_rfc7570) | Label Switched Path (LSP) Attribute in the Explicit Route Object (ERO) | [RSVP](#ra_rsvp) | deep | none | 1 | 1 |
+| [RFC 7552](#ra_rfc7552) | Updates to LDP for IPv6 | [MPLS/LDP](#ra_ldp) | deep | none | 6 | 2 |
+| [RFC 7570](#ra_rfc7570) | Label Switched Path (LSP) Attribute in the Explicit Route Object (ERO) | [RSVP](#ra_rsvp) | deep | none | 2 | 2 |
 | [RFC 7606](#ra_rfc7606) | Revised Error Handling for BGP UPDATE Messages | [BGP](#ra_bgp) | deep | 1 (1 held) | 9 | 3 |
 | [RFC 7607](#ra_rfc7607) | Codification of AS 0 Processing | [BGP](#ra_bgp) | deep | 1 (1 rejected) | 2 | 1 |
 | [RFC 7611](#ra_rfc7611) | BGP ACCEPT_OWN Community Attribute | [BGP](#ra_bgp) | deep | none | 2 | 0 |
@@ -16837,7 +19497,7 @@ Every RFC reviewed, with the depth of reading (best of the two passes) and the e
 | [RFC 7726](#ra_rfc7726) | Clarifying Procedures for Establishing BFD Sessions for MPLS Label Switched Paths (LSPs) | [OAM](#ra_oam) | deep | none | 3 | 2 |
 | [RFC 7737](#ra_rfc7737) | Label Switched Path (LSP) Ping and Traceroute Reply Mode Simplification | [OAM](#ra_oam) | deep | none | 4 | 2 |
 | [RFC 7748](#ra_rfc7748) | Elliptic Curves for Security | [IP](#ra_ip) | deep | 9 (4 verified, 1 held, 4 rejected) | 3 | 0 |
-| [RFC 7750](#ra_rfc7750) | Differentiated Service Code Point and Explicit Congestion Notification Monitoring in the T | [OAM](#ra_oam) | deep | none | 1 | 1 |
+| [RFC 7750](#ra_rfc7750) | Differentiated Service Code Point and Explicit Congestion Notification Monitoring in the T | [OAM](#ra_oam) | deep | none | 3 | 3 |
 | [RFC 7761](#ra_rfc7761) | Protocol Independent Multicast - Sparse Mode (PIM-SM): Protocol Specification (Revised) | [Multicast](#ra_mcast) | deep | 4 (2 verified, 1 held, 1 rejected) | 9 | 4 |
 | [RFC 7771](#ra_rfc7771) | Switching Provider Edge (S-PE) Protection for MPLS and MPLS Transport Profile (MPLS-TP) St | [PW](#ra_pw) | deep | none | 4 | 2 |
 | [RFC 7775](#ra_rfc7775) | IS-IS Route Preference for Extended IP and IPv6 Reachability | [IS-IS](#ra_isis) | deep | none | 2 | 1 |
@@ -16858,7 +19518,7 @@ Every RFC reviewed, with the depth of reading (best of the two passes) and the e
 | [RFC 8077](#ra_rfc8077) | Pseudowire Setup and Maintenance Using the Label Distribution Protocol (LDP) | [PW](#ra_pw) | deep | 1 (1 rejected) | 8 | 5 |
 | [RFC 8092](#ra_rfc8092) | BGP Large Communities Attribute | [BGP](#ra_bgp) | deep | 1 (1 held) | 1 | 0 |
 | [RFC 8093](#ra_rfc8093) | Deprecation of BGP Path Attribute Values 30, 31, 129, 241, 242, and 243 | [BGP](#ra_bgp) | deep | none | 0 | 0 |
-| [RFC 8102](#ra_rfc8102) | Remote-LFA Node Protection and Manageability | [IS-IS](#ra_isis) | deep | none | 1 | 0 |
+| [RFC 8102](#ra_rfc8102) | Remote-LFA Node Protection and Manageability | [IS-IS](#ra_isis) | deep | none | 2 | 1 |
 | [RFC 8169](#ra_rfc8169) | Residence Time Measurement in MPLS Networks | [RSVP](#ra_rsvp) | deep | none | 5 | 3 |
 | [RFC 8186](#ra_rfc8186) | Support of the IEEE 1588 Timestamp Format in a Two-Way Active Measurement Protocol (TWAMP) | [OAM](#ra_oam) | deep | 1 (1 held) | 0 | 0 |
 | [RFC 8190](#ra_rfc8190) | Updates to the Special-Purpose IP Address Registries | [IP](#ra_ip) | deep | none | 2 | 2 |
@@ -16871,6 +19531,7 @@ Every RFC reviewed, with the depth of reading (best of the two passes) and the e
 | [RFC 8231](#ra_rfc8231) | Path Computation Element Communication Protocol (PCEP) Extensions for Stateful PCE | [PCEP](#ra_pcep) | deep | 9 (7 verified, 1 held, 1 rejected) | 11 | 3 |
 | [RFC 8232](#ra_rfc8232) | Optimizations of Label Switched Path State Synchronization Procedures for a Stateful PCE | [PCEP](#ra_pcep) | deep | none | 5 | 2 |
 | [RFC 8233](#ra_rfc8233) | Extensions to the Path Computation Element Communication Protocol (PCEP) to Compute Servic | [PCEP](#ra_pcep) | deep | 1 (1 held) | 5 | 3 |
+| [RFC 8234](#ra_rfc8234) | Updates to MPLS Transport Profile (MPLS-TP) Linear Protection in Automatic Protection Swit | [MPLS/LDP](#ra_ldp) | deep | none | 4 | 0 |
 | [RFC 8253](#ra_rfc8253) | PCEPS: Usage of TLS to Provide a Secure Transport for the Path Computation Element Communi | [PCEP](#ra_pcep) | deep | 1 (1 held) | 7 | 3 |
 | [RFC 8259](#ra_rfc8259) | The JavaScript Object Notation (JSON) Data Interchange Format | [IP](#ra_ip) | deep | 16 (5 verified, 1 reported, 2 held, 8 rejected) | 1 | 0 |
 | [RFC 8271](#ra_rfc8271) | Updates to the Resource Reservation Protocol for Fast Reroute of Traffic Engineering GMPLS | [RSVP](#ra_rsvp) | deep | none | 3 | 2 |
@@ -16881,7 +19542,7 @@ Every RFC reviewed, with the depth of reading (best of the two passes) and the e
 | [RFC 8319](#ra_rfc8319) | Support for Adjustable Maximum Router Lifetimes per Link | [IP](#ra_ip) | deep | none | 3 | 2 |
 | [RFC 8320](#ra_rfc8320) | LDP Extensions to Support Maximally Redundant Trees | [MPLS/LDP](#ra_ldp) | deep | none | 2 | 1 |
 | [RFC 8326](#ra_rfc8326) | Graceful BGP Session Shutdown | [BGP](#ra_bgp) | deep | 1 (1 verified) | 0 | 0 |
-| [RFC 8333](#ra_rfc8333) | Micro-loop Prevention by Introducing a Local Convergence Delay | [IS-IS](#ra_isis) | deep | none | 1 | 1 |
+| [RFC 8333](#ra_rfc8333) | Micro-loop Prevention by Introducing a Local Convergence Delay | [IS-IS](#ra_isis) | deep | none | 2 | 2 |
 | [RFC 8338](#ra_rfc8338) | Signaling Root-Initiated Point-to-Multipoint Pseudowire Using LDP | [PW](#ra_pw) | deep | none | 6 | 2 |
 | [RFC 8356](#ra_rfc8356) | Experimental Codepoint Allocation for the Path Computation Element Communication Protocol  | [MPLS/LDP](#ra_ldp) | deep | none | 2 | 1 |
 | [RFC 8390](#ra_rfc8390) | RSVP-TE Path Diversity Using Exclude Route | [RSVP](#ra_rsvp) | deep | none | 7 | 2 |
@@ -16897,17 +19558,17 @@ Every RFC reviewed, with the depth of reading (best of the two passes) and the e
 | [RFC 8534](#ra_rfc8534) | Explicit Tracking with Wildcard Routes in Multicast VPN | [Multicast](#ra_mcast) | deep | none | 6 | 3 |
 | [RFC 8538](#ra_rfc8538) | Notification Message Support for BGP Graceful Restart | [BGP](#ra_bgp) | deep | none | 2 | 1 |
 | [RFC 8545](#ra_rfc8545) | Well-Known Port Assignments for the One-Way Active Measurement Protocol (OWAMP) and the Tw | [OAM](#ra_oam) | deep | none | 1 | 1 |
-| [RFC 8570](#ra_rfc8570) | IS-IS Traffic Engineering (TE) Metric Extensions | [IS-IS](#ra_isis) | deep | none | 4 | 1 |
+| [RFC 8570](#ra_rfc8570) | IS-IS Traffic Engineering (TE) Metric Extensions | [IS-IS](#ra_isis) | deep | none | 8 | 3 |
 | [RFC 8571](#ra_rfc8571) | BGP - Link State (BGP-LS) Advertisement of IGP Traffic Engineering Performance Metric Exte | [BGP](#ra_bgp) | deep | none | 0 | 0 |
 | [RFC 8623](#ra_rfc8623) | Stateful Path Computation Element (PCE) Protocol Extensions for Usage with Point-to-Multip | [PCEP](#ra_pcep) | deep | none | 7 | 5 |
 | [RFC 8654](#ra_rfc8654) | Extended Message Support for BGP | [BGP](#ra_bgp) | deep | none | 2 | 1 |
-| [RFC 8660](#ra_rfc8660) | Segment Routing with the MPLS Data Plane | [IS-IS](#ra_isis) | deep | none | 1 | 0 |
+| [RFC 8660](#ra_rfc8660) | Segment Routing with the MPLS Data Plane | [IS-IS](#ra_isis) | deep | none | 6 | 2 |
 | [RFC 8661](#ra_rfc8661) | Segment Routing MPLS Interworking with LDP | [IS-IS](#ra_isis) | deep | none | 5 | 2 |
 | [RFC 8664](#ra_rfc8664) | Path Computation Element Communication Protocol (PCEP) Extensions for Segment Routing | [PCEP](#ra_pcep) | deep | 1 (1 verified) | 4 | 4 |
 | [RFC 8667](#ra_rfc8667) | IS-IS Extensions for Segment Routing | [IS-IS](#ra_isis) | deep | 1 (1 verified) | 8 | 4 |
 | [RFC 8668](#ra_rfc8668) | Advertising Layer 2 Bundle Member Link Attributes in IS-IS | [IS-IS](#ra_isis) | deep | 1 (1 verified) | 2 | 1 |
 | [RFC 8669](#ra_rfc8669) | Segment Routing Prefix Segment Identifier Extensions for BGP | [BGP](#ra_bgp) | deep | 1 (1 verified) | 2 | 0 |
-| [RFC 8685](#ra_rfc8685) | Path Computation Element Communication Protocol (PCEP) Extensions for the Hierarchical Pat | [PCEP](#ra_pcep) | deep | none | 5 | 3 |
+| [RFC 8685](#ra_rfc8685) | Path Computation Element Communication Protocol (PCEP) Extensions for the Hierarchical Pat | [PCEP](#ra_pcep) | deep | none | 10 | 5 |
 | [RFC 8690](#ra_rfc8690) | Clarification of Segment ID Sub-TLV Length for RFC 8287 | [OAM](#ra_oam) | deep | none | 1 | 1 |
 | [RFC 8697](#ra_rfc8697) | Path Computation Element Communication Protocol (PCEP) Extensions for Establishing Relatio | [PCEP](#ra_pcep) | deep | none | 3 | 1 |
 | [RFC 8706](#ra_rfc8706) | Restart Signaling for IS-IS | [IS-IS](#ra_isis) | deep | none | 4 | 2 |
@@ -16921,6 +19582,7 @@ Every RFC reviewed, with the depth of reading (best of the two passes) and the e
 | [RFC 8796](#ra_rfc8796) | RSVP-TE Summary Fast Reroute Extensions for Label Switched Path (LSP) Tunnels | [RSVP](#ra_rsvp) | deep | none | 6 | 1 |
 | [RFC 8800](#ra_rfc8800) | Path Computation Element Communication Protocol (PCEP) Extension for Label Switched Path ( | [PCEP](#ra_pcep) | deep | none | 3 | 2 |
 | [RFC 8814](#ra_rfc8814) | Signaling Maximum SID Depth (MSD) Using the Border Gateway Protocol - Link State | [BGP](#ra_bgp) | deep | none | 0 | 0 |
+| [RFC 8918](#ra_rfc8918) | Invalid TLV Handling in IS-IS | [IS-IS](#ra_isis) | deep | none | 4 | 2 |
 | [RFC 8950](#ra_rfc8950) | Advertising IPv4 Network Layer Reachability Information (NLRI) with an IPv6 Next Hop | [BGP](#ra_bgp) | deep | none | 0 | 0 |
 | [RFC 8972](#ra_rfc8972) | Simple Two-Way Active Measurement Protocol Optional Extensions | [OAM](#ra_oam) | deep | 4 (4 verified) | 3 | 2 |
 | [RFC 8986](#ra_rfc8986) | Segment Routing over IPv6 (SRv6) Network Programming | [IS-IS](#ra_isis) | deep | 2 (1 verified, 1 rejected) | 4 | 1 |
@@ -16931,6 +19593,7 @@ Every RFC reviewed, with the depth of reading (best of the two passes) and the e
 | [RFC 9005](#ra_rfc9005) | Path Computation Element Communication Protocol (PCEP) Extension for Associating Policies  | [PCEP](#ra_pcep) | deep | none | 0 | 0 |
 | [RFC 9012](#ra_rfc9012) | The BGP Tunnel Encapsulation Attribute | [BGP](#ra_bgp) | deep | none | 5 | 1 |
 | [RFC 9015](#ra_rfc9015) | BGP Control Plane for the Network Service Header in Service Function Chaining | [BGP](#ra_bgp) | deep | none | 8 | 6 |
+| [RFC 9017](#ra_rfc9017) | Special-Purpose Label Terminology | [MPLS/LDP](#ra_ldp) | deep | none | 2 | 2 |
 | [RFC 9026](#ra_rfc9026) | Multicast VPN Fast Upstream Failover | [Multicast](#ra_mcast) | deep | none | 4 | 1 |
 | [RFC 9041](#ra_rfc9041) | Updating the MPLS Label Switched Paths (LSPs) Ping Parameters IANA Registry | [OAM](#ra_oam) | deep | none | 5 | 3 |
 | [RFC 9050](#ra_rfc9050) | Path Computation Element Communication Protocol (PCEP) Procedures and Extensions for Using | [PCEP](#ra_pcep) | deep | none | 7 | 3 |
@@ -16943,14 +19606,15 @@ Every RFC reviewed, with the depth of reading (best of the two passes) and the e
 | [RFC 9110](#ra_rfc9110) | HTTP Semantics | [IP](#ra_ip) | deep | 14 (6 verified, 2 reported, 6 rejected) | 9 | 3 |
 | [RFC 9112](#ra_rfc9112) | HTTP/1.1 | [IP](#ra_ip) | deep | 5 (2 verified, 1 reported, 2 rejected) | 1 | 0 |
 | [RFC 9114](#ra_rfc9114) | HTTP/3 | [IP](#ra_ip) | deep | 7 (3 verified, 2 reported, 2 rejected) | 2 | 0 |
+| [RFC 9184](#ra_rfc9184) | BGP Extended Community Registries Update | [BGP](#ra_bgp) | deep | none | 0 | 0 |
 | [RFC 9204](#ra_rfc9204) | QPACK: Field Compression for HTTP/3 | [IP](#ra_ip) | deep | 2 (1 verified, 1 held) | 3 | 1 |
 | [RFC 9234](#ra_rfc9234) | Route Leak Prevention and Detection Using Roles in UPDATE and OPEN Messages | [BGP](#ra_bgp) | deep | none | 3 | 1 |
 | [RFC 9256](#ra_rfc9256) | Segment Routing Policy Architecture | [IS-IS](#ra_isis) | deep | none | 2 | 0 |
 | [RFC 9293](#ra_rfc9293) | Transmission Control Protocol (TCP) | [IP](#ra_ip) | deep | 9 (4 verified, 2 held, 3 rejected) | 9 | 7 |
-| [RFC 9294](#ra_rfc9294) | Application-Specific Link Attributes Advertisement Using the Border Gateway Protocol - Lin | [IS-IS](#ra_isis) | deep | none | 0 | 0 |
+| [RFC 9294](#ra_rfc9294) | Application-Specific Link Attributes Advertisement Using the Border Gateway Protocol - Lin | [IS-IS](#ra_isis) | deep | none | 2 | 1 |
 | [RFC 9325](#ra_rfc9325) | Recommendations for Secure Use of Transport Layer Security (TLS) and Datagram Transport La | [IP](#ra_ip) | deep | none | 1 | 0 |
 | [RFC 9346](#ra_rfc9346) | IS-IS Extensions in Support of Inter-Autonomous System (AS) MPLS and GMPLS Traffic Enginee | [IS-IS](#ra_isis) | deep | none | 2 | 2 |
-| [RFC 9350](#ra_rfc9350) | IGP Flexible Algorithm | [IS-IS](#ra_isis) | deep | 2 (1 verified, 1 held) | 2 | 1 |
+| [RFC 9350](#ra_rfc9350) | IGP Flexible Algorithm | [IS-IS](#ra_isis) | deep | 2 (1 verified, 1 held) | 6 | 5 |
 | [RFC 9352](#ra_rfc9352) | IS-IS Extensions to Support Segment Routing over the IPv6 Data Plane | [IS-IS](#ra_isis) | deep | none | 4 | 1 |
 | [RFC 9357](#ra_rfc9357) | Label Switched Path (LSP) Object Flag Extension for Stateful PCE | [PCEP](#ra_pcep) | deep | none | 1 | 0 |
 | [RFC 9377](#ra_rfc9377) | IS-IS Flood Reflection | [IS-IS](#ra_isis) | deep | none | 2 | 1 |
@@ -16958,7 +19622,7 @@ Every RFC reviewed, with the depth of reading (best of the two passes) and the e
 | [RFC 9479](#ra_rfc9479) | IS-IS Application-Specific Link Attributes | [IS-IS](#ra_isis) | deep | none | 2 | 0 |
 | [RFC 9488](#ra_rfc9488) | Local Protection Enforcement in the Path Computation Element Communication Protocol (PCEP) | [PCEP](#ra_pcep) | deep | none | 0 | 0 |
 | [RFC 9494](#ra_rfc9494) | Long-Lived Graceful Restart for BGP | [BGP](#ra_bgp) | deep | none | 3 | 1 |
-| [RFC 9502](#ra_rfc9502) | IGP Flexible Algorithm in IP Networks | [IS-IS](#ra_isis) | deep | none | 1 | 1 |
+| [RFC 9502](#ra_rfc9502) | IGP Flexible Algorithm in IP Networks | [IS-IS](#ra_isis) | deep | none | 5 | 5 |
 | [RFC 9514](#ra_rfc9514) | Border Gateway Protocol - Link State (BGP-LS) Extensions for Segment Routing over IPv6 (SR | [BGP](#ra_bgp) | deep | 2 (2 verified) | 2 | 0 |
 | [RFC 9525](#ra_rfc9525) | Service Identity in TLS | [IP](#ra_ip) | deep | 1 (1 held) | 7 | 3 |
 | [RFC 9552](#ra_rfc9552) | Distribution of Link-State and Traffic Engineering Information Using BGP | [BGP](#ra_bgp) | deep | 2 (2 verified) | 9 | 4 |
@@ -16970,22 +19634,25 @@ Every RFC reviewed, with the depth of reading (best of the two passes) and the e
 | [RFC 9687](#ra_rfc9687) | Border Gateway Protocol 4 (BGP-4) Send Hold Timer | [BGP](#ra_bgp) | deep | none | 1 | 0 |
 | [RFC 9757](#ra_rfc9757) | Path Computation Element Communication Protocol (PCEP) Extensions for Native IP Networks | [PCEP](#ra_pcep) | deep | none | 9 | 3 |
 | [RFC 9774](#ra_rfc9774) | Deprecation of AS_SET and AS_CONFED_SET in BGP | [BGP](#ra_bgp) | deep | none | 1 | 1 |
-| [RFC 9776](#ra_rfc9776) | Internet Group Management Protocol, Version 3 | [Multicast](#ra_mcast) | deep | none | 2 | 1 |
-| [RFC 9777](#ra_rfc9777) | Multicast Listener Discovery Version 2 (MLDv2) for IPv6 | [Multicast](#ra_mcast) | deep | none | 1 | 1 |
+| [RFC 9776](#ra_rfc9776) | Internet Group Management Protocol, Version 3 | [Multicast](#ra_mcast) | deep | none | 8 | 4 |
+| [RFC 9777](#ra_rfc9777) | Multicast Listener Discovery Version 2 (MLDv2) for IPv6 | [Multicast](#ra_mcast) | deep | none | 5 | 4 |
 | [RFC 9789](#ra_rfc9789) | MPLS Network Actions (MNAs) Framework | [MPLS/LDP](#ra_ldp) | deep | none | 5 | 2 |
 | [RFC 9793](#ra_rfc9793) | BGP Extensions for Bit Index Explicit Replication (BIER) | [BGP](#ra_bgp) | deep | 1 (1 verified) | 5 | 1 |
 | [RFC 9800](#ra_rfc9800) | Compressed SRv6 Segment List Encoding | [IS-IS](#ra_isis) | deep | none | 5 | 2 |
-| [RFC 9830](#ra_rfc9830) | Advertising Segment Routing Policies in BGP | [BGP](#ra_bgp) | deep | none | 2 | 1 |
+| [RFC 9805](#ra_rfc9805) | Deprecation of the IPv6 Router Alert Option for New Protocols | [IP](#ra_ip) | deep | none | 3 | 3 |
+| [RFC 9830](#ra_rfc9830) | Advertising Segment Routing Policies in BGP | [BGP](#ra_bgp) | deep | none | 6 | 3 |
 | [RFC 9831](#ra_rfc9831) | Segment Type Extensions for BGP Segment Routing (SR) Policy | [BGP](#ra_bgp) | deep | none | 2 | 1 |
-| [RFC 9843](#ra_rfc9843) | IGP Flexible Algorithms: Bandwidth, Delay, Metrics, and Constraints | [IS-IS](#ra_isis) | deep | none | 3 | 3 |
+| [RFC 9843](#ra_rfc9843) | IGP Flexible Algorithms: Bandwidth, Delay, Metrics, and Constraints | [IS-IS](#ra_isis) | deep | none | 7 | 7 |
 | [RFC 9846](#ra_rfc9846) | The Transport Layer Security (TLS) Protocol Version 1.3 | [IP](#ra_ip) | deep | 5 (1 verified, 4 reported) | 6 | 6 |
 | [RFC 9855](#ra_rfc9855) | Topology Independent Fast Reroute Using Segment Routing | [IS-IS](#ra_isis) | deep | none | 1 | 1 |
 | [RFC 9862](#ra_rfc9862) | Path Computation Element Communication Protocol (PCEP) Extensions for Segment Routing (SR) | [PCEP](#ra_pcep) | deep | none | 6 | 1 |
+| [RFC 9868](#ra_rfc9868) | Transport Options for UDP | [IP](#ra_ip) | deep | 2 (1 verified, 1 held) | 5 | 3 |
 | [RFC 9885](#ra_rfc9885) | Multi-Part TLVs in IS-IS | [IS-IS](#ra_isis) | deep | none | 2 | 1 |
 | [RFC 9916](#ra_rfc9916) | Updates to the Usage of TLS to Provide a Secure Transport for the Path Computation Element | [PCEP](#ra_pcep) | deep | none | 2 | 2 |
 | [RFC 9917](#ra_rfc9917) | IGP Flexible Algorithms Reverse Affinity Constraint | [IS-IS](#ra_isis) | deep | none | 0 | 0 |
 | [RFC 9929](#ra_rfc9929) | IGP Unreachable Prefix Announcement | [IS-IS](#ra_isis) | deep | none | 0 | 0 |
 | [RFC 9933](#ra_rfc9933) | Carrying SR-Algorithm in Path Computation Element Communication Protocol (PCEP) | [PCEP](#ra_pcep) | deep | none | 6 | 3 |
+| [RFC 9994](#ra_rfc9994) | MPLS Network Action (MNA) Sub-Stack Specification Including In-Stack Network Actions and D | [MPLS/LDP](#ra_ldp) | deep | none | 6 | 4 |
 | [RFC 10039](#ra_rfc10039) | Interconnecting EVPN and IPVPN Domains | [BGP](#ra_bgp) | deep | 1 (1 reported) | 6 | 2 |
 | [RFC 10041](#ra_rfc10041) | Advertising Unreachable Links in OSPF | [MPLS/LDP](#ra_ldp) | deep | 1 (1 reported) | 7 | 3 |
 
